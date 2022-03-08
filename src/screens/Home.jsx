@@ -9,7 +9,7 @@ const Container = styled.View`
     flex: 1;
 `
 const Title = styled.Text`
-    color: ${props => props.theme.title}
+    color: ${props => props.theme.title};
 `
 
 export function Home(){
