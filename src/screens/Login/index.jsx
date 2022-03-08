@@ -2,7 +2,7 @@ import {View, Button, Text} from 'react-native'
 
 export function Login({navigation}){
     function signIn(){
-        navigation.replace('home')
+        navigation.replace('main')
     }
     return (
         <View>
