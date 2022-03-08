@@ -12,10 +12,14 @@
   "dependencies": {
     "expo": "~44.0.0",
     "expo-status-bar": "~1.2.0",
+    "moti": "^0.17.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-web": "0.17.1"
+    "react-native-reanimated": "^2.4.1",
+    "react-native-web": "0.17.1",
+    "reanimated": "^0.0.1-alpha",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
