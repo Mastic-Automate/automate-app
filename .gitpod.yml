@@ -1,0 +1,10 @@
+tasks:
+  - before: npm i -g expo-cli
+  - init: yarn install
+    command: yarn run start
+
+ports:
+  - port: 19006
+    onOpen: open-preview
+
+
