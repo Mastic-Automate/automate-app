@@ -14,6 +14,7 @@ const Title = styled.Text`
 
 export function Home(){
     const {toggleTheme} = useTheme()
+
     return (
         <Container>
             <Title>Bem vindo(a)</Title>
