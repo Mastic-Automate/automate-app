@@ -2,8 +2,7 @@ import {NavigationContainer} from '@react-navigation/native'
 
 
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
-import { Home } from './src/screens/Home';
-import { InitialRoutes } from './src/routes/initialRoutes'
+import { InitialRoutes } from './src/routes/InitialRoutes'
 
 export default function App() {
   return (
