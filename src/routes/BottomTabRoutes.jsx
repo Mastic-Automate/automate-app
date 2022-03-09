@@ -4,7 +4,7 @@ import { Home } from '../screens/Home'
 
 const Nav = createBottomTabNavigator()
 
-export function MainRoutes(){
+export function BottomTabRoutes(){
     return (
         <Nav.Navigator screenOptions={{headerShown: false}}>
             <Nav.Screen name="home" component={Home} />
