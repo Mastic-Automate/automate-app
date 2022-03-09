@@ -2,7 +2,7 @@ import styled from 'styled-components/native'
 
 import {Text, Button} from 'react-native';
 
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../../hooks/useTheme';
 
 const Container = styled.View`
     background-color: ${props => props.theme.background};
