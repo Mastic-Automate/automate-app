@@ -13,9 +13,9 @@ export function BottomTabRoutes(){
     return (
         <Nav.Navigator screenOptions={{headerShown: false}}>
             <Nav.Screen name="home" component={Home} />
-            <Nav.Screen name="config" component={Config} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{title: 'Plantas'}} />
             <Nav.Screen name="videos" component={Videos} options={{title: 'Vídeos' }} />
+            <Nav.Screen name="config" component={Config} />
         </Nav.Navigator>
     )
 }
