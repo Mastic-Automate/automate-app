@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import styled, {useTheme} from 'styled-components/native'
 
 const Item = styled.TouchableOpacity`
@@ -10,8 +10,10 @@ const Item = styled.TouchableOpacity`
     border-radius:5px;
 `
 
-export function BottomTabBarItem({buttonProps, active, Icon}){
+export function BottomTabBarItem({buttonProps, Icon, index, currentIndex}){
     const {primary, secondary2} = useTheme()
+
+    const active =useMemo(()=> index === currentIndex, [currentIndex])
 
     return (
         <Item {...buttonProps} active={active}>
