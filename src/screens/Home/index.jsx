@@ -20,7 +20,7 @@ export function Home(){
         <Container>
             <Title>Bem vindo(a)</Title>
             <Button onPress={toggleTheme} title='Alternar tema' />
-            <Card title="card" theme='light' />
+            <Card text="card" theme='light' icon="cog" />
         </Container>
     )
 }
