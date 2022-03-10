@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { MotiView } from 'moti';
-import { useFonts, Poppins } from '@expo-google-fonts/inter';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 /*
@@ -15,9 +14,6 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
   text: string - O Texto que será renderizado no interior do Card.
 */
 export default function Card(props) {
-    const fonts = useFonts({
-      'Poppins': require('../../assets/fonts/Poppins-Thin.ttf'),
-    });
     const animation = props.delay === undefined || 0 ? false : true;
     const animConfigs = {
       from: { translateY: 300, opacity: 0 },
@@ -87,10 +83,6 @@ export default function Card(props) {
     
   const CardTextLight = styled.Text`
     font-size: 17;
-    @font-face {
-      font-family: 'Poppins' ;
-      src: url("../../assets/fonts/Poppins-Thin.ttf") format("ttf") 
-    }
     font-family: 'Poppins';
     width: 75% ;
     font-weight: bold;
@@ -98,10 +90,6 @@ export default function Card(props) {
   `;
      
   const CardTextDark = styled.Text`
-  @font-face {
-    font-family: 'Poppins' ;
-    src: url("../../assets/fonts/Poppins-Thin.ttf") format("ttf") 
-  }
   font-family: 'Poppins';
   width: 75% ;
   font-weight: bold;
