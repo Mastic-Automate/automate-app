@@ -10,10 +10,13 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.2.2",
+    "@expo-google-fonts/poppins": "^0.2.2",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "expo": "~44.0.0",
+    "expo-font": "^10.0.5",
     "expo-status-bar": "~1.2.0",
     "moti": "^0.17.1",
     "react": "17.0.1",

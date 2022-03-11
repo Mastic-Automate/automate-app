@@ -3,6 +3,7 @@ import styled from 'styled-components/native'
 import {Text, Button} from 'react-native';
 
 import { useTheme } from '../../hooks/useTheme';
+import Card from '../../components/Card';
 
 const Container = styled.View`
     background-color: ${props => props.theme.background};
@@ -19,6 +20,7 @@ export function Home(){
         <Container>
             <Title>Bem vindo(a)</Title>
             <Button onPress={toggleTheme} title='Alternar tema' />
+            <Card text="card" theme='light' icon="cog" />
         </Container>
     )
 }
