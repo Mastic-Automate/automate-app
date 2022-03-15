@@ -1,4 +1,6 @@
-import styled from 'styled-components/native'
+import {useState} from 'react'
+
+import styled, {useTheme} from 'styled-components/native'
 
 const Container = styled.View`
     flex-flow: row nowrap;
@@ -6,19 +8,29 @@ const Container = styled.View`
     padding: 10px;
     align-items: center;
     gap: 10px;
-    background-color: ${props => props.theme.secondary3};
+    background-color: ${props =>props.isFocused? 'transparent' : props.theme.secondary3};
+    border: ${props => props.isFocused? '2px' : '2px'} solid ${props => props.isFocused? props.theme.primary : props.theme.secondary3};
 `
 
 const TextInput = styled.TextInput`
     flex:1;
     outline-width: 0px;
+    color: ${props => props.theme.secondary1};
+    font-size: 20px;
 `
 
-function Input({Icon, ...textInputProps}){
+function Input({iconType:Icon, iconName, ...textInputProps}){
+    const [isFocused, setIsFocused] = useState(false)
+    const theme = useTheme()
+
     return (
-        <Container>
-            {Icon && <Icon />}
-            <TextInput {...textInputProps} />
+        <Container isFocused={isFocused}>
+            <Icon name={iconName} size={40} color={isFocused? theme.primary : theme.secondary1} />
+            <TextInput
+                {...textInputProps} 
+                onFocus={()=> setIsFocused(true)} 
+                onBlur={()=> setIsFocused(false)}
+            />
         </Container>
     )
 }
