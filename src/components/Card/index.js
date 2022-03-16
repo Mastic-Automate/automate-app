@@ -25,16 +25,16 @@ const CardBody = styled(MotiView)`
   justify-content:center;
   align-items:center;
   padding: 10px;
-  gap: 10px;
   margin: 4px;
 `
 
 const CardText = styled.Text`
-  font-size: 17;
+  font-size: 17px;
   font-family: 'Poppins';
   flex:1;
   font-weight: bold;
   color: ${props => props.theme.secondary1};
+  margin-left: 3px;
 `
 export default function Card(props) {
   const animation = props.delay === undefined || 0 ? false : true;
