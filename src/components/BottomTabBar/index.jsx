@@ -16,7 +16,6 @@ const Container = styled.View`
     padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
-    gap: 10px;
 `
 
 export function BottomTabBar({navigation, state}){
