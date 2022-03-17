@@ -6,7 +6,7 @@ import {MaterialCommunityIcons as MaterialCommunity, MaterialIcons as Material} 
 import {Button} from '../../components/Button'
 import { Input } from '../../components/Input'
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
     padding: 10px;
     background-color: ${props => props.theme.background};
     align-items: center;
