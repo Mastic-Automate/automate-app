@@ -9,6 +9,9 @@ import { Input } from '../../components/Input'
 const Container = styled.View`
     padding: 10px;
     background-color: ${props => props.theme.background};
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
 `
 
 const Title = styled.Text`
@@ -26,7 +29,7 @@ const BottomText = styled.Text`
 `
 
 const BottomLink = styled.TouchableOpacity`
-    width: 100%;
+    width: 40%;
 `
 const BottomLinkText = styled.Text`
     text-align:center;
@@ -38,6 +41,11 @@ const BottomLinkText = styled.Text`
 
 const InputsView = styled.View`
     margin: 10px;
+    width: 100%;
+`
+
+const BottomView = styled.View`
+    align-items:center;
 `
 
 export function Login({navigation}){
@@ -64,10 +72,12 @@ export function Login({navigation}){
 
                 <Button text="Login" onPress={signIn} style={{marginTop:10}} />
             </InputsView>
-            <BottomText>Ainda não possui uma conta?</BottomText>
-            <BottomLink onPress={()=> navigation.replace('register')}>
-                <BottomLinkText>Registre-se! </BottomLinkText>
-            </BottomLink>
+            <BottomView>
+                <BottomText>Ainda não possui uma conta?</BottomText>
+                <BottomLink onPress={()=> navigation.replace('register')}>
+                    <BottomLinkText>Registre-se! </BottomLinkText>
+                </BottomLink>
+            </BottomView>
         </Container>
     )
 }
