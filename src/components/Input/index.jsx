@@ -13,18 +13,17 @@ const Container = styled.View`
 
 const TextInput = styled.TextInput`
     flex:1;
-    outline-width: 0px;
     color: ${props => props.theme.secondary1};
     font-size: 20px;
     margin-left: 10px;
 `
 
-function Input({iconType:Icon, iconName, ...textInputProps}){
+function Input({iconType:Icon, iconName, containerProps, ...textInputProps}){
     const [isFocused, setIsFocused] = useState(false)
     const theme = useTheme()
 
     return (
-        <Container isFocused={isFocused}>
+        <Container isFocused={isFocused} {...containerProps}>
             <Icon name={iconName} size={40} color={isFocused? theme.primary : theme.secondary1} />
             <TextInput
                 {...textInputProps} 
