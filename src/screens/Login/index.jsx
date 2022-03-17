@@ -26,11 +26,13 @@ const BottomText = styled.Text`
 `
 
 const BottomLink = styled.TouchableOpacity`
+    width: 100%;
+`
+const BottomLinkText = styled.Text`
+    text-align:center;
     color: ${props => props.theme.primary};
     font-weight: bold;
     font-size: 20px;
-    width: 100%;
-    text-align:center;
     font-family: Poppins;
 `
 
@@ -62,7 +64,7 @@ export function Login({navigation}){
             </InputsView>
             <BottomText>Ainda não possui uma conta?</BottomText>
             <BottomLink onPress={()=> navigation.replace('register')}>
-                Registre-se!
+                <BottomLinkText>Registre-se! </BottomLinkText>
             </BottomLink>
         </Container>
     )

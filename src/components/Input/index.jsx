@@ -13,7 +13,6 @@ const Container = styled.View`
 
 const TextInput = styled.TextInput`
     flex:1;
-    outline-width: 0px;
     color: ${props => props.theme.secondary1};
     font-size: 20px;
     margin-left: 10px;
