@@ -53,14 +53,16 @@ export function Login({navigation}){
                     placeholder="Email"
                     iconType={MaterialCommunity}
                     iconName="account-circle-outline"
+                    containerProps={{marginTop:10}}
                 />
                 <Input 
                     placeholder="Senha"
                     iconType={Material}
                     iconName="lock-outline"
+                    containerProps={{marginTop:10}}
                 />
 
-                <Button text="Login" onPress={signIn} />
+                <Button text="Login" onPress={signIn} style={{marginTop:10}} />
             </InputsView>
             <BottomText>Ainda não possui uma conta?</BottomText>
             <BottomLink onPress={()=> navigation.replace('register')}>
