@@ -14,7 +14,7 @@ export function ThemeContextProvider({children}){
     }
     
     return (
-        <ThemeContext.Provider value={{toggleTheme}}>
+        <ThemeContext.Provider value={{toggleTheme, theme}}>
 
             <ThemeProvider theme={currentTheme}>
                 {children}
