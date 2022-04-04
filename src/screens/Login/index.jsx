@@ -29,7 +29,8 @@ const BottomText = styled.Text`
 `
 
 const BottomLink = styled.TouchableOpacity`
-    width: 40%;
+    width: 50%;
+    text-align:center;
 `
 const BottomLinkText = styled.Text`
     text-align:center;
@@ -37,6 +38,7 @@ const BottomLinkText = styled.Text`
     font-weight: bold;
     font-size: 20px;
     font-family: Poppins;
+    width: 100%;
 `
 
 const InputsView = styled.View`
