@@ -15,7 +15,6 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 */
 
 const CardBody = styled(MotiView)`
-  width: 85%;
   background-color: ${props => props.theme.background};
   border-radius: 10px;
   border-width: 3;
@@ -25,7 +24,6 @@ const CardBody = styled(MotiView)`
   justify-content:center;
   align-items:center;
   padding: 10px;
-  margin: 4px;
 `
 
 const CardText = styled.Text`
@@ -35,7 +33,7 @@ const CardText = styled.Text`
   color: ${props => props.theme.secondary1};
   margin-left: 3px;
 `
-export default function Card({delay, text, iconType:Icon, iconName}) {
+export default function Card({delay, text, style, iconType:Icon, iconName}) {
   const animation = !(delay === undefined || delay === 0)
   const animConfigs = {
     from: { translateY: 300, opacity: 0 },
@@ -49,6 +47,7 @@ export default function Card({delay, text, iconType:Icon, iconName}) {
       from={animation ? animConfigs.from : {}}
       animate={animation ? animConfigs.animate : {}}
       transition={{ type: 'timing', duration: 350, delay: delay }} 
+      style={style}
     >
       <Icon 
         name={iconName}
