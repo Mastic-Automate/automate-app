@@ -1,9 +1,11 @@
 import styled, {useTheme} from 'styled-components/native';
 
+import {MaterialIcons} from '@expo/vector-icons';
+
 const Container = styled.View`
     flex-flow: row nowrap;
-    width: 90%;
     height: 60px;
+    width:100%;
     background-color: ${props => props.theme.secondary3};
     justify-content: center;
     border-radius: 10px;
@@ -15,21 +17,22 @@ const Container = styled.View`
 
 const Title = styled.View`
     font-size: 20px;
+    color: ${props => props.theme.secondary1};
 `;
 
-const iconsWrapper = styled.View`
-    
+const IconsWrapper = styled.View`
+    flex-direction:row;
 `;
 
-export default function PlantTile({iconType:Icon, iconName, iconName2, props, text}) {
+export default function PlantTile({text}) {
     const {primary} = useTheme()
     return (
         <Container>
             <Title>{text}</Title>
-            <iconsWrapper>
-                <Icon name={iconName} size={40} color={primary} />
-                <Icon name={iconName2} size={40} color={primary} />
-            </iconsWrapper>
+            <IconsWrapper>
+                <MaterialIcons name='info-outline' size={40} color={primary} style={{margin:3}} />
+                <MaterialIcons name="edit" size={40} color={primary} style={{margin:3}} />
+            </IconsWrapper>
         </Container>
     )
     

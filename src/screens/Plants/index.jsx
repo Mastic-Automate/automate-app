@@ -23,10 +23,8 @@ export function Plants(){
     return (
         <Container>
             <Title>Suas plantas</Title>
-            <PlantTile text="Olá" 
-                iconType={Material}
-                iconName="edit"
-                iconName2="info"
+            <PlantTile 
+                text="Olá"
             />
         </Container>
     )
