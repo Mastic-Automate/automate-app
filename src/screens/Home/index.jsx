@@ -1,5 +1,7 @@
 import styled from 'styled-components/native'
 
+import {Ionicons, MaterialIcons} from '@expo/vector-icons'
+
 import Card from '../../components/Card';
 
 const Container = styled.View`
@@ -34,9 +36,21 @@ export function Home(){
             <Title>Bem vindo(a)</Title>
             <SubTitle>Como estão suas plantas?</SubTitle>
             <CardsContainer>
-                <Card text="Assista a conteúdos disponibilizados por profissionais na plataforma" theme='light' icon="play" />
-                <Card text="Adicione mais uma planta à coleção" theme='light' icon="add" />
-                <Card text="Gere relatório de cuidado de uma planta de sua coleção" theme='light' icon="info" />
+                <Card 
+                    text="Assista a conteúdos disponibilizados por profissionais na plataforma" 
+                    iconName="play-circle-outline"
+                    iconType={Ionicons} 
+                />
+                <Card 
+                    text="Adicione mais uma planta à coleção" 
+                    iconName="add-circle-outline"
+                    iconType={MaterialIcons}
+                />
+                <Card 
+                    text="Gere relatório de cuidado de uma planta de sua coleção" 
+                    iconName="info-outline" 
+                    iconType={MaterialIcons}
+                />
             </CardsContainer>
         </Container>
     )
