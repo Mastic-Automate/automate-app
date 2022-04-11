@@ -20,6 +20,7 @@ const Container = styled.View`
 const Title = styled.View`
     font-size: 20px;
     color: ${props => props.theme.secondary1};
+    font-family: Poppins;
 `;
 
 const IconsWrapper = styled.View`
