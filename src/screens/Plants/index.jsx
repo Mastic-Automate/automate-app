@@ -41,9 +41,11 @@ export function Plants(){
             <PlantTileContainer>
                 <PlantTile 
                     text="Tomate"
+                    id="a"
                 />
                 <PlantTile 
                     text="Pimenta"
+                    id="b"
                 />  
             </PlantTileContainer>
             <AddButton>
