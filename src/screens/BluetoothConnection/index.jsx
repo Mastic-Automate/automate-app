@@ -6,16 +6,21 @@ import {Ionicons} from '@expo/vector-icons'
 const Container = styled.View`
     flex:1;
     align-items:center;
+    background-color: ${props => props.theme.background};
 `
 const Title = styled.Text`
     font-size:30px;
     color: ${props => props.theme.title};
     margin-top:30px;
+    width:100%;
+    text-align:center;
 `
 const Subtitle = styled.Text`
     font-size: 20px;
     color: ${props => props.theme.subtitle};
     margin-top:30px;
+    width:100%;
+    text-align:center;
 `
 
 const BluetoothIcon = styled(Ionicons)`
