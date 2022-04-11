@@ -3,6 +3,7 @@ import styled from 'styled-components/native'
 import {Text} from 'react-native'
 
 import {Button} from '../../components/Button'
+import {Input} from '../../components/Input'
 
 const Container = styled.View`
     padding: 10px;
@@ -17,11 +18,17 @@ const Title = styled.Text`
 `
 
 const InputsContainer = styled.View`
+    width: 100%;
 `
 const BottomButtonsContainer = styled.View`
     flex-direction:row;
-    justify-content:center ;
+    justify-content:center;
     width:100%;
+`
+
+const PlantInfoLabel = styled.Text`
+    color: ${props => props.theme.secondary2};
+    font-size: 20px;
 `
 
 function EditPlant({route}){
@@ -30,9 +37,18 @@ function EditPlant({route}){
         <Container>
             <Title>Editar planta</Title>
             <InputsContainer>
-                <Text>Input 1</Text>
-                <Text>Input 2</Text>
-                <Text>Input 3</Text>
+                <PlantInfoLabel>Nome</PlantInfoLabel>
+                <Input 
+                    placeholder="Nome da planta"
+                    value="Meus tomates" 
+                />
+                <PlantInfoLabel>Modelo</PlantInfoLabel>
+                <Input 
+                    placeholder="Modelo da planta"
+                    value="Tomate" 
+                />
+                <Button text="Remover planta" style={{marginTop:5}} />
+                
             </InputsContainer>
             <BottomButtonsContainer>
                 <Button text="Salvar" style={{flex:1, margin:5}} />
