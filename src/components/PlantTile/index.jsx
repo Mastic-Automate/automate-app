@@ -31,7 +31,7 @@ export default function PlantTile({id, text}) {
     const {primary} = useTheme()
 
     function openPlantInfo(){
-        console.log('Info')
+        navigation.replace('info-plant', {id:id})
     }
     function openPlantEdit(){
         navigation.replace('edit-plant', {id:id})
