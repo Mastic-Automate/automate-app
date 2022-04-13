@@ -24,7 +24,9 @@ function Input({iconType:Icon, iconName, style, ...textInputProps}){
 
     return (
         <Container isFocused={isFocused} style={style}>
-            <Icon name={iconName} size={40} color={isFocused? theme.primary : theme.secondary1} />
+            {Icon &&(
+                <Icon name={iconName} size={40} color={isFocused? theme.primary : theme.secondary1} />
+            )}
             <TextInput
                 {...textInputProps} 
                 onFocus={()=> setIsFocused(true)} 

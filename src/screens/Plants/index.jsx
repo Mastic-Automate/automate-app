@@ -2,8 +2,7 @@ import styled, {useTheme} from 'styled-components/native';
 
 import PlantTile from '../../components/PlantTile'
 import {MaterialIcons} from '@expo/vector-icons';
-
-import {View, Text} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Container = styled.View`
     background: ${props => props.theme.background};
@@ -26,14 +25,13 @@ const Title = styled.Text`
     font-size:30px;
 `
 
-const AddButton = styled.View`
+const AddButton = styled.TouchableOpacity`
     position: fixed;
     bottom: 91px;
     right: 20px;
-    cursor: pointer;
 `;
 
-export function Plants(){
+export function Plants({navigation}){
     const {primary} = useTheme();
     return (
         <Container>
@@ -41,12 +39,14 @@ export function Plants(){
             <PlantTileContainer>
                 <PlantTile 
                     text="Tomate"
+                    id="a"
                 />
                 <PlantTile 
                     text="Pimenta"
+                    id="b"
                 />  
             </PlantTileContainer>
-            <AddButton>
+            <AddButton onPress={() =>navigation.replace('bluetooth-connection', {target:'add-plant', params:{}}) }>
                 <MaterialIcons 
                     name='add-circle' 
                     size={58} 
