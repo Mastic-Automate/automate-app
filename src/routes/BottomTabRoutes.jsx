@@ -7,6 +7,7 @@ import { Home } from '../screens/Home'
 import { Videos } from '../screens/Videos'
 import { PlantsManagementRoutes } from './PlantsManagementRoutes'
 import { BottomTabBar } from '../components/BottomTabBar'
+import {ConfigScreensRoutes} from './ConfigScreensRoutes'
 
 const Nav = createBottomTabNavigator()
 
@@ -16,7 +17,7 @@ export function BottomTabRoutes(){
             <Nav.Screen name="home" component={Home} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{title: 'Plantas'}} />
             <Nav.Screen name="videos" component={Videos} options={{title: 'Vídeos' }} />
-            <Nav.Screen name="config" component={Config} />
+            <Nav.Screen name="config" component={ConfigScreensRoutes} />
         </Nav.Navigator>
     )
 }
