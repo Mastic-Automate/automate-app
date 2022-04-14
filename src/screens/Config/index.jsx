@@ -1,7 +1,8 @@
-import { Button, Switch } from 'react-native';
 import styled from 'styled-components/native';
 
-import {ConfigTileSwitch} from '../../components/ConfigTile/index'
+import {MaterialCommunityIcons} from '@expo/vector-icons'
+
+import {ConfigTileSwitch, ConfigTileSection} from '../../components/ConfigTile'
 import { useTheme } from '../../hooks/useTheme';
 
 const Container = styled.View`
@@ -25,7 +26,7 @@ const TilesContainer = styled.View`
     width: 100%;
 `
 
-export function Config(){
+export function Config({navigation}){
     const {toggleTheme, theme} = useTheme()
 
     const isDarkTheme = !(theme==='light')
@@ -39,6 +40,12 @@ export function Config(){
                     text="Tema escuro"
                     value={isDarkTheme}
                     onChange={toggleTheme}
+                />
+                <ConfigTileSection 
+                    text="Configurações de conta"
+                    iconType={MaterialCommunityIcons}
+                    iconName="account-circle-outline"
+                    onPress={() => navigation.replace('account')}
                 />
             </TilesContainer>
 
