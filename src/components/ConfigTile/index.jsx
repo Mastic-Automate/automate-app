@@ -1,40 +1,4 @@
-import styled, {useTheme} from 'styled-components/native';
+import {ConfigTileSwitch} from './ConfigTileSwitch'
+import {ConfigTileSection} from './ConfigTileSection'
 
-import {Switch} from 'react-native'
-
-const Container = styled.View`
-    background-color: ${props => props.theme.secondary3};
-    border-radius: 10px;
-    padding: 10px;
-    flex-direction: row;
-    align-items:center;
-    justify-content: space-between;
-    height: 50px;
-    width: 100%;
-`
-
-const TileText = styled.Text`
-    font-size: 20px;
-    color: ${props => props.theme.secondary1};
-`
-
-export function ConfigTileSwitch({text, iconType:Icon, iconName, onChange, value}){
-    const {primary} = useTheme()
-
-    return (
-        <Container>
-            {iconName && (
-                <Icon 
-                    name={iconName}
-                />
-            )}
-            <TileText>{text}</TileText>
-            <Switch 
-                trackColor={{false: "#797979", true: primary}}
-                thumbColor="#ffffff"
-                value={value}
-                onValueChange = {onChange}
-            />
-        </Container>
-    )
-}
+export {ConfigTileSwitch, ConfigTileSection}
