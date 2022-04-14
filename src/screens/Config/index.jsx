@@ -20,8 +20,7 @@ const Title = styled.Text`
     margin-top: 75px;
 `
 
-const TilesContainer = styled.View`
-    align-items:center;
+const TilesContainer = styled.ScrollView`
     margin-top: 80px;
     width: 100%;
 `

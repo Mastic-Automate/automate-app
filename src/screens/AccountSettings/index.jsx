@@ -17,12 +17,20 @@ const Title = styled.Text`
     margin-top: 75px;
 `
 
+const TilesContainer = styled.ScrollView`
+    margin-top: 80px;
+    width: 100%;
+`
+
 function AccountSettings(){
     return (
         <Container>
             <Title>Configurações de conta</Title>
 
-            <Button text="Logout" />
+            <TilesContainer>
+                <Button text="Logout" />
+            </TilesContainer>
+
         </Container>
     )
 }
