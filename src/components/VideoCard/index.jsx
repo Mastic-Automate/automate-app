@@ -1,4 +1,6 @@
-import styled, {useTheme} from 'styled-components/native';
+import styled from 'styled-components/native';
+
+import YoutubePlayer from 'react-native-youtube-iframe'
 
 const Container = styled.View`
     width: 100%;
@@ -6,12 +8,6 @@ const Container = styled.View`
     height: 320px;
     background-color: ${props => props.theme.secondary3};
     margin-bottom: 10px;
-`;
-
-const VideoThumb = styled.Image`
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
 `;
 
 const InfoContainer = styled.View`
@@ -31,11 +27,13 @@ const Subtitle = styled.Text`
     margin-top: 12px;
 `;
 
-export default function VideoCard({urlVideoThumb, videoTitle, videoSubtitle}) {
+export default function VideoCard({videoId, videoTitle, videoSubtitle}) {
     return(
         <Container>
-            <VideoThumb
-                source={{uri: urlVideoThumb }}
+            <YoutubePlayer 
+                width="100%"
+                videoId={videoId}
+                height={210}
             />
             <InfoContainer>
                 <Title>

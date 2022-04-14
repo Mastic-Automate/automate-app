@@ -28,7 +28,7 @@ export function Videos(){
             <Title>Videos</Title>
             <VideosContainer>
                 <VideoCard
-                    urlVideoThumb='https://images.unsplash.com/photo-1608022749628-3251d92cdd79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
+                    videoId="vbaJcRxASo0"
                     videoTitle='Como lavar tomates recém colhidos'
                     videoSubtitle='Luíz Antônio Braga'
                 />
