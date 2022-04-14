@@ -18,14 +18,16 @@ const TileText = styled.Text`
     color: ${props => props.theme.secondary1};
 `
 
-export function ConfigTileSwitch({text, iconType:Icon, iconName, onChange, value}){
+export function ConfigTileSwitch({text, iconType:Icon, iconName, onChange, value, style}){
     const {primary} = useTheme()
 
     return (
-        <Container>
+        <Container style={style}>
             {iconName && (
                 <Icon 
                     name={iconName}
+                    color={primary}
+                    size={40}
                 />
             )}
             <TileText>{text}</TileText>

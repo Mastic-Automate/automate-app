@@ -40,11 +40,13 @@ export function Config({navigation}){
                     text="Tema escuro"
                     value={isDarkTheme}
                     onChange={toggleTheme}
+                    style={{margin:5}}
                 />
                 <ConfigTileSection 
                     text="Configurações de conta"
                     iconType={MaterialCommunityIcons}
                     iconName="account-circle-outline"
+                    style={{margin:5}}
                     onPress={() => navigation.replace('account')}
                 />
             </TilesContainer>

@@ -16,10 +16,10 @@ const TileText = styled.Text`
     color: ${props => props.theme.secondary1};
 `
 
-function ConfigTileSection({text, iconName, iconType:Icon, onPress}){
+function ConfigTileSection({text, iconName, iconType:Icon, onPress, style}){
     const {primary} = useTheme()
     return (
-        <Container onPress={onPress}>
+        <Container onPress={onPress} style={style}>
             {Icon && (
                 <Icon 
                     size={40}
