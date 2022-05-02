@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
 
-import {Text} from 'react-native'
+import { Text } from 'react-native'
 
-import {Button} from '../../components/Button'
-import {Input} from '../../components/Input'
+import { Button } from '../../components/Button'
+import { Input } from '../../components/Input'
 
 const Container = styled.View`
     padding: 10px;
@@ -31,31 +31,31 @@ const PlantInfoLabel = styled.Text`
     font-size: 20px;
 `
 
-function EditPlant({route}){
-    const {id} = route.params
+function EditPlant({ route }) {
+    const { id } = route.params
     return (
         <Container>
             <Title>Editar planta</Title>
             <InputsContainer>
                 <PlantInfoLabel>Nome</PlantInfoLabel>
-                <Input 
+                <Input
                     placeholder="Nome da planta"
-                    value="Meus tomates" 
+                    value="Meus tomates"
                 />
                 <PlantInfoLabel>Modelo</PlantInfoLabel>
-                <Input 
+                <Input
                     placeholder="Modelo da planta"
-                    value="Tomate" 
+                    value="Tomate"
                 />
-                <Button text="Remover planta" style={{marginTop:5}} />
-                
+                <Button text="Remover planta" style={{ marginTop: 5 }} negative />
+
             </InputsContainer>
             <BottomButtonsContainer>
-                <Button text="Salvar" style={{flex:1, margin:5}} />
-                <Button text="Cancelar" outline style={{flex:1, margin:5}} />
+                <Button text="Salvar" style={{ flex: 1, margin: 5 }} />
+                <Button text="Cancelar" outline style={{ flex: 1, margin: 5 }} />
             </BottomButtonsContainer>
         </Container>
     )
 }
 
-export {EditPlant}
+export { EditPlant }
