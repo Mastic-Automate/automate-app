@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import {Button} from '../../components/Button'
+import { Button } from '../../components/Button'
 
 const Container = styled.View`
     padding-left: 10px;
@@ -22,17 +22,17 @@ const TilesContainer = styled.ScrollView`
     width: 100%;
 `
 
-function AccountSettings(){
+function AccountSettings() {
     return (
         <Container>
             <Title>Configurações de conta</Title>
 
             <TilesContainer>
-                <Button text="Logout" />
+                <Button text="Logout" negative />
             </TilesContainer>
 
         </Container>
     )
 }
 
-export {AccountSettings}
+export { AccountSettings }
