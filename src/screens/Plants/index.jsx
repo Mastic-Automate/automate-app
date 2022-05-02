@@ -1,8 +1,8 @@
-import styled, {useTheme} from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
+import { FlatList } from 'react-native'
 
 import PlantTile from '../../components/PlantTile'
-import {MaterialIcons} from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Container = styled.View`
     background: ${props => props.theme.background};
@@ -13,10 +13,8 @@ const Container = styled.View`
     padding-top: 20px;
 `;
 
-const PlantTileContainer = styled.View`
+const PlantTileContainer = styled.ScrollView`
     width: 100%;
-    align-items: center;
-    justify-content: center;
     margin-top: 32px;
 `;
 
@@ -31,27 +29,33 @@ const AddButton = styled.TouchableOpacity`
     right: 20px;
 `;
 
-export function Plants({navigation}){
-    const {primary} = useTheme();
+const plants = [
+    {
+        text: 'Meus tomates',
+        id: '1'
+    },
+    {
+        text: 'Pimenta',
+        id: '2'
+    },
+]
+
+export function Plants({ navigation }) {
+    const { primary } = useTheme();
+
+
     return (
         <Container>
             <Title>Suas plantas</Title>
-            <PlantTileContainer>
-                <PlantTile 
-                    text="Tomate"
-                    id="a"
-                />
-                <PlantTile 
-                    text="Pimenta"
-                    id="b"
-                />  
+            <PlantTileContainer contentContainerStyle={{ alignItems: 'center' }}>
+                {plants.map(plant => <PlantTile {...plant} key={plant.id} />)}
             </PlantTileContainer>
-            <AddButton onPress={() =>navigation.replace('bluetooth-connection', {target:'add-plant', params:{}}) }>
-                <MaterialIcons 
-                    name='add-circle' 
-                    size={58} 
-                    color={primary} 
-                    style={{margin:3}} 
+            <AddButton onPress={() => navigation.replace('bluetooth-connection', { target: 'add-plant', params: {} })}>
+                <MaterialIcons
+                    name='add-circle'
+                    size={58}
+                    color={primary}
+                    style={{ margin: 3 }}
                 />
             </AddButton>
         </Container>
