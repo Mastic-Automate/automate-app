@@ -5,7 +5,7 @@ import {Controller} from 'react-hook-form'
 import {Input} from '../Input'
 
 const ErrorText = styled.Text`
-    color: red;
+    color: ${props => props.theme.error};
 `
 
 export function FormInput({control, name, error, ...textInputProps}){
