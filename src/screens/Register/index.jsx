@@ -11,9 +11,10 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import {BottomInfo, BottomText, Container, Inputs, LoginLink, Title} from './styles'
 
 const schema = yup.object({
-    email: yup.string().required("Campo email é obrigatório").email("Email inválido"),
-    password: yup.string().required("Campo senha obrigatório").min(6, "Senha deve ter ao menos 6 caracteres"),
-    'password-confirm': yup.string().required("Campo de confirmação de senha obrigatório").oneOf([yup.ref('password'), null], "Senha de confirmação deve ser igual a primeira senha")
+    email: yup.string().required("Email é obrigatório").email("Email inválido"),
+    name: yup.string().required("Nome é obrigatório"),
+    password: yup.string().required("Senha obrigatória").min(6, "Senha deve ter ao menos 6 caracteres"),
+    'password-confirm': yup.string().required("Confirmação de senha é obrigatório").oneOf([yup.ref('password'), null], "Senha de confirmação deve ser igual a primeira senha")
 })
 
 export function Register({navigation}){
@@ -31,11 +32,21 @@ export function Register({navigation}){
                 <Input
                     name="email"
                     control={control}
-                    iconName="account-circle-outline"
+                    iconName="email-outline"
                     iconType={MaterialCommunityIcons}
                     style={{marginTop: 10}}
                     placeholder="Email"
                     error={errors.email}
+                    keyBoardType="email"
+                />
+                <Input
+                    name="name"
+                    control={control}
+                    iconName="account-circle-outline"
+                    iconType={MaterialCommunityIcons}
+                    style={{marginTop: 10}}
+                    placeholder="Nome"
+                    error={errors.name}
                     keyBoardType="email"
                 />
                 <Input 
