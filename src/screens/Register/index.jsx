@@ -1,5 +1,3 @@
-import styled from 'styled-components/native'
-
 import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
 
 import {useForm} from 'react-hook-form'
@@ -10,42 +8,13 @@ import {Button} from '../../components/Button'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 
+import {BottomInfo, BottomText, Container, Inputs, LoginLink, Title} from './styles'
+
 const schema = yup.object({
     email: yup.string().required("Campo email é obrigatório").email("Email inválido"),
     password: yup.string().required("Campo senha obrigatório").min(6, "Senha deve ter ao menos 6 caracteres"),
     'password-confirm': yup.string().required("Campo de confirmação de senha obrigatório").oneOf([yup.ref('password'), null], "Senha de confirmação deve ser igual a primeira senha")
 })
-
-const Container = styled.KeyboardAvoidingView`
-    padding:10px;
-    background-color: ${props => props.theme.background};
-    align-items:center;
-    justify-content: space-around;
-    flex:1;
-`
-const Title = styled.Text`
-    font-size:30px;
-    color: ${props => props.theme.title};
-`
-
-const Inputs = styled.View`
-    width:100%;
-`
-
-const BottomInfo = styled.View`
-    align-items: center;
-`
-const BottomText = styled.Text`
-    font-size: 20px;
-    color: ${props => props.theme.secondary1};
-`
-
-const LoginLink = styled.TouchableOpacity`
-    color: ${props => props.theme.primary};
-    font-size: 20px;
-    font-weight: bold;
-    font-family: Poppins;
-`
 
 export function Register({navigation}){
     const {control, handleSubmit, formState:{errors}} = useForm({
