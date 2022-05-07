@@ -1,38 +1,26 @@
-import styled from 'styled-components/native'
-
-import { Text } from 'react-native'
-
 import { Button } from '../../components/Button'
-import { Input } from '../../components/Input'
+import {FormInput as Input } from '../../components/FormInput'
 
-const Container = styled.View`
-    padding: 10px;
-    align-items:center;
-    justify-content:space-around;
-    background-color:${props => props.theme.background};
-    flex:1;
-`
-const Title = styled.Text`
-    color: ${props => props.theme.title};
-    font-size: 30px;
-`
+import {BottomButtonsContainer, Container, InputsContainer, PlantInfoLabel, Title} from './styles'
 
-const InputsContainer = styled.View`
-    width: 100%;
-`
-const BottomButtonsContainer = styled.View`
-    flex-direction:row;
-    justify-content:center;
-    width:100%;
-`
+import {useForm} from 'react-hook-form'
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
 
-const PlantInfoLabel = styled.Text`
-    color: ${props => props.theme.secondary2};
-    font-size: 20px;
-`
+const schema = yup.object({
+    name: yup.string().required("Nome é obrigatório"),
+    model: yup.string().required("Modelo é obrigatório")
+})
 
 function EditPlant({ route }) {
     const { id } = route.params
+    const {control, handleSubmit, formState:{errors}} = useForm({
+        resolver:yupResolver(schema)
+    })
+
+    function handleSaveEdit(data){
+        console.log(data)
+    }
     return (
         <Container>
             <Title>Editar planta</Title>
@@ -41,17 +29,23 @@ function EditPlant({ route }) {
                 <Input
                     placeholder="Nome da planta"
                     value="Meus tomates"
+                    control={control}
+                    name="name"
+                    error={errors.name}
                 />
                 <PlantInfoLabel>Modelo</PlantInfoLabel>
                 <Input
                     placeholder="Modelo da planta"
                     value="Tomate"
+                    control={control}
+                    name="model"
+                    error={errors.model}
                 />
                 <Button text="Remover planta" style={{ marginTop: 5 }} negative />
 
             </InputsContainer>
             <BottomButtonsContainer>
-                <Button text="Salvar" style={{ flex: 1, margin: 5 }} />
+                <Button text="Salvar" onPress={handleSubmit(handleSaveEdit)} style={{ flex: 1, margin: 5 }} />
                 <Button text="Cancelar" outline style={{ flex: 1, margin: 5 }} />
             </BottomButtonsContainer>
         </Container>

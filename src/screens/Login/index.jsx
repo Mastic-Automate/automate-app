@@ -4,54 +4,24 @@ import {View, Text} from 'react-native'
 import {MaterialCommunityIcons as MaterialCommunity, MaterialIcons as Material} from '@expo/vector-icons'
 
 import {Button} from '../../components/Button'
-import { Input } from '../../components/Input'
+import {FormInput as Input } from '../../components/FormInput'
 
-const Container = styled.SafeAreaView`
-    padding: 10px;
-    background-color: ${props => props.theme.background};
-    align-items: center;
-    justify-content: space-around;
-    height: 100%;
-`
+import {BottomLink, BottomLinkText, BottomText, BottomView, Container, InputsView, Title} from './styles'
 
-const Title = styled.Text`
-    font-size: 30px;
-    color: ${props => props.theme.title};
-    width: 100%;
-    text-align: center;
-`
+import {useForm} from 'react-hook-form'
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
 
-const BottomText = styled.Text`
-    color: ${props => props.theme.secondary1};
-    font-size: 20px;
-    width: 100%;
-    text-align:center;
-`
-
-const BottomLink = styled.TouchableOpacity`
-    width: 50%;
-    text-align:center;
-`
-const BottomLinkText = styled.Text`
-    text-align:center;
-    color: ${props => props.theme.primary};
-    font-weight: bold;
-    font-size: 20px;
-    font-family: Poppins;
-    width: 100%;
-`
-
-const InputsView = styled.View`
-    margin: 10px;
-    width: 100%;
-`
-
-const BottomView = styled.View`
-    align-items:center;
-`
+const schema = yup.object({
+    email: yup.string().required("Campo de email obrigatório").email("Email inválido"),
+    password: yup.string().required("Campo de senha obrigatório")
+})
 
 export function Login({navigation}){
-    function signIn(){
+    const {control, handleSubmit, formState:{errors}} = useForm({
+        resolver: yupResolver(schema)
+    })
+    function signIn(data){
         navigation.replace('main')
     }
     return (
@@ -59,20 +29,27 @@ export function Login({navigation}){
             <Title>Login</Title>
             <InputsView>
             
-                <Input 
+                <Input
+                    name="email"
+                    control={control}
+                    error={errors.email}
                     placeholder="Email"
                     iconType={MaterialCommunity}
                     iconName="account-circle-outline"
                     style={{marginTop:10}}
                 />
-                <Input 
+                <Input
+                    name="password"
+                    control={control}
+                    error={errors.password}
                     placeholder="Senha"
                     iconType={Material}
                     iconName="lock-outline"
+                    secureTextEntry
                     style={{marginTop:10}}
                 />
 
-                <Button text="Login" onPress={signIn} style={{marginTop:10}} />
+                <Button text="Login" onPress={handleSubmit(signIn)} style={{marginTop:10}} />
             </InputsView>
             <BottomView>
                 <BottomText>Ainda não possui uma conta?</BottomText>

@@ -29,7 +29,7 @@ const IconsWrapper = styled.View`
 
 export default function PlantTile({id, text}) {
     const navigation = useNavigation()
-    const {primary} = useTheme()
+    const {secondary1} = useTheme()
 
     function openPlantInfo(){
         navigation.replace('bluetooth-connection', 
@@ -52,8 +52,8 @@ export default function PlantTile({id, text}) {
         <Container>
             <Title>{text}</Title>
             <IconsWrapper>
-                <MaterialIcons name='info-outline' size={40} color={primary} style={{margin:3}}  onPress={openPlantInfo}/>
-                <MaterialIcons name="edit" size={40} color={primary} style={{margin:3}} onPress={openPlantEdit} />
+                <MaterialIcons name='info-outline' size={40} color={secondary1} style={{margin:3}}  onPress={openPlantInfo}/>
+                <MaterialIcons name="edit" size={40} color={secondary1} style={{margin:3}} onPress={openPlantEdit} />
             </IconsWrapper>
         </Container>
     )
