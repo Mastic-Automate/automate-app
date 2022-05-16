@@ -9,7 +9,11 @@ function AuthContextProvider({children}){
     async function signIn(userEmail, userPassword){
         const requestBody = {userEmail, userPassword}
         try {
-            const response = await api.post('/signin', requestBody)
+            const response = await api.post('/signin', requestBody, {
+                headers: {
+                    'Access-Control-Allow-Origin':'*'
+                }
+            })
             console.log(response)
         } catch(err) {
             console.log(err)
