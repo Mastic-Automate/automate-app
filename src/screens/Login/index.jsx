@@ -1,10 +1,9 @@
-import styled from 'styled-components/native'
-import {View, Text} from 'react-native'
-
 import {MaterialCommunityIcons as MaterialCommunity, MaterialIcons as Material} from '@expo/vector-icons'
 
 import {Button} from '../../components/Button'
 import {FormInput as Input } from '../../components/FormInput'
+
+import {useAuth} from '../../hooks/useAuth'
 
 import {BottomLink, BottomLinkText, BottomText, BottomView, Container, InputsView, Title} from './styles'
 
@@ -18,11 +17,12 @@ const schema = yup.object({
 })
 
 export function Login({navigation}){
+    const {signIn:authSignIn} = useAuth()
     const {control, handleSubmit, formState:{errors}} = useForm({
         resolver: yupResolver(schema)
     })
     function signIn(data){
-        navigation.replace('main')
+        authSignIn(data.email, data.password)
     }
     return (
         <Container>

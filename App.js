@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import {useFonts} from 'expo-font'
 
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
+import {AuthContextProvider} from './src/contexts/AuthContext'
 import { InitialRoutes } from './src/routes/InitialRoutes'
 
 import {Poppins_400Regular} from '@expo-google-fonts/poppins'
@@ -14,10 +15,12 @@ export default function App() {
     'Poppins':Poppins_400Regular
   })
   return (
-    <ThemeContextProvider>
-      <NavigationContainer>
-        <InitialRoutes />
-      </NavigationContainer>
-    </ThemeContextProvider>
+    <AuthContextProvider>
+      <ThemeContextProvider>
+        <NavigationContainer>
+          <InitialRoutes />
+        </NavigationContainer>
+      </ThemeContextProvider>
+    </AuthContextProvider>
   );
 }
