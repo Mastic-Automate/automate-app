@@ -17,13 +17,14 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 const CardBody = styled(MotiView)`
   background-color: ${props => props.theme.background};
   border-radius: 10px;
-  border-width: 3;
+  border-width: 2px;
   border-color: ${props => props.theme.primary};
   flex-flow:row nowrap;
   align-content: center;
   justify-content:center;
   align-items:center;
   padding: 10px;
+  width:100%;
 `
 
 const CardText = styled.Text`
@@ -33,80 +34,79 @@ const CardText = styled.Text`
   color: ${props => props.theme.secondary1};
   margin-left: 3px;
 `
-export default function Card({delay, text, style, iconType:Icon, iconName}) {
+export default function Card({ delay, text, style, iconType: Icon, iconName }) {
   const animation = !(delay === undefined || delay === 0)
   const animConfigs = {
     from: { translateY: 300, opacity: 0 },
     animate: { translateY: 0, opacity: 1 }
   }
 
-  const {primary} = useTheme()
+  const { primary } = useTheme()
 
   return (
     <CardBody
       from={animation ? animConfigs.from : {}}
       animate={animation ? animConfigs.animate : {}}
-      transition={{ type: 'timing', duration: 350, delay: delay }} 
+      transition={{ type: 'timing', duration: 350, delay: delay }}
       style={style}
     >
-      <Icon 
+      <Icon
         name={iconName}
         color={primary}
         size={40}
       />
-      
+
       <CardText >{text}</CardText>
     </CardBody>
   )
 }
-  
+
 const AnimCardFadeIn = (props) => {
   return (
-    <MotiView 
+    <MotiView
 
       from={{ translateX: -300 }}
       animate={{ translateX: 0 }}
       transition={{ type: 'spring', duration: 1500, delay: props.delay }}
-      style={props.theme === 'light' ? styles.cardBodyLight : styles.cardBodyDark} 
+      style={props.theme === 'light' ? styles.cardBodyLight : styles.cardBodyDark}
     >
-    
-  
+
+
       <AntDesign name={props.icon} size={40} style={styles.icon} color="#00c964" />
-    {
-      props.theme === 'light' 
-        ? <CardTextLight >{props.text}</CardTextLight> 
-        : <CardTextDark >{props.text}</CardTextDark>
-    }
-  </MotiView>
+      {
+        props.theme === 'light'
+          ? <CardTextLight >{props.text}</CardTextLight>
+          : <CardTextDark >{props.text}</CardTextDark>
+      }
+    </MotiView>
   )
 }
-    
-  
+
+
 const AnimCardSlideInDown = (props) => {
   return (
-  <MotiView 
-    from={{ translateY: 300, opacity: 0 }}
-    animate={{ translateY: 0, opacity: 1 }}
-    transition={{ type: 'spring', duration: 5000 }}
-    style={props.theme === 'light' ? styles.cardBodyLight : styles.cardBodyDark} 
-  > 
-    <AntDesign name={props.icon} size={40} style={styles.icon} color="#00c964" />
+    <MotiView
+      from={{ translateY: 300, opacity: 0 }}
+      animate={{ translateY: 0, opacity: 1 }}
+      transition={{ type: 'spring', duration: 5000 }}
+      style={props.theme === 'light' ? styles.cardBodyLight : styles.cardBodyDark}
+    >
+      <AntDesign name={props.icon} size={40} style={styles.icon} color="#00c964" />
 
-    <CardText >{props.text}</CardText>
-      
-  </MotiView>
+      <CardText >{props.text}</CardText>
+
+    </MotiView>
   )
 }
-  
-  
+
+
 const styles = StyleSheet.create({
   icon: {
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
-    margin: 5 ,
+    margin: 5,
   }
 });
-  
-  
+
