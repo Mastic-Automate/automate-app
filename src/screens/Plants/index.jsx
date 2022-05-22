@@ -53,7 +53,7 @@ export function Plants({ navigation }) {
             <AddButton onPress={() => navigation.replace('bluetooth-connection', { target: 'add-plant', params: {} })}>
                 <MaterialIcons
                     name='add-circle'
-                    size={80}
+                    size={70}
                     color={primary}
                     style={{ margin: 3 }}
                 />
