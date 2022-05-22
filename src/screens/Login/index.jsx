@@ -10,6 +10,7 @@ import { BottomLink, BottomLinkText, BottomText, BottomView, Container, InputsVi
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useEffect } from 'react'
 
 const schema = yup.object({
     email: yup.string().required("Campo de email obrigatório").email("Email inválido"),
@@ -17,13 +18,19 @@ const schema = yup.object({
 })
 
 export function Login({ navigation }) {
-    const { signIn: authSignIn } = useAuth()
+    const { signIn, user } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     })
-    function signIn(data) {
-        authSignIn(data.email, data.password)
+    function handleSignin(data) {
+        signIn(data.email, data.password)
     }
+
+    useEffect(() => {
+        if (user !== null) {
+            navigation.replace('main')
+        }
+    }, [user])
     return (
         <Container>
             <Title>Login</Title>
@@ -54,7 +61,7 @@ export function Login({ navigation }) {
                     autoCapitalize="none"
                 />
 
-                <Button text="Login" onPress={handleSubmit(signIn)} style={{ marginTop: 10 }} />
+                <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />
             </InputsView>
             <BottomView>
                 <BottomText>Ainda não possui uma conta?</BottomText>
