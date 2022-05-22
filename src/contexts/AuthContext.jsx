@@ -10,7 +10,9 @@ function AuthContextProvider({ children }) {
         const requestBody = { userEmail, userPassword }
         try {
             const response = await api.post('/signin', requestBody)
-            console.log(response.data)
+            const responseUser = response.data.user
+            setUser(responseUser)
+            console.log(user)
         } catch (err) {
             console.log(err)
         }
