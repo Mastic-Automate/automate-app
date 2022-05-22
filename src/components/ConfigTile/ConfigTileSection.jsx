@@ -1,4 +1,4 @@
-import styled, {useTheme} from 'styled-components/native'
+import styled, { useTheme } from 'styled-components/native'
 
 const Container = styled.TouchableOpacity`
     background-color: ${props => props.theme.secondary3};
@@ -7,7 +7,7 @@ const Container = styled.TouchableOpacity`
     flex-direction: row;
     align-items:center;
     justify-content: space-between;
-    height: 50px;
+    height: 60px;
     width: 100%;
 `
 
@@ -16,12 +16,12 @@ const TileText = styled.Text`
     color: ${props => props.theme.secondary1};
 `
 
-function ConfigTileSection({text, iconName, iconType:Icon, onPress, style}){
-    const {primary} = useTheme()
+function ConfigTileSection({ text, iconName, iconType: Icon, onPress, style }) {
+    const { primary } = useTheme()
     return (
         <Container onPress={onPress} style={style}>
             {Icon && (
-                <Icon 
+                <Icon
                     size={40}
                     color={primary}
                     name={iconName}
@@ -34,4 +34,4 @@ function ConfigTileSection({text, iconName, iconType:Icon, onPress, style}){
     )
 }
 
-export {ConfigTileSection}
+export { ConfigTileSection }

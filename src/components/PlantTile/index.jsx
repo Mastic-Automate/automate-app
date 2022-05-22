@@ -5,11 +5,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 
 const Container = styled.View`
-    flex-flow: row nowrap;
+    flex-direction: row;
     height: 60px;
     width:100%;
     background-color: ${props => props.theme.secondary3};
-    justify-content: center;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
@@ -52,8 +51,8 @@ export default function PlantTile({ id, text }) {
         <Container>
             <Title>{text}</Title>
             <IconsWrapper>
-                <MaterialIcons name='info-outline' size={40} color={secondary1} style={{ margin: 3 }} onPress={openPlantInfo} />
-                <MaterialIcons name="edit" size={40} color={secondary1} style={{ margin: 3 }} onPress={openPlantEdit} />
+                <MaterialIcons name='info-outline' size={40} color={secondary1} style={{ marginHorizontal: 3 }} onPress={openPlantInfo} />
+                <MaterialIcons name="edit" size={40} color={secondary1} style={{ marginHorizontal: 3 }} onPress={openPlantEdit} />
             </IconsWrapper>
         </Container>
     )
