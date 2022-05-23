@@ -1,14 +1,14 @@
-import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons'
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-import {FormInput as Input} from '../../components/FormInput'
-import {Button} from '../../components/Button'
+import { FormInput as Input } from '../../components/FormInput'
+import { Button } from '../../components/Button'
 
 import * as yup from 'yup'
-import {yupResolver} from '@hookform/resolvers/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import {BottomInfo, BottomText, Container, Inputs, LoginLink, Title} from './styles'
+import { BottomInfo, BottomText, Container, Content, Inputs, LoginLink, LoginLinkText, Title } from './styles'
 
 const schema = yup.object({
     email: yup.string().required("Email é obrigatório").email("Email inválido"),
@@ -17,68 +17,80 @@ const schema = yup.object({
     'password-confirm': yup.string().required("Confirmação de senha é obrigatório").oneOf([yup.ref('password'), null], "Senha de confirmação deve ser igual a primeira senha")
 })
 
-export function Register({navigation}){
-    const {control, handleSubmit, formState:{errors}} = useForm({
-        resolver:yupResolver(schema)
+export function Register({ navigation }) {
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
     })
 
-    function handleUserRegister(data){
+    function handleUserRegister(data) {
         console.log(data)
     }
     return (
         <Container>
-            <Title>Cadastrar</Title>
-            <Inputs>
-                <Input
-                    name="email"
-                    control={control}
-                    iconName="email-outline"
-                    iconType={MaterialCommunityIcons}
-                    style={{marginTop: 10}}
-                    placeholder="Email"
-                    error={errors.email}
-                    keyBoardType="email"
-                />
-                <Input
-                    name="name"
-                    control={control}
-                    iconName="account-circle-outline"
-                    iconType={MaterialCommunityIcons}
-                    style={{marginTop: 10}}
-                    placeholder="Nome"
-                    error={errors.name}
-                    keyBoardType="email"
-                />
-                <Input 
-                    name="password"
-                    control={control}
-                    iconName="lock-outline"
-                    iconType={MaterialIcons}
-                    style={{marginTop: 10}}
-                    placeholder="Senha"
-                    error={errors.password}
-                    secureTextEntry
-                />
-                <Input
-                    name="password-confirm"
-                    control={control}
-                    iconName="lock-outline"
-                    iconType={MaterialIcons}
-                    style={{marginTop: 10}}
-                    placeholder="Confirmar senha"
-                    error={errors['password-confirm']}
-                    secureTextEntry
-                />
-                <Button
-                    text="Cadastrar"
-                    style={{marginTop:10}}
-                    onPress={handleSubmit(handleUserRegister)}
-                />
+            <Content>
 
-            </Inputs>
+                <Title>Cadastrar</Title>
+                <Inputs>
+                    <Input
+                        name="email"
+                        control={control}
+                        iconName="email-outline"
+                        iconType={MaterialCommunityIcons}
+                        style={{ marginTop: 10 }}
+                        placeholder="Email"
+                        error={errors.email}
+                        keyBoardType="email-address"
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                    />
+                    <Input
+                        name="name"
+                        control={control}
+                        iconName="account-circle-outline"
+                        iconType={MaterialCommunityIcons}
+                        style={{ marginTop: 10 }}
+                        placeholder="Nome"
+                        error={errors.name}
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                    />
+                    <Input
+                        name="password"
+                        control={control}
+                        iconName="lock-outline"
+                        iconType={MaterialIcons}
+                        style={{ marginTop: 10 }}
+                        placeholder="Senha"
+                        error={errors.password}
+                        secureTextEntry
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                    />
+                    <Input
+                        name="password-confirm"
+                        control={control}
+                        iconName="lock-outline"
+                        iconType={MaterialIcons}
+                        style={{ marginTop: 10 }}
+                        placeholder="Confirmar senha"
+                        error={errors['password-confirm']}
+                        secureTextEntry
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                    />
+                    <Button
+                        text="Cadastrar"
+                        style={{ marginTop: 10 }}
+                        onPress={handleSubmit(handleUserRegister)}
+                    />
+
+                </Inputs>
+            </Content>
             <BottomInfo>
                 <BottomText>Já possui uma conta?</BottomText>
-                <LoginLink onPress={() => navigation.replace('login')}>Login</LoginLink>
+                <LoginLink onPress={() => navigation.replace('login')}>
+                    <LoginLinkText>Login</LoginLinkText>
+                </LoginLink>
             </BottomInfo>
         </Container>
     )
