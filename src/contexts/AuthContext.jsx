@@ -9,16 +9,26 @@ function AuthContextProvider({ children }) {
     async function signIn(userEmail, userPassword) {
         const requestBody = { userEmail, userPassword }
         try {
-            const response = await api.post('/signin', requestBody)
+            const response = await api.post(`/signin`, requestBody)
             const responseUser = response.data.user
             setUser(responseUser)
-            console.log(user)
+            // console.log(user)
         } catch (err) {
             console.log(err)
         }
     }
-    function signUp(userEmail, userName, userPassword) {
-        api.post('/signin')
+    async function signUp(userEmail, userName, userPassword) {
+        try {
+            await api.post(`/signup`, {
+                userEmail,
+                userName,
+                userPassword
+            })
+            signIn(userEmail, userPassword)
+        } catch(err) {
+            console.log(err)
+        }
+
     }
     return (
         <AuthContext.Provider value={{ user, signIn, signUp }}>

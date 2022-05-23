@@ -8,7 +8,10 @@ import { Button } from '../../components/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
+import {useAuth} from '../../hooks/useAuth'
+
 import { BottomInfo, BottomText, Container, Content, Inputs, LoginLink, LoginLinkText, Title } from './styles'
+import { useEffect } from 'react'
 
 const schema = yup.object({
     email: yup.string().required("Email é obrigatório").email("Email inválido"),
@@ -22,8 +25,17 @@ export function Register({ navigation }) {
         resolver: yupResolver(schema)
     })
 
+    const {signUp, user} = useAuth()
+    
+    useEffect(() => {
+        if(user !== null) {
+            navigation.replace('main')
+        }
+    }, [user])
+
+
     function handleUserRegister(data) {
-        console.log(data)
+        signUp(data.email, data.name, data.password)
     }
     return (
         <Container>
