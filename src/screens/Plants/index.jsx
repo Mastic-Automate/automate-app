@@ -24,8 +24,8 @@ const Title = styled.Text`
 `
 
 const AddButton = styled.TouchableOpacity`
-    position: fixed;
-    bottom: 91px;
+    position: absolute;
+    bottom: 20px;
     right: 20px;
 `;
 
@@ -53,7 +53,7 @@ export function Plants({ navigation }) {
             <AddButton onPress={() => navigation.replace('bluetooth-connection', { target: 'add-plant', params: {} })}>
                 <MaterialIcons
                     name='add-circle'
-                    size={58}
+                    size={70}
                     color={primary}
                     style={{ margin: 3 }}
                 />
