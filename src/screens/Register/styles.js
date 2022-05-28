@@ -40,4 +40,20 @@ const LoginLinkText = styled.Text`
     font-family: Poppins;
 `
 
-export { Container, Content, BottomInfo, BottomText, Inputs, LoginLink, LoginLinkText, Title }
+const ErrorText = styled.Text`
+    color: ${props => props.theme.error};
+    width:100%;
+    text-align:center;
+`
+
+export { 
+    Container,
+    Content, 
+    BottomInfo, 
+    BottomText, 
+    Inputs, 
+    LoginLink, 
+    LoginLinkText, 
+    Title,
+    ErrorText
+}
