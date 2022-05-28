@@ -1,4 +1,6 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import {API_BASE_URL} from '@env'
 import axios from 'axios'
@@ -14,6 +16,10 @@ function AuthContextProvider({ children }) {
             if(response.data.sucess){
                 const responseUser = response.data.user
                 setUser(responseUser)
+                AsyncStorage.setItem('@UserAuth', JSON.stringify({
+                    email:userEmail,
+                    password:userPassword
+                }))
                 return {
                     sucess:true,
                     error: null
@@ -62,6 +68,19 @@ function AuthContextProvider({ children }) {
         }
 
     }
+
+    async function signInOnSetup(){
+        const jsonAuthData = await AsyncStorage.getItem('@UserAuth')
+        if(!!jsonAuthData) {
+            const authData = JSON.parse(jsonAuthData)
+            signIn(authData.email, authData.password)
+        }
+    }
+
+    useEffect(() => {
+        signInOnSetup()
+    }, [])
+
     return (
         <AuthContext.Provider value={{ user, signIn, signUp }}>
             {children}
