@@ -12,7 +12,6 @@ function AuthContextProvider({ children }) {
             const response = await api.post(`/signin`, requestBody)
             const responseUser = response.data.user
             setUser(responseUser)
-            // console.log(user)
         } catch (err) {
             console.log(err)
         }
