@@ -20,7 +20,7 @@ const Container = styled.View`
 
 export function BottomTabBar({navigation, state}){
     function navigate(screenName){
-        navigation.replace('main', {screen: screenName})
+        navigation.replace('authRoutes', {screen: screenName})
     }
 
     return (

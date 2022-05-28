@@ -69,6 +69,11 @@ function AuthContextProvider({ children }) {
 
     }
 
+    async function signOut(){
+        setUser(null)
+        AsyncStorage.removeItem('@UserAuth')
+    }
+
     async function signInOnSetup(){
         const jsonAuthData = await AsyncStorage.getItem('@UserAuth')
         if(!!jsonAuthData) {
@@ -82,7 +87,7 @@ function AuthContextProvider({ children }) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, signIn, signUp }}>
+        <AuthContext.Provider value={{ user, signIn, signUp, signOut }}>
             {children}
         </AuthContext.Provider>
     )

@@ -27,7 +27,7 @@ const schema = yup.object({
 })
 
 export function Login({ navigation }) {
-    const { signIn, user } = useAuth()
+    const { signIn } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     })
@@ -42,11 +42,6 @@ export function Login({ navigation }) {
         })
     }
 
-    useEffect(() => {
-        if (user !== null) {
-            navigation.replace('main')
-        }
-    }, [user])
     return (
         <Container>
             <Title>Login</Title>

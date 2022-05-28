@@ -35,13 +35,7 @@ export function Register({ navigation }) {
         resolver: yupResolver(schema)
     })
 
-    const {signUp, user} = useAuth()
-    
-    useEffect(() => {
-        if(user !== null) {
-            navigation.replace('main')
-        }
-    }, [user])
+    const {signUp} = useAuth()
 
     const [bottomError, setBottomError] = useState('')
 
