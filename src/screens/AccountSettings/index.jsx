@@ -1,5 +1,7 @@
 import styled from 'styled-components/native'
 
+import {useAuth} from '../../hooks/useAuth'
+
 import { Button } from '../../components/Button'
 
 const Container = styled.View`
@@ -23,12 +25,13 @@ const TilesContainer = styled.ScrollView`
 `
 
 function AccountSettings() {
+    const {signOut} = useAuth()
     return (
         <Container>
             <Title>Configurações de conta</Title>
 
             <TilesContainer>
-                <Button text="Logout" negative />
+                <Button text="Logout" negative onPress={signOut} />
             </TilesContainer>
 
         </Container>

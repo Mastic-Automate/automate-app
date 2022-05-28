@@ -43,5 +43,19 @@ const InputsView = styled.View`
 const BottomView = styled.View`
     align-items:center;
 `
+const ErrorText = styled.Text`
+    color: ${props => props.theme.error};
+    width: 100%;
+    text-align:center;
+`
 
-export {BottomLink, BottomLinkText, BottomText, BottomView, Container, InputsView, Title}
+export {
+    BottomLink, 
+    BottomLinkText, 
+    BottomText, 
+    BottomView, 
+    Container, 
+    InputsView, 
+    Title,
+    ErrorText
+}

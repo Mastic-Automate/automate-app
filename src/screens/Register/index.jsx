@@ -10,8 +10,18 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import {useAuth} from '../../hooks/useAuth'
 
-import { BottomInfo, BottomText, Container, Content, Inputs, LoginLink, LoginLinkText, Title } from './styles'
-import { useEffect } from 'react'
+import { 
+    BottomInfo, 
+    BottomText, 
+    Container, 
+    Content, 
+    Inputs, 
+    LoginLink, 
+    LoginLinkText, 
+    Title,
+    ErrorText
+} from './styles'
+import { useEffect, useState } from 'react'
 
 const schema = yup.object({
     email: yup.string().required("Email é obrigatório").email("Email inválido"),
@@ -25,17 +35,16 @@ export function Register({ navigation }) {
         resolver: yupResolver(schema)
     })
 
-    const {signUp, user} = useAuth()
-    
-    useEffect(() => {
-        if(user !== null) {
-            navigation.replace('main')
-        }
-    }, [user])
+    const {signUp} = useAuth()
 
+    const [bottomError, setBottomError] = useState('')
 
     function handleUserRegister(data) {
-        signUp(data.email, data.name, data.password)
+        signUp(data.email, data.name, data.password).then(result => {
+            if(!result.sucess) {
+                setBottomError((result.error.msg))
+            }
+        })
     }
     return (
         <Container>
@@ -51,7 +60,7 @@ export function Register({ navigation }) {
                         style={{ marginTop: 10 }}
                         placeholder="Email"
                         error={errors.email}
-                        keyBoardType="email-address"
+                        keyboardType="email-address"
                         autoCorrect={false}
                         autoCapitalize="none"
                     />
@@ -95,6 +104,7 @@ export function Register({ navigation }) {
                         style={{ marginTop: 10 }}
                         onPress={handleSubmit(handleUserRegister)}
                     />
+                    <ErrorText>{bottomError}</ErrorText>
 
                 </Inputs>
             </Content>

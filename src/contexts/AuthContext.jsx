@@ -1,6 +1,9 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
-import { api } from '../services/api'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import {API_BASE_URL} from '@env'
+import axios from 'axios'
 
 const AuthContext = createContext({})
 
@@ -9,29 +12,82 @@ function AuthContextProvider({ children }) {
     async function signIn(userEmail, userPassword) {
         const requestBody = { userEmail, userPassword }
         try {
-            const response = await api.post(`/signin`, requestBody)
-            const responseUser = response.data.user
-            setUser(responseUser)
-            // console.log(user)
+            const response = await axios.post(`${API_BASE_URL}/signin`, requestBody)
+            if(response.data.sucess){
+                const responseUser = response.data.user
+                setUser(responseUser)
+                AsyncStorage.setItem('@UserAuth', JSON.stringify({
+                    email:userEmail,
+                    password:userPassword
+                }))
+                return {
+                    sucess:true,
+                    error: null
+                }
+            }
+
+            return {
+                sucess:false,
+                error: {
+                    msg: response.data.msg
+                }
+            }
         } catch (err) {
             console.log(err)
         }
     }
     async function signUp(userEmail, userName, userPassword) {
         try {
-            await api.post(`/signup`, {
+            const response = await axios.post(`${API_BASE_URL}/signup`, {
                 userEmail,
                 userName,
                 userPassword
             })
-            signIn(userEmail, userPassword)
+            if(response.data.sucess) {
+                signIn(userEmail, userPassword)
+                return {
+                    sucess:true,
+                    error: null
+                }
+            } 
+            return {
+                sucess:false,
+                error:{
+                    msg: response.data.msg
+                }
+            }
+            
         } catch(err) {
             console.log(err)
+            return {
+                sucess:false,
+                error: {
+                    msg: 'Erro'
+                }
+            }
         }
 
     }
+
+    async function signOut(){
+        setUser(null)
+        AsyncStorage.removeItem('@UserAuth')
+    }
+
+    async function signInOnSetup(){
+        const jsonAuthData = await AsyncStorage.getItem('@UserAuth')
+        if(!!jsonAuthData) {
+            const authData = JSON.parse(jsonAuthData)
+            signIn(authData.email, authData.password)
+        }
+    }
+
+    useEffect(() => {
+        signInOnSetup()
+    }, [])
+
     return (
-        <AuthContext.Provider value={{ user, signIn, signUp }}>
+        <AuthContext.Provider value={{ user, signIn, signUp, signOut }}>
             {children}
         </AuthContext.Provider>
     )
