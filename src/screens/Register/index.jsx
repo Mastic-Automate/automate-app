@@ -51,7 +51,7 @@ export function Register({ navigation }) {
                         style={{ marginTop: 10 }}
                         placeholder="Email"
                         error={errors.email}
-                        keyBoardType="email-address"
+                        keyboardType="email-address"
                         autoCorrect={false}
                         autoCapitalize="none"
                     />
