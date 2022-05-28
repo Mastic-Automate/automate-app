@@ -1,6 +1,5 @@
 import { createContext, useState } from 'react'
 
-import { api } from '../services/api'
 import {API_BASE_URL} from '@env'
 import axios from 'axios'
 
@@ -12,8 +11,21 @@ function AuthContextProvider({ children }) {
         const requestBody = { userEmail, userPassword }
         try {
             const response = await axios.post(`${API_BASE_URL}/signin`, requestBody)
-            const responseUser = response.data.user
-            setUser(responseUser)
+            if(response.data.sucess){
+                const responseUser = response.data.user
+                setUser(responseUser)
+                return {
+                    sucess:true,
+                    error: null
+                }
+            }
+
+            return {
+                sucess:false,
+                error: {
+                    msg: response.data.msg
+                }
+            }
         } catch (err) {
             console.log(err)
         }
