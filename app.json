@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "automate-app",
+    "name": "Automate app",
     "slug": "automate-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,13 +17,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier":"com.mastic.automate"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package":"com.mastic.automate"
     },
     "web": {
       "favicon": "./assets/favicon.png"
