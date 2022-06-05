@@ -31,7 +31,7 @@ export default function PlantTile({ id, text }) {
     const { secondary1 } = useTheme()
 
     function openPlantInfo() {
-        navigation.replace('bluetooth-connection',
+        navigation.navigate('bluetooth-connection',
             {
                 target: 'info-plant',
                 params: { id: id }
@@ -39,7 +39,7 @@ export default function PlantTile({ id, text }) {
         )
     }
     function openPlantEdit() {
-        navigation.replace('bluetooth-connection',
+        navigation.navigate('bluetooth-connection',
             {
                 target: 'edit-plant',
                 params: { id: id }

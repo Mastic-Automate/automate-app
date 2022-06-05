@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import styled, { useTheme } from 'styled-components/native'
+import styled from 'styled-components/native'
 
 import {Ionicons} from '@expo/vector-icons'
 

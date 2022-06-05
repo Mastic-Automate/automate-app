@@ -1,5 +1,4 @@
 import styled, { useTheme } from 'styled-components/native';
-import { FlatList } from 'react-native'
 
 import PlantTile from '../../components/PlantTile'
 import { MaterialIcons } from '@expo/vector-icons';
@@ -50,7 +49,7 @@ export function Plants({ navigation }) {
             <PlantTileContainer contentContainerStyle={{ alignItems: 'center' }}>
                 {plants.map(plant => <PlantTile {...plant} key={plant.id} />)}
             </PlantTileContainer>
-            <AddButton onPress={() => navigation.replace('bluetooth-connection', { target: 'add-plant', params: {} })}>
+            <AddButton onPress={() => navigation.navigate('bluetooth-connection', { target: 'add-plant', params: {} })}>
                 <MaterialIcons
                     name='add-circle'
                     size={70}
