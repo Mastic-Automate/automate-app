@@ -4,22 +4,20 @@ import styled, {useTheme} from 'styled-components/native'
 const Item = styled.TouchableOpacity`
     flex: 1;
     height: 50px;
-    background-color: ${props => props.active? props.theme.secondary4 : 'transparent'};
+    background-color: ${props => props.isActive? props.theme.secondary4 : 'transparent'};
     align-items:center;
     justify-content:center;
     border-radius:5px;
     margin: 10px;
 `
 
-export function BottomTabBarItem({buttonProps, Icon, index, currentIndex}){
+export function BottomTabBarItem({Icon, isActive, ...buttonProps}){
     const {primary, secondary2} = useTheme()
 
-    const active =useMemo(()=> index === currentIndex, [currentIndex])
-
     return (
-        <Item {...buttonProps} active={active}>
+        <Item {...buttonProps} active={isActive}>
             <Icon
-                color={active? primary : secondary2}
+                color={isActive? primary : secondary2}
                 size={40}
             />
         </Item>

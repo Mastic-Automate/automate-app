@@ -18,14 +18,49 @@ const Container = styled.View`
     padding-bottom: 5px;
 `
 
-export function BottomTabBar({navigation, state}){
-    function navigate(screenName){
-        navigation.replace('authRoutes', {screen: screenName})
-    }
+const iconByRouteName = {
+    'home': (iconProps) => <Material name="home" {...iconProps} />,
+    'plantsManagement': (iconProps) => <MaterialIcons name="dashboard" {...iconProps} />,
+    'config':(iconProps) => <Material name="cog" {...iconProps} />,
+    'videos':(iconProps) => <Material name="play-circle-outline" {...iconProps} />
+}
 
+export function BottomTabBar({state, navigation}){
     return (
         <Container>
-            <BottomTabBarItem
+            {state.routes.map((route, index) => {
+                const isFocused = state.index === index
+
+                const onPress = () => {
+                    const event = navigation.emit({
+                        type: 'tabPress',
+                        target: route.key,
+                        canPreventDefault: true,
+                    });
+
+                    if (!isFocused && !event.defaultPrevented) {
+                        navigation.navigate({ name: route.name, merge: true });
+                    }
+                }
+
+                const onLongPress = () => {
+                    navigation.emit({
+                        type: 'tabLongPress',
+                        target: route.key,
+                    });
+                };
+
+                return (
+                    <BottomTabBarItem
+                        key={route.key}
+                        isActive={isFocused}
+                        Icon={iconByRouteName[route.name]}
+                        onPress={onPress}
+                        onLongPress={onLongPress}
+                    />
+                )
+            })}
+            {/* <BottomTabBarItem
                 index={0}
                 currentIndex={state.index}
                 Icon={(iconProps) => <Material name="home" {...iconProps} />}
@@ -64,7 +99,7 @@ export function BottomTabBar({navigation, state}){
                         navigate('config')
                     }
                 }} 
-            />
+            /> */}
         </Container>
     )
 }
