@@ -46,7 +46,7 @@ export function Config({navigation}){
                     iconType={MaterialCommunityIcons}
                     iconName="account-circle-outline"
                     style={{margin:5}}
-                    onPress={() => navigation.replace('account')}
+                    onPress={() => navigation.navigate('account')}
                 />
             </TilesContainer>
 
