@@ -1,12 +1,14 @@
 import { useMemo, useState, createContext, useEffect } from 'react'
 import {ThemeProvider} from 'styled-components/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {Appearance} from 'react-native'
 
 import { themes } from '../global/theme'
 
 export const ThemeContext = createContext({})
 
 export function ThemeContextProvider({children}){
+    const deviceColorScheme = Appearance.getColorScheme()
     const [theme, setTheme] = useState(null)
     const currentTheme = useMemo(() => themes[theme], [theme])
 
@@ -25,10 +27,11 @@ export function ThemeContextProvider({children}){
     useEffect(()=> {
         AsyncStorage.getItem('@AppTheme').then(result => {
             if(!!result){
-                return setTheme(result)
+                setTheme(result)
+                return setIsThemeLoading(false)
             }
             setTheme('light')
-            setIsThemeLoading(false)
+            return setIsThemeLoading(false)
         })
     }, [])
     
