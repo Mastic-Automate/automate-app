@@ -127,9 +127,17 @@ export const Scanear = async () => {
     const [automateDevice, setAutomateDevice] = useState({});
     const [devicesFound, setDevicesFound] = useState([])
     const [found, setFound] = useState(null);
+    const [permissions, setPermissions] = useState(null);
     const [counter, setCounter] = useState(0)
+
+  //  console.log('Permissão:');
     
- console.log("Permissão: "+requestAccessFineLocationPermission());
+  useEffect(() => {
+   requestAccessFineLocationPermission().then(perm => {
+       console.log(perm? 'Permitido o Uso da localização': "Não permitido o Uso da localização")
+   });
+  }, [])
+
     useEffect(()=>{
         RNBluetoothClassic.startDiscovery().then(devices => {
             console.log('Todos os devices a seguir: ')
@@ -165,11 +173,48 @@ export const Scanear = async () => {
 }
 
 
-export const SendMessage = async (device) => {
-    await RNBluetoothClassic.pairDevice('00:19:08:35:0D:77').then(device => console.log(device)).catch(err => console.log('Connected Error'))
 
-    s = device.isConnected()
-    console.log("Esta conectado: "+s);
-    RNBluetoothClassic.connectToDevice(device.id);
 
+export const Connect = async (device) => {
+ 
+  if (!device.isConnected()){
+    await RNBluetoothClassic.pairDevice(device.id)
+    .then(device => console.log(device))
+    .catch(err => console.log('Connected Error'))
+  }
+
+ let d = await RNBluetoothClassic.connectToDevice(device.id)
+   d.isConnected().then(s => console.log(s? 'Dispositivo conectado': 'Dispositivo Desconectado'));  
+
+   return d
+}
+
+export const Disconnect = async (device) => {
+    
+   let d = await device.disconnect().catch(error => {});
+
+   console.log(d? "Dispositivo Desconectado": 'O dispositivo já está desconectado');
+  return d
+}
+
+
+export const SendMessage = async (device, message) => {
+    if(device.bonded){
+        const msg = JSON.stringify({
+            command: 'setUmidade',
+            arg:"50"
+        })
+        device.write(message, 'utf-8').then(delivered => console.log(delivered)).catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
+    
+    } else{
+        console.log('Ainda não pode escrever!');
+        return false
+    }
+
+}
+
+export const DataRead = async (device) => {
+
+    let message = await device.read();
+    return message;
 }

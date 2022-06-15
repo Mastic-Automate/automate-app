@@ -4,7 +4,7 @@ import { Button } from '../../components/Button'
 import { FormInput, FormInput as Input } from '../../components/FormInput'
 
 import { useAuth } from '../../hooks/useAuth'
-import { Bluetooth, Scanear, SendMessage } from './Bluetooth'
+import { Bluetooth, Scanear, SendMessage, Connect, Disconnect, DataRead } from './Bluetooth'
 
 import styled from 'styled-components'
 
@@ -43,14 +43,14 @@ const InputAutomate = styled(TextInput)`
 
 
 export function Login({ navigation }) {
-    const { signIn } = useAuth()
+    const { signIn } = useAuth();
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
-    })
-    const [ Automate, setAutomate] = useState(null);
-    const [ text, setText] = useState(null)
-
-    const [bottomError, setBottomError] = useState('')
+    });
+    const [Automate, setAutomate] = useState(null);
+    const [text, setText] = useState(null);
+    const [data, setData] =useState('');
+    const [bottomError, setBottomError] = useState('');
 
     function handleSignin(data) {
         signIn(data.email, data.password).then(result => {
@@ -62,20 +62,26 @@ export function Login({ navigation }) {
 
 
    Scanear().then(r => {setAutomate(r)});
-  // Scanear();
-const HandlerScan = () => {
-    //let sla = )
-   // setAutomate(sla)
-   r = Scanear();
-   return r
-}
 
-const HandleSendMessage = async () => {
- // await SendMessage(Automate).then(connected => console.log('Dispositivo conectado: '+connected));
- SendMessage(Automate);
-}
+  
+    const HandleConnect = async () => {
+ 
+        Connect(Automate).then(device => setAutomate(device));
+    }
 
+    const HandleDisconnect = async () => {
+        Disconnect(Automate).then(device => setAutomate(device));
+    }
 
+    const HandleMessage = async () => {
+       let r = await SendMessage(Automate, text).then(response => {return response});
+       console.log(r)
+    }
+
+    const HandleDataRead = async () => {
+        DataRead(Automate).then(info => setData(info))
+        console.log(data)
+    }
     return (
         <Container>
             <Title>{!Automate? 'Encontrando...': Automate.id}</Title>
@@ -99,11 +105,13 @@ const HandleSendMessage = async () => {
                 />
 
 
-                <Button text="Teste" onPress={function() {}} style={{ marginTop: 10 }} />
-                <Button text="Scanear" onPress={HandlerScan} style={{ marginTop: 10 }} />
-                <Button text="Conectar" onPress={HandleSendMessage} style={{ marginTop: 10 }} />
+                <Button text="Enviar Mensagem" onPress={HandleMessage} style={{ marginTop: 10 }} />
+                <Button text="Ouvir" onPress={HandleDataRead} style={{ marginTop: 10 }} />
+                <Button text="Conectar" onPress={HandleConnect} style={{ marginTop: 10 }} />
+                <Button text="Desconectar" onPress={HandleDisconnect} style={{ marginTop: 10 }} />
+               
 
-                
+   
                     <BottomText>{}</BottomText>
                
                 <ErrorText>{bottomError}</ErrorText>
