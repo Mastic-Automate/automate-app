@@ -104,6 +104,23 @@ export const Bluetooth = () => {
     console.log('vai pesquisar')
 }
 
+async function requestAccessFineLocationPermission() {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Access fine location required for discovery',
+        message:
+          'In order to perform discovery, you must enable/allow ' +
+          'fine location access.',
+        buttonNeutral: 'Ask Me Later"',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK'
+      }
+    );
+    return granted === PermissionsAndroid.RESULTS.GRANTED;
+  };
+
+
 export const Scanear = async () => {
 
     const [paired, setPaired] = useState(null)
@@ -112,12 +129,13 @@ export const Scanear = async () => {
     const [found, setFound] = useState(null);
     const [counter, setCounter] = useState(0)
     
+ console.log("Permissão: "+requestAccessFineLocationPermission());
     useEffect(()=>{
         RNBluetoothClassic.startDiscovery().then(devices => {
             console.log('Todos os devices a seguir: ')
             console.log(devices)
             setDevicesFound(devices)
-        })
+        }).catch(err => console.log("Já está escaneando"))
     }, [counter])
 
     useEffect(() => { 
@@ -133,6 +151,7 @@ export const Scanear = async () => {
         } else {
             RNBluetoothClassic.cancelDiscovery();
             console.log("Scan Pausado, Dispositivo encontrado");
+            setAutomateDevice(automateDevicesFound)
             setFound(true);
             
             
@@ -140,5 +159,17 @@ export const Scanear = async () => {
     
     
     },[devicesFound])
+    if (found) {
+        return automateDevice
+    }
+}
+
+
+export const SendMessage = async (device) => {
+    await RNBluetoothClassic.pairDevice('00:19:08:35:0D:77').then(device => console.log(device)).catch(err => console.log('Connected Error'))
+
+    s = device.isConnected()
+    console.log("Esta conectado: "+s);
+    RNBluetoothClassic.connectToDevice(device.id);
 
 }
