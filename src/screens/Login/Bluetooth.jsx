@@ -1,5 +1,5 @@
 
-import RNBluetoothClassic, { BluetoothEventType } from 'react-native-bluetooth-classic';
+import RNBluetoothClassic, { BluetoothEventType, BluetoothDeviceReadEvent } from 'react-native-bluetooth-classic';
 import { PermissionsAndroid } from 'react-native';
 import { useEffect, useState } from 'react'
 import { boolean } from 'yup';
@@ -120,7 +120,6 @@ async function requestAccessFineLocationPermission() {
     return granted === PermissionsAndroid.RESULTS.GRANTED;
   };
 
-
 export const Scanear = async () => {
 
     const [paired, setPaired] = useState(null)
@@ -172,9 +171,6 @@ export const Scanear = async () => {
     }
 }
 
-
-
-
 export const Connect = async (device) => {
  
   if (!device.isConnected()){
@@ -183,10 +179,12 @@ export const Connect = async (device) => {
     .catch(err => console.log('Connected Error'))
   }
 
- let d = await RNBluetoothClassic.connectToDevice(device.id)
-   d.isConnected().then(s => console.log(s? 'Dispositivo conectado': 'Dispositivo Desconectado'));  
+ let d = await device.connect({
+    CONNECTION_TYPE: 'delimited'
+  })
+    console.log(d? 'Dispositivo conectado': 'Dispositivo Desconectado');  
 
-   return d
+   return device
 }
 
 export const Disconnect = async (device) => {
@@ -196,7 +194,6 @@ export const Disconnect = async (device) => {
    console.log(d? "Dispositivo Desconectado": 'O dispositivo já está desconectado');
   return d
 }
-
 
 export const SendMessage = async (device, message) => {
     if(device.bonded){
@@ -215,6 +212,8 @@ export const SendMessage = async (device, message) => {
 
 export const DataRead = async (device) => {
 
-    let message = await device.read();
-    return message;
+   let message = await device.read().then(message => {console.log(message); return message});
+   
+   
+   return message;
 }

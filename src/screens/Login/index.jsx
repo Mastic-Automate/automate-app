@@ -51,6 +51,7 @@ export function Login({ navigation }) {
     const [text, setText] = useState(null);
     const [data, setData] =useState('');
     const [bottomError, setBottomError] = useState('');
+    const [connected, setConnected] = useState(false)
 
     function handleSignin(data) {
         signIn(data.email, data.password).then(result => {
@@ -66,26 +67,29 @@ export function Login({ navigation }) {
   
     const HandleConnect = async () => {
  
-        Connect(Automate).then(device => setAutomate(device));
+        Connect(Automate).then(device => {setAutomate(device);setConnected(true)});
+        
     }
 
     const HandleDisconnect = async () => {
         Disconnect(Automate).then(device => setAutomate(device));
+        setConnected(false)
     }
 
     const HandleMessage = async () => {
        let r = await SendMessage(Automate, text).then(response => {return response});
-       console.log(r)
+       console.log(r? "Mensagem enviada": "Falha ao enviar")
     }
 
     const HandleDataRead = async () => {
         DataRead(Automate).then(info => setData(info))
-        console.log(data)
+        //console.log(data)
     }
     return (
         <Container>
             <Title>{!Automate? 'Encontrando...': Automate.id}</Title>
             <Title>{text}</Title>
+            <Title>Texto Recebido: {data}</Title>
             <InputsView>
 
                 <Input
