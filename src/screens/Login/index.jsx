@@ -99,9 +99,9 @@ export function Login({ navigation }) {
                     placeholder="Texto a Ser enviado"
                     iconType={Material}
                     iconName="lock-outline"
-                    secureTextEntry
+                    
                     style={{ marginTop: 10 }}
-                    autoCorrect={false}
+                    autoCorrect={true}
                     autoCapitalize="none"
                     onChangeText={setText}
                     value={text}

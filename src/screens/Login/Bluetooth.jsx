@@ -122,14 +122,33 @@ async function requestAccessFineLocationPermission() {
 
 export const Scanear = async () => {
 
-    const [paired, setPaired] = useState(null)
+    const [paired, setPaired] = useState(null);
     const [automateDevice, setAutomateDevice] = useState({});
-    const [devicesFound, setDevicesFound] = useState([])
+    const [devicesFound, setDevicesFound] = useState([]);
     const [found, setFound] = useState(null);
     const [permissions, setPermissions] = useState(null);
-    const [counter, setCounter] = useState(0)
+    const [counter, setCounter] = useState(0);
+    const [connected, setConnected] = useState(false);
 
   //  console.log('Permissão:');
+
+    const ifConnected = async () => { 
+    let  Automate = await RNBluetoothClassic.getBondedDevices().then(r => {return r.filter(device => device.name === 'Automate')}).catch(err => {});
+    console.log("conectados");
+    console.log( Automate);
+    if(Automate[0].name !== "Automate"){
+        setConnected(false);
+       // console.log(Automate[0].name);
+    } else {
+        setConnected(true);
+       // console.log(Automate[0].name);
+      // setAutomateDevice(Automate[0])
+      // setFound(true);
+    }
+    }
+
+   let retorno =ifConnected();
+    console.log(retorno);
     
   useEffect(() => {
    requestAccessFineLocationPermission().then(perm => {
@@ -179,9 +198,7 @@ export const Connect = async (device) => {
     .catch(err => console.log('Connected Error'))
   }
 
- let d = await device.connect({
-    CONNECTION_TYPE: 'delimited'
-  })
+ let d = await device.connect()
     console.log(d? 'Dispositivo conectado': 'Dispositivo Desconectado');  
 
    return device
@@ -212,8 +229,13 @@ export const SendMessage = async (device, message) => {
 
 export const DataRead = async (device) => {
 
-   let message = await device.read().then(message => {console.log(message); return message});
+  // .then(message => {console.log(message); return message});
    
+   let messages = await device.available();
+   if (messages > 0) {
+   var message = await device.read().then(message => {console.log(message === null? "": message); return message});
+    device.clear();
+   }
    
    return message;
 }
