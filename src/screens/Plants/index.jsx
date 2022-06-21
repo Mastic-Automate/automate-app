@@ -46,7 +46,7 @@ export function Plants({ navigation }) {
     return (
         <Container>
             <Title>Suas plantas</Title>
-            <PlantTileContainer contentContainerStyle={{ alignItems: 'center' }}>
+            <PlantTileContainer contentContainerStyle={{ }}>
                 {plants.map(plant => <PlantTile {...plant} key={plant.id} />)}
             </PlantTileContainer>
             <AddButton onPress={() => navigation.navigate('bluetooth-connection', { target: 'add-plant', params: {} })}>

@@ -2,6 +2,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import { Login } from '../screens/Login'
 import { Register } from '../screens/Register'
 
+import { BluetoothConnection } from '../screens/BluetoothConnection'
+
+
+
 import {useAuth} from '../hooks/useAuth'
 import { useEffect } from 'react'
 
@@ -17,7 +21,7 @@ export function InitialRoutes({navigation}){
     }, [user])
     return (
         <Stack.Navigator screenOptions={{headerShown:false}}>
-            <Stack.Screen name="login" component={Login}  />
+            <Stack.Screen name="Bluetooth Connection" component={BluetoothConnection}  />
             <Stack.Screen name="register" component={Register}  />
         </Stack.Navigator>
     )
