@@ -31,7 +31,7 @@ function MicrocontrollersContextProvider({children}){
     }
     async function removeDevice(address){
         const filteredDevices = storedDevices.filter(device => device.address !== address)
-        AsyncStorage.setItem('@Microcontrollers', filteredDevices)
+        AsyncStorage.setItem('@Microcontrollers', JSON.stringify(filteredDevices))
         loadDevices()
     }
 
