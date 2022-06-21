@@ -4,6 +4,7 @@ import { Button } from '../../components/Button'
 import { FormInput as Input } from '../../components/FormInput'
 
 import { useAuth } from '../../hooks/useAuth'
+import {useMicrocontrollers} from '../../hooks/useMicrocontrollers'
 
 import { 
     BottomLink, 
@@ -41,6 +42,11 @@ export function Login({ navigation }) {
             }
         })
     }
+    const {saveNewDevice, storedDevices} = useMicrocontrollers()
+
+    function handleAddDevice(){
+        saveNewDevice('AA::BB', 'AA:BB', 'Automate', 'Nome customizado')
+    }
 
     return (
         <Container>
@@ -72,7 +78,7 @@ export function Login({ navigation }) {
                     autoCapitalize="none"
                 />
 
-                <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />
+                <Button text="Login" onPress={handleAddDevice} style={{ marginTop: 10 }} />
                 <ErrorText>{bottomError}</ErrorText>
             </InputsView>
             <BottomView>
@@ -80,6 +86,9 @@ export function Login({ navigation }) {
                 <BottomLink onPress={() => navigation.replace('register')}>
                     <BottomLinkText>Registre-se! </BottomLinkText>
                 </BottomLink>
+                <BottomLinkText>
+                    {JSON.stringify(storedDevices)}
+                </BottomLinkText>
             </BottomView>
         </Container>
     )

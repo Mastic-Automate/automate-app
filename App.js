@@ -7,7 +7,7 @@ import AppLoading from 'expo-app-loading'
 
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 import { AuthContextProvider } from './src/contexts/AuthContext'
-import { InitialRoutes } from './src/routes/InitialRoutes'
+import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
 import {RootRoutes} from './src/routes/RootRoutes'
 
 import { Poppins_400Regular } from '@expo-google-fonts/poppins'
@@ -22,9 +22,11 @@ export default function App() {
   return (
     <AuthContextProvider>
       <ThemeContextProvider>
-        <NavigationContainer>
-          <RootRoutes />
-        </NavigationContainer>
+        <MicrocontrollersContextProvider>
+          <NavigationContainer>
+            <RootRoutes />
+          </NavigationContainer>
+        </MicrocontrollersContextProvider>
       </ThemeContextProvider>
     </AuthContextProvider>
   );
