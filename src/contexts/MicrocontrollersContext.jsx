@@ -18,7 +18,9 @@ function MicrocontrollersContextProvider({children}){
     }
 
     function loadDevices(){
-        AsyncStorage.getItem('@Microcontrollers').then(devices => setStoredDevices(devices))
+        getSavedDevices().then(devices => {
+            setStoredDevices(devices)
+        })
     }
 
     async function saveNewDevice(address, id, name, customName){
@@ -29,12 +31,13 @@ function MicrocontrollersContextProvider({children}){
     }
     async function removeDevice(address){
         const filteredDevices = storedDevices.filter(device => device.address !== address)
-        AsyncStorage.setItem('Microcontrollers', filteredDevices)
+        AsyncStorage.setItem('@Microcontrollers', filteredDevices)
         loadDevices()
     }
 
     useEffect(()=>{
         loadDevices()
+        // AsyncStorage.clear()
     }, [])
 
     return (
