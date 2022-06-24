@@ -34,7 +34,7 @@ export const Scanear = async () => {
     const [connected, setConnected] = useState(false);
     const [bonded, setBonded] = useState(false);
 
-
+ 
 
     const ifBonded = async () => {
         RNBluetoothClassic.getBondedDevices().then(r => {
@@ -55,10 +55,14 @@ export const Scanear = async () => {
 
     
     useEffect(() => {
-   requestAccessFineLocationPermission().then(perm => {
+  let perm = requestAccessFineLocationPermission().then(perm => {
        console.log(perm? 'Permitido o Uso da localização': "Não permitido o Uso da localização")
    });
-   ifBonded().then(devices => {});
+     if (perm) {RNBluetoothClassic.isBluetoothEnabled().then(bluetoothEnable => {
+    if(bluetoothEnable)
+  { ifBonded().then(devices => {});} else { RNBluetoothClassic.requestBluetoothEnabled().then(s => s?ifBonded().then(devices => {}):{}).catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO")) }
+   })};
+   
     },[])
 
     useEffect(()=>{
