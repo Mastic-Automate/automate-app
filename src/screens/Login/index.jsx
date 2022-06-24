@@ -4,7 +4,8 @@ import { Button } from '../../components/Button'
 import { FormInput, FormInput as Input } from '../../components/FormInput'
 
 import { useAuth } from '../../hooks/useAuth'
-import { Bluetooth, Scanear, SendMessage, Connect, Disconnect, DataRead } from './Bluetooth'
+import { Bluetooth, Scanear, SendMessage, Connect, Disconnect, DataRead } from './Bluetooth';
+import RNBluetoothClassic, { BluetoothEventType, BluetoothEventSubscription, BluetoothEventListener, BluetoothDeviceReadEvent, BluetoothReadEvent } from 'react-native-bluetooth-classic';
 
 import styled from 'styled-components'
 
@@ -61,13 +62,18 @@ export function Login({ navigation }) {
         })
     }
 
-
-   Scanear().then(r => {setAutomate(r)});
-
-  
+    const HandleScan = async () => {
+       Scanear().then(r => {setAutomate(r)});
+    }
+    HandleScan();
     const HandleConnect = async () => {
  
-        Connect(Automate).then(device => {setAutomate(device);setConnected(true)});
+        Connect(Automate).then(device => {
+            
+            setAutomate(device);
+            setConnected(true);
+            RNBluetoothClassic.onDeviceRead(device.id, ({ data }) => {console.log(device.available());device.clear();HandleDataRead(data)});
+        });
         
     }
 
@@ -78,17 +84,17 @@ export function Login({ navigation }) {
 
     const HandleMessage = async () => {
        let r = await SendMessage(Automate, text).then(response => {return response});
-       console.log(r? "Mensagem enviada": "Falha ao enviar")
+       
     }
 
-    const HandleDataRead = async () => {
-        DataRead(Automate).then(info => setData(info))
+    const HandleDataRead = async (info) => {
+       setData(info)
         //console.log(data)
     }
     return (
         <Container>
             <Title>{!Automate? 'Encontrando...': Automate.id}</Title>
-            <Title>{text}</Title>
+            
             <Title>Texto Recebido: {data}</Title>
             <InputsView>
 
@@ -110,7 +116,7 @@ export function Login({ navigation }) {
 
 
                 <Button text="Enviar Mensagem" onPress={HandleMessage} style={{ marginTop: 10 }} />
-                <Button text="Ouvir" onPress={HandleDataRead} style={{ marginTop: 10 }} />
+               
                 <Button text="Conectar" onPress={HandleConnect} style={{ marginTop: 10 }} />
                 <Button text="Desconectar" onPress={HandleDisconnect} style={{ marginTop: 10 }} />
                

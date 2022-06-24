@@ -3,106 +3,9 @@ import RNBluetoothClassic, { BluetoothEventType, BluetoothDeviceReadEvent } from
 import { PermissionsAndroid } from 'react-native';
 import { useEffect, useState } from 'react'
 import { boolean } from 'yup';
-
-export const Bluetooth = () => {
-    const [unpaired, setUnpaired] = useState([])
-    const [microController, setMicroController] = useState(null)
-    const [paired, setPaired] = useState([])
-    const [discovering, setDiscovering] = useState(null)
-
-    const handleSendMessage = async (val) => {
-        if(!!microController){
-            const msg = JSON.stringify({
-                command: 'setUmidade',
-                arg:"50"
-            })
-            RNBluetoothClassic.writeToDevice(microController.address, msg, 'utf-8');
-            return true
-        } else{
-            console.log('Ainda não pode escrever!');
-            return false
-        }
-    }
-
-    async function requestAccessFineLocationPermission() {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: 'Access fine location required for discovery',
-            message:
-              'In order to perform discovery, you must enable/allow ' +
-              'fine location access.',
-            buttonNeutral: 'Ask Me Later"',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK'
-          }
-        );
-        return granted === PermissionsAndroid.RESULTS.GRANTED;
-      };
-
-    useEffect(()=>{
-       
-            //console.log(unpaired[1].name);
-
-        RNBluetoothClassic.getBondedDevices().then(result => {
-            setPaired(result)
-        })
-
-    })
-
-    useEffect(() => console.log(unpaired), [unpaired, paired]);
-
-    
-    useEffect(()=>{
-        if(!!microController){
-            console.log('microcontrolador a seguir: ')
-            console.log(microController)
-            RNBluetoothClassic.connectToDevice(microController.address).then(resultDevice => {
-                console.log('Resultado da conexão a seguir')
-                console.log(resultDevice)
-            })
-        }
-    }, [microController])
+import { typeOf } from 'react-is';
 
 
-    function getUnpairedDevices() {
-        
-        RNBluetoothClassic.startDiscovery().then((result) => {
-            setUnpaired(result)});
-           { const targetDevices = [...unpaired, ...paired]
-            if(unpaired.length>0){
-                console.log('Escaneou')
-    
-                console.log(`Quantidade de aparelhos: ${targetDevices.length}`)
-                const automateController = targetDevices.filter(device => device.name === "Automate")[0];
-                console.log(automateController)
-                if(!!automateController){
-                    
-                    setMicroController(automateController)
-                    RNBluetoothClassic.getConnectedDevice(automateController.address).then(connectedDevice => {
-                        if(!connectedDevice){
-                            RNBluetoothClassic.pairDevice(automateController.address).then(result => {
-                                RNBluetoothClassic.cancelDiscovery()
-                                RNBluetoothClassic.connectToDevice(automateController.address)
-                
-                                console.log(result);
-                            })
-                        } else {
-                            console.log('Aparelho já está conectado...')
-                            return  unpaired;
-                        }
-                    })
-                }
-                //console.log(automateController)
-    
-            }
-        }
-            
-        
-    }
-    getUnpairedDevices();
-    console.log('vai pesquisar')
-}
 
 async function requestAccessFineLocationPermission() {
     const granted = await PermissionsAndroid.request(
@@ -129,63 +32,67 @@ export const Scanear = async () => {
     const [permissions, setPermissions] = useState(null);
     const [counter, setCounter] = useState(0);
     const [connected, setConnected] = useState(false);
+    const [bonded, setBonded] = useState(false);
 
-  //  console.log('Permissão:');
 
-    const ifConnected = async () => { 
-    let  Automate = await RNBluetoothClassic.getBondedDevices().then(r => {return r.filter(device => device.name === 'Automate')}).catch(err => {});
-    console.log("conectados");
-    console.log( Automate);
-    if(Automate[0].name !== "Automate"){
-        setConnected(false);
-       // console.log(Automate[0].name);
-    } else {
-        setConnected(true);
-       // console.log(Automate[0].name);
-      // setAutomateDevice(Automate[0])
-      // setFound(true);
+
+    const ifBonded = async () => {
+        RNBluetoothClassic.getBondedDevices().then(r => {
+
+            const A = r.filter(device => device.name === 'Automate');
+            if(A[0] === undefined){
+                console.log("Dispositivo ainda não pareado");   
+                setFound(false);
+                verifyDevices();
+            } else {               
+                console.log("Dispositivo já pareado");
+                setAutomateDevice(A[0]);
+                setFound(true);
+            }
+            return r
+        }).catch(err => {});
     }
-    }
 
-   let retorno =ifConnected();
-    console.log(retorno);
     
-  useEffect(() => {
+    useEffect(() => {
    requestAccessFineLocationPermission().then(perm => {
        console.log(perm? 'Permitido o Uso da localização': "Não permitido o Uso da localização")
    });
-  }, [])
+   ifBonded().then(devices => {});
+    },[])
 
     useEffect(()=>{
-        RNBluetoothClassic.startDiscovery().then(devices => {
-            console.log('Todos os devices a seguir: ')
-            console.log(devices)
-            setDevicesFound(devices)
-        }).catch(err => console.log("Já está escaneando"))
-    }, [counter])
+        if (found === false) {
+            console.log("Escaneando dispositivos...");
+            RNBluetoothClassic.startDiscovery().then(devices => {
+            setDevicesFound(devices);
+            console.log('Todos os devices Scaneados a seguir: ')
+            console.log(devices);
+            verifyDevices(devices);
+        }).catch(err => console.log("Já está escaneando"));
+    }}, [found])
 
-    useEffect(() => { 
-        const automateDevicesFound = devicesFound.filter(device => device.name === "Automate")[0]
-        console.log('A seguir: ')
-        console.log(automateDevicesFound)
-        
-        if (!automateDevicesFound) {
-            setFound(false);
-            console.log('Dispositivo não foi localizado, Pesquisando novamente');
-            let c = counter;
-            setCounter(counter+1)
-        } else {
-            RNBluetoothClassic.cancelDiscovery();
-            console.log("Scan Pausado, Dispositivo encontrado");
-            setAutomateDevice(automateDevicesFound)
-            setFound(true);
-            
-            
-        }
     
-    
-    },[devicesFound])
+
+  const verifyDevices = async (d) =>  { 
+    if (d!==undefined) {
+    const automateDevicesFound = d.filter(device => device.name === "Automate")[0]
+    if (!automateDevicesFound) {
+        console.log('Dispositivo não foi localizado, Pesquisando novamente');
+        setCounter(counter+1);
+        setFound(false);
+    } else {
+        RNBluetoothClassic.cancelDiscovery();
+        console.log("Scan Pausado, Dispositivo encontrado");
+        setAutomateDevice(automateDevicesFound)
+        setFound(true);    
+    }
+}
+}
+
+
     if (found) {
+        //automateDevice.isConnected()? Connect(automateDevice).catch(err=>{}): console.log("Dispositivo já conectado");
         return automateDevice
     }
 }
@@ -213,29 +120,36 @@ export const Disconnect = async (device) => {
 }
 
 export const SendMessage = async (device, message) => {
-    if(device.bonded){
-        const msg = JSON.stringify({
-            command: 'setUmidade',
-            arg:"50"
-        })
-        device.write(message, 'utf-8').then(delivered => console.log(delivered)).catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
-    
-    } else{
-        console.log('Ainda não pode escrever!');
-        return false
-    }
+    device.isConnected().then((isConnected) => {
+        if(isConnected){
+            const msg = JSON.stringify({
+                command: 'setUmidade',
+                arg:"50"
+            })
+            device.write(message, 'utf-8').then(delivered => console.log(delivered? "Mensagem enviada":"Mensagem não enviada")).catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
+        
+        } else{
+            console.log('Ainda não pode escrever!');
+            return false
+        }
+    })
 
 }
 
 export const DataRead = async (device) => {
 
   // .then(message => {console.log(message); return message});
-   
-   let messages = await device.available();
-   if (messages > 0) {
-   var message = await device.read().then(message => {console.log(message === null? "": message); return message});
+   console.log("Começou leitura");
+
+  device.available().then(messages => console.log('Numero dentro do buffer: '+messages));
+  
+  device.read().then(message => console.log("Mensagem lida: "+message));
+    
+  // let messages = await device.available();
+  // if (messages > 0) {
+   //var message = await device.read().then(message => {console.log(message === null? "": message); return message});
     device.clear();
-   }
-   
-   return message;
+  // }
+   RNBluetoothClassic.onDeviceRead(device.id, ({ data }) => console.log(data));
+   return "";
 }
