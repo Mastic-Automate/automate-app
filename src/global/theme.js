@@ -1,10 +1,18 @@
 export const themes = {
     light: {
-        primary: '#1EEC58',
+        primary: '#009D81',
         error: '#FF5959',
+        negative:'#DC3545',
+        blue:'#407BFF',
+        purple:'#35276D',
         background: '#FFFFFF',
-        title: '#404040',
+        title: '#292929',
+        text1:'#757575',
+        text2:'#000000',
         subtitle: '#585858',
+
+        background1: '#FFFFFF',
+        background2:'#D7E1E8',
 
         secondary1:'#696969', 
         secondary2:'#9D9D9D', 
@@ -12,10 +20,15 @@ export const themes = {
         secondary4:'#FAFAFA', 
     },
     dark: {
-        primary: '#1EEC58',
+        primary: '#009D81',
         error: '#FF5959',
+        negative:'#DC3545',
+        blue:'#407BFF',
+        purple:'#35276D',
         background: '#161722',
         title: '#EBEBEB',
+        text1:'#B6B6B6',
+        text2:'#EEEEEE',
         subtitle: '#C1C1C1',
 
         secondary1:'#CCCCCC', 
