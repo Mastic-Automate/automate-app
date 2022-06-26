@@ -9,6 +9,7 @@ const AuthContext = createContext({})
 
 function AuthContextProvider({ children }) {
     const [user, setUser] = useState(null)
+
     async function signIn(userEmail, userPassword) {
         const requestBody = { userEmail, userPassword }
         try {
