@@ -56,9 +56,18 @@ export function Home(){
                     keyExtractor={(data)=> data.title}
                     showsHorizontalScrollIndicator={false}
                 />
-                <InfoPlantCard 
-                    title="Título"
-                    description="Descrição"
+                <FlatList 
+                    data={[{title:'Título', description:'Descrição'}]}
+                    renderItem={({item}) => {
+                        return (
+                            <InfoPlantCard 
+                                {...item}
+                            />
+                        )
+                    }}
+                    keyExtractor={item => item.title}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{margin:10}}
                 />
             </PlantsSection>
         </Container>
