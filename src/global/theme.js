@@ -31,6 +31,9 @@ export const themes = {
         text2:'#EEEEEE',
         subtitle: '#C1C1C1',
 
+        background1: '#252525',
+        background2:'#1A1F23',
+
         secondary1:'#CCCCCC', 
         secondary2:'#8E8E8E', 
         secondary3:'#303030', 
