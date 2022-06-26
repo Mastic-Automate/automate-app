@@ -9,6 +9,7 @@ export const themes = {
         title: '#292929',
         text1:'#757575',
         text2:'#000000',
+        cardColor:'#EDEDED',
         subtitle: '#585858',
 
         background1: '#FFFFFF',
@@ -29,6 +30,7 @@ export const themes = {
         title: '#EBEBEB',
         text1:'#B6B6B6',
         text2:'#EEEEEE',
+        cardColor:'#343434',
         subtitle: '#C1C1C1',
 
         background1: '#252525',

@@ -1,58 +1,66 @@
+import { FlatList } from 'react-native'
 import styled from 'styled-components/native'
-
-import {Ionicons, MaterialIcons} from '@expo/vector-icons'
-
-import Card from '../../components/Card';
+import { Plant } from '../../components/Plant'
+import {InfoPlantCard} from '../../components/InfoPlantCard'
 
 const Container = styled.View`
-    background-color: ${props => props.theme.background};
+    background-color: ${props => props.theme.background1};
     flex: 1;
-    align-items:center;
-    padding-left: 10px;
-    padding-right: 10px;
     padding-top: 20px;
 `
 const Title = styled.Text`
     color: ${props => props.theme.title};
     font-size:30px;
+    font-weight: bold;
+    width: 50%;
+    margin-left:34px;
+    margin-right:34px;
 `
 
-const SubTitle = styled.Text`
-    color: ${props => props.theme.subtitle};
-    font-size: 20px;
-    width: 100%;
-    margin-top: 40px;
+const TopSection = styled.View`
+    height: 225px;
+    background-color: ${props => props.theme.background1};
 `
 
-const CardsContainer = styled.View`
-    margin-top: 75px;
+const PlantsSection = styled.ScrollView`
+    background-color: ${props => props.theme.background2};
+    flex:1;
+`
+const PlantsSectionTitle = styled.Text`
+    font-weight:bold;
+    font-size:28px;
+    color: ${props => props.theme.title};
 `
 
 export function Home(){
     return (
         <Container>
-            <Title>Bem vindo(a)</Title>
-            <SubTitle>Como estão suas plantas?</SubTitle>
-            <CardsContainer>
-                <Card 
-                    text="Assista a conteúdos disponibilizados por profissionais na plataforma" 
-                    iconName="play-circle-outline"
-                    iconType={Ionicons}
-                    style={{marginTop:10}}
+            <TopSection>
+                <Title>A melhor rosa está no seu jardim!</Title>
+            </TopSection>
+            
+            <PlantsSection>
+                <PlantsSectionTitle>
+                    Plantas recentes
+                </PlantsSectionTitle>
+                <FlatList 
+                    data={[{variant:'yellow', title:'Amarelo'}, {variant:'red', title:'Vermelho'}, {variant:'blue', title:'Azul'}]}
+                    horizontal
+                    renderItem={({item}) => {
+                        return (
+                            <Plant 
+                                {...item}
+                            />
+                        )
+                    }}
+                    keyExtractor={(data)=> data.title}
+                    showsHorizontalScrollIndicator={false}
                 />
-                <Card 
-                    text="Adicione mais uma planta à coleção" 
-                    iconName="add-circle-outline"
-                    iconType={MaterialIcons}
-                    style={{marginTop:10}}
+                <InfoPlantCard 
+                    title="Título"
+                    description="Descrição"
                 />
-                <Card 
-                    text="Gere relatório de cuidado de uma planta de sua coleção" 
-                    iconName="info-outline" 
-                    iconType={MaterialIcons}
-                    style={{marginTop:10}}
-                />
-            </CardsContainer>
+            </PlantsSection>
         </Container>
     )
 }

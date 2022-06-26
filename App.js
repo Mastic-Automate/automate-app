@@ -11,6 +11,7 @@ import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersCo
 import {RootRoutes} from './src/routes/RootRoutes'
 
 import { Poppins_400Regular } from '@expo-google-fonts/poppins'
+import { Home } from './src/screens/Home';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,7 +25,7 @@ export default function App() {
       <ThemeContextProvider>
         <MicrocontrollersContextProvider>
           <NavigationContainer>
-            <RootRoutes />
+            <Home />
           </NavigationContainer>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>
