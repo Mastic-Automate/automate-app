@@ -37,7 +37,7 @@ const BluetoothIcon = styled(Ionicons)`
 `
 const NewTitle = styled.Text`
     font-size:2.25rem;
-    color: #000;
+    color: ${props => props.theme.title};
     width: 17.5rem;
     font-family: 'ProximaNovaExtraBold';
     text-align: left;
@@ -47,7 +47,7 @@ const NewTitle = styled.Text`
 
 const NewSubtitle = styled.Text`
     font-size: 1.25rem;
-    color: #000;
+    color: ${props => props.theme.title};
     font-weight: 400;
     line-height: 24px;
     width: 18.75rem;
@@ -175,79 +175,53 @@ const DescText = styled(Text)`
     text-align: center;
 `
 
-function BluetoothConnection(){
+function ScanAutomate(){
+    return (
+        <>
+            <NewTitle >Procurando dispositivo</NewTitle>
+            <NewSubtitle>Seu dispositivo Automate deve aparecer aqui, em breve.</NewSubtitle>
+            {/* <LineDiv /> */}
+            <Image
+                style={{width: '26.75rem', height: '20.06rem', marginTop: '2.25rem',  }}
+                source={require('../../../assets/conexão.gif')} 
+            />
+
+            {/* <ContainerMenuFooter style={{marginTop: '10.188rem'}}>
+                <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
+                <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
+                <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
+            </ContainerMenuFooter> */}
+            {/*N sei praq que isso tá servindo, ent comentei*/}
+        </>
+    )
+    
+}
+
+function BluetoothConnection({navigation, route}){
    
     const [automateFound, setAutomateFound] = useState(true);
 
-    //Função para ver os dois estados em mudança
-    setTimeout(function (){
-       setAutomateFound(!automateFound);
-    },5000)
+    const {target, params} = route.params
+    useEffect(()=>{
+        setTimeout(function (){
+        navigation.replace(target, params)
+        },5000)
+    }, [])
 
     let [fontsLoaded] = useFonts({
         'ProximaNovaBold': require('../../../assets/fonts/proximaNova/ProximaNovaBold.otf'),
         'ProximaNovaExtraBold': require('../../../assets/fonts/proximaNova/ProximaNovaExtraBold.otf'),
         'Montserrat': require('../../../assets/fonts/Montserrat/Montserrat-Regular.ttf'),
       });
+
     
-      if (!fontsLoaded) {
-        console.log(fontsLoaded)
-      }
-
-
-
-      const ScanAutomate = () => {
-       return <>
-       <NewTitle >Procurando dispositivo</NewTitle>
-        <NewSubtitle>Seu dispositivo <b>Automate</b> deve aparecer aqui, em breve.</NewSubtitle>
-        <LineDiv />
-        <Image
-      style={{width: '26.75rem', height: '20.06rem', marginTop: '2.25rem',  }}
-      source={require('../../../assets/conexão.gif')} />
-
-  
-       <ContainerMenuFooter style={{marginTop: '10.188rem'}}>
-           <Barrinha />
-           <ContentMenuFooter>
-           <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
-        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
-       <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
-        </ContentMenuFooter>
-       </ContainerMenuFooter>
-
-       </>
-      }
-
-      const FoundAutomate = () => {
-        return <>
-        <NewTitle >Selecione seu dispositivo</NewTitle>
-         <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
-         <LineDiv />
-         <Image
-       style={{width: '21.38rem', height: '16.00rem', borderRadius: '2.438rem', marginTop: '7%',}}
-       source={require('../../../assets/arduino.gif')} />
-           <AutomateName>Nome/Apelido do Dispositivo</AutomateName>
-            <DescText ><i>Deslize para cima para<br/> ver mais!</i></DescText>
-           <View style={{height: '20%', overflow: 'scroll', flex: 1, marginTop: '5%',}}>
-        <ContainerMenuFooter style={{marginTop: '45%', height: '80%'}}>
-            <Barrinha />
-            <ContentMenuFooter>
-        <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
-        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
-       <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
-        </ContentMenuFooter>
-        </ContainerMenuFooter>
-        </View>
-        </>
-       }
- 
 
     return (
         <Container>
             <NavDiv>
-            <MaterialIcons style={{fontSize: '1.50rem', fontWeight: '900', marginLeft: '2rem'}} name='arrow-back-ios' />
+                <MaterialIcons style={{fontSize: '1.50rem', fontWeight: '900', marginLeft: '2rem'}} name='arrow-back-ios' />
             </NavDiv>
-                {!automateFound? <ScanAutomate/>:<FoundAutomate/>}
+            <ScanAutomate />
                 
         </Container>
     )
