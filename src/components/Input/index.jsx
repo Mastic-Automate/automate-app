@@ -1,12 +1,11 @@
-import {useState} from 'react'
-
 import styled, {useTheme} from 'styled-components/native'
 
 const Container = styled.View`
     flex-flow: row nowrap;
-    height:70px;
+    height:60px;
     border-radius: 4px;
     padding-right: 2px;
+    padding-left: 2px;
     align-items: center;
     background-color: ${props => props.theme.cardColor};
 `
@@ -23,12 +22,12 @@ function Input({iconType:Icon, iconName, style, ...textInputProps}){
 
     return (
         <Container style={style}>
-            {Icon &&(
-                <Icon name={iconName} size={24} color={theme.text1} />
-            )}
             <TextInput
                 {...textInputProps} 
             />
+            {Icon &&(
+                <Icon name={iconName} size={24} color={theme.text1} style={{marginRight:10}} />
+            )}
         </Container>
     )
 }
