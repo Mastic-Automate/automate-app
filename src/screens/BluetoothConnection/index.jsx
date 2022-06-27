@@ -37,7 +37,7 @@ const BluetoothIcon = styled(Ionicons)`
 `
 const NewTitle = styled.Text`
     font-size:2.25rem;
-    color: ${props => props.theme.title};
+    color: #000;
     width: 17.5rem;
     font-family: 'ProximaNovaExtraBold';
     text-align: left;
@@ -47,7 +47,7 @@ const NewTitle = styled.Text`
 
 const NewSubtitle = styled.Text`
     font-size: 1.25rem;
-    color: ${props => props.theme.title};
+    color: #000;
     font-weight: 400;
     line-height: 24px;
     width: 18.75rem;
@@ -59,28 +59,195 @@ const NewSubtitle = styled.Text`
 
 `
 
-function BluetoothConnection({navigation, route}){
-    const {target, params} = route.params
-    useEffect(()=>{
-        setTimeout(function (){
-        navigation.replace(target, params)
-        },5000)
-    }, [])
+
+const AutomateName = styled.Text`
+width: 18.50rem;
+height: 3.94;
+margin-left: 4.438rem;
+margin-top: 1.063rem;
+
+
+font-family: 'ProximaNovaBold';
+font-size: 2rem;
+
+
+color: #000000;
+
+
+
+`
+
+const NavDiv = styled.View`
+    width: 100%;
+    height: 3.75rem;
+    flex-direction: row;
+    align-items: center;
+    
+    margin-top: 1.875rem;
+`
+const LineDiv = styled.View`
+    width: 90%;
+    height: 0.19rem;
+    background-color: #000718;
+    margin-top: 1.1rem;
+   align-self: center;
+`
+// Alça em inglês é muito dificio, então vai barrinha mesmo
+const Barrinha = styled.View`
+
+    width: 25%;
+    //width: 7rem;
+    height: 0.63rem;
+    background-color: #8FA9BB;
+    align-self: center;
+    border-radius: 0.938rem;
+    margin-top: 0.875rem;
+    
+`
+
+const ContainerMenuFooter = styled.View`
+    width: 100%;
+    height: 8.5rem;
+    background-color: #D7E1E8;
+    //display: block;
+    //align-items: flex-start;
+    border-top-left-radius: 3.375rem;
+    border-top-right-radius: 3.375rem;
+
+    
+`
+
+const ContentMenuFooter = styled.View`
+    width: 90%;
+    height: 25%;
+    background-color: #265374;
+
+    //align-items: flex-start;
+    margin-top: 13%;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    justify-content: space-around;
+    flex: 0;
+    flex-direction: row;
+    
+`
+
+const BatteryIcon = styled(MaterialIcons)`
+    font-size: 4.688rem;
+    transform: rotate(90deg);
+    //align-self: flex-start;
+   // height: min-content;
+    //margin-left: 3.25rem;
+   
+    //display: inline-flex;
+    position: static;
+    display: inline;
+`
+
+const DropIcon = styled(MaterialIcons)`
+    font-size: 4.688rem;
+   // align-self: center;
+   // display: inline-block;
+
+   // flex-direction: column;
+    //display: inline-flex;
+    position: static;
+    display: inline;
+`
+
+const SunIcon = styled(MaterialIcons)`
+    font-size: 4.688rem;
+   // align-self: center;
+   // display: inline-block;
+
+   // flex-direction: column;
+    //display: inline-flex;
+    position: static;
+    display: inline;
+`
+
+const DescText = styled(Text)`
+    position: absolute;
+    font-size: 1.2rem;
+    align-self: center;
+    top: 75%;
+    text-align: center;
+`
+
+function BluetoothConnection(){
+   
+    const [automateFound, setAutomateFound] = useState(true);
+
+    //Função para ver os dois estados em mudança
+    setTimeout(function (){
+       setAutomateFound(!automateFound);
+    },5000)
 
     let [fontsLoaded] = useFonts({
         'ProximaNovaBold': require('../../../assets/fonts/proximaNova/ProximaNovaBold.otf'),
         'ProximaNovaExtraBold': require('../../../assets/fonts/proximaNova/ProximaNovaExtraBold.otf'),
         'Montserrat': require('../../../assets/fonts/Montserrat/Montserrat-Regular.ttf'),
-    });
+      });
+    
+      if (!fontsLoaded) {
+        console.log(fontsLoaded)
+      }
+
+
+
+      const ScanAutomate = () => {
+       return <>
+       <NewTitle >Procurando dispositivo</NewTitle>
+        <NewSubtitle>Seu dispositivo <b>Automate</b> deve aparecer aqui, em breve.</NewSubtitle>
+        <LineDiv />
+        <Image
+      style={{width: '26.75rem', height: '20.06rem', marginTop: '2.25rem',  }}
+      source={require('../../../assets/conexão.gif')} />
+
+  
+       <ContainerMenuFooter style={{marginTop: '10.188rem'}}>
+           <Barrinha />
+           <ContentMenuFooter>
+           <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
+        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
+       <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
+        </ContentMenuFooter>
+       </ContainerMenuFooter>
+
+       </>
+      }
+
+      const FoundAutomate = () => {
+        return <>
+        <NewTitle >Selecione seu dispositivo</NewTitle>
+         <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
+         <LineDiv />
+         <Image
+       style={{width: '21.38rem', height: '16.00rem', borderRadius: '2.438rem', marginTop: '7%',}}
+       source={require('../../../assets/arduino.gif')} />
+           <AutomateName>Nome/Apelido do Dispositivo</AutomateName>
+            <DescText ><i>Deslize para cima para<br/> ver mais!</i></DescText>
+           <View style={{height: '20%', overflow: 'scroll', flex: 1, marginTop: '5%',}}>
+        <ContainerMenuFooter style={{marginTop: '45%', height: '80%'}}>
+            <Barrinha />
+            <ContentMenuFooter>
+        <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
+        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
+       <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
+        </ContentMenuFooter>
+        </ContainerMenuFooter>
+        </View>
+        </>
+       }
+ 
 
     return (
         <Container>
-            <NewTitle >Procurando dispositivo</NewTitle>
-            <NewSubtitle>Seu dispositivo Automate deve aparecer aqui, em breve.</NewSubtitle>
-            <Image
-                style={{width: '26.75rem', height: '20.06rem', marginTop: '2.25rem',  }}
-                source={require('../../../assets/conexão.gif')} 
-            />
+            <NavDiv>
+            <MaterialIcons style={{fontSize: '1.50rem', fontWeight: '900', marginLeft: '2rem'}} name='arrow-back-ios' />
+            </NavDiv>
+                {!automateFound? <ScanAutomate/>:<FoundAutomate/>}
                 
         </Container>
     )
