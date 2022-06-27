@@ -175,6 +175,56 @@ const DescText = styled(Text)`
     text-align: center;
 `
 
+const ScanAutomate = () => {
+    return  (
+        <>
+            <NewTitle >Procurando dispositivo</NewTitle>
+            <NewSubtitle>Seu dispositivo <b>Automate</b> deve aparecer aqui, em breve.</NewSubtitle>
+            <LineDiv />
+            <Image
+                style={{width: '26.75rem', height: '20.06rem', marginTop: '2.25rem',  }}
+                source={require('../../../assets/conexão.gif')} 
+            />
+  
+            <ContainerMenuFooter style={{marginTop: '10.188rem'}}>
+                <Barrinha />
+                <ContentMenuFooter>
+                    <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
+                    <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
+                    <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
+                </ContentMenuFooter>
+            </ContainerMenuFooter>
+
+       </>
+    )
+}
+
+const FoundAutomate = () => {
+    return (
+        <>
+            <NewTitle >Selecione seu dispositivo</NewTitle>
+            <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
+            <LineDiv />
+            <Image
+                style={{width: '21.38rem', height: '16.00rem', borderRadius: '2.438rem', marginTop: '7%',}}
+                source={require('../../../assets/arduino.gif')} 
+            />
+            <AutomateName>Nome/Apelido do Dispositivo</AutomateName>
+            <DescText ><i>Deslize para cima para<br/> ver mais!</i></DescText>
+            <View style={{height: '20%', overflow: 'scroll', flex: 1, marginTop: '5%',}}>
+                <ContainerMenuFooter style={{marginTop: '45%', height: '80%'}}>
+                    <Barrinha />
+                    <ContentMenuFooter>
+                        <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
+                        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
+                        <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
+                    </ContentMenuFooter>
+                </ContainerMenuFooter>
+            </View>
+        </>
+    )
+}
+
 function BluetoothConnection(){
    
     const [automateFound, setAutomateFound] = useState(true);
@@ -193,54 +243,6 @@ function BluetoothConnection(){
       if (!fontsLoaded) {
         console.log(fontsLoaded)
       }
-
-
-
-      const ScanAutomate = () => {
-       return <>
-       <NewTitle >Procurando dispositivo</NewTitle>
-        <NewSubtitle>Seu dispositivo <b>Automate</b> deve aparecer aqui, em breve.</NewSubtitle>
-        <LineDiv />
-        <Image
-      style={{width: '26.75rem', height: '20.06rem', marginTop: '2.25rem',  }}
-      source={require('../../../assets/conexão.gif')} />
-
-  
-       <ContainerMenuFooter style={{marginTop: '10.188rem'}}>
-           <Barrinha />
-           <ContentMenuFooter>
-           <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
-        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
-       <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
-        </ContentMenuFooter>
-       </ContainerMenuFooter>
-
-       </>
-      }
-
-      const FoundAutomate = () => {
-        return <>
-        <NewTitle >Selecione seu dispositivo</NewTitle>
-         <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
-         <LineDiv />
-         <Image
-       style={{width: '21.38rem', height: '16.00rem', borderRadius: '2.438rem', marginTop: '7%',}}
-       source={require('../../../assets/arduino.gif')} />
-           <AutomateName>Nome/Apelido do Dispositivo</AutomateName>
-            <DescText ><i>Deslize para cima para<br/> ver mais!</i></DescText>
-           <View style={{height: '20%', overflow: 'scroll', flex: 1, marginTop: '5%',}}>
-        <ContainerMenuFooter style={{marginTop: '45%', height: '80%'}}>
-            <Barrinha />
-            <ContentMenuFooter>
-        <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
-        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
-       <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
-        </ContentMenuFooter>
-        </ContainerMenuFooter>
-        </View>
-        </>
-       }
- 
 
     return (
         <Container>
