@@ -7,7 +7,8 @@ import AppLoading from 'expo-app-loading';
 import { Image } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons'
 import { Text, View } from 'moti';
-
+import * as Bluetooth from '../../services/Bluetooth';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 
 const Container = styled.View`
@@ -168,9 +169,9 @@ const ScanAutomate = ({automateFound}) => {
             <ContainerMenuFooter style={{justifySelf:'flex-end'}}>
                 <Barrinha />
                 <ContentMenuFooter style={{flex:1}}>
-                    <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
-                    <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
-                    <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
+                    <BatteryIcon name='battery-std' color={'#4e4e4e'} />
+                    <DropIcon name='opacity' color={'#4e4e4e'} />
+                    <SunIcon name='brightness-7' color={'#4e4e4e'} />
                 </ContentMenuFooter>
             </ContainerMenuFooter>
 
@@ -178,9 +179,11 @@ const ScanAutomate = ({automateFound}) => {
     )
 }
 
-const FoundAutomate = ({automateFound}) => {
+const FoundAutomate = (Automate, info) => {
+
     return (
         <>
+        
             <NewTitle >Selecione seu dispositivo</NewTitle>
             <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
             <LineDiv />
@@ -188,15 +191,15 @@ const FoundAutomate = ({automateFound}) => {
                 style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf:'center'}}
                 source={require('../../../assets/arduino.gif')} 
             />
-            <AutomateName>Nome/Apelido do Dispositivo</AutomateName>
-            <DescText >Deslize para cima para ver mais!</DescText>
-            <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', backgroundColor: 'red' }}>
+            <AutomateName>{Automate.automateFound.name}</AutomateName>
+            <DescText >slaaaaaa</DescText>
+            <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', }}>
                 <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
                     <Barrinha />
                     <ContentMenuFooter>
-                        <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
-                        <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
-                        <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
+                        <BatteryIcon name='battery-std' color="#42db49" />
+                        <DropIcon name='opacity' color="#006eff" />
+                        <SunIcon name='brightness-7' color="#e9db19" />
                     </ContentMenuFooter>
                 </ContainerMenuFooter>
             </ScrollView>
@@ -206,11 +209,86 @@ const FoundAutomate = ({automateFound}) => {
 
 function BluetoothConnection(){
    
-    const [automateFound, setAutomateFound] = useState(true);
+    const [automateFound, setAutomateFound] = useState(false);
+    const [Automate, setAutomate] = useState({});
+    const [text, setText] = useState(null);
+    const [data, setData] =useState('');
+    const [bottomError, setBottomError] = useState('');
+    const [connected, setConnected] = useState(false);
+
+
+
+    useEffect(()=> {
+         if(automateFound) {
+       let z = isConnectedDevice().then(b => b?console.log("Já conectado"): HandleConnect(Automate));
+       console.log("Valor z");
+       console.log(z);
+    }
+    return () => {
+        
+        //funções para desmonte de componente
+       
+    }
+}, [automateFound])
+
+ const isConnectedDevice= async () => {
+  let b = await Automate.isConnected();
+  return b;
+ }
+
+    const removeSubscriptions = () => {
+       // subscription.remove();
+       // conne.remove();
+    }
+   
+    const HandleScan = async () => {
+        Bluetooth.Scanear().then(r => {
+            if (r !== undefined) {
+                setAutomate(r);
+                setAutomateFound(true);              
+                //console.log(r); 
+            }
+            
+        });
+     }
+     
+     const HandleConnect = async (d) => {
+  
+       await Bluetooth.Connect(d).then(array => {
+            const device = array[0];
+            console.log("\n \nAprovação: ");
+            console.log(array[1]);
+             if (array[1] || undefined){
+                console.log("Entrou no Read");
+                setConnected(true);
+            RNBluetoothClassic.onDeviceRead(device.id, ({ data }) => {console.log(device.available());device.clear();HandleDataRead(data)});
+            setConnected(true);
+             }
+             
+            });
+         
+     }
+        HandleScan();
+
+     const HandleDisconnect = async () => {
+        Bluetooth.Disconnect(Automate).then(device => setAutomate(device));
+         setConnected(false)
+     }
+ 
+     const HandleMessage = async () => {
+        let r = await Bluetooth.SendMessage(Automate, text).then(response => {return response});
+        
+     }
+ 
+     const HandleDataRead = async (info) => {
+        console.log(data)
+        setData(info)
+         
+     }
 
     //Função para ver os dois estados em mudança
     setTimeout(function (){
-       setAutomateFound(!automateFound);
+       //setAutomateFound(!automateFound);
     },5000)
 
     let [fontsLoaded] = useFonts({
@@ -220,7 +298,7 @@ function BluetoothConnection(){
       });
     
       if (!fontsLoaded) {
-        console.log(fontsLoaded)
+        //console.log(fontsLoaded)
       }
 
     return (
@@ -228,7 +306,7 @@ function BluetoothConnection(){
             <NavDiv>
             <MaterialIcons style={{fontSize: 24, fontWeight: '900', marginLeft: 32}} name='arrow-back-ios' />
             </NavDiv>
-                {!automateFound? <ScanAutomate automateFound={automateFound}/>:<FoundAutomate automateFound={automateFound}/>}
+                {!automateFound? <ScanAutomate />:<FoundAutomate automateFound={Automate} info={data}/>}
                 
         </Container>
     )
