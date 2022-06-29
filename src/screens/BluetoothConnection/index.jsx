@@ -12,7 +12,7 @@ import { Text, View } from 'moti';
 
 const Container = styled.View`
     flex:1;
-    align-items:left;
+    align-items:flex-start;
     background-color: ${props => props.theme.background};
 `
 const Title = styled.Text`
@@ -36,83 +36,76 @@ const BluetoothIcon = styled(Ionicons)`
     color: ${props => props.theme.primary};
 `
 const NewTitle = styled.Text`
-    font-size:2.25rem;
+    font-size:32px;
     color: #000;
-    width: 17.5rem;
+    width: 280px;
     font-family: 'ProximaNovaExtraBold';
     text-align: left;
-    margin-top: 0.625rem;
-    margin-left: 2.75rem;
+    margin-top: 100px;
+    margin-left: 104px;
 `
 
 const NewSubtitle = styled.Text`
-    font-size: 1.25rem;
+    font-size: 20px;
     color: #000;
     font-weight: 400;
     line-height: 24px;
-    width: 18.75rem;
-    height: 2.75rem;
-    margin-left: 2.75rem;
+    width: 70%;
+    margin-left: 44px;
     font-family: 'Montserrat';
-    margin-top: 1.063rem;
+    margin-top: 17;
     text-align: left;
 
 `
 
 
 const AutomateName = styled.Text`
-width: 18.50rem;
-height: 3.94;
-margin-left: 4.438rem;
-margin-top: 1.063rem;
+    width: 296px;
+    height: 3.94;
+    margin-left: 71px;
+    margin-top: 17px;
 
+    font-family: 'ProximaNovaBold';
+    font-size: 32px;
 
-font-family: 'ProximaNovaBold';
-font-size: 2rem;
-
-
-color: #000000;
-
-
+    color: #000000;
 
 `
 
 const NavDiv = styled.View`
     width: 100%;
-    height: 3.75rem;
+    height: 60px;
     flex-direction: row;
     align-items: center;
     
-    margin-top: 1.875rem;
+    margin-top: 30px;
 `
 const LineDiv = styled.View`
     width: 90%;
-    height: 0.19rem;
+    height: 3px;
     background-color: #000718;
-    margin-top: 1.1rem;
-   align-self: center;
+    margin-top: 17.6px;
+    align-self: center;
 `
 // Alça em inglês é muito dificio, então vai barrinha mesmo
 const Barrinha = styled.View`
 
     width: 25%;
-    //width: 7rem;
-    height: 0.63rem;
+    height: 10px;
     background-color: #8FA9BB;
     align-self: center;
-    border-radius: 0.938rem;
-    margin-top: 0.875rem;
+    border-radius: 16px;
+    margin-top: 14px;
     
 `
 
 const ContainerMenuFooter = styled.View`
     width: 100%;
-    height: 8.5rem;
+    height: 136px;
     background-color: #D7E1E8;
-    //display: block;
-    //align-items: flex-start;
-    border-top-left-radius: 3.375rem;
-    border-top-right-radius: 3.375rem;
+
+    border-top-left-radius: 54px;
+    border-top-right-radius: 54px;
 
     
 `
@@ -122,7 +115,6 @@ const ContentMenuFooter = styled.View`
     height: 25%;
     background-color: #265374;
 
-    //align-items: flex-start;
     margin-top: 13%;
     align-content: center;
     align-items: center;
@@ -134,59 +126,41 @@ const ContentMenuFooter = styled.View`
 `
 
 const BatteryIcon = styled(MaterialIcons)`
-    font-size: 4.688rem;
+    font-size: 75px;
     transform: rotate(90deg);
-    //align-self: flex-start;
-   // height: min-content;
-    //margin-left: 3.25rem;
    
-    //display: inline-flex;
-    position: static;
-    display: inline;
 `
 
 const DropIcon = styled(MaterialIcons)`
-    font-size: 4.688rem;
-   // align-self: center;
-   // display: inline-block;
+    font-size: 75px;
 
-   // flex-direction: column;
-    //display: inline-flex;
-    position: static;
-    display: inline;
 `
 
 const SunIcon = styled(MaterialIcons)`
-    font-size: 4.688rem;
-   // align-self: center;
-   // display: inline-block;
+    font-size: 75px;
 
-   // flex-direction: column;
-    //display: inline-flex;
-    position: static;
-    display: inline;
 `
 
 const DescText = styled(Text)`
     position: absolute;
-    font-size: 1.2rem;
+    font-size: 19px;
     align-self: center;
     top: 75%;
     text-align: center;
 `
 
-const ScanAutomate = () => {
+const ScanAutomate = ({automateFound}) => {
     return  (
         <>
             <NewTitle >Procurando dispositivo</NewTitle>
-            <NewSubtitle>Seu dispositivo <b>Automate</b> deve aparecer aqui, em breve.</NewSubtitle>
+            <NewSubtitle>Seu dispositivo Automate deve aparecer aqui, em breve.</NewSubtitle>
             <LineDiv />
             <Image
-                style={{width: '26.75rem', height: '20.06rem', marginTop: '2.25rem',  }}
+                style={{width: 428, height: 330, marginTop: 36, }}
                 source={require('../../../assets/conexão.gif')} 
             />
   
-            <ContainerMenuFooter style={{marginTop: '10.188rem'}}>
+            <ContainerMenuFooter style={{marginTop: 161.6}}>
                 <Barrinha />
                 <ContentMenuFooter>
                     <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
@@ -199,18 +173,18 @@ const ScanAutomate = () => {
     )
 }
 
-const FoundAutomate = () => {
+const FoundAutomate = ({automateFound}) => {
     return (
         <>
             <NewTitle >Selecione seu dispositivo</NewTitle>
             <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
             <LineDiv />
             <Image
-                style={{width: '21.38rem', height: '16.00rem', borderRadius: '2.438rem', marginTop: '7%',}}
+                style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%',}}
                 source={require('../../../assets/arduino.gif')} 
             />
             <AutomateName>Nome/Apelido do Dispositivo</AutomateName>
-            <DescText ><i>Deslize para cima para<br/> ver mais!</i></DescText>
+            <DescText >Deslize para cima para ver mais!</DescText>
             <View style={{height: '20%', overflow: 'scroll', flex: 1, marginTop: '5%',}}>
                 <ContainerMenuFooter style={{marginTop: '45%', height: '80%'}}>
                     <Barrinha />
@@ -247,9 +221,9 @@ function BluetoothConnection(){
     return (
         <Container>
             <NavDiv>
-            <MaterialIcons style={{fontSize: '1.50rem', fontWeight: '900', marginLeft: '2rem'}} name='arrow-back-ios' />
+            <MaterialIcons style={{fontSize: 24, fontWeight: '900', marginLeft: 32}} name='arrow-back-ios' />
             </NavDiv>
-                {!automateFound? <ScanAutomate/>:<FoundAutomate/>}
+                {!automateFound? <ScanAutomate automateFound={automateFound}/>:<FoundAutomate automateFound={automateFound}/>}
                 
         </Container>
     )
