@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/native'
-
+import { ScrollView } from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading';
@@ -13,6 +13,7 @@ import { Text, View } from 'moti';
 const Container = styled.View`
     flex:1;
     align-items:flex-start;
+    justify-content:space-between;
     background-color: ${props => props.theme.background};
 `
 const Title = styled.Text`
@@ -41,8 +42,9 @@ const NewTitle = styled.Text`
     width: 280px;
     font-family: 'ProximaNovaExtraBold';
     text-align: left;
-    margin-top: 100px;
-    margin-left: 104px;
+    margin-left: 44px;
+    width: 70%;
+    margin-top: 20px;
 `
 
 const NewSubtitle = styled.Text`
@@ -53,7 +55,7 @@ const NewSubtitle = styled.Text`
     width: 70%;
     margin-left: 44px;
     font-family: 'Montserrat';
-    margin-top: 17;
+    margin-top: 17px;
     text-align: left;
 
 `
@@ -61,7 +63,6 @@ const NewSubtitle = styled.Text`
 
 const AutomateName = styled.Text`
     width: 296px;
-    height: 3.94;
     margin-left: 71px;
     margin-top: 17px;
 
@@ -78,7 +79,7 @@ const NavDiv = styled.View`
     flex-direction: row;
     align-items: center;
     
-    margin-top: 30px;
+    margin-top: 5px;
 `
 const LineDiv = styled.View`
     width: 90%;
@@ -113,14 +114,13 @@ const ContainerMenuFooter = styled.View`
 const ContentMenuFooter = styled.View`
     width: 90%;
     height: 25%;
-    background-color: #265374;
 
-    margin-top: 13%;
+
     align-content: center;
     align-items: center;
     align-self: center;
     justify-content: space-around;
-    flex: 0;
+    
     flex-direction: row;
     
 `
@@ -149,20 +149,25 @@ const DescText = styled(Text)`
     text-align: center;
 `
 
+const StatusGif = styled.Image`
+    border-radius:40px;
+`
+
 const ScanAutomate = ({automateFound}) => {
     return  (
         <>
             <NewTitle >Procurando dispositivo</NewTitle>
             <NewSubtitle>Seu dispositivo Automate deve aparecer aqui, em breve.</NewSubtitle>
             <LineDiv />
-            <Image
-                style={{width: 428, height: 330, marginTop: 36, }}
+            
+            <StatusGif
+                style={{width: 428, height: 330, marginTop: 36, borderRadius:40, alignSelf:'center'}}
                 source={require('../../../assets/conexão.gif')} 
             />
-  
-            <ContainerMenuFooter style={{marginTop: 161.6}}>
+            
+            <ContainerMenuFooter style={{justifySelf:'flex-end'}}>
                 <Barrinha />
-                <ContentMenuFooter>
+                <ContentMenuFooter style={{flex:1}}>
                     <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
                     <DropIcon name='opacity' color={automateFound?"#006eff":'#4e4e4e'} />
                     <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
@@ -179,14 +184,14 @@ const FoundAutomate = ({automateFound}) => {
             <NewTitle >Selecione seu dispositivo</NewTitle>
             <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
             <LineDiv />
-            <Image
-                style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%',}}
+            <StatusGif
+                style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf:'center'}}
                 source={require('../../../assets/arduino.gif')} 
             />
             <AutomateName>Nome/Apelido do Dispositivo</AutomateName>
             <DescText >Deslize para cima para ver mais!</DescText>
-            <View style={{height: '20%', overflow: 'scroll', flex: 1, marginTop: '5%',}}>
-                <ContainerMenuFooter style={{marginTop: '45%', height: '80%'}}>
+            <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', backgroundColor: 'red' }}>
+                <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
                     <Barrinha />
                     <ContentMenuFooter>
                         <BatteryIcon name='battery-std' color={automateFound?"#42db49":'#4e4e4e'} />
@@ -194,7 +199,7 @@ const FoundAutomate = ({automateFound}) => {
                         <SunIcon name='brightness-7' color={automateFound?"#e9db19":'#4e4e4e'} />
                     </ContentMenuFooter>
                 </ContainerMenuFooter>
-            </View>
+            </ScrollView>
         </>
     )
 }
