@@ -12,6 +12,7 @@ import {RootRoutes} from './src/routes/RootRoutes'
 
 import { Poppins_400Regular } from '@expo-google-fonts/poppins'
 import { BluetoothConnection } from './src/screens/BluetoothConnection';
+import { Login } from './src/screens/Login';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -25,7 +26,7 @@ export default function App() {
       <ThemeContextProvider>
         <MicrocontrollersContextProvider>
           <NavigationContainer>
-            <BluetoothConnection />
+            <Login />
           </NavigationContainer>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>

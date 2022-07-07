@@ -1,18 +1,40 @@
 import styled from 'styled-components/native'
 
 const Container = styled.SafeAreaView`
-    padding: 10px;
-    background-color: ${props => props.theme.background};
-    align-items: center;
-    justify-content: space-around;
     height: 100%;
+`
+const BackgroundImage = styled.ImageBackground`
+    width:100%;
+    height:100%;
+    align-items: center;
+    justify-content:flex-end;
+`
+
+const Menu = styled.View`
+    background-color: ${props => props.theme.background1};
+    border-top-left-radius:40px;
+    border-top-right-radius:40px;
+    width:100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 28px;
+    padding-bottom:20px;
+    height: 80%;
+    justify-content:space-between;
+`
+
+const HeadingSection = styled.View`
+    width:100%;
 `
 
 const Title = styled.Text`
-    font-size: 30px;
-    color: ${props => props.theme.title};
-    width: 100%;
-    text-align: center;
+    font-size: 36px;
+    font-weight:bold;
+    color: ${props => props.theme.primary};
+`
+const Subtitle = styled.Text`
+    color: ${props => props.theme.primary};
+    font-size: 24px;
 `
 
 const BottomText = styled.Text`
@@ -36,7 +58,6 @@ const BottomLinkText = styled.Text`
 `
 
 const InputsView = styled.View`
-    margin: 10px;
     width: 100%;
 `
 
@@ -57,5 +78,9 @@ export {
     Container, 
     InputsView, 
     Title,
-    ErrorText
+    ErrorText,
+    Menu,
+    Subtitle,
+    HeadingSection,
+    BackgroundImage
 }

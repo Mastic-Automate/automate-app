@@ -13,13 +13,18 @@ import {
     Container, 
     InputsView, 
     Title,
-    ErrorText
+    ErrorText,
+    Menu,
+    Subtitle,
+    HeadingSection,
+    BackgroundImage
 } from './styles'
 
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useState } from 'react'
+import { Image } from 'react-native'
 
 const schema = yup.object({
     email: yup.string().required("Campo de email obrigatório").email("Email inválido"),
@@ -44,43 +49,54 @@ export function Login({ navigation }) {
 
     return (
         <Container>
-            <Title>Login</Title>
-            <InputsView>
+            <BackgroundImage source={require('../../assets/background1.png')}>
 
-                <Input
-                    name="email"
-                    control={control}
-                    error={errors.email}
-                    keyboardType="email-address"
-                    placeholder="Email"
-                    iconType={MaterialCommunity}
-                    iconName="account-circle-outline"
-                    style={{ marginTop: 10 }}
-                    autoCorrect={false}
-                    autoCapitalize="none"
+                <Image 
+                    source={require('../../assets/logo_automate.png')}
+                    style={{width:150, height:150}}
                 />
-                <Input
-                    name="password"
-                    control={control}
-                    error={errors.password}
-                    placeholder="Senha"
-                    iconType={Material}
-                    iconName="lock-outline"
-                    secureTextEntry
-                    style={{ marginTop: 10 }}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                />
+                <Menu>
+                    <HeadingSection>
+                        <Title>Login</Title>
+                        <Subtitle>Sua nova forma de plantar!</Subtitle>
+                    </HeadingSection>
 
-                <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />
-                <ErrorText>{bottomError}</ErrorText>
-            </InputsView>
-            <BottomView>
-                <BottomText>Ainda não possui uma conta?</BottomText>
-                <BottomLink onPress={() => navigation.replace('register')}>
-                    <BottomLinkText>Registre-se! </BottomLinkText>
-                </BottomLink>
-            </BottomView>
+                    <InputsView>
+                        <Input
+                            name="email"
+                            control={control}
+                            error={errors.email}
+                            keyboardType="email-address"
+                            placeholder="Email"
+                            iconType={MaterialCommunity}
+                            iconName="account-circle-outline"
+                            style={{ marginTop: 10 }}
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                        />
+                        <Input
+                            name="password"
+                            control={control}
+                            error={errors.password}
+                            placeholder="Senha"
+                            iconType={Material}
+                            iconName="lock-outline"
+                            secureTextEntry
+                            style={{ marginTop: 10 }}
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                        />
+
+                        <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />
+                        <ErrorText>{bottomError}</ErrorText>
+                    </InputsView>
+                    <BottomView>
+                        <BottomLink onPress={() => navigation.replace('register')}>
+                            <BottomLinkText>Criar conta</BottomLinkText>
+                        </BottomLink>
+                    </BottomView>
+                </Menu>
+            </BackgroundImage>
         </Container>
     )
 }
