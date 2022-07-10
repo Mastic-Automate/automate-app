@@ -1,29 +1,21 @@
-import styled from 'styled-components/native';
+import {Image} from 'react-native'
 
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 import {ConfigTileSwitch, ConfigTileSection} from '../../components/ConfigTile'
 import { useTheme } from '../../hooks/useTheme';
 
-const Container = styled.View`
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color:${props => props.theme.background};
-    flex:1;
-`
-
-const Title = styled.Text`
-    color: ${props => props.theme.title};
-    font-size: 30px;
-    width: 100%;
-    text-align:center;
-    margin-top: 75px;
-`
-
-const TilesContainer = styled.ScrollView`
-    margin-top: 80px;
-    width: 100%;
-`
+import {
+    Container, 
+    Title, 
+    HeadingSection, 
+    MainSection, 
+    SectionTitle, 
+    MessageContainer, 
+    MessageContainerText,
+    MessageContainerCol1,
+    MessageContainerCol2
+} from './styles'
 
 export function Config({navigation}){
     const {toggleTheme, theme} = useTheme()
@@ -32,9 +24,26 @@ export function Config({navigation}){
 
     return(
         <Container>
-            <Title>Configurações</Title>
-            <TilesContainer>
-
+            <HeadingSection>
+                <Title>Configurações</Title>
+                <MessageContainer>
+                    <MessageContainerCol1>
+                        <MessageContainerText>
+                            Lembre-se de encher seu recipiente de água.
+                        </MessageContainerText>
+                    </MessageContainerCol1>
+                    <MessageContainerCol2>
+                        <Image 
+                            source={require('../../assets/rose.png')}
+                            style={{width:100, height:100}}
+                        />
+                    </MessageContainerCol2>
+                </MessageContainer>
+            </HeadingSection>
+            <MainSection>
+                <SectionTitle>
+                    Geral
+                </SectionTitle>
                 <ConfigTileSwitch
                     text="Tema escuro"
                     value={isDarkTheme}
@@ -48,7 +57,7 @@ export function Config({navigation}){
                     style={{margin:5}}
                     onPress={() => navigation.navigate('account')}
                 />
-            </TilesContainer>
+            </MainSection>
 
         </Container>
     ) 
