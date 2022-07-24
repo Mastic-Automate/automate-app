@@ -1,3 +1,5 @@
+import {Dimensions, Text, View} from 'react-native'
+
 import { Button } from '../../components/Button'
 
 import {FormInput as Input} from '../../components/FormInput'
@@ -6,26 +8,75 @@ import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 
-import {BottomButtonsContainer, Container, InputLabel, InputsContainer, Title} from './styles'
+import Carousel from 'react-native-snap-carousel'
+
+import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSectionTitle, InputLabel, InputsContainer, Title} from './styles'
+import { CarouselCard } from './CarouselCard'
+import { useMemo, useState } from 'react'
+import { appImages } from '../../global/images'
 
 const schema = yup.object({
-    name: yup.string().required("Nome é obrigatório"),
-    model: yup.string().required("Modelo é obrigatório")
+    name: yup.string().required("Nome é obrigatório")
 })
 
+const defaultModels = [
+    {
+        name:'tomate',
+        enviroment:'interno',
+        luminosity: 5,
+        time: '2 a 4 semanas',
+        img: appImages['plant_corner']
+    },
+    {
+        name:'alface',
+        enviroment:'externo',
+        luminosity: 5,
+        time: '2 a 10 semanas',
+        img: appImages['plant_corner']
+    }
+]
+const SLIDER_WIDTH = Dimensions.get('window').width
+const ITEM_WIDTH = SLIDER_WIDTH*0.8
+
 function AddPlant(){
+    const [currentModelIndex, setCurrentModelIndex] = useState(0)
+    const selectedPlant = useMemo(() => {
+        return defaultModels[currentModelIndex]
+    }, [currentModelIndex])
     const {handleSubmit, control, formState:{errors}} = useForm({
         resolver: yupResolver(schema)
     })
 
     function handleAddPlant(data){
         console.log(data)
+        console.log(selectedPlant)
     }
     
     return (
         <Container>
             <Title>Adicionar planta</Title>
             <InputsContainer>
+                <Carousel 
+                    data={defaultModels}
+                    renderItem={({item, index}) => {
+                        return (
+                            <CarouselCard 
+                                name={item.name}
+                                active={currentModelIndex === index}
+                                img={item.img}
+                                key={index}
+                            />
+                        )
+                    }}
+                    sliderWidth={SLIDER_WIDTH}
+                    itemWidth={ITEM_WIDTH}
+                    useScrollView
+                    slideStyle={{
+                        alignItems:'center',
+                        justifyContent:'center'
+                    }}
+                    onSnapToItem={setCurrentModelIndex}
+                />
                 <InputLabel>Nome</InputLabel>
                 <Input 
                     placeholder="Tomates incríveis"
@@ -33,13 +84,21 @@ function AddPlant(){
                     name="name"  
                     error={errors.name}
                 />
-                <InputLabel>Modelo</InputLabel>
-                <Input 
-                    placeholder="Tomate"
-                    control={control}
-                    name="model"
-                    error={errors.model}
-                />
+                <DetailSection style={{marginTop:10}}>
+                    <DetailSectionTitle>Detalhes</DetailSectionTitle>
+                    <DetailRow 
+                        label="Tempo"
+                        value={selectedPlant.time}
+                    />
+                    <DetailRow 
+                        label="Ambiente"
+                        value={selectedPlant.enviroment}
+                    />
+                    <DetailRow 
+                        label="Iluminação"
+                        value={selectedPlant.luminosity}
+                    />
+                </DetailSection>
             </InputsContainer>
             <BottomButtonsContainer>
                 <Button text="Salvar" style={{flex:1, margin:5}} onPress={handleSubmit(handleAddPlant)} />
