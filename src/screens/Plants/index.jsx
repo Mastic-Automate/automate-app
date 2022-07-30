@@ -1,32 +1,20 @@
-import styled, { useTheme } from 'styled-components/native';
+import { useTheme } from 'styled-components/native';
 
-import {PlantTile} from '../../components/PlantTile'
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Container = styled.View`
-    background: ${props => props.theme.background};
-    flex: 1;
-    align-items:center;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 20px;
-`;
+import {
+    Container, 
+    Title,
+    AddButton,
+    MainContent,
+    SomePlantsContainer,
+    UserPlantsContainer,
+    UserPlantsTitle
+} from './styles'
+import { PlantCard } from './PlantCard';
+import {UserPlantCard} from './UserPlantCard'
 
-const PlantTileContainer = styled.ScrollView`
-    width: 100%;
-    margin-top: 32px;
-`;
-
-const Title = styled.Text`
-    color: ${props => props.theme.title};
-    font-size:30px;
-`
-
-const AddButton = styled.TouchableOpacity`
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-`;
+import {appImages} from '../../global/images'
 
 const plants = [
     {
@@ -37,18 +25,52 @@ const plants = [
         text: 'Pimenta',
         id: '2'
     },
+    {
+        text: 'Coentro',
+        id: '3'
+    },
 ]
 
 export function Plants({ navigation }) {
     const { primary } = useTheme();
 
-
     return (
         <Container>
-            <Title>Suas plantas</Title>
-            <PlantTileContainer contentContainerStyle={{ }}>
-                {plants.map(plant => <PlantTile {...plant} key={plant.id} />)}
-            </PlantTileContainer>
+            <MainContent>
+                <Title>Todas as plantas</Title>
+                <SomePlantsContainer horizontal>
+                    {plants.map(plant => {
+                        return (
+                            <PlantCard 
+                                description="Descrição"
+                                id={plant.id}
+                                image={appImages['plant_corner']}
+                                name={plant.text}
+                                key={plant.id}
+                                style={{marginLeft:10}}
+                            />
+                        )
+                    })}
+                </SomePlantsContainer>
+                <UserPlantsTitle horizontal>
+                    Suas plantas
+                </UserPlantsTitle>
+                <UserPlantsContainer horizontal>
+                    <UserPlantCard 
+                        image={appImages['plant_corner']}
+                        name="Suculenta"
+                        description="Sala"
+                        style={{marginLeft:10}}
+                    />
+                    <UserPlantCard 
+                        image={appImages['plant_corner']}
+                        name="Suculenta1"
+                        description="Telhado"
+                        style={{marginLeft:10}}
+                    />
+                </UserPlantsContainer>
+            </MainContent>
+            
             <AddButton onPress={() => navigation.navigate('bluetooth-connection', { target: 'add-plant', params: {} })}>
                 <MaterialIcons
                     name='add-circle'
