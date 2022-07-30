@@ -4,6 +4,8 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 import {ConfigTileSwitch, ConfigTileSection} from '../../components/ConfigTile'
 import { useTheme } from '../../hooks/useTheme';
+import { useAuth } from '../../hooks/useAuth';
+import {appImages} from '../../global/images'
 
 import {
     Container, 
@@ -14,11 +16,17 @@ import {
     MessageContainer, 
     MessageContainerText,
     MessageContainerCol1,
-    MessageContainerCol2
+    MessageContainerCol2,
+    AccountImage,
+    AccountSection,
+    AccountSectionInfoCol1,
+    AccountUserEmail,
+    AccountUserName
 } from './styles'
 
 export function Config({navigation}){
     const {toggleTheme, theme} = useTheme()
+    const {user} = useAuth()
 
     const isDarkTheme = !(theme==='light')
 
@@ -26,6 +34,19 @@ export function Config({navigation}){
         <Container>
             <HeadingSection>
                 <Title>Configurações</Title>
+                <AccountSection
+                    onPress={() => {
+                        navigation.navigate('account')
+                    }}
+                >
+                    <AccountImage 
+                        source={appImages['profile_placeholder']}
+                    />
+                    <AccountSectionInfoCol1>
+                        <AccountUserName>{user.userName}</AccountUserName>
+                        <AccountUserEmail>{user.userEmail}</AccountUserEmail>
+                    </AccountSectionInfoCol1>
+                </AccountSection>
                 <MessageContainer>
                     <MessageContainerCol1>
                         <MessageContainerText>
@@ -49,13 +70,6 @@ export function Config({navigation}){
                     value={isDarkTheme}
                     onChange={toggleTheme}
                     style={{margin:5}}
-                />
-                <ConfigTileSection 
-                    text="Configurações de conta"
-                    iconType={MaterialCommunityIcons}
-                    iconName="account-circle-outline"
-                    style={{margin:5}}
-                    onPress={() => navigation.navigate('account')}
                 />
             </MainSection>
 

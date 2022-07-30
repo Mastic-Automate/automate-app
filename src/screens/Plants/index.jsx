@@ -1,6 +1,6 @@
 import styled, { useTheme } from 'styled-components/native';
 
-import PlantTile from '../../components/PlantTile'
+import {PlantTile} from '../../components/PlantTile'
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Container = styled.View`

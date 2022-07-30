@@ -26,7 +26,7 @@ const IconsWrapper = styled.View`
     flex-direction:row;
 `;
 
-export default function PlantTile({ id, text }) {
+export function PlantTile({ id, text }) {
     const navigation = useNavigation()
     const { secondary1 } = useTheme()
 

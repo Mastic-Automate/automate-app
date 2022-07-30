@@ -19,6 +19,31 @@ const Title = styled.Text`
     text-align:center;
     margin-top: 25px;
 `
+const AccountSection = styled.TouchableOpacity`
+    flex-flow: row nowrap;
+    padding-left:10px;
+    padding-right:10px;
+    margin-bottom: 10px;
+`
+const AccountImage = styled.Image`
+    width: 95px;
+    height: 95px;
+    border-radius: 47.5px;
+`
+const AccountSectionInfoCol1 = styled.View`
+    flex:1;
+    justify-content:center;
+    margin:10px;
+`
+const AccountUserName = styled.Text`
+    color: ${props => props.theme.title};
+    font-weight: bold;
+    font-size: 24px;
+`
+const AccountUserEmail = styled.Text`
+    font-size:16px;
+    color: ${props => props.theme.text1};
+`
 const MessageContainer = styled.View`
     background-color: ${props => props.theme.purple};
     height:130px;
@@ -65,5 +90,10 @@ export {
     MessageContainer,
     MessageContainerText,
     MessageContainerCol1,
-    MessageContainerCol2
+    MessageContainerCol2,
+    AccountImage,
+    AccountSection,
+    AccountSectionInfoCol1,
+    AccountUserEmail,
+    AccountUserName
 }
