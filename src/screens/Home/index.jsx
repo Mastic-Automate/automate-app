@@ -43,6 +43,7 @@ export function Home(){
                             <Plant 
                                 {...item}
                                 image={appImages['plant1']}
+                                subtitle="Sub"
                             />
                         )
                     }}

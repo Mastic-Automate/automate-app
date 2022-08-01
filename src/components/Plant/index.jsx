@@ -12,6 +12,14 @@ const Title = styled.Text`
     color:#ffffff;
     font-size:18px;
     font-weight:bold;
+    width:100%;
+    padding-left:10px;
+`
+const Subtitle = styled.Text`
+    color: #ffffff;
+    font-size: 14px;
+    width:100%;
+    padding-left:10px;
 `
 const Container = styled.TouchableOpacity`
     margin:4px;
@@ -32,7 +40,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         maxHeight: 160,
-        borderRadius: 16,
+        borderRadius: 20,
         overflow: 'hidden',
         alignItems:'center',
         position:'relative',
@@ -42,7 +50,7 @@ const styles = StyleSheet.create({
     }
 })
 
-export function Plant({variant, image, title, ...containerProps}){
+export function Plant({variant, image, title, subtitle, ...containerProps}){
     const gradient = gradientsByVariants[variant]
     return (
         <Container {...containerProps}>
@@ -51,6 +59,7 @@ export function Plant({variant, image, title, ...containerProps}){
             />
             <LinearGradient style={styles.gradient} colors={gradient}>
                 <Title>{title}</Title>
+                <Subtitle>{subtitle}</Subtitle>
             </LinearGradient>
         </Container>
     )
