@@ -24,9 +24,9 @@ const TopSectionCol1 = styled.View`
 const TopSectionCol2 = styled.View`
     width: 150px;
     align-items:center;
+    z-index:-1;
 `
 const TopPlantImage = styled.Image`
-    
 `
 
 const PlantsSection = styled.ScrollView`
