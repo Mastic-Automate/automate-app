@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 
-const Container = styled.ScrollView`
+const Container = styled.View`
     height: 100%;
+    position: relative;
 `
 const BackgroundImage = styled.ImageBackground`
     width:100%;
@@ -17,10 +18,11 @@ const Menu = styled.SafeAreaView`
     width:100%;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 28px;
-    padding-bottom:20px;
+    padding-top: 15px;
+    padding-bottom: 20px;
     height: 82%;
     justify-content:space-between;
+    flex:1;
 `
 
 const HeadingSection = styled.View`
@@ -34,12 +36,12 @@ const Title = styled.Text`
 `
 const Subtitle = styled.Text`
     color: ${props => props.theme.primary};
-    font-size: 24px;
+    font-size: 16px;
 `
 
 const BottomText = styled.Text`
     color: ${props => props.theme.secondary1};
-    font-size: 20px;
+    font-size: 18px;
     width: 100%;
     text-align:center;
 `
