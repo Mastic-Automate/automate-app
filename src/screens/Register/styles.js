@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Container = styled.SafeAreaView`
+const Container = styled.ScrollView`
     height: 100%;
 `
 const BackgroundImage = styled.ImageBackground`
@@ -10,7 +10,7 @@ const BackgroundImage = styled.ImageBackground`
     justify-content:flex-end;
 `
 
-const Menu = styled.View`
+const Menu = styled.SafeAreaView`
     background-color: ${props => props.theme.background1};
     border-top-left-radius:40px;
     border-top-right-radius:40px;

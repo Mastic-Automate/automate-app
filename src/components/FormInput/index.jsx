@@ -6,6 +6,7 @@ import {Input} from '../Input'
 
 const ErrorText = styled.Text`
     color: ${props => props.theme.error};
+    font-size:12px;
 `
 
 export function FormInput({control, name, error, ...textInputProps}){

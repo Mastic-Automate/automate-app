@@ -14,14 +14,19 @@ import { appImages } from '../../global/images'
 
 function AccountSettings() {
     const {signOut, user} = useAuth()
+
     return (
         <Container>
             <Title>Perfil</Title>
             <ProfilePicture 
                 source={appImages['profile_placeholder']}
             />
-            <UserNameText>{user.userName}</UserNameText>
-            <EmailText>{user.userEmail}</EmailText>
+            {!!user && (
+                <>
+                    <UserNameText>{user.userName}</UserNameText>
+                    <EmailText>{user.userEmail}</EmailText>
+                </>
+            )}
 
             <TilesContainer>
                 <Button text="Logout" negative onPress={signOut} />

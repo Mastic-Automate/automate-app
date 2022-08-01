@@ -43,8 +43,12 @@ export function Config({navigation}){
                         source={appImages['profile_placeholder']}
                     />
                     <AccountSectionInfoCol1>
-                        <AccountUserName>{user.userName}</AccountUserName>
-                        <AccountUserEmail>{user.userEmail}</AccountUserEmail>
+                        {!!user && (
+                            <>
+                                <AccountUserName>{user.userName}</AccountUserName>
+                                <AccountUserEmail>{user.userEmail}</AccountUserEmail>
+                            </>
+                        )}
                     </AccountSectionInfoCol1>
                 </AccountSection>
                 <MessageContainer>
