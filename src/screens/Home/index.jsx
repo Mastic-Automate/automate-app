@@ -55,6 +55,7 @@ export function Home(){
                         return (
                             <InfoPlantCard 
                                 {...item}
+                                image={appImages['plant1']}
                             />
                         )
                     }}

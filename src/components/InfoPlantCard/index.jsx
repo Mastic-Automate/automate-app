@@ -14,6 +14,10 @@ const ImageContainer = styled.View`
     height: 100%;
     width: 150px;
 `
+const Image = styled.Image`
+    width: 100%;
+    height: 100%;
+`
 const ContentContainer = styled.View`
     flex:1;
     justify-content:space-between ;
@@ -42,11 +46,13 @@ const ViewButtonText = styled.Text`
     font-weight: bold;
 `
 
-export function InfoPlantCard({title, description}){
+export function InfoPlantCard({title, description, image}){
     return (
         <Container>
             <ImageContainer>
-
+                <Image 
+                    source={image}
+                />
             </ImageContainer>
             <ContentContainer>
                 <Title>
