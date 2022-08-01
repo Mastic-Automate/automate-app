@@ -36,11 +36,13 @@ export function Home(){
                 </PlantsSectionTitle>
                 <FlatList 
                     data={[{variant:'yellow', title:'Amarelo'}, {variant:'red', title:'Vermelho'}, {variant:'blue', title:'Azul'}]}
+                    style={{paddingTop:20}}
                     horizontal
                     renderItem={({item}) => {
                         return (
                             <Plant 
                                 {...item}
+                                image={appImages['plant1']}
                             />
                         )
                     }}

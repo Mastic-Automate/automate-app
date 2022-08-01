@@ -15,22 +15,40 @@ const Title = styled.Text`
 `
 const Container = styled.TouchableOpacity`
     margin:4px;
+    height: 200px;
+    width:130px;
+    justify-content: flex-end;
+`
+const PlantPicture = styled.Image`
+    width:150px;
+    height:150px;
+    position:absolute;
+    top:0px;
+    right: -20px;
 `
 
 const styles = StyleSheet.create({
     gradient: {
-        width: 135,
-        height: 160,
+        width: '100%',
+        height: '100%',
+        maxHeight: 160,
         borderRadius: 16,
         overflow: 'hidden',
-        alignItems:'center'
+        alignItems:'center',
+        position:'relative',
+        justifyContent:'flex-end',
+        zIndex:-1,
+        paddingBottom:20
     }
 })
 
-export function Plant({variant, title, ...containerProps}){
+export function Plant({variant, image, title, ...containerProps}){
     const gradient = gradientsByVariants[variant]
     return (
         <Container {...containerProps}>
+            <PlantPicture 
+                source={image}
+            />
             <LinearGradient style={styles.gradient} colors={gradient}>
                 <Title>{title}</Title>
             </LinearGradient>

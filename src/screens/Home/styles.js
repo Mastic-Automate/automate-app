@@ -32,6 +32,7 @@ const TopPlantImage = styled.Image`
 const PlantsSection = styled.ScrollView`
     background-color: ${props => props.theme.background2};
     flex:1;
+    padding-top:15px ;
 `
 const PlantsSectionTitle = styled.Text`
     font-weight:bold;
