@@ -1,42 +1,33 @@
 import { FlatList } from 'react-native'
-import styled from 'styled-components/native'
 import { Plant } from '../../components/Plant'
 import {InfoPlantCard} from '../../components/InfoPlantCard'
 
-const Container = styled.View`
-    background-color: ${props => props.theme.background1};
-    flex: 1;
-    padding-top: 20px;
-`
-const Title = styled.Text`
-    color: ${props => props.theme.title};
-    font-size:30px;
-    font-weight: bold;
-    width: 50%;
-    margin-left:34px;
-    margin-right:34px;
-`
+import {
+    Container, 
+    PlantsSection, 
+    PlantsSectionTitle, 
+    Title, 
+    TopSection, 
+    TopPlantImage,
+    TopSectionCol1,
+    TopSectionCol2
+} from './styles'
 
-const TopSection = styled.View`
-    height: 225px;
-    background-color: ${props => props.theme.background1};
-`
-
-const PlantsSection = styled.ScrollView`
-    background-color: ${props => props.theme.background2};
-    flex:1;
-`
-const PlantsSectionTitle = styled.Text`
-    font-weight:bold;
-    font-size:28px;
-    color: ${props => props.theme.title};
-`
+import {appImages} from '../../global/images'
 
 export function Home(){
     return (
         <Container>
             <TopSection>
-                <Title>A melhor rosa está no seu jardim!</Title>
+                <TopSectionCol1>
+                    <Title>A melhor rosa está no seu jardim!</Title>
+                </TopSectionCol1>
+                <TopSectionCol2>
+                    <TopPlantImage 
+                        source={appImages['plant1']}
+                    />
+                </TopSectionCol2>
+
             </TopSection>
             
             <PlantsSection>
