@@ -14,8 +14,11 @@ import {
 } from './styles'
 
 import {appImages} from '../../global/images'
+import { pickRandomPlants, plants } from '../../global/plants'
+import { useMemo } from 'react'
 
 export function Home(){
+    const randomPlants = useMemo(() => pickRandomPlants(3), [])
     return (
         <Container>
             <TopSection>
@@ -50,14 +53,16 @@ export function Home(){
                     keyExtractor={(data)=> data.title}
                     showsHorizontalScrollIndicator={false}
                 />
-                <View style={{marginTop: 10}}>
-                    {[{title:'Título', description:'Descrição'}, {title:'Título2', description:'Descrição'}].map(item => {
+                <View style={{marginVertical: 10}}>
+                    {randomPlants.map(plant => {
                         return (
                             <InfoPlantCard 
-                                {...item}
-                                image={appImages['plant1']}
+                                image={plant.image}
+                                description={plant.description}
                                 style={{marginBottom:5}}
-                                key={item.title}
+                                key={plant.id}
+                                title={plant.name}
+                                id={plant.id}
                             />
                         )
                     })}

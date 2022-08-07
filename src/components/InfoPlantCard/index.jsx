@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import styled from 'styled-components/native'
 
 const Container = styled.View`
@@ -46,7 +47,8 @@ const ViewButtonText = styled.Text`
     font-weight: bold;
 `
 
-export function InfoPlantCard({title, description, image, style}){
+export function InfoPlantCard({title, description, image, style, id}){
+    const navigation = useNavigation()
     return (
         <Container style={style}>
             <ImageContainer>
@@ -61,7 +63,7 @@ export function InfoPlantCard({title, description, image, style}){
                 <Description>
                     {description}
                 </Description>
-                <ViewButton>
+                <ViewButton onPress={()=> navigation.navigate('plantInfo', {id:id})}>
                     <ViewButtonText>
                         Ver planta
                     </ViewButtonText>

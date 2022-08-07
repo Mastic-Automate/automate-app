@@ -14,22 +14,9 @@ import {
 import { PlantCard } from './PlantCard';
 import {UserPlantCard} from './UserPlantCard'
 
-import {appImages} from '../../global/images'
 
-const plants = [
-    {
-        text: 'Meus tomates',
-        id: '1'
-    },
-    {
-        text: 'Pimenta',
-        id: '2'
-    },
-    {
-        text: 'Coentro',
-        id: '3'
-    },
-]
+import {plants} from '../../global/plants' 
+import {appImages} from '../../global/images'
 
 export function Plants({ navigation }) {
     const { primary } = useTheme();
@@ -39,18 +26,17 @@ export function Plants({ navigation }) {
             <MainContent>
                 <Title>Todas as plantas</Title>
                 <SomePlantsContainer horizontal>
-                    {plants.map(plant => {
-                        return (
-                            <PlantCard 
-                                description="Descrição"
-                                id={plant.id}
-                                image={appImages['plant_corner']}
-                                name={plant.text}
-                                key={plant.id}
-                                style={{marginLeft:10}}
-                            />
-                        )
-                    })}
+                    {plants.map(plant => (
+                        <PlantCard 
+                            description={plant.description}
+                            id={plant.id}
+                            image={plant.image}
+                            name={plant.name}
+                            key={plant.id}
+                            style={{marginHorizontal:5}}
+                        />
+                    ))}
+                    
                 </SomePlantsContainer>
                 <UserPlantsTitle horizontal>
                     Suas plantas

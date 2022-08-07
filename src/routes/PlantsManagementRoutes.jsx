@@ -7,16 +7,13 @@ import {BluetoothConnection} from '../screens/BluetoothConnection'
 import {AddPlant} from '../screens/AddPlant'
 
 const Nav = createNativeStackNavigator()
-
+// São todas as rotas que estão relacionadas com as configurações de planta e conexão bluetooth
 export function PlantsManagementRoutes(){
-    const {primary} = useTheme()
     return (
-        <Nav.Navigator screenOptions={{headerShown:true, headerTransparent:true, headerTitle:'', headerTintColor:primary}}>
-            <Nav.Screen name="plants" component={Plants} />
+        <Nav.Navigator screenOptions={{headerShown:false}}>
             <Nav.Screen name="bluetooth-connection" component={BluetoothConnection} />
             <Nav.Screen name="add-plant" component={AddPlant} />
             <Nav.Screen name="edit-plant" component={EditPlant} />
-            <Nav.Screen name="info-plant" component={InfoPlant} />
         </Nav.Navigator>
     )
 }

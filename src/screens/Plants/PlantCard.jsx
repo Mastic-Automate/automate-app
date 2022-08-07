@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import styled from 'styled-components'
 
 const Container = styled.View`
@@ -46,6 +47,7 @@ const PlantViewButtonText = styled.Text`
 `
 
 export function PlantCard({name, id, description, image, style}){
+    const navigation = useNavigation()
     return (
         <Container style={style}>
             <ImageContainer>
@@ -60,7 +62,7 @@ export function PlantCard({name, id, description, image, style}){
                 <PlantDescriptionText>
                     {description}
                 </PlantDescriptionText>
-                <PlantViewButton>
+                <PlantViewButton onPress={()=> navigation.navigate('plantInfo', {id: id})}>
                     <PlantViewButtonText>
                         Detalhes
                     </PlantViewButtonText>

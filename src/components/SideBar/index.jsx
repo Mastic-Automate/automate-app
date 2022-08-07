@@ -45,7 +45,7 @@ export const SideBar = (props) => {
                 />
                 <SidebarItem
                     onPress={() => {
-                        props.navigation.navigate("plantsManagement");
+                        props.navigation.navigate("plants");
                     }}
                     text="Minhas plantas"
                     iconName="list"

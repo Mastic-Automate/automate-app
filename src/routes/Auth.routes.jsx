@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import { SideBar } from '../components/SideBar'
 import { useTheme } from 'styled-components'
 import {Ionicons} from '@expo/vector-icons'
+import { Plants } from '../screens/Plants'
+import { InfoPlant } from '../screens/InfoPlant'
 
 const Nav = createDrawerNavigator()
 
@@ -41,7 +43,9 @@ export function AuthRoutes({navigation}){
             drawerContent={SideBar} 
         >
             <Nav.Screen name="home" component={Home} options={defaultScreenOptions} />
+            <Nav.Screen name="plants" component={Plants} options={defaultScreenOptions} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{...defaultScreenOptions, headerTitle: 'Plantas'}} />
+            <Nav.Screen name="plantInfo" component={InfoPlant} options={defaultScreenOptions} />
             <Nav.Screen name="config" component={ConfigScreensRoutes} options={{...defaultScreenOptions, headerTitle:'Configurações'}} />
         </Nav.Navigator>
     )
