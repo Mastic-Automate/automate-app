@@ -1,16 +1,18 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {createDrawerNavigator} from '@react-navigation/drawer'
 
 import { Home } from '../screens/Home'
 import { PlantsManagementRoutes } from './PlantsManagementRoutes'
-import { BottomTabBar } from '../components/BottomTabBar'
 import {ConfigScreensRoutes} from './ConfigScreensRoutes'
 import {useAuth} from '../hooks/useAuth'
 import { useEffect } from 'react'
+import { SideBar } from '../components/SideBar'
+import { useTheme } from 'styled-components'
 
-const Nav = createBottomTabNavigator()
+const Nav = createDrawerNavigator()
 
 export function AuthRoutes({navigation}){
     const {user} = useAuth()
+    const theme = useTheme()
 
     useEffect(() => {
         if(user === null){
@@ -18,7 +20,15 @@ export function AuthRoutes({navigation}){
         }
     }, [user])
     return (
-        <Nav.Navigator screenOptions={{headerShown: false}} tabBar={props => <BottomTabBar {...props} />}>
+        <Nav.Navigator 
+            drawerContent={SideBar} 
+            screenOptions={{
+                headerTitle:'Automate',
+                headerTitleAlign:'center',
+                headerStyle:{backgroundColor:theme.background1},
+                headerTintColor:theme.text2
+            }}
+        >
             <Nav.Screen name="home" component={Home} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{title: 'Plantas'}} />
             <Nav.Screen name="config" component={ConfigScreensRoutes} />

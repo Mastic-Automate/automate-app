@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { Plant } from '../../components/Plant'
 import {InfoPlantCard} from '../../components/InfoPlantCard'
 
@@ -50,21 +50,18 @@ export function Home(){
                     keyExtractor={(data)=> data.title}
                     showsHorizontalScrollIndicator={false}
                 />
-                <FlatList 
-                    data={[{title:'Título', description:'Descrição'}, {title:'Título2', description:'Descrição'}]}
-                    renderItem={({item}) => {
+                <View style={{marginTop: 10}}>
+                    {[{title:'Título', description:'Descrição'}, {title:'Título2', description:'Descrição'}].map(item => {
                         return (
                             <InfoPlantCard 
                                 {...item}
                                 image={appImages['plant1']}
                                 style={{marginBottom:5}}
+                                key={item.title}
                             />
                         )
-                    }}
-                    keyExtractor={item => item.title}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{margin:10}}
-                />
+                    })}
+                </View>
             </PlantsSection>
         </Container>
     )
