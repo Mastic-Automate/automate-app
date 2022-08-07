@@ -15,14 +15,12 @@ export function AuthRoutes({navigation}){
     const {user} = useAuth()
     const theme = useTheme()
 
-    const defaultScreenOptions = useMemo(()=> {
-        return {
-            headerTitle:'Automate',
-            headerTitleAlign:'center',
-            headerStyle:{backgroundColor:theme.background1},
-            headerTintColor:theme.text2
-        }
-    }, [])
+    const defaultScreenOptions = {
+        headerTitle:'Automate',
+        headerTitleAlign:'center',
+        headerStyle:{backgroundColor:theme.background1},
+        headerTintColor:theme.text2
+    }
 
     useEffect(() => {
         if(user === null){

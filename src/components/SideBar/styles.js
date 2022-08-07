@@ -41,7 +41,7 @@ const BottomSection = styled.TouchableOpacity`
     padding-right:15px;
 `
 const BottomText = styled.Text`
-    color: ${props => props.theme.text2};
+    color: white;
     font-size: 24px;
     font-weight:bold;
 `
