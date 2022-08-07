@@ -33,7 +33,6 @@ export function Config({navigation}){
     return(
         <Container>
             <HeadingSection>
-                <Title>Configurações</Title>
                 <AccountSection
                     onPress={() => {
                         navigation.navigate('account')
