@@ -7,7 +7,7 @@ import { useAuth } from '../hooks/useAuth'
 import { useEffect } from 'react'
 import { SideBar } from '../components/SideBar'
 import { useTheme } from 'styled-components'
-import { useMemo } from 'react'
+import {Ionicons} from '@expo/vector-icons'
 
 const Nav = createDrawerNavigator()
 
@@ -19,7 +19,16 @@ export function AuthRoutes({navigation}){
         headerTitle:'Automate',
         headerTitleAlign:'center',
         headerStyle:{backgroundColor:theme.background1},
-        headerTintColor:theme.text2
+        headerTintColor:theme.text2,
+        headerRight: () => (
+            <Ionicons 
+                name="settings-outline"
+                color={theme.text2}
+                size={40}
+                onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
+                style={{margin:5}}
+            />
+        )
     }
 
     useEffect(() => {

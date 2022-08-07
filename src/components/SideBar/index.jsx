@@ -54,7 +54,7 @@ export const SideBar = (props) => {
                 />
             </MainSection>
             <BottomSection onPress={() => {
-                props.navigation.navigate('config')
+                props.navigation.navigate('config', {screen:'account'})
             }}>
                 <BottomText>
                     {user.userName}
