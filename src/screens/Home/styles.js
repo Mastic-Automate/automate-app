@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Container = styled.View`
+const Container = styled.ScrollView`
     background-color: ${props => props.theme.background1};
     flex: 1;
     padding-top: 20px;
@@ -29,7 +29,7 @@ const TopSectionCol2 = styled.View`
 const TopPlantImage = styled.Image`
 `
 
-const PlantsSection = styled.ScrollView`
+const PlantsSection = styled.View`
     background-color: ${props => props.theme.background2};
     flex:1;
     padding-top:15px ;

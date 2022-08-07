@@ -46,9 +46,9 @@ const ViewButtonText = styled.Text`
     font-weight: bold;
 `
 
-export function InfoPlantCard({title, description, image}){
+export function InfoPlantCard({title, description, image, style}){
     return (
-        <Container>
+        <Container style={style}>
             <ImageContainer>
                 <Image 
                     source={image}

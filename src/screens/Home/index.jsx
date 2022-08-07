@@ -51,12 +51,13 @@ export function Home(){
                     showsHorizontalScrollIndicator={false}
                 />
                 <FlatList 
-                    data={[{title:'Título', description:'Descrição'}]}
+                    data={[{title:'Título', description:'Descrição'}, {title:'Título2', description:'Descrição'}]}
                     renderItem={({item}) => {
                         return (
                             <InfoPlantCard 
                                 {...item}
                                 image={appImages['plant1']}
+                                style={{marginBottom:5}}
                             />
                         )
                     }}

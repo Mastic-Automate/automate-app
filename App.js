@@ -1,9 +1,8 @@
-import 'react-native-gesture-handler'
-
 import { NavigationContainer } from '@react-navigation/native'
 
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
+import {StatusBar} from './src/components/StatusBar'
 
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 import { AuthContextProvider } from './src/contexts/AuthContext'
@@ -24,6 +23,7 @@ export default function App() {
       <ThemeContextProvider>
         <MicrocontrollersContextProvider>
           <NavigationContainer>
+            <StatusBar />
             <RootRoutes />
           </NavigationContainer>
         </MicrocontrollersContextProvider>
