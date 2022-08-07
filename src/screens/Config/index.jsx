@@ -1,7 +1,5 @@
 import {Image} from 'react-native'
 
-import {MaterialCommunityIcons} from '@expo/vector-icons'
-
 import {ConfigTileSwitch, ConfigTileSection} from '../../components/ConfigTile'
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
@@ -9,7 +7,6 @@ import {appImages} from '../../global/images'
 
 import {
     Container, 
-    Title, 
     HeadingSection, 
     MainSection, 
     SectionTitle, 

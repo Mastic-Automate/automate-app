@@ -9,8 +9,7 @@ const HeadingSection = styled.View`
     width:100%;
     height:300px;
     background-color: ${props => props.theme.background1};
-    padding-left:8px;
-    padding-right:8px;
+    padding: 8px;
 `
 const Title = styled.Text`
     color: ${props => props.theme.title};
@@ -26,9 +25,9 @@ const AccountSection = styled.TouchableOpacity`
     margin-bottom: 10px;
 `
 const AccountImage = styled.Image`
-    width: 95px;
-    height: 95px;
-    border-radius: 47.5px;
+    width: 75px;
+    height: 75px;
+    border-radius: 37.5px;
 `
 const AccountSectionInfoCol1 = styled.View`
     flex:1;
