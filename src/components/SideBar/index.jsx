@@ -55,9 +55,11 @@ export const SideBar = (props) => {
             <BottomSection onPress={() => {
                 props.navigation.navigate('config', {screen:'account'})
             }}>
-                <BottomText>
-                    {user.userName}
-                </BottomText>
+                {!!user && (
+                    <BottomText>
+                        {user.userName}
+                    </BottomText>
+                )}
                 <BottomProfilePicture source={appImages['profile_placeholder']} />
             </BottomSection>
         </BarContainer>
