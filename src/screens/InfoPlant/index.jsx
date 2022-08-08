@@ -16,7 +16,8 @@ import {
     MidSectionCol1,
     MidSectionCol2,
     PlantImage,
-    Title
+    Title,
+    BottomSectionTitle
 } from './styles'
 import { getPlantInfo } from '../../global/plants';
 import { useMemo } from 'react';
@@ -51,6 +52,9 @@ function InfoPlant({route}){
                 </MidSectionCol2>
             </MidSection>
             <BottomSection>
+                <BottomSectionTitle>
+                    Sobre
+                </BottomSectionTitle>
                 <BottomText>
                     {plantInfo.description}
                 </BottomText>

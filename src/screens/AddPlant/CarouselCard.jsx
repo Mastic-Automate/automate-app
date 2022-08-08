@@ -12,16 +12,23 @@ const Name = styled.Text`
     font-size:24px;
     color: ${props => props.active? 'white' : props.theme.title};
 `
+const Subtitle = styled.Text`
+    font-size:16px;
+    color: ${props => props.theme.subtitle};
+`
 const Image = styled.Image`
     width:200px;
 `
 
-export function CarouselCard({name, img, active}){
+export function CarouselCard({name, sub, img, active}){
     return (
         <Container active={active}>
             <Name active={active}>
                 {name}
             </Name>
+            <Subtitle>
+                {sub}
+            </Subtitle>
             <Image 
                 source={img}
             />

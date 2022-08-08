@@ -9,7 +9,7 @@ const Container = styled.View`
 const Title = styled.Text`
     font-size: 48px;
     color: ${props => props.theme.title};
-    font-weight: bold;
+    font-family: SuperaGothic;
 `
 
 const HeaderSection = styled.View`
@@ -52,11 +52,17 @@ const PlantImage = styled.Image`
 const BottomSection = styled.View`
     width: 100%;
     height: 150px;
-    justify-content:space-between ;
+`
+const BottomSectionTitle = styled.Text`
+    font-size: 24px;
+    font-family: Montserrat_800ExtraBold;
+    color: ${props => props.theme.title};
 `
 const BottomText = styled.Text`
     color: ${props => props.theme.text2};
     font-size: 20px;
+    font-family: Montserrat_400Regular;
+    margin-top: 10px;
 `
 
 export {
@@ -70,5 +76,6 @@ export {
     MidSectionCol1,
     Title,
     MidSectionCol2,
-    PlantImage
+    PlantImage,
+    BottomSectionTitle
 }

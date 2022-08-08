@@ -21,8 +21,8 @@ const Container = styled.TouchableOpacity`
 
 const Text = styled.Text`
     color: ${props => props.outline ? props.theme.secondary2 : '#ffffff'};
-    font-weight: bold;
-    font-size: 20px;
+    font-family: ProximaNova;
+    font-size: 24px;
     flex:1;
     text-align: center;
 `

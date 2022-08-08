@@ -29,12 +29,13 @@ const HeadingSection = styled.View`
 
 const Title = styled.Text`
     font-size: 36px;
-    font-weight:bold;
+    font-family: ProximaNova;
     color: ${props => props.theme.primary};
 `
 const Subtitle = styled.Text`
     color: ${props => props.theme.primary};
     font-size: 24px;
+    font-family: ProximaNova;
 `
 
 const BottomText = styled.Text`
@@ -51,9 +52,8 @@ const BottomLink = styled.TouchableOpacity`
 const BottomLinkText = styled.Text`
     text-align:center;
     color: ${props => props.theme.primary};
-    font-weight: bold;
     font-size: 20px;
-    font-family: Poppins;
+    font-family: Poppins700;
     width: 100%;
 `
 

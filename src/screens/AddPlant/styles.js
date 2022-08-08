@@ -13,6 +13,7 @@ const Title = styled.Text`
     width:100%;
     text-align:center;
     margin-top: 30px;
+    font-family:Poppins;
 `
 
 const InputsContainer = styled.View`
@@ -29,9 +30,10 @@ const DetailSection = styled.View`
 `
 const DetailSectionTitle = styled.Text`
     font-size:20px;
-    font-weight:bold;
+    font-family:Poppins700;
     width:100%;
     text-align:center;
+    color: ${props => props.theme.title};
 `
 const DetailRowLabel = styled.Text`
     color: ${props => props.theme.title};

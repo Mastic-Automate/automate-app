@@ -24,6 +24,7 @@ const defaultModels = [
         name:'tomate',
         enviroment:'interno',
         luminosity: 5,
+        sub:'Fácil de cuidar',
         time: '2 a 4 semanas',
         img: appImages['plant_corner']
     },
@@ -31,6 +32,7 @@ const defaultModels = [
         name:'alface',
         enviroment:'externo',
         luminosity: 5,
+        sub:'Fácil de cuidar',
         time: '2 a 10 semanas',
         img: appImages['plant_corner']
     }
@@ -65,6 +67,7 @@ function AddPlant(){
                                 active={currentModelIndex === index}
                                 img={item.img}
                                 key={index}
+                                sub={item.sub}
                             />
                         )
                     }}
