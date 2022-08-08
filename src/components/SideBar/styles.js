@@ -43,7 +43,7 @@ const BottomSection = styled.TouchableOpacity`
 const BottomText = styled.Text`
     color: white;
     font-size: 24px;
-    font-weight:bold;
+    font-family: MusticaPro;
 `
 const BottomProfilePicture = styled.Image`
     width: 60px;
@@ -54,8 +54,8 @@ const BottomProfilePicture = styled.Image`
 const ItemText = styled.Text`
     color:${props => props.isFocused? '#5E6C83' : 'white'};
     font-size: 20px;
-    ${props => props.isFocused&& 'font-weight:bold'};
     margin-left: 12px;
+    font-family: ${props => props.isFocused? 'Montserrat_700Bold' : 'Montserrat_500Medium'};
 `
 
 export {

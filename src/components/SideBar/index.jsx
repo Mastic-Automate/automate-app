@@ -33,7 +33,6 @@ export const SideBar = (props) => {
                 />
             </TopSection>
             <MainSection>
-
                 <SidebarItem
                     onPress={() => {
                         props.navigation.navigate("home");

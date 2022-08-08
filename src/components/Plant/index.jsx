@@ -11,15 +11,16 @@ const gradientsByVariants = {
 const Title = styled.Text`
     color:#ffffff;
     font-size:18px;
-    font-weight:bold;
     width:100%;
     padding-left:10px;
+    font-family: MusticaPro;
 `
 const Subtitle = styled.Text`
     color: #ffffff;
     font-size: 14px;
     width:100%;
     padding-left:10px;
+    font-family: MusticaPro;
 `
 const Container = styled.TouchableOpacity`
     margin:4px;

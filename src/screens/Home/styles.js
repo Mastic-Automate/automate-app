@@ -8,7 +8,7 @@ const Container = styled.ScrollView`
 const Title = styled.Text`
     color: ${props => props.theme.title};
     font-size:30px;
-    font-weight: bold;
+    font-family: Montserrat_900Black;
 `
 
 const TopSection = styled.View`
@@ -35,9 +35,15 @@ const PlantsSection = styled.View`
     padding-top:15px ;
 `
 const PlantsSectionTitle = styled.Text`
-    font-weight:bold;
     font-size:28px;
     color: ${props => props.theme.title};
+    font-family: SuperaGothic;
+    margin-left: 20px;
+`
+
+const RandomPlantsSection = styled.View`
+    margin-top: 30px;
+    margin-bottom: 10px;
 `
 
 export {
@@ -48,5 +54,6 @@ export {
     TopSection,
     TopPlantImage,
     TopSectionCol1,
-    TopSectionCol2
+    TopSectionCol2,
+    RandomPlantsSection
 }

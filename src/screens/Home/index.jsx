@@ -10,11 +10,12 @@ import {
     TopSection, 
     TopPlantImage,
     TopSectionCol1,
-    TopSectionCol2
+    TopSectionCol2,
+    RandomPlantsSection
 } from './styles'
 
 import {appImages} from '../../global/images'
-import { pickRandomPlants, plants } from '../../global/plants'
+import { pickRandomPlants } from '../../global/plants'
 import { useMemo } from 'react'
 
 export function Home(){
@@ -53,7 +54,7 @@ export function Home(){
                     keyExtractor={(data)=> data.title}
                     showsHorizontalScrollIndicator={false}
                 />
-                <View style={{marginVertical: 10}}>
+                <RandomPlantsSection>
                     {randomPlants.map(plant => {
                         return (
                             <InfoPlantCard 
@@ -66,7 +67,7 @@ export function Home(){
                             />
                         )
                     })}
-                </View>
+                </RandomPlantsSection>
             </PlantsSection>
         </Container>
     )

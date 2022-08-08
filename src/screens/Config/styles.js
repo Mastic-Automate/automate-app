@@ -36,7 +36,7 @@ const AccountSectionInfoCol1 = styled.View`
 `
 const AccountUserName = styled.Text`
     color: ${props => props.theme.title};
-    font-weight: bold;
+    font-family: ProximaNova;
     font-size: 24px;
 `
 const AccountUserEmail = styled.Text`
@@ -64,6 +64,7 @@ const MessageContainerCol2 = styled.View`
 const MessageContainerText = styled.Text`
     color: #ffffff;
     font-size:18px;
+    font-family: Montserrat_400Regular;
 `
 
 const MainSection = styled.View`
@@ -76,8 +77,8 @@ const MainSection = styled.View`
 `
 const SectionTitle = styled.Text`
     font-size:24px;
-    font-weight:bold;
     color: ${props => props.theme.title};
+    font-family: Montserrat_600SemiBold;
 `
 
 export {

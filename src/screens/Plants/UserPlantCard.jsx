@@ -27,12 +27,13 @@ const InfoContainer = styled.View`
 `
 const PlantNameText = styled.Text`
     color: ${props => props.theme.title};
-    font-weight:bold;
     font-size: 24px;
+    font-family: SuperaGothic;
 `
 const PlantDescriptionText = styled.Text`
     font-size: 20px;
     color: ${props => props.theme.text1};
+    font-family: Montserrat_500Medium;
 `
 
 export function UserPlantCard({name, description, image, id, style}) {

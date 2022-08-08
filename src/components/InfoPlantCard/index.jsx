@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 
 const Container = styled.View`
     width:100%;
-    height: 130px;
+    min-height: 130px;
     background-color:${props => props.theme.cardColor};
     flex-direction:row;
     border-radius: 8px;
@@ -12,7 +12,7 @@ const Container = styled.View`
 `
 
 const ImageContainer = styled.View`
-    height: 100%;
+    height: 150px;
     width: 150px;
 `
 const Image = styled.Image`
@@ -21,16 +21,17 @@ const Image = styled.Image`
 `
 const ContentContainer = styled.View`
     flex:1;
-    justify-content:space-between ;
+    justify-content:space-between;
 `
 const Title = styled.Text`
     font-size:28px;
-    font-weight:bold;
+    font-family: Poppins700;
     color: ${props => props.theme.title};
 `
 const Description = styled.Text`
     font-size:12px;
     color: ${props => props.theme.text1};
+    font-family: Poppins;
 `
 const ViewButton = styled.TouchableOpacity`
     border-radius: 16px;
@@ -44,7 +45,12 @@ const ViewButton = styled.TouchableOpacity`
 const ViewButtonText = styled.Text`
     color: #ffffff;
     font-size: 15px;
-    font-weight: bold;
+    font-family: Poppins700;
+`
+const BottomView = styled.View`
+    flex-flow: row nowrap;
+    flex:1;
+    justify-content: space-between;
 `
 
 export function InfoPlantCard({title, description, image, style, id}){
@@ -60,14 +66,16 @@ export function InfoPlantCard({title, description, image, style, id}){
                 <Title>
                     {title}
                 </Title>
-                <Description>
-                    {description}
-                </Description>
-                <ViewButton onPress={()=> navigation.navigate('plantInfo', {id:id})}>
-                    <ViewButtonText>
-                        Ver planta
-                    </ViewButtonText>
-                </ViewButton>
+                <BottomView>
+                    <Description>
+                        {description}
+                    </Description>
+                    <ViewButton onPress={()=> navigation.navigate('plantInfo', {id:id})}>
+                        <ViewButtonText>
+                            Ver planta
+                        </ViewButtonText>
+                    </ViewButton>
+                </BottomView>
             </ContentContainer>
 
         </Container>

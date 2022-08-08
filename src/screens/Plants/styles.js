@@ -17,6 +17,7 @@ const Title = styled.Text`
     font-size:30px;
     width: 100%;
     text-align:center;
+    font-family: SuperaGothic;
 `
 const SomePlantsContainer = styled.ScrollView`
 `

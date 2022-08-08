@@ -16,6 +16,7 @@ const Container = styled.View`
 const TileText = styled.Text`
     font-size: 20px;
     color: ${props => props.theme.secondary1};
+    font-family: Montserrat_600SemiBold;
 `
 
 export function ConfigTileSwitch({text, iconType:Icon, iconName, onChange, value, style}){

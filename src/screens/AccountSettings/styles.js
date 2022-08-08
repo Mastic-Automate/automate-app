@@ -27,7 +27,7 @@ const ProfilePicture = styled.Image`
 `
 const UserNameText = styled.Text`
     color: ${props => props.theme.title};
-    font-weight:bold;
+    font-family:ProximaNova;
     font-size:32px;
 `
 const EmailText = styled.Text`

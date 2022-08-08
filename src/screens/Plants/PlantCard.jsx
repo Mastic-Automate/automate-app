@@ -22,16 +22,17 @@ const Image = styled.Image`
 `
 const InfoContainer = styled.View`
     flex:1;
-    justify-content:space-between ;
+    justify-content:space-between;
 `
 const PlantNameText = styled.Text`
     color: ${props => props.theme.darkBlue};
     font-size: 28px;
-    font-weight:bold;
+    font-family: ProximaNova;
 `
 const PlantDescriptionText = styled.Text`
     color: ${props => props.theme.text1};
     font-size:18px;
+    font-family: Montserrat_500Medium;
 `
 const PlantViewButton = styled.TouchableOpacity`
     background-color: ${props => props.theme.lightBlue};
@@ -43,7 +44,7 @@ const PlantViewButton = styled.TouchableOpacity`
 const PlantViewButtonText = styled.Text`
     color: ${props => props.theme.darkBlue};
     font-size: 18px;
-    font-weight:bold;
+    font-family: ProximaNova;
 `
 
 export function PlantCard({name, id, description, image, style}){
