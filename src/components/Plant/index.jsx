@@ -29,10 +29,10 @@ const Container = styled.TouchableOpacity`
     justify-content: flex-end;
 `
 const PlantPicture = styled.Image`
-    width:150px;
-    height:150px;
+    width:140px;
+    height:140px;
     position:absolute;
-    top:0px;
+    top:10px;
     right: -20px;
 `
 

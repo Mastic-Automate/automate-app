@@ -15,6 +15,7 @@ const TopSection = styled.View`
     height: 225px;
     background-color: ${props => props.theme.background1};
     flex-flow: row nowrap;
+    position:relative;
 `
 const TopSectionCol1 = styled.View`
     flex:1;
@@ -32,7 +33,8 @@ const TopPlantImage = styled.Image`
 const PlantsSection = styled.View`
     background-color: ${props => props.theme.background2};
     flex:1;
-    padding-top:15px ;
+    padding-top:40px;
+    position:relative;
 `
 const PlantsSectionTitle = styled.Text`
     font-size:28px;
