@@ -1,59 +1,88 @@
 import styled from 'styled-components/native'
 
-const Container = styled.SafeAreaView`
-    padding:10px;
-    background-color: ${props => props.theme.background};
-    align-items:center;
-    justify-content: space-around;
-    flex:1;
-`
-const Content = styled.ScrollView`
-    flex:1;
-    width:100%; 
+const Container = styled.ScrollView`
     height: 100%;
+    position: relative;
 `
-const Title = styled.Text`
-    font-size:30px;
-    color: ${props => props.theme.title};
+const BackgroundImage = styled.ImageBackground`
     width:100%;
-    text-align:center;
-`
-
-const Inputs = styled.View`
-    width:100%;
-`
-
-const BottomInfo = styled.View`
+    height:100%;
     align-items: center;
+    justify-content:flex-end;
 `
+
+const Menu = styled.SafeAreaView`
+    background-color: ${props => props.theme.background3};
+    border-top-left-radius:40px;
+    border-top-right-radius:40px;
+    width:100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    height: 82%;
+    justify-content:space-between;
+    flex:1;
+`
+
+const HeadingSection = styled.View`
+    width:100%;
+`
+
+const Title = styled.Text`
+    font-size: 36px;
+    font-family: ProximaNova;
+    color: ${props => props.theme.title};
+`
+const Subtitle = styled.Text`
+    color: ${props => props.theme.text1};
+    font-size: 16px;
+    font-family: ProximaNova;
+`
+
 const BottomText = styled.Text`
-    font-size: 20px;
     color: ${props => props.theme.secondary1};
+    font-size: 18px;
+    width: 100%;
+    text-align:center;
+    font-family: Poppins700;
 `
 
-const LoginLink = styled.TouchableOpacity`
+const BottomLink = styled.TouchableOpacity`
+    width: 50%;
 `
-const LoginLinkText = styled.Text`
-    color: ${props => props.theme.primary};
+const BottomLinkText = styled.Text`
+    text-align:center;
+    color: ${props => props.theme.title};
     font-size: 20px;
-    font-weight: bold;
-    font-family: Poppins;
+    font-family: Poppins700;
+    width: 100%;
 `
 
+const InputsView = styled.View`
+    width: 100%;
+`
+
+const BottomView = styled.View`
+    align-items:center;
+`
 const ErrorText = styled.Text`
     color: ${props => props.theme.error};
-    width:100%;
+    width: 100%;
     text-align:center;
 `
 
-export { 
-    Container,
-    Content, 
-    BottomInfo, 
+export {
+    BottomLink, 
+    BottomLinkText, 
     BottomText, 
-    Inputs, 
-    LoginLink, 
-    LoginLinkText, 
+    BottomView, 
+    Container, 
+    InputsView, 
     Title,
-    ErrorText
+    ErrorText,
+    Menu,
+    Subtitle,
+    HeadingSection,
+    BackgroundImage
 }

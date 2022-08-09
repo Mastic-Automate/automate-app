@@ -1,58 +1,74 @@
-import styled from 'styled-components/native'
+import { FlatList, View } from 'react-native'
+import { Plant } from '../../components/Plant'
+import {InfoPlantCard} from '../../components/InfoPlantCard'
 
-import {Ionicons, MaterialIcons} from '@expo/vector-icons'
+import {
+    Container, 
+    PlantsSection, 
+    PlantsSectionTitle, 
+    Title, 
+    TopSection, 
+    TopPlantImage,
+    TopSectionCol1,
+    TopSectionCol2,
+    RandomPlantsSection
+} from './styles'
 
-import Card from '../../components/Card';
-
-const Container = styled.View`
-    background-color: ${props => props.theme.background};
-    flex: 1;
-    align-items:center;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 20px;
-`
-const Title = styled.Text`
-    color: ${props => props.theme.title};
-    font-size:30px;
-`
-
-const SubTitle = styled.Text`
-    color: ${props => props.theme.subtitle};
-    font-size: 20px;
-    width: 100%;
-    margin-top: 40px;
-`
-
-const CardsContainer = styled.View`
-    margin-top: 75px;
-`
+import {appImages} from '../../global/images'
+import { pickRandomPlants } from '../../global/plants'
+import { useMemo } from 'react'
 
 export function Home(){
+    const randomPlants = useMemo(() => pickRandomPlants(3), [])
     return (
         <Container>
-            <Title>Bem vindo(a)</Title>
-            <SubTitle>Como estão suas plantas?</SubTitle>
-            <CardsContainer>
-                <Card 
-                    text="Assista a conteúdos disponibilizados por profissionais na plataforma" 
-                    iconName="play-circle-outline"
-                    iconType={Ionicons}
-                    style={{marginTop:10}}
+            <TopSection>
+                <TopSectionCol1>
+                    <Title>A melhor rosa está no seu jardim!</Title>
+                </TopSectionCol1>
+                <TopSectionCol2>
+                    <TopPlantImage 
+                        source={appImages['plant1']}
+                    />
+                </TopSectionCol2>
+
+            </TopSection>
+            
+            <PlantsSection>
+                <PlantsSectionTitle>
+                    Plantas recentes
+                </PlantsSectionTitle>
+                <FlatList 
+                    data={[{variant:'yellow', title:'Amarelo'}, {variant:'red', title:'Vermelho'}, {variant:'blue', title:'Azul'}]}
+                    style={{paddingTop:20}}
+                    horizontal
+                    renderItem={({item}) => {
+                        return (
+                            <Plant 
+                                {...item}
+                                image={appImages['plant1']}
+                                subtitle="Sub"
+                            />
+                        )
+                    }}
+                    keyExtractor={(data)=> data.title}
+                    showsHorizontalScrollIndicator={false}
                 />
-                <Card 
-                    text="Adicione mais uma planta à coleção" 
-                    iconName="add-circle-outline"
-                    iconType={MaterialIcons}
-                    style={{marginTop:10}}
-                />
-                <Card 
-                    text="Gere relatório de cuidado de uma planta de sua coleção" 
-                    iconName="info-outline" 
-                    iconType={MaterialIcons}
-                    style={{marginTop:10}}
-                />
-            </CardsContainer>
+                <RandomPlantsSection>
+                    {randomPlants.map(plant => {
+                        return (
+                            <InfoPlantCard 
+                                image={plant.image}
+                                description={plant.description}
+                                style={{marginBottom:15}}
+                                key={plant.id}
+                                title={plant.name}
+                                id={plant.id}
+                            />
+                        )
+                    })}
+                </RandomPlantsSection>
+            </PlantsSection>
         </Container>
     )
 }

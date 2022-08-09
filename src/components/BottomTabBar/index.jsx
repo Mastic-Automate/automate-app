@@ -22,7 +22,6 @@ const iconByRouteName = {
     'home': (iconProps) => <Material name="home" {...iconProps} />,
     'plantsManagement': (iconProps) => <MaterialIcons name="dashboard" {...iconProps} />,
     'config':(iconProps) => <Material name="cog" {...iconProps} />,
-    'videos':(iconProps) => <Material name="play-circle-outline" {...iconProps} />
 }
 
 export function BottomTabBar({state, navigation}){

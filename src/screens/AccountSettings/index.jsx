@@ -1,34 +1,32 @@
-import styled from 'styled-components/native'
-
 import {useAuth} from '../../hooks/useAuth'
 
 import { Button } from '../../components/Button'
 
-const Container = styled.View`
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color:${props => props.theme.background};
-    flex:1;
-`
-
-const Title = styled.Text`
-    color: ${props => props.theme.title};
-    font-size: 30px;
-    width: 100%;
-    text-align:center;
-    margin-top: 75px;
-`
-
-const TilesContainer = styled.ScrollView`
-    margin-top: 80px;
-    width: 100%;
-`
+import {
+    Container, 
+    TilesContainer, 
+    Title, 
+    ProfilePicture,
+    UserNameText,
+    EmailText
+} from './styles'
+import { appImages } from '../../global/images'
 
 function AccountSettings() {
-    const {signOut} = useAuth()
+    const {signOut, user} = useAuth()
+
     return (
         <Container>
-            <Title>Configurações de conta</Title>
+            <Title>Perfil</Title>
+            <ProfilePicture 
+                source={appImages['profile_placeholder']}
+            />
+            {!!user && (
+                <>
+                    <UserNameText>{user.userName}</UserNameText>
+                    <EmailText>{user.userEmail}</EmailText>
+                </>
+            )}
 
             <TilesContainer>
                 <Button text="Logout" negative onPress={signOut} />

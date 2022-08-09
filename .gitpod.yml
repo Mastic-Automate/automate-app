@@ -1,7 +1,7 @@
 tasks:
   - before: npm i -g expo-cli
   - init: yarn install
-    command: yarn run start
+    command: yarn devgo
 
 ports:
   - port: 19006

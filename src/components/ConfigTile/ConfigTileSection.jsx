@@ -14,6 +14,7 @@ const Container = styled.TouchableOpacity`
 const TileText = styled.Text`
     font-size: 20px;
     color: ${props => props.theme.secondary1};
+    font-family: Montserrat_600SemiBold;
 `
 
 function ConfigTileSection({ text, iconName, iconType: Icon, onPress, style }) {

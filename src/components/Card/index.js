@@ -102,7 +102,6 @@ const AnimCardSlideInDown = (props) => {
 
 const styles = StyleSheet.create({
   icon: {
-    alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
     justifyContent: 'center',

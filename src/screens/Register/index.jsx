@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
 import { useForm } from 'react-hook-form'
-
+import {Image} from 'react-native'
 import { FormInput as Input } from '../../components/FormInput'
 import { Button } from '../../components/Button'
 
@@ -11,17 +11,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import {useAuth} from '../../hooks/useAuth'
 
 import { 
-    BottomInfo, 
-    BottomText, 
-    Container, 
-    Content, 
-    Inputs, 
-    LoginLink, 
-    LoginLinkText, 
-    Title,
-    ErrorText
+    BackgroundImage,
+    BottomLink,
+    BottomLinkText,
+    BottomText,
+    BottomView,
+    Container,
+    ErrorText,
+    HeadingSection,
+    InputsView,
+    Menu,
+    Subtitle,
+    Title
 } from './styles'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const schema = yup.object({
     email: yup.string().required("Email é obrigatório").email("Email inválido"),
@@ -48,72 +51,72 @@ export function Register({ navigation }) {
     }
     return (
         <Container>
-            <Content>
+            <BackgroundImage source={require('../../assets/background1.png')}>
+                <Image 
+                    source={require('../../assets/logo_automate.png')}
+                    style={{width:150, height:150}} 
+                />
+                <Menu>
+                    <HeadingSection>
+                        <Title>Cadastrar</Title>
+                        <Subtitle>Venha participar do melhor projeto de agricultura urbana!</Subtitle>
+                    </HeadingSection>
+                    <InputsView>
+                        <Input
+                            name="email"
+                            control={control}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            placeholder="Email"
+                            error={errors.email}
+                            keyboardType="email-address"
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                        />
+                        <Input
+                            name="name"
+                            control={control}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            placeholder="Nome"
+                            error={errors.name}
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                        />
+                        <Input
+                            name="password"
+                            control={control}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            placeholder="Senha"
+                            error={errors.password}
+                            secureTextEntry
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                        />
+                        <Input
+                            name="password-confirm"
+                            control={control}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            placeholder="Confirmar senha"
+                            error={errors['password-confirm']}
+                            secureTextEntry
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                        />
+                        <Button
+                            text="Cadastrar"
+                            style={{ marginTop: 10 }}
+                            onPress={handleSubmit(handleUserRegister)}
+                        />
+                        <ErrorText>{bottomError}</ErrorText>
 
-                <Title>Cadastrar</Title>
-                <Inputs>
-                    <Input
-                        name="email"
-                        control={control}
-                        iconName="email-outline"
-                        iconType={MaterialCommunityIcons}
-                        style={{ marginTop: 10 }}
-                        placeholder="Email"
-                        error={errors.email}
-                        keyboardType="email-address"
-                        autoCorrect={false}
-                        autoCapitalize="none"
-                    />
-                    <Input
-                        name="name"
-                        control={control}
-                        iconName="account-circle-outline"
-                        iconType={MaterialCommunityIcons}
-                        style={{ marginTop: 10 }}
-                        placeholder="Nome"
-                        error={errors.name}
-                        autoCorrect={false}
-                        autoCapitalize="none"
-                    />
-                    <Input
-                        name="password"
-                        control={control}
-                        iconName="lock-outline"
-                        iconType={MaterialIcons}
-                        style={{ marginTop: 10 }}
-                        placeholder="Senha"
-                        error={errors.password}
-                        secureTextEntry
-                        autoCorrect={false}
-                        autoCapitalize="none"
-                    />
-                    <Input
-                        name="password-confirm"
-                        control={control}
-                        iconName="lock-outline"
-                        iconType={MaterialIcons}
-                        style={{ marginTop: 10 }}
-                        placeholder="Confirmar senha"
-                        error={errors['password-confirm']}
-                        secureTextEntry
-                        autoCorrect={false}
-                        autoCapitalize="none"
-                    />
-                    <Button
-                        text="Cadastrar"
-                        style={{ marginTop: 10 }}
-                        onPress={handleSubmit(handleUserRegister)}
-                    />
-                    <ErrorText>{bottomError}</ErrorText>
-
-                </Inputs>
-            </Content>
-            <BottomInfo>
-                <BottomText>Já possui uma conta?</BottomText>
-                <LoginLink onPress={() => navigation.replace('login')}>
-                    <LoginLinkText>Login</LoginLinkText>
-                </LoginLink>
-            </BottomInfo>
+                    </InputsView>
+                    <BottomView>
+                        <BottomText>Já possui uma conta?</BottomText>
+                        <BottomLink onPress={() => navigation.replace('login')}>
+                            <BottomLinkText>Login</BottomLinkText>
+                        </BottomLink>
+                    </BottomView>
+                </Menu>
+            </BackgroundImage>
         </Container>
     )
 }

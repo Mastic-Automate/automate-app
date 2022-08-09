@@ -1,39 +1,64 @@
 import { Text } from 'react-native'
 import styled from 'styled-components/native'
 
-import { Button } from '../../components/Button'
-import {InfoPlantTile} from '../../components/InfoPlantTile'
+import { Feather, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
-const Container = styled.View`
-    flex:1;
-    justify-content:space-around;
-    background-color:${props => props.theme.background};
-    padding:10px;
-`
+import { useTheme } from 'styled-components';
 
-const Title = styled.Text`
-    font-size: 30px;
-    color: ${props => props.theme.title};
-    width:100%;
-    text-align:center;
-`
-const InfoTilesContainer = styled.View`
-    flex:1;
-    width:100%;
-    margin-top: 30px;
-`
+import {
+    BottomSection,
+    BottomText,
+    Container,
+    HeaderSection,
+    InfoSquare,
+    InfoSquareText,
+    MidSection,
+    MidSectionCol1,
+    MidSectionCol2,
+    PlantImage,
+    Title,
+    BottomSectionTitle
+} from './styles'
+import { getPlantInfo } from '../../global/plants';
+import { useMemo } from 'react';
 
-function InfoPlant(){
+function InfoPlant({route}){
+    const themeColors = useTheme()
+    const plantInfo = useMemo(() => getPlantInfo(route.params.id), [route.params.id])
     return (
         <Container>
-            <Title>Informações da planta</Title>
-            <InfoTilesContainer>
-                <InfoPlantTile 
-                    text="Umidade do solo"
-                    value="20%"
-                />
-            </InfoTilesContainer>
-            <Button text="Salvar relatório na nuvem" />
+            <HeaderSection>
+                <Title style={{marginTop: 12}}>{plantInfo.name}</Title>
+            </HeaderSection>
+            <MidSection>
+                <MidSectionCol1>
+                    <InfoSquare>
+                        <Feather name="sun" color={themeColors.blue} size={52} />
+                        <InfoSquareText>100%</InfoSquareText>
+                    </InfoSquare>
+                    <InfoSquare>
+                        <Ionicons name="water-outline" color={themeColors.blue} size={52} />
+                        <InfoSquareText>100%</InfoSquareText>
+                    </InfoSquare>
+                    <InfoSquare>
+                        <FontAwesome5 name="temperature-high" color={themeColors.blue} size={52} />
+                        <InfoSquareText>100%</InfoSquareText>
+                    </InfoSquare>
+                </MidSectionCol1>
+                <MidSectionCol2>
+                    <PlantImage 
+                        source={plantInfo.image}
+                    />
+                </MidSectionCol2>
+            </MidSection>
+            <BottomSection>
+                <BottomSectionTitle>
+                    Sobre
+                </BottomSectionTitle>
+                <BottomText>
+                    {plantInfo.description}
+                </BottomText>
+            </BottomSection>
         </Container>
     )
 }

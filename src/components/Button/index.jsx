@@ -13,16 +13,16 @@ function getButtonBackgroundColor(props) {
 const Container = styled.TouchableOpacity`
     background-color: ${props => getButtonBackgroundColor(props)};
     border: 1px solid ${props => props.outline ? props.theme.secondary2 : 'transparent'};
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 35px;
     flex-flow: row nowrap;
     align-items:center;
+    height: 70px;
 `
 
 const Text = styled.Text`
     color: ${props => props.outline ? props.theme.secondary2 : '#ffffff'};
-    font-weight: bold;
-    font-size: 20px;
+    font-family: ProximaNova;
+    font-size: 24px;
     flex:1;
     text-align: center;
 `
