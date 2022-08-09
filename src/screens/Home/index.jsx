@@ -60,7 +60,7 @@ export function Home(){
                             <InfoPlantCard 
                                 image={plant.image}
                                 description={plant.description}
-                                style={{marginBottom:5}}
+                                style={{marginBottom:15}}
                                 key={plant.id}
                                 title={plant.name}
                                 id={plant.id}

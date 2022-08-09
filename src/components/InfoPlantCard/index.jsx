@@ -7,13 +7,13 @@ const Container = styled.View`
     background-color:${props => props.theme.cardColor};
     flex-direction:row;
     border-radius: 8px;
-    padding-right:8px;
-    padding-bottom:8px;
+    overflow: hidden;
 `
 
 const ImageContainer = styled.View`
-    height: 150px;
-    width: 150px;
+    height: 130px;
+    width: 130px;
+    background-color: ${props => props.theme.cardImageContainer};
 `
 const Image = styled.Image`
     width: 100%;
@@ -22,6 +22,9 @@ const Image = styled.Image`
 const ContentContainer = styled.View`
     flex:1;
     justify-content:space-between;
+    padding-bottom:8px;
+    padding-right: 8px;
+    padding-left: 12px;
 `
 const Title = styled.Text`
     font-size:28px;

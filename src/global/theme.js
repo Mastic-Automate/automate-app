@@ -13,6 +13,7 @@ export const themes = {
         text1:'#757575',
         text2:'#000000',
         cardColor:'#EDEDED',
+        cardImageContainer: '#ffffff',
         subtitle: '#585858',
 
         background1: '#FFFFFF',
@@ -40,6 +41,7 @@ export const themes = {
         text1:'#B6B6B6',
         text2:'#EEEEEE',
         cardColor:'#343434',
+        cardImageContainer: '#636363',
         subtitle: '#C1C1C1',
 
         background1: '#0D3440',

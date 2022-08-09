@@ -5,7 +5,7 @@ const Container = styled.View`
     width:192px;
     height:350px;
     padding:10px;
-    background-color: ${props => props.theme.background1};
+    background-color: ${props => props.theme.cardColor};
     border-radius: 24px;
 `
 const ImageContainer = styled.View`
@@ -25,7 +25,7 @@ const InfoContainer = styled.View`
     justify-content:space-between;
 `
 const PlantNameText = styled.Text`
-    color: ${props => props.theme.darkBlue};
+    color: ${props => props.theme.title};
     font-size: 28px;
     font-family: ProximaNova;
 `

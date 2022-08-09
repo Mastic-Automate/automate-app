@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 const Container = styled.TouchableOpacity`
-    background-color: ${props => props.theme.background1};
+    background-color: ${props => props.theme.cardColor};
     border-radius: 24px;
     padding: 10px;
     flex-flow: row nowrap;
