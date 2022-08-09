@@ -44,7 +44,7 @@ const TopPlantImage = styled.Image`
 const PlantsSection = styled.View`
     background-color: ${props => props.theme.background2};
     flex:1;
-    padding-top:40px;
+    padding-top:50px;
     position:relative;
 `
 const PlantsSectionTitle = styled.Text`
@@ -61,6 +61,25 @@ const RandomPlantsSection = styled.View`
     padding-right: 15px;
 `
 
+const InputsRow = styled.View`
+    flex-flow: row nowrap;
+    position: absolute;
+    top: -25px;
+    width: 100%;
+    padding-left:25px;
+    padding-right:25px;
+`
+
+const FilterButton = styled.TouchableOpacity`
+    border-radius: 10px;
+    margin-right: 20px;
+    background-color: ${props => props.theme.purple};
+    align-items:center;
+    justify-content:center;
+    width: 64px;
+    height: 64px;
+`
+
 export {
     Container,
     PlantsSection,
@@ -72,5 +91,7 @@ export {
     TopPlantImage,
     TopSectionCol1,
     TopSectionCol2,
-    RandomPlantsSection
+    RandomPlantsSection,
+    FilterButton,
+    InputsRow
 }

@@ -15,7 +15,9 @@ import {
     TopSectionCol1,
     TopSectionCol2,
     RandomPlantsSection,
-    TopMessage
+    TopMessage,
+    InputsRow,
+    FilterButton
 } from './styles'
 
 import {appImages} from '../../global/images'
@@ -48,23 +50,37 @@ export function Home(){
             </TopSection>
             
             <PlantsSection>
-                <Input 
-                    iconType={Feather}
-                    iconName="search"
-                    style={{
-                        position:'absolute',
-                        top: -25,
-                        width: "90%",
-                        alignSelf:'center',
-                    }}
-                    placeholder="Pesquisar"
-                />
+                <InputsRow>
+                    <FilterButton>
+                        <FontAwesome5 
+                            color="#ffffff"
+                            size={30}
+                            name="filter"
+                        />
+                    </FilterButton>
+                    <Input 
+                        iconType={Feather}
+                        iconName="search"
+                        style={{
+                            flex:1
+                        }}
+                        placeholder="Pesquisar"
+                    />
+                </InputsRow>
+
                 <PlantsSectionTitle>
                     Plantas recentes
                 </PlantsSectionTitle>
-                <FlatList 
-                    data={[{variant:'yellow', title:'Amarelo'}, {variant:'red', title:'Vermelho'}, {variant:'blue', title:'Azul'}]}
+                <FlatList
+                    data={[
+                        {variant:'yellow', title:'Amarelo'}, 
+                        {variant:'red', title:'Vermelho'}, 
+                        {variant:'blue', title:'Azul'}
+                    ]}
                     horizontal
+                    contentContainerStyle={{
+                        marginLeft: 20
+                    }}
                     renderItem={({item}) => {
                         return (
                             <Plant 
