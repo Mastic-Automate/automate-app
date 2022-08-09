@@ -54,13 +54,13 @@ const ViewButtonText = styled.Text`
     font-family: Poppins700;
 `
 
-const LikeContainer = styled.View`
+const LikeContainer = styled.TouchableOpacity`
     position: absolute;
     top:12px;
     right:12px;
 `
 
-export function InfoPlantCard({title, description, image, style, id, liked=false}){
+export function InfoPlantCard({title, description, image, style, id, liked=false, onLikePressed}){
     const navigation = useNavigation()
     return (
         <Container style={style}>
@@ -81,7 +81,7 @@ export function InfoPlantCard({title, description, image, style, id, liked=false
                         Ver planta
                     </ViewButtonText>
                 </ViewButton>
-                <LikeContainer>
+                <LikeContainer onPress={onLikePressed}>
                     <Like liked={liked} />
                 </LikeContainer>
             </ContentContainer>
