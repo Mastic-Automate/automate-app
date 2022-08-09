@@ -1,5 +1,5 @@
 import { FlatList, View } from 'react-native'
-import {Feather} from '@expo/vector-icons'
+import {Feather, FontAwesome5} from '@expo/vector-icons'
 import { Plant } from '../../components/Plant'
 import {InfoPlantCard} from '../../components/InfoPlantCard'
 import {Input} from '../../components/Input'
@@ -9,11 +9,13 @@ import {
     PlantsSection, 
     PlantsSectionTitle, 
     Title, 
-    TopSection, 
+    TopSection,
+    TopMessageContainer,
     TopPlantImage,
     TopSectionCol1,
     TopSectionCol2,
-    RandomPlantsSection
+    RandomPlantsSection,
+    TopMessage
 } from './styles'
 
 import {appImages} from '../../global/images'
@@ -27,6 +29,16 @@ export function Home(){
             <TopSection>
                 <TopSectionCol1>
                     <Title>A melhor rosa está no seu jardim!</Title>
+                    <TopMessageContainer>
+                        <TopMessage>
+                            Bom dia
+                        </TopMessage>
+                        <FontAwesome5 
+                            name="sun"
+                            size={20}
+                            color="#FFCE31"
+                        />
+                    </TopMessageContainer>
                 </TopSectionCol1>
                 <TopSectionCol2>
                     <TopPlantImage 

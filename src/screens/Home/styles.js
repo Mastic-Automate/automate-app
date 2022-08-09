@@ -10,6 +10,15 @@ const Title = styled.Text`
     font-size:30px;
     font-family: Montserrat_900Black;
 `
+const TopMessageContainer = styled.View`
+    flex-flow: row nowrap;
+`
+const TopMessage = styled.Text`
+    font-size: 16px;
+    font-family: SuperaGothic400;
+    color: ${props => props.theme.title};
+    margin-right: 5px;
+`
 
 const TopSection = styled.View`
     height: 225px;
@@ -28,6 +37,8 @@ const TopSectionCol2 = styled.View`
     z-index:-1;
 `
 const TopPlantImage = styled.Image`
+    position:absolute;
+    right: -180px;
 `
 
 const PlantsSection = styled.View`
@@ -55,6 +66,8 @@ export {
     PlantsSection,
     PlantsSectionTitle, 
     Title,
+    TopMessageContainer,
+    TopMessage,
     TopSection,
     TopPlantImage,
     TopSectionCol1,

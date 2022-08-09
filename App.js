@@ -25,6 +25,7 @@ export default function App() {
     'Poppins700': Poppins_700Bold,
     'ProximaNova': require('./assets/fonts/proximaNova/ProximaNovaBold.otf'),
     'SuperaGothic': require('./assets/fonts/SuperaGothic/SuperaGothic-ExtraBold.otf'),
+    'SuperaGothic400': require('./assets/fonts/SuperaGothic/SuperaGothic-Regular.otf'),
     'MusticaPro':require('./assets/fonts/Mustica/MusticaPro-SemiBold.otf'),
     Montserrat_500Medium,
     Montserrat_700Bold,
