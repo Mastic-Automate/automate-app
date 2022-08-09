@@ -17,6 +17,7 @@ export const themes = {
 
         background1: '#FFFFFF',
         background2:'#D7E1E8',
+        background3:'#D7E1E8',
 
         secondary1:'#696969', 
         secondary2:'#9D9D9D', 
@@ -41,8 +42,9 @@ export const themes = {
         cardColor:'#343434',
         subtitle: '#C1C1C1',
 
-        background1: '#252525',
+        background1: '#0D3440',
         background2:'#1A1F23',
+        background3: '#52525C',
 
         secondary1:'#CCCCCC', 
         secondary2:'#8E8E8E', 

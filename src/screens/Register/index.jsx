@@ -65,9 +65,7 @@ export function Register({ navigation }) {
                         <Input
                             name="email"
                             control={control}
-                            iconName="email-outline"
-                            iconType={MaterialCommunityIcons}
-                            style={{ marginTop: 10 }}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
                             placeholder="Email"
                             error={errors.email}
                             keyboardType="email-address"
@@ -77,9 +75,7 @@ export function Register({ navigation }) {
                         <Input
                             name="name"
                             control={control}
-                            iconName="account-circle-outline"
-                            iconType={MaterialCommunityIcons}
-                            style={{ marginTop: 10 }}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
                             placeholder="Nome"
                             error={errors.name}
                             autoCorrect={false}
@@ -88,9 +84,7 @@ export function Register({ navigation }) {
                         <Input
                             name="password"
                             control={control}
-                            iconName="lock-outline"
-                            iconType={MaterialIcons}
-                            style={{ marginTop: 10 }}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
                             placeholder="Senha"
                             error={errors.password}
                             secureTextEntry
@@ -100,9 +94,7 @@ export function Register({ navigation }) {
                         <Input
                             name="password-confirm"
                             control={control}
-                            iconName="lock-outline"
-                            iconType={MaterialIcons}
-                            style={{ marginTop: 10 }}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
                             placeholder="Confirmar senha"
                             error={errors['password-confirm']}
                             secureTextEntry

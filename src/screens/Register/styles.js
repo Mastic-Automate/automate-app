@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Container = styled.View`
+const Container = styled.ScrollView`
     height: 100%;
     position: relative;
 `
@@ -12,7 +12,7 @@ const BackgroundImage = styled.ImageBackground`
 `
 
 const Menu = styled.SafeAreaView`
-    background-color: ${props => props.theme.background1};
+    background-color: ${props => props.theme.background3};
     border-top-left-radius:40px;
     border-top-right-radius:40px;
     width:100%;
@@ -32,10 +32,10 @@ const HeadingSection = styled.View`
 const Title = styled.Text`
     font-size: 36px;
     font-family: ProximaNova;
-    color: ${props => props.theme.primary};
+    color: ${props => props.theme.title};
 `
 const Subtitle = styled.Text`
-    color: ${props => props.theme.primary};
+    color: ${props => props.theme.text1};
     font-size: 16px;
     font-family: ProximaNova;
 `
@@ -53,7 +53,7 @@ const BottomLink = styled.TouchableOpacity`
 `
 const BottomLinkText = styled.Text`
     text-align:center;
-    color: ${props => props.theme.primary};
+    color: ${props => props.theme.title};
     font-size: 20px;
     font-family: Poppins700;
     width: 100%;

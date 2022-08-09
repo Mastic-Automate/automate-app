@@ -68,9 +68,7 @@ export function Login({ navigation }) {
                             error={errors.email}
                             keyboardType="email-address"
                             placeholder="Email"
-                            iconType={MaterialCommunity}
-                            iconName="account-circle-outline"
-                            style={{ marginTop: 10 }}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
                             autoCorrect={false}
                             autoCapitalize="none"
                         />
@@ -79,10 +77,8 @@ export function Login({ navigation }) {
                             control={control}
                             error={errors.password}
                             placeholder="Senha"
-                            iconType={Material}
-                            iconName="lock-outline"
                             secureTextEntry
-                            style={{ marginTop: 10 }}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
                             autoCorrect={false}
                             autoCapitalize="none"
                         />
