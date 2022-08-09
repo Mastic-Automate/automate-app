@@ -44,8 +44,8 @@ const PlantsSectionTitle = styled.Text`
 const RandomPlantsSection = styled.View`
     margin-top: 30px;
     margin-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 `
 
 export {
