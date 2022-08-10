@@ -1,9 +1,13 @@
 import {Image} from 'react-native'
 
+import {Feather, FontAwesome5} from '@expo/vector-icons'
+
 import {ConfigTileSwitch, ConfigTileSection} from '../../components/ConfigTile'
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
-import {appImages} from '../../global/images'
+import {appImages} from '../../global/images';
+
+import {Input} from '../../components/Input';
 
 import {
     Container, 
@@ -18,7 +22,10 @@ import {
     AccountSection,
     AccountSectionInfoCol1,
     AccountUserEmail,
-    AccountUserName
+    AccountUserName,
+    InputsRow,
+    ThemeButton,
+
 } from './styles'
 
 export function Config({navigation}){
@@ -26,6 +33,18 @@ export function Config({navigation}){
     const {user} = useAuth()
 
     const isDarkTheme = !(theme==='light')
+
+    const themeButton = () => {
+        return (
+            <ThemeButton>
+                <FontAwesome5 
+                    color="#ffffff"
+                    size={30}
+                    name={theme === 'light' ? 'moon' : 'sun'}
+                />
+            </ThemeButton>
+        )
+    }
 
     return(
         <Container>
@@ -62,6 +81,17 @@ export function Config({navigation}){
                 </MessageContainer>
             </HeadingSection>
             <MainSection>
+                <InputsRow>
+                    {themeButton()}
+                        <Input 
+                            iconType={Feather}
+                            iconName="search"
+                            style={{
+                                flex:1
+                            }}
+                            placeholder="Pesquisar"
+                        />
+                    </InputsRow>
                 <SectionTitle>
                     Geral
                 </SectionTitle>

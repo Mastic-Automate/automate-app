@@ -3,6 +3,7 @@ import styled from 'styled-components/native'
 const Container = styled.ScrollView`
     background-color:${props => props.theme.background};
     flex:1;
+    height: 100%;
 `
 
 const HeadingSection = styled.View`
@@ -68,17 +69,40 @@ const MessageContainerText = styled.Text`
 `
 
 const MainSection = styled.View`
-    flex:1;
+    flex: 1;
     width:100%;
+    min-height: 500px;    
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
     background-color: ${props => props.theme.background2};
     padding-left:8px;
     padding-right:8px;
     padding-top:16px;
 `
 const SectionTitle = styled.Text`
+    margin-top: 60px;
+    padding: 0 20px;
     font-size:24px;
     color: ${props => props.theme.title};
     font-family: Montserrat_600SemiBold;
+`
+
+const InputsRow = styled.View`
+    flex-flow: row nowrap;
+    position: absolute;
+    top: -25px;
+    width: 100%;
+    padding-left:20px;
+`
+
+const ThemeButton = styled.TouchableOpacity`
+    border-radius: 10px;
+    margin-right: 20px;
+    background-color: ${props => props.theme.themeButton};
+    align-items:center;
+    justify-content:center;
+    width: 64px;
+    height: 64px;
 `
 
 export {
@@ -95,5 +119,7 @@ export {
     AccountSection,
     AccountSectionInfoCol1,
     AccountUserEmail,
-    AccountUserName
+    AccountUserName,
+    InputsRow,
+    ThemeButton
 }
