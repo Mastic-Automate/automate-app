@@ -73,7 +73,9 @@ export function InfoPlantCard({title, description, image, style, id, liked=false
                 <Title>
                     {title}
                 </Title>
-                <Description>
+                <Description
+                    numberOfLines={2}
+                >
                     {description}
                 </Description>
                 <ViewButton onPress={()=> navigation.navigate('plantInfo', {id:id})}>
