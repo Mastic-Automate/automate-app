@@ -60,7 +60,9 @@ export function PlantCard({name, id, description, image, style}){
                 <PlantNameText>
                     {name}
                 </PlantNameText>
-                <PlantDescriptionText>
+                <PlantDescriptionText
+                    numberOfLines={3}
+                >
                     {description}
                 </PlantDescriptionText>
                 <PlantViewButton onPress={()=> navigation.navigate('plantInfo', {id: id})}>
