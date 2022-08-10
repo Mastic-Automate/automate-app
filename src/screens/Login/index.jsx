@@ -5,6 +5,8 @@ import { FormInput as Input } from '../../components/FormInput'
 
 import { useAuth } from '../../hooks/useAuth'
 
+import { appImages } from '../../global/images'
+
 import { 
     BottomLink, 
     BottomLinkText, 
@@ -17,7 +19,8 @@ import {
     Menu,
     Subtitle,
     HeadingSection,
-    BackgroundImage
+    BackgroundImage,
+    PlantImage
 } from './styles'
 
 import { useForm } from 'react-hook-form'
@@ -55,9 +58,10 @@ export function Login({ navigation }) {
                     source={require('../../assets/logo_automate.png')}
                     style={{width:150, height:150}}
                 />
+                
                 <Menu>
                     <HeadingSection>
-                        <Title>Login</Title>
+                        <Title>LOGIN</Title>
                         <Subtitle>Sua nova forma de plantar!</Subtitle>
                     </HeadingSection>
 
@@ -68,7 +72,7 @@ export function Login({ navigation }) {
                             error={errors.email}
                             keyboardType="email-address"
                             placeholder="Email"
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ marginTop: 10, backgroundColor:'#9BC2DD'}}
                             autoCorrect={false}
                             autoCapitalize="none"
                         />
@@ -86,6 +90,9 @@ export function Login({ navigation }) {
                         <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />
                         <ErrorText>{bottomError}</ErrorText>
                     </InputsView>
+                    <PlantImage
+                        source={appImages['plant2']}
+                    />
                     <BottomView>
                         <BottomLink onPress={() => navigation.replace('register')}>
                             <BottomLinkText>Criar conta</BottomLinkText>
