@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import styled from 'styled-components/native'
+import { Like } from './Like'
 
 const Container = styled.View`
     width:100%;
@@ -8,6 +9,7 @@ const Container = styled.View`
     flex-direction:row;
     border-radius: 8px;
     overflow: hidden;
+    position:relative;
 `
 
 const ImageContainer = styled.View`
@@ -21,7 +23,6 @@ const Image = styled.Image`
 `
 const ContentContainer = styled.View`
     flex:1;
-    justify-content:space-between;
     padding-bottom:8px;
     padding-right: 8px;
     padding-left: 12px;
@@ -43,20 +44,23 @@ const ViewButton = styled.TouchableOpacity`
     width: 110px;
     align-items:center;
     justify-content:center;
-    align-self:flex-end;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
 `
 const ViewButtonText = styled.Text`
     color: #ffffff;
     font-size: 15px;
     font-family: Poppins700;
 `
-const BottomView = styled.View`
-    flex-flow: row nowrap;
-    flex:1;
-    justify-content: space-between;
+
+const LikeContainer = styled.TouchableOpacity`
+    position: absolute;
+    top:12px;
+    right:12px;
 `
 
-export function InfoPlantCard({title, description, image, style, id}){
+export function InfoPlantCard({title, description, image, style, id, liked=false, onLikePressed}){
     const navigation = useNavigation()
     return (
         <Container style={style}>
@@ -69,18 +73,18 @@ export function InfoPlantCard({title, description, image, style, id}){
                 <Title>
                     {title}
                 </Title>
-                <BottomView>
-                    <Description>
-                        {description}
-                    </Description>
-                    <ViewButton onPress={()=> navigation.navigate('plantInfo', {id:id})}>
-                        <ViewButtonText>
-                            Ver planta
-                        </ViewButtonText>
-                    </ViewButton>
-                </BottomView>
+                <Description>
+                    {description}
+                </Description>
+                <ViewButton onPress={()=> navigation.navigate('plantInfo', {id:id})}>
+                    <ViewButtonText>
+                        Ver planta
+                    </ViewButtonText>
+                </ViewButton>
+                <LikeContainer onPress={onLikePressed}>
+                    <Like liked={liked} />
+                </LikeContainer>
             </ContentContainer>
-
         </Container>
     )
 }
