@@ -17,7 +17,7 @@ const Menu = styled.View`
     width:100%;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 28px;
+    padding-top: 40px;
     padding-bottom:20px;
     height: 80%;
     justify-content:space-between;

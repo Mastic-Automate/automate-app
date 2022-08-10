@@ -18,7 +18,7 @@ const Menu = styled.SafeAreaView`
     width:100%;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 15px;
+    padding-top: 40px;
     padding-bottom: 20px;
     height: 82%;
     justify-content:space-between;

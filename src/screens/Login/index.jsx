@@ -75,6 +75,7 @@ export function Login({ navigation }) {
                             style={{ marginTop: 10, backgroundColor:'#9BC2DD'}}
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="password"
@@ -85,6 +86,7 @@ export function Login({ navigation }) {
                             style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
 
                         <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />

@@ -73,6 +73,7 @@ export function Register({ navigation }) {
                             keyboardType="email-address"
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="name"
@@ -82,6 +83,7 @@ export function Register({ navigation }) {
                             error={errors.name}
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="password"
@@ -92,6 +94,7 @@ export function Register({ navigation }) {
                             secureTextEntry
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="password-confirm"
@@ -102,6 +105,7 @@ export function Register({ navigation }) {
                             secureTextEntry
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Button
                             text="Cadastrar"
