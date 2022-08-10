@@ -55,6 +55,7 @@ const PlantImage = styled.Image`
 
 const BottomSection = styled.View`
     width: 100%;
+    min-height: 200px;
     padding: 30px 0;
 `
 const BottomSectionTitle = styled.Text`
