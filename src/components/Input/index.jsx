@@ -23,7 +23,8 @@ function Input({iconType:Icon, iconName, style, ...textInputProps}){
     return (
         <Container style={style}>
             <TextInput
-                {...textInputProps} 
+                {...textInputProps}
+                placeholderTextColor={theme.text1}
             />
             {Icon &&(
                 <Icon name={iconName} size={24} color={theme.text1} style={{marginRight:10}} />

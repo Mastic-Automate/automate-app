@@ -7,24 +7,60 @@ const Container = styled.View`
 
 const MainContent = styled.ScrollView`
     flex:1;
-    background-color: ${props => props.theme.background2};
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 20px;
+    background-color: ${props => props.theme.background1};
 `
+
+const TopSection = styled.View`
+    background: ${props => props.theme.background1};
+    justify-content: flex-end;
+    height: 200px;
+    padding: 50px 0;
+`;
+
+const PlantSection = styled.View`
+    background: ${props => props.theme.background2};
+    padding: 80px 0;
+    z-index: 1;
+    position: relative;
+`;
+
 const Title = styled.Text`
     color: ${props => props.theme.title};
     font-size:30px;
     width: 100%;
-    text-align:center;
+    text-align:left;
     font-family: SuperaGothic;
+    padding: 6px 25px;
 `
+
+const InputsRow = styled.View`
+    flex-flow: row nowrap;
+    width: 100%;
+    position: absolute;
+    padding: 10px 10px;
+    top: -40px;
+    z-index: 2;
+`;
+
+const FilterButton = styled.TouchableOpacity`
+    border-radius: 10px;
+    margin-left: 10px;
+    background-color: ${props => props.theme.green};
+    align-items:center;
+    justify-content:center;
+    width: 64px;
+    height: 64px;
+`;
+
 const SomePlantsContainer = styled.ScrollView`
 `
+
 const UserPlantsTitle = styled.Text`
     color: ${props => props.theme.text2};
     font-weight:bold;
-    font-size:28px;
+    font-size: 30px;
+    font-family: SuperaGothic;
+    padding: 20px 20px;
 `
 const UserPlantsContainer = styled.ScrollView`
     
@@ -40,7 +76,11 @@ export {
     Title,
     AddButton,
     MainContent,
+    TopSection,
+    PlantSection,
     SomePlantsContainer,
     UserPlantsContainer,
-    UserPlantsTitle
+    UserPlantsTitle,
+    InputsRow,
+    FilterButton,
 }
