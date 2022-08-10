@@ -1,8 +1,8 @@
 import styled from 'styled-components/native'
 
-const Container = styled.View`
-    flex:1;
-    background-color:${props => props.theme.background1};
+const Container = styled.ScrollView`
+    flex: 1;
+    /* background-color:${props => props.theme.background1}; */
 `
 
 const Title = styled.Text`
@@ -55,7 +55,7 @@ const PlantImage = styled.Image`
 
 const BottomSection = styled.View`
     width: 100%;
-    height: 150px;
+    padding: 30px 0;
 `
 const BottomSectionTitle = styled.Text`
     font-size: 24px;
@@ -70,6 +70,7 @@ const BottomText = styled.Text`
     font-family: Montserrat_400Regular;
     margin-top: 10px;
     padding: 0 20px;
+    z-index: 2;
 `
 
 const RightSection = styled.View`

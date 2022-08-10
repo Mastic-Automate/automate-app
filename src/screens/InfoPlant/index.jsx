@@ -27,6 +27,7 @@ function InfoPlant({route}){
     const themeColors = useTheme()
     const plantInfo = useMemo(() => getPlantInfo(route.params.id), [route.params.id])
     return (
+
         <Container>
             <HeaderSection>
                 <Title style={{marginTop: 12}}>{plantInfo.name}</Title>
@@ -62,6 +63,7 @@ function InfoPlant({route}){
             </BottomSection>
             <RightSection></RightSection>
         </Container>
+        
         
     )
 }
