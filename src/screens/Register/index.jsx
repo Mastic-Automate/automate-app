@@ -111,6 +111,7 @@ export function Register({ navigation }) {
                             text="Cadastrar"
                             style={{ marginTop: 10 }}
                             onPress={handleSubmit(handleUserRegister)}
+                            variant="blue"
                         />
                         <ErrorText>{bottomError}</ErrorText>
 

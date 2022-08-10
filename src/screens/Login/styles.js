@@ -31,11 +31,13 @@ const Title = styled.Text`
     font-size: 36px;
     font-family: ProximaNova;
     color: ${props => props.theme.title};
+    margin-left: 10px;
 `
 const Subtitle = styled.Text`
     color: ${props => props.theme.text1};
     font-size: 24px;
     font-family: ProximaNova;
+    margin-left: 10px;
 `
 
 const BottomText = styled.Text`

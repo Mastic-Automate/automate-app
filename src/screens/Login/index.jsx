@@ -89,7 +89,12 @@ export function Login({ navigation }) {
                             placeholderTextColor="#487B9D"
                         />
 
-                        <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />
+                        <Button 
+                            text="Login" 
+                            onPress={handleSubmit(handleSignin)} 
+                            style={{ marginTop: 10 }} 
+                            variant="blue"
+                        />
                         <ErrorText>{bottomError}</ErrorText>
                     </InputsView>
                     <PlantImage
