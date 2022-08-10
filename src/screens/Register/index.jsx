@@ -9,6 +9,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import {useAuth} from '../../hooks/useAuth'
+import {appImages} from '../../global/images'
 
 import { 
     BackgroundImage,
@@ -22,7 +23,8 @@ import {
     InputsView,
     Menu,
     Subtitle,
-    Title
+    Title,
+    PlantImage
 } from './styles'
 import { useState } from 'react'
 
@@ -58,7 +60,7 @@ export function Register({ navigation }) {
                 />
                 <Menu>
                     <HeadingSection>
-                        <Title>Cadastrar</Title>
+                        <Title>CADASTRE-SE</Title>
                         <Subtitle>Venha participar do melhor projeto de agricultura urbana!</Subtitle>
                     </HeadingSection>
                     <InputsView>
@@ -109,6 +111,9 @@ export function Register({ navigation }) {
                         <ErrorText>{bottomError}</ErrorText>
 
                     </InputsView>
+                    <PlantImage 
+                        source={appImages['plant2']}
+                    />
                     <BottomView>
                         <BottomText>Já possui uma conta?</BottomText>
                         <BottomLink onPress={() => navigation.replace('login')}>

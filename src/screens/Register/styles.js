@@ -72,6 +72,15 @@ const ErrorText = styled.Text`
     text-align:center;
 `
 
+const PlantImage = styled.Image`
+    width: 150px;
+    height: 250px;
+    position:absolute;
+    top: 50%;
+    z-index: -1;
+    left:0;
+`
+
 export {
     BottomLink, 
     BottomLinkText, 
@@ -84,5 +93,6 @@ export {
     Menu,
     Subtitle,
     HeadingSection,
-    BackgroundImage
+    BackgroundImage,
+    PlantImage
 }
