@@ -17,7 +17,8 @@ import {
     MidSectionCol2,
     PlantImage,
     Title,
-    BottomSectionTitle
+    BottomSectionTitle,
+    RightSection,
 } from './styles'
 import { getPlantInfo } from '../../global/plants';
 import { useMemo } from 'react';
@@ -26,6 +27,7 @@ function InfoPlant({route}){
     const themeColors = useTheme()
     const plantInfo = useMemo(() => getPlantInfo(route.params.id), [route.params.id])
     return (
+
         <Container>
             <HeaderSection>
                 <Title style={{marginTop: 12}}>{plantInfo.name}</Title>
@@ -33,15 +35,15 @@ function InfoPlant({route}){
             <MidSection>
                 <MidSectionCol1>
                     <InfoSquare>
-                        <Feather name="sun" color={themeColors.blue} size={52} />
+                        <Feather name="sun" color={themeColors.background2} size={52} />
                         <InfoSquareText>100%</InfoSquareText>
                     </InfoSquare>
                     <InfoSquare>
-                        <Ionicons name="water-outline" color={themeColors.blue} size={52} />
+                        <Ionicons name="water-outline" color={themeColors.background2} size={52} />
                         <InfoSquareText>100%</InfoSquareText>
                     </InfoSquare>
                     <InfoSquare>
-                        <FontAwesome5 name="temperature-high" color={themeColors.blue} size={52} />
+                        <FontAwesome5 name="temperature-high" color={themeColors.background2} size={52} />
                         <InfoSquareText>100%</InfoSquareText>
                     </InfoSquare>
                 </MidSectionCol1>
@@ -59,7 +61,10 @@ function InfoPlant({route}){
                     {plantInfo.description}
                 </BottomText>
             </BottomSection>
+            <RightSection></RightSection>
         </Container>
+        
+        
     )
 }
 
