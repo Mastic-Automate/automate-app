@@ -46,7 +46,7 @@ const AccountUserEmail = styled.Text`
 `
 const MessageContainer = styled.View`
     background-color: ${props => props.theme.purple};
-    height: 130px;
+    height: 120px;
     width: 100%;
     border-radius: 8px;
     flex-flow: row nowrap;
@@ -80,6 +80,14 @@ const MainSection = styled.View`
     padding-top:16px;
 `
 const SectionTitle = styled.Text`
+    margin-top: 60px;
+    padding: 0 20px;
+    font-size: 20px;
+    color: ${props => props.theme.title};
+    font-family: Montserrat_600SemiBold;
+`
+
+const SectionOptions = styled.View`
     margin-top: 60px;
     padding: 0 20px;
     font-size:24px;
@@ -121,5 +129,6 @@ export {
     AccountUserEmail,
     AccountUserName,
     InputsRow,
-    ThemeButton
+    ThemeButton,
+    SectionOptions,
 }

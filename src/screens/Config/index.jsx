@@ -24,6 +24,7 @@ import {
     AccountUserName,
     InputsRow,
     ThemeButton,
+    SectionOptions,
 
 } from './styles'
 
@@ -98,6 +99,15 @@ export function Config({navigation}){
                 <SectionTitle>
                     Geral
                 </SectionTitle>
+                <SectionTitle>
+                    Arduino
+                </SectionTitle>
+                <SectionTitle>
+                    Notificações
+                </SectionTitle>
+                <SectionOptions>
+
+                </SectionOptions>
 
             </MainSection>
 
