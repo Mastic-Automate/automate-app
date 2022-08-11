@@ -67,7 +67,18 @@ export function Register({ navigation }) {
                         <Input
                             name="email"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginTop: 10,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
+                                elevation: 30,
+                            }}
                             placeholder="Email"
                             error={errors.email}
                             keyboardType="email-address"
@@ -78,7 +89,18 @@ export function Register({ navigation }) {
                         <Input
                             name="name"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginTop: 10,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 20,
+                                elevation: 25,
+                            }}
                             placeholder="Nome"
                             error={errors.name}
                             autoCorrect={false}
@@ -88,7 +110,18 @@ export function Register({ navigation }) {
                         <Input
                             name="password"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginTop: 10,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 20,
+                                elevation: 25,
+                            }}
                             placeholder="Senha"
                             error={errors.password}
                             secureTextEntry
@@ -99,7 +132,18 @@ export function Register({ navigation }) {
                         <Input
                             name="password-confirm"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginTop: 10,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 20,
+                                elevation: 25,
+                            }}
                             placeholder="Confirmar senha"
                             error={errors['password-confirm']}
                             secureTextEntry
