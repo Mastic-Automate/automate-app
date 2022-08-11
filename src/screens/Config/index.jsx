@@ -2,7 +2,6 @@ import {Image} from 'react-native'
 
 import {Feather, FontAwesome5} from '@expo/vector-icons'
 
-import {ConfigTileSwitch, ConfigTileSection} from '../../components/ConfigTile'
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
 import {appImages} from '../../global/images';
@@ -36,8 +35,12 @@ export function Config({navigation}){
 
     const themeButton = () => {
         return (
-            <ThemeButton>
-                <FontAwesome5 
+            <ThemeButton 
+                onPress={() => {
+                    toggleTheme()
+                }}
+            >
+                <Feather 
                     color="#ffffff"
                     size={30}
                     name={theme === 'light' ? 'moon' : 'sun'}
@@ -95,12 +98,7 @@ export function Config({navigation}){
                 <SectionTitle>
                     Geral
                 </SectionTitle>
-                <ConfigTileSwitch
-                    text="Tema escuro"
-                    value={isDarkTheme}
-                    onChange={toggleTheme}
-                    style={{margin:5}}
-                />
+
             </MainSection>
 
         </Container>

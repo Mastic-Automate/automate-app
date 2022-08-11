@@ -1,4 +1,4 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
 const Container = styled.ScrollView`
     background-color:${props => props.theme.background};
@@ -46,7 +46,7 @@ const AccountUserEmail = styled.Text`
 `
 const MessageContainer = styled.View`
     background-color: ${props => props.theme.purple};
-    height:130px;
+    height: 130px;
     width: 100%;
     border-radius: 8px;
     flex-flow: row nowrap;
