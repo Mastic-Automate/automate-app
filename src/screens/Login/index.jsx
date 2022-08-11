@@ -29,6 +29,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useState } from 'react'
+import { useTheme } from '../../hooks/useTheme';
 import { Image } from 'react-native'
 
 const schema = yup.object({
@@ -37,6 +38,7 @@ const schema = yup.object({
 })
 
 export function Login({ navigation }) {
+    const {theme} = useTheme()
     const { signIn } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -52,9 +54,10 @@ export function Login({ navigation }) {
         })
     }
 
+    // name={theme === 'light' ? 'moon' : 'sun'}
     return (
         <Container>
-            <BackgroundImage source={require('../../assets/background1.png')}>
+            <BackgroundImage source={theme === 'light' ? require('../../assets/background1.png') : require('../../assets/background-night.png')}>
 
                 <Image 
                     source={require('../../assets/logo_automate.png')}
