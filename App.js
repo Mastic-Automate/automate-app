@@ -7,6 +7,7 @@ import {StatusBar} from './src/components/StatusBar'
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 import { AuthContextProvider } from './src/contexts/AuthContext'
 import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
+import {BluetoothConnectionContextProvider} from './src/contexts/BLuetoothConnectionContext'
 import {RootRoutes} from './src/routes/RootRoutes'
 
 import { Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins'
@@ -18,6 +19,7 @@ import {
   Montserrat_600SemiBold,
   Montserrat_800ExtraBold
 } from '@expo-google-fonts/montserrat'
+import { BluetoothConnection } from './src/screens/BluetoothConnection';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -41,10 +43,12 @@ export default function App() {
     <AuthContextProvider>
       <ThemeContextProvider>
         <MicrocontrollersContextProvider>
-          <NavigationContainer>
-            <StatusBar />
-            <RootRoutes />
-          </NavigationContainer>
+          <BluetoothConnectionContextProvider>
+            <NavigationContainer>
+              <StatusBar />
+              <BluetoothConnection />
+            </NavigationContainer>
+          </BluetoothConnectionContextProvider>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>
     </AuthContextProvider>

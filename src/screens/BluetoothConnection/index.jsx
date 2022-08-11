@@ -10,6 +10,8 @@ import { Text, View } from 'moti';
 import * as Bluetooth from '../../services/Bluetooth';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
+import {useBluetoothConnection} from '../../contexts/BLuetoothConnectionContext'
+
 
 const Container = styled.View`
     flex:1;
@@ -216,14 +218,14 @@ function BluetoothConnection(){
     const [bottomError, setBottomError] = useState('');
     const [connected, setConnected] = useState(false);
 
-
+    const {Connect, Disconnect, Scanear, DataRead, SendMessage} = useBluetoothConnection()
 
     useEffect(()=> {
          if(automateFound) {
-       let z = isConnectedDevice().then(b => b?console.log("Já conectado"): HandleConnect(Automate));
-       console.log("Valor z");
-       console.log(z);
-    }
+            let z = isConnectedDevice().then(b => b?console.log("Já conectado"): HandleConnect(Automate));
+            console.log("Valor z");
+            console.log(z);
+        }
     return () => {
         
         //funções para desmonte de componente
@@ -242,7 +244,7 @@ function BluetoothConnection(){
     }
    
     const HandleScan = async () => {
-        Bluetooth.Scanear().then(r => {
+        Scanear().then(r => {
             if (r !== undefined) {
                 setAutomate(r);
                 setAutomateFound(true);              
@@ -250,11 +252,11 @@ function BluetoothConnection(){
             }
             
         });
-     }
+    }
      
      const HandleConnect = async (d) => {
   
-       await Bluetooth.Connect(d).then(array => {
+       await Connect(d).then(array => {
             const device = array[0];
             console.log("\n \nAprovação: ");
             console.log(array[1]);
@@ -271,12 +273,12 @@ function BluetoothConnection(){
         HandleScan();
 
      const HandleDisconnect = async () => {
-        Bluetooth.Disconnect(Automate).then(device => setAutomate(device));
+        Disconnect(Automate).then(device => setAutomate(device));
          setConnected(false)
      }
  
      const HandleMessage = async () => {
-        let r = await Bluetooth.SendMessage(Automate, text).then(response => {return response});
+        let r = await SendMessage(Automate, text).then(response => {return response});
         
      }
  
