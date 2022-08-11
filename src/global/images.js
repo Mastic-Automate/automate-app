@@ -7,4 +7,5 @@ export const appImages = {
     'pimenta_do_reino':require('../assets/pimenta_do_reino.png'),
     'mirtilo':require('../assets/mirtilo.png'),
     'suculenta':require('../assets/suculenta.png'),
+    'plant2':require('../assets/planta2.png')
 }

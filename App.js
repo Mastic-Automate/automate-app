@@ -9,7 +9,7 @@ import { AuthContextProvider } from './src/contexts/AuthContext'
 import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
 import {RootRoutes} from './src/routes/RootRoutes'
 
-import { Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import { Poppins_400Regular, Poppins_700Bold} from '@expo-google-fonts/poppins'
 import {
   Montserrat_900Black,
   Montserrat_700Bold,

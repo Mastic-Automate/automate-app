@@ -9,6 +9,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import {useAuth} from '../../hooks/useAuth'
+import {appImages} from '../../global/images'
 
 import { 
     BackgroundImage,
@@ -22,7 +23,8 @@ import {
     InputsView,
     Menu,
     Subtitle,
-    Title
+    Title,
+    PlantImage
 } from './styles'
 import { useState } from 'react'
 
@@ -58,7 +60,7 @@ export function Register({ navigation }) {
                 />
                 <Menu>
                     <HeadingSection>
-                        <Title>Cadastrar</Title>
+                        <Title>CADASTRE-SE</Title>
                         <Subtitle>Venha participar do melhor projeto de agricultura urbana!</Subtitle>
                     </HeadingSection>
                     <InputsView>
@@ -71,6 +73,7 @@ export function Register({ navigation }) {
                             keyboardType="email-address"
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="name"
@@ -80,6 +83,7 @@ export function Register({ navigation }) {
                             error={errors.name}
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="password"
@@ -90,6 +94,7 @@ export function Register({ navigation }) {
                             secureTextEntry
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="password-confirm"
@@ -100,15 +105,20 @@ export function Register({ navigation }) {
                             secureTextEntry
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Button
                             text="Cadastrar"
                             style={{ marginTop: 10 }}
                             onPress={handleSubmit(handleUserRegister)}
+                            variant="blue"
                         />
                         <ErrorText>{bottomError}</ErrorText>
 
                     </InputsView>
+                    <PlantImage 
+                        source={appImages['plant2']}
+                    />
                     <BottomView>
                         <BottomText>Já possui uma conta?</BottomText>
                         <BottomLink onPress={() => navigation.replace('login')}>
