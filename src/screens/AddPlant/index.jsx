@@ -26,7 +26,7 @@ const defaultModels = [
         luminosity: 5,
         sub:'Fácil de cuidar',
         time: '2 a 4 semanas',
-        img: appImages['plant_corner']
+        img: appImages['morango']
     },
     {
         name:'alface',
@@ -34,7 +34,7 @@ const defaultModels = [
         luminosity: 5,
         sub:'Fácil de cuidar',
         time: '2 a 10 semanas',
-        img: appImages['plant_corner']
+        img: appImages['pimenta_do_reino']
     }
 ]
 const SLIDER_WIDTH = Dimensions.get('window').width
@@ -80,13 +80,6 @@ function AddPlant(){
                     }}
                     onSnapToItem={setCurrentModelIndex}
                 />
-                <InputLabel>Nome</InputLabel>
-                <Input 
-                    placeholder="Tomates incríveis"
-                    control={control}
-                    name="name"  
-                    error={errors.name}
-                />
                 <DetailSection style={{marginTop:10}}>
                     <DetailSectionTitle>Detalhes</DetailSectionTitle>
                     <DetailRow 
@@ -101,12 +94,12 @@ function AddPlant(){
                         label="Iluminação"
                         value={selectedPlant.luminosity}
                     />
+
+                    <BottomButtonsContainer>
+                        <Button text="Salvar" style={{flex:1, margin:30}} onPress={handleSubmit(handleAddPlant)} />
+                    </BottomButtonsContainer>
                 </DetailSection>
             </InputsContainer>
-            <BottomButtonsContainer>
-                <Button text="Salvar" style={{flex:1, margin:5}} onPress={handleSubmit(handleAddPlant)} />
-                <Button text="Cancelar" style={{flex:1, margin:5}} outline />
-            </BottomButtonsContainer>
         </Container>
     )
 }

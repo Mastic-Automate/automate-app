@@ -1,10 +1,8 @@
 import styled from 'styled-components/native'
 
-const Container = styled.SafeAreaView`
-    padding: 10px;
+const Container = styled.ScrollView`
     flex:1;
     background-color: ${props => props.theme.background};
-    justify-content:center ;
 `
 
 const Title = styled.Text`
@@ -25,8 +23,12 @@ const InputLabel = styled.Text`
     font-size: 20px;
 `
 const DetailSection = styled.View`
-    height: 150px;
+    height: 400px;
     width: 100%;
+    background-color: ${props => props.theme.background2};
+    padding-right: 30px;
+    padding-left: 30px;
+    border-top-left-radius:60px ;
 `
 const DetailSectionTitle = styled.Text`
     font-size:20px;
@@ -37,15 +39,17 @@ const DetailSectionTitle = styled.Text`
 `
 const DetailRowLabel = styled.Text`
     color: ${props => props.theme.title};
+    font-size: 20px;
 `
 const DetailRowValue = styled.Text`
     color: ${props => props.theme.text2};
+    font-size: 20px;
 `
 const DetailRowContainer = styled.View`
     flex-flow: row nowrap;
     justify-content:space-between;
     align-items:center;
-    margin: 2px;
+    margin-bottom: 10px;
 `
 const DetailRow = ({label, value}) => {
     return (
