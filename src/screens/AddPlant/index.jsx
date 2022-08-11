@@ -96,7 +96,7 @@ function AddPlant(){
                     />
 
                     <BottomButtonsContainer>
-                        <Button text="Salvar" style={{flex:1, margin:30}} onPress={handleSubmit(handleAddPlant)} />
+                        <Button text="Adicionar planta" style={{flex:1, margin:30}} onPress={handleSubmit(handleAddPlant)} />
                     </BottomButtonsContainer>
                 </DetailSection>
             </InputsContainer>

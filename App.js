@@ -19,6 +19,7 @@ import {
   Montserrat_800ExtraBold
 } from '@expo-google-fonts/montserrat'
 import { AddPlant } from './src/screens/AddPlant';
+import {SavePlant} from './src/screens/SavePlant'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -44,7 +45,7 @@ export default function App() {
         <MicrocontrollersContextProvider>
           <NavigationContainer>
             <StatusBar />
-            <AddPlant />
+            <SavePlant />
           </NavigationContainer>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>
