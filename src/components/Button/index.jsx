@@ -21,7 +21,9 @@ const Container = styled.TouchableOpacity`
     border-radius: 35px;
     flex-flow: row nowrap;
     align-items:center;
-    height: 70px;
+    height: 60px;
+    width: 277px;
+    align-self: center;
 `
 
 const Text = styled.Text`

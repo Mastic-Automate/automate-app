@@ -20,7 +20,9 @@ import {
     Subtitle,
     HeadingSection,
     BackgroundImage,
-    PlantImage
+    PlantImage,
+    AlignHelper
+
 } from './styles'
 
 import { useForm } from 'react-hook-form'
@@ -72,10 +74,10 @@ export function Login({ navigation }) {
                             error={errors.email}
                             keyboardType="email-address"
                             placeholder="Email"
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD'}}
+                            style={{ backgroundColor:'#B7D9F0', fontFamily:'Poppins', marginBottom: 24}}
                             autoCorrect={false}
                             autoCapitalize="none"
-                            placeholderTextColor="#487B9D"
+                            placeholderTextColor="#336283"
                         />
                         <Input
                             name="password"
@@ -83,16 +85,16 @@ export function Login({ navigation }) {
                             error={errors.password}
                             placeholder="Senha"
                             secureTextEntry
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ backgroundColor:'#9BC2DD',}}
                             autoCorrect={false}
                             autoCapitalize="none"
-                            placeholderTextColor="#487B9D"
+                            placeholderTextColor="#336283"
                         />
 
                         <Button 
-                            text="Login" 
+                            text="Entrar" 
                             onPress={handleSubmit(handleSignin)} 
-                            style={{ marginTop: 10 }} 
+                            style={{ marginTop: 66,}} 
                             variant="blue"
                         />
                         <ErrorText>{bottomError}</ErrorText>
@@ -101,9 +103,14 @@ export function Login({ navigation }) {
                         source={appImages['plant2']}
                     />
                     <BottomView>
-                        <BottomLink onPress={() => navigation.replace('register')}>
-                            <BottomLinkText>Criar conta</BottomLinkText>
-                        </BottomLink>
+                        <AlignHelper>
+                            <BottomLink onPress={() => navigation.replace('register')}>
+                                <BottomLinkText>Criar conta</BottomLinkText>
+                            </BottomLink>
+                            <BottomLink onPress={() => navigation.replace('register')}>
+                                <BottomLinkText>Ih, esqueci a senha</BottomLinkText>
+                            </BottomLink>
+                        </AlignHelper>
                     </BottomView>
                 </Menu>
             </BackgroundImage>
