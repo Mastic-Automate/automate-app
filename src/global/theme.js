@@ -26,7 +26,7 @@ export const themes = {
         secondary3:'#F0F0F0', 
         secondary4:'#FAFAFA', 
 
-        tabBackground:'#ACD0E9'
+        tabBackground:'#4F8698'
     },
     dark: {
         primary: '#009D81',
