@@ -7,11 +7,11 @@ const Container = styled.ScrollView`
 
 const Title = styled.Text`
     color: ${props => props.theme.title};
-    font-size: 30px;
+    font-size: 55px;
     width:100%;
     text-align:center;
     margin-top: 30px;
-    font-family:Poppins;
+    font-family:Montserrat_600SemiBold;
 `
 
 const InputsContainer = styled.View`
@@ -19,8 +19,9 @@ const InputsContainer = styled.View`
     flex:1;
 `
 const InputLabel = styled.Text`
-    color: ${props => props.theme.secondary1};
+    color: ${props => props.theme.title};
     font-size: 20px;
+    font-family: Poppins600;
 `
 const DetailSection = styled.View`
     height: 400px;
@@ -28,6 +29,7 @@ const DetailSection = styled.View`
     background-color: ${props => props.theme.background2};
     padding-right: 30px;
     padding-left: 30px;
+    padding-top: 30px;
     border-top-left-radius:60px ;
 `
 const DetailSectionTitle = styled.Text`
@@ -37,13 +39,18 @@ const DetailSectionTitle = styled.Text`
     text-align:center;
     color: ${props => props.theme.title};
 `
+const DetailInfosSection = styled.View`
+    margin-top: 40px;
+`
 const DetailRowLabel = styled.Text`
     color: ${props => props.theme.title};
     font-size: 20px;
+    font-family: actor;
 `
 const DetailRowValue = styled.Text`
     color: ${props => props.theme.text2};
     font-size: 20px;
+    font-family: Oswald200;
 `
 const DetailRowContainer = styled.View`
     flex-flow: row nowrap;
@@ -82,5 +89,6 @@ export {
     DetailRowContainer,
     DetailSection,
     DetailSectionTitle,
-    PlantImage
+    PlantImage,
+    DetailInfosSection
 }

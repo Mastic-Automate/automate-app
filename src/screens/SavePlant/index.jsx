@@ -19,7 +19,8 @@ import {
     InputLabel, 
     InputsContainer, 
     Title,
-    PlantImage
+    PlantImage,
+    DetailInfosSection
 } from './styles'
 
 const schema = yup.object({
@@ -39,7 +40,7 @@ function SavePlant(){
         <Container
             contentContainerStyle={{alignItems:'center'}}
         >
-            <Title>Adicionar planta</Title>
+            <Title>Suculenta</Title>
             <PlantImage 
                 source={appImages['suculenta']}
             />
@@ -52,18 +53,21 @@ function SavePlant(){
                         error={errors.name}
                         placeholder="Nome/Apelido"
                     />
-                    <DetailRow 
-                        label="Tempo"
-                        value="2 semanas"
-                    />
-                    <DetailRow 
-                        label="Ambiente"
-                        value="Interno"
-                    />
-                    <DetailRow 
-                        label="Iluminação"
-                        value="5"
-                    />
+                    <DetailInfosSection>
+
+                        <DetailRow 
+                            label="Tempo"
+                            value="2 semanas"
+                        />
+                        <DetailRow 
+                            label="Ambiente"
+                            value="Interno"
+                        />
+                        <DetailRow 
+                            label="Iluminação"
+                            value="5"
+                        />
+                    </DetailInfosSection>
 
                     <BottomButtonsContainer>
                         <Button text="Salvar planta" style={{flex:1, margin:30}} onPress={handleSubmit(handleSavePlant)} />

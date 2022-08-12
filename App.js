@@ -9,7 +9,11 @@ import { AuthContextProvider } from './src/contexts/AuthContext'
 import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
 import {RootRoutes} from './src/routes/RootRoutes'
 
-import { Poppins_400Regular, Poppins_700Bold} from '@expo-google-fonts/poppins'
+import { 
+  Poppins_400Regular,
+  Poppins_700Bold,
+  Poppins_600SemiBold
+} from '@expo-google-fonts/poppins'
 import {
   Montserrat_900Black,
   Montserrat_700Bold,
@@ -34,6 +38,7 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     'Poppins': Poppins_400Regular,
     'Poppins700': Poppins_700Bold,
+    'Poppins600':Poppins_600SemiBold,
     'ProximaNova': require('./assets/fonts/proximaNova/ProximaNovaBold.otf'),
     'SuperaGothic': require('./assets/fonts/SuperaGothic/SuperaGothic-ExtraBold.otf'),
     'SuperaGothic400': require('./assets/fonts/SuperaGothic/SuperaGothic-Regular.otf'),
@@ -61,7 +66,7 @@ export default function App() {
         <MicrocontrollersContextProvider>
           <NavigationContainer>
             <StatusBar />
-            <AddPlant />
+            <SavePlant />
           </NavigationContainer>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>
