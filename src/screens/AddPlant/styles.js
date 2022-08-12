@@ -28,7 +28,9 @@ const DetailSection = styled.View`
     background-color: ${props => props.theme.background2};
     padding-right: 30px;
     padding-left: 30px;
-    border-top-left-radius:60px ;
+    padding-top: 30px;
+    border-top-left-radius:60px;
+    margin-top: 50px;
 `
 const DetailSectionTitle = styled.Text`
     font-size:20px;
@@ -36,14 +38,17 @@ const DetailSectionTitle = styled.Text`
     width:100%;
     text-align:center;
     color: ${props => props.theme.title};
+    margin-bottom: 40px;
 `
 const DetailRowLabel = styled.Text`
     color: ${props => props.theme.title};
     font-size: 20px;
+    font-family: actor;
 `
 const DetailRowValue = styled.Text`
     color: ${props => props.theme.text2};
     font-size: 20px;
+    font-family: Oswald200;
 `
 const DetailRowContainer = styled.View`
     flex-flow: row nowrap;

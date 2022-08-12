@@ -9,12 +9,12 @@ const Container = styled.View`
     border-radius:16px;
 `
 const Name = styled.Text`
-    font-size:24px;
+    font-size:28px;
     color: ${props => props.active? 'white' : props.theme.title};
 `
 const Subtitle = styled.Text`
     font-size:16px;
-    color: ${props => props.theme.subtitle};
+    color: ${props => props.active? 'white' : props.theme.subtitle};
 `
 const Image = styled.Image`
     width:200px;
@@ -26,7 +26,10 @@ export function CarouselCard({name, sub, img, active}){
             <Name active={active}>
                 {name}
             </Name>
-            <Subtitle>
+            <Subtitle 
+                active={active}
+                numberOfLines={1}
+            >
                 {sub}
             </Subtitle>
             <Image 

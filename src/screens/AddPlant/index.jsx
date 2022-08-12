@@ -80,7 +80,7 @@ function AddPlant(){
                     }}
                     onSnapToItem={setCurrentModelIndex}
                 />
-                <DetailSection style={{marginTop:10}}>
+                <DetailSection>
                     <DetailSectionTitle>Detalhes</DetailSectionTitle>
                     <DetailRow 
                         label="Tempo"

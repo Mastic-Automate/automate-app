@@ -18,6 +18,15 @@ import {
   Montserrat_600SemiBold,
   Montserrat_800ExtraBold
 } from '@expo-google-fonts/montserrat'
+import { Actor_400Regular } from '@expo-google-fonts/actor'
+import {
+  Oswald_200ExtraLight,
+  Oswald_300Light,
+  Oswald_400Regular,
+  Oswald_500Medium,
+  Oswald_600SemiBold,
+  Oswald_700Bold
+} from '@expo-google-fonts/oswald'
 import { AddPlant } from './src/screens/AddPlant';
 import {SavePlant} from './src/screens/SavePlant'
 
@@ -34,7 +43,14 @@ export default function App() {
     Montserrat_900Black,
     Montserrat_400Regular,
     Montserrat_600SemiBold,
-    Montserrat_800ExtraBold
+    Montserrat_800ExtraBold,
+    'actor':Actor_400Regular,
+    'Oswald200': Oswald_200ExtraLight,
+    'Oswald300':Oswald_300Light,
+    'Oswald400':Oswald_400Regular,
+    'Oswald500':Oswald_500Medium,
+    'Oswald600':Oswald_600SemiBold,
+    'Oswald700':Oswald_700Bold
   })
   if(!fontsLoaded){
     return <AppLoading />
@@ -45,7 +61,7 @@ export default function App() {
         <MicrocontrollersContextProvider>
           <NavigationContainer>
             <StatusBar />
-            <SavePlant />
+            <AddPlant />
           </NavigationContainer>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>
