@@ -14,7 +14,7 @@ export function BluetoothConnectionContextProvider({children}){
     const [data, setData] = useState('')
 
     useEffect(()=>{
-        if (found === false) {
+        if (!found) {
             console.log("Escaneando dispositivos...");
             RNBluetoothClassic.startDiscovery().then(devices => {
                 setDevicesFound(devices);
@@ -32,11 +32,11 @@ export function BluetoothConnectionContextProvider({children}){
         if (perm) {
             RNBluetoothClassic.isBluetoothEnabled().then(bluetoothEnable => {
                 if(bluetoothEnable) { 
-                    ifBonded().then(devices => {
+                    ifBonded('Automate').then(devices => {
 
                     });
                 } else { 
-                    RNBluetoothClassic.requestBluetoothEnabled().then(s => s?ifBonded().then(devices => {}):{}).catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO")) 
+                    RNBluetoothClassic.requestBluetoothEnabled().then(s => s?ifBonded("Automate").then(devices => {}):{}).catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO")) 
                 }
        })};
        
@@ -58,10 +58,9 @@ export function BluetoothConnectionContextProvider({children}){
         return granted === PermissionsAndroid.RESULTS.GRANTED;
       };
 
-    const ifBonded = async () => {
+    const ifBonded = async (deviceName) => {
         RNBluetoothClassic.getBondedDevices().then(r => {
-
-            const A = r.filter(device => device.name === 'Automate');
+            const A = r.filter(device => device.name === deviceName);
             if(A[0] === undefined){
                 console.log("Dispositivo ainda não pareado");   
                 setFound(false);
@@ -74,20 +73,10 @@ export function BluetoothConnectionContextProvider({children}){
             return r
         }).catch(err => {});
     }
-
-
-    
-    const Scanear = async () => {
-    
-        if (found) {
-            //automateDevice.isConnected()? Connect(automateDevice).catch(err=>{}): console.log("Dispositivo já conectado");
-            return automateDevice
-        }
-    }
     
     const verifyDevices = async (d) =>  { 
         if (d!==undefined) {
-            const automateDevicesFound = d.filter(device => device.name === "Automate")[0]
+            const automateDevicesFound = d.filter(device => device.name === "Automate")
             if (!automateDevicesFound) {
                 console.log('Dispositivo não foi localizado, Pesquisando novamente');
                 setCounter(counter+1);
@@ -95,79 +84,46 @@ export function BluetoothConnectionContextProvider({children}){
             } else {
                 RNBluetoothClassic.cancelDiscovery();
                 console.log("Scan Pausado, Dispositivo encontrado");
-                setAutomateDevice(automateDevicesFound)
+                setAutomateDevice(automateDevicesFound[0])
                 setFound(true);
             }
         }
     }
 
-    const Connect = async (device) => {
-      let tf =false;
-        await device.isConnected().then(async r =>  {
-      if (!r){
-       
-       while (tf === false) {
-        console.log("Conectando...");
-        const d = await device.connect().catch(async err => {return false}).then(d => {console.log(d? 'Dispositivo conectado': 'Dispositivo Desconectado');  
-        
-        if (d){tf = true;}
-      });
-    }
-          return tf
+    const connect = async (device) => {
+        let deviceConnected = await device.isConnected()
+        if(!deviceConnected){
+            await device.connect()
         }
-       
-      })
      
-    //  console.log("chegou o resultado "+d);
-      return [device, tf]
-    
-       
+        console.log('Dispositivo conectado')
     }
     
-    const Disconnect = async (device) => {
-        
-       let d = await device.disconnect().catch(error => {});
-    
-       console.log(d? "Dispositivo Desconectado": 'O dispositivo já está desconectado');
-      return d
+    const disconnect = async (device) => {
+        let d = await device.disconnect().catch(error => {});
+        console.log(d? "Dispositivo Desconectado": 'O dispositivo já está desconectado');
+        return d
     }
     
-    const SendMessage = async (device, message) => {
+    const sendMessage = async (device, message) => {
         device.isConnected().then((isConnected) => {
             if(isConnected){
-                const msg = JSON.stringify({
-                    command: 'setUmidade',
-                    arg:"50"
-                })
                 device.write(message, 'utf-8').then(delivered => console.log(delivered? "Mensagem enviada":"Mensagem não enviada")).catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
-            
             } else{
                 console.log('Ainda não pode escrever!');
                 return false
             }
         })
-    
     }
+
+    useEffect(() => {
+        if(!!automateDevice){
+            connect(automateDevice)
+        }
+    }, [automateDevice])
     
-    const DataRead = async (device) => {
-    
-      // .then(message => {console.log(message); return message});
-       console.log("Começou leitura");
-    
-      device.available().then(messages => console.log('Numero dentro do buffer: '+messages));
-      
-      device.read().then(message => console.log("Mensagem lida: "+message));
-        
-      // let messages = await device.available();
-      // if (messages > 0) {
-       //var message = await device.read().then(message => {console.log(message === null? "": message); return message});
-        device.clear();
-      // }
-       RNBluetoothClassic.onDeviceRead(device.id, ({ data }) => console.log(data));
-       return "";
-    }
     return (
-        <BluetoothConnectionContext.Provider value={{DataRead, SendMessage, Disconnect, Connect, Scanear, devicesFound, automateDevice, data}}>
+        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, data, devicesFound}}>
             {children}
         </BluetoothConnectionContext.Provider>
     )
