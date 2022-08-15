@@ -25,10 +25,10 @@ import {
     Menu,
     Subtitle,
     Title,
-    PlantImage
+    PlantImage,
+    AlignHelper
 } from './styles'
 import { useState } from 'react'
-import { AlignHelper } from '../Login/styles'
 
 const schema = yup.object({
     email: yup.string().required("Email é obrigatório").email("Email inválido"),
@@ -71,6 +71,7 @@ export function Register({ navigation }) {
                             name="email"
                             control={control}
                             style={{ 
+                                marginTop: 24,
                                 marginBottom: 24,
                                 backgroundColor:'#9BC2DD',
                                 shadowColor: "#000",
@@ -168,9 +169,11 @@ export function Register({ navigation }) {
                     />
                     <BottomView>
                         <AlignHelper>
-                            <BottomText>Já possui uma conta?</BottomText>
                             <BottomLink onPress={() => navigation.replace('login')}>
                                 <BottomLinkText>Login</BottomLinkText>
+                            </BottomLink>
+                            <BottomLink onPress={() => navigation.replace('login')}>
+                                <BottomLinkText>Ajuda</BottomLinkText>
                             </BottomLink>
                         </AlignHelper>
                     </BottomView>
