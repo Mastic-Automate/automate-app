@@ -30,6 +30,7 @@ const HeadingSection = styled.View`
 const Title = styled.Text`
     font-size: 36px;
     font-family: ProximaNova;
+    color: ${props => props.theme.title};
     color: #003553;
     margin-left: 19px;
     margin-bottom: 1%;
@@ -38,6 +39,7 @@ const Subtitle = styled.Text`
     color: #003553;
     font-size: 26px;
     font-family: ProximaNova;
+    color: ${props => props.theme.text1};
     margin-left: 19px;
     font-weight: 600;
     font-style: normal;

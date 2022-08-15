@@ -29,6 +29,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useState } from 'react'
+import { useTheme } from '../../hooks/useTheme';
 import { Image } from 'react-native'
 
 const schema = yup.object({
@@ -37,6 +38,7 @@ const schema = yup.object({
 })
 
 export function Login({ navigation }) {
+    const {theme} = useTheme()
     const { signIn } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -52,9 +54,10 @@ export function Login({ navigation }) {
         })
     }
 
+    // name={theme === 'light' ? 'moon' : 'sun'}
     return (
         <Container>
-            <BackgroundImage source={require('../../assets/background1.png')}>
+            <BackgroundImage source={theme === 'light' ? require('../../assets/background1.png') : require('../../assets/background-night.png')}>
 
                 <Image 
                     source={require('../../assets/logo_automate.png')}
@@ -74,7 +77,18 @@ export function Login({ navigation }) {
                             error={errors.email}
                             keyboardType="email-address"
                             placeholder="Email"
-                            style={{ backgroundColor:'#B7D9F0', fontFamily:'Poppins', marginBottom: 24}}
+                            style={{ 
+                                backgroundColor:'#B7D9F0',
+                                marginBottom: 24,
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
+                                elevation: 30,
+                            }}
                             autoCorrect={false}
                             autoCapitalize="none"
                             placeholderTextColor="#336283"
@@ -85,7 +99,17 @@ export function Login({ navigation }) {
                             error={errors.password}
                             placeholder="Senha"
                             secureTextEntry
-                            style={{ backgroundColor:'#9BC2DD',}}
+                            style={{ 
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
+                                elevation: 30,
+                            }}
                             autoCorrect={false}
                             autoCapitalize="none"
                             placeholderTextColor="#336283"
