@@ -11,6 +11,7 @@ export function BluetoothConnectionContextProvider({children}){
     const [found, setFound] = useState(null);
     const [counter, setCounter] = useState(0);
     const [automateDevice, setAutomateDevice] = useState({});
+    const [data, setData] = useState('')
 
     useEffect(()=>{
         if (found === false) {
@@ -28,9 +29,15 @@ export function BluetoothConnectionContextProvider({children}){
            console.log(perm? 'Permitido o Uso da localização': "Não permitido o Uso da localização")
         });
 
-        if (perm) {RNBluetoothClassic.isBluetoothEnabled().then(bluetoothEnable => {
-            if(bluetoothEnable)
-      { ifBonded().then(devices => {});} else { RNBluetoothClassic.requestBluetoothEnabled().then(s => s?ifBonded().then(devices => {}):{}).catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO")) }
+        if (perm) {
+            RNBluetoothClassic.isBluetoothEnabled().then(bluetoothEnable => {
+                if(bluetoothEnable) { 
+                    ifBonded().then(devices => {
+
+                    });
+                } else { 
+                    RNBluetoothClassic.requestBluetoothEnabled().then(s => s?ifBonded().then(devices => {}):{}).catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO")) 
+                }
        })};
        
     },[])
@@ -160,7 +167,7 @@ export function BluetoothConnectionContextProvider({children}){
        return "";
     }
     return (
-        <BluetoothConnectionContext.Provider value={{DataRead, SendMessage, Disconnect, Connect, Scanear, devicesFound}}>
+        <BluetoothConnectionContext.Provider value={{DataRead, SendMessage, Disconnect, Connect, Scanear, devicesFound, automateDevice, data}}>
             {children}
         </BluetoothConnectionContext.Provider>
     )

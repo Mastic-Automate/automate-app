@@ -210,88 +210,8 @@ const FoundAutomate = (Automate, info) => {
 }
 
 function BluetoothConnection(){
-   
-    const [automateFound, setAutomateFound] = useState(false);
-    const [Automate, setAutomate] = useState({});
-    const [text, setText] = useState(null);
-    const [data, setData] =useState('');
-    const [bottomError, setBottomError] = useState('');
-    const [connected, setConnected] = useState(false);
-
-    const {Connect, Disconnect, Scanear, DataRead, SendMessage} = useBluetoothConnection()
-
-    useEffect(()=> {
-         if(automateFound) {
-            let z = isConnectedDevice().then(b => b?console.log("Já conectado"): HandleConnect(Automate));
-            console.log("Valor z");
-            console.log(z);
-        }
-    return () => {
-        
-        //funções para desmonte de componente
-       
-    }
-}, [automateFound])
-
- const isConnectedDevice= async () => {
-  let b = await Automate.isConnected();
-  return b;
- }
-
-    const removeSubscriptions = () => {
-       // subscription.remove();
-       // conne.remove();
-    }
-   
-    const HandleScan = async () => {
-        Scanear().then(r => {
-            if (r !== undefined) {
-                setAutomate(r);
-                setAutomateFound(true);              
-                //console.log(r); 
-            }
-            
-        });
-    }
-     
-     const HandleConnect = async (d) => {
-  
-       await Connect(d).then(array => {
-            const device = array[0];
-            console.log("\n \nAprovação: ");
-            console.log(array[1]);
-             if (array[1] || undefined){
-                console.log("Entrou no Read");
-                setConnected(true);
-            RNBluetoothClassic.onDeviceRead(device.id, ({ data }) => {console.log(device.available());device.clear();HandleDataRead(data)});
-            setConnected(true);
-             }
-             
-            });
-         
-     }
-        HandleScan();
-
-     const HandleDisconnect = async () => {
-        Disconnect(Automate).then(device => setAutomate(device));
-         setConnected(false)
-     }
- 
-     const HandleMessage = async () => {
-        let r = await SendMessage(Automate, text).then(response => {return response});
-        
-     }
- 
-     const HandleDataRead = async (info) => {
-        console.log(data)
-        setData(info)
-         
-     }
-
-    //Função para ver os dois estados em mudança
-    setTimeout(function (){
-       //setAutomateFound(!automateFound);
-    },5000)
+    const {Connect, Disconnect, Scanear, DataRead, SendMessage, automateDevice, data} = useBluetoothConnection()
+    const automateFound = !!automateDevice
 
     let [fontsLoaded] = useFonts({
         'ProximaNovaBold': require('../../../assets/fonts/proximaNova/ProximaNovaBold.otf'),
@@ -308,7 +228,7 @@ function BluetoothConnection(){
             <NavDiv>
             <MaterialIcons style={{fontSize: 24, fontWeight: '900', marginLeft: 32}} name='arrow-back-ios' />
             </NavDiv>
-                {!automateFound? <ScanAutomate />:<FoundAutomate automateFound={Automate} info={data}/>}
+                {!automateFound? <ScanAutomate />:<FoundAutomate automateFound={automateDevice} info={data}/>}
                 
         </Container>
     )
