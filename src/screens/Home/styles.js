@@ -6,6 +6,7 @@ const Container = styled.ScrollView`
     padding-top: 20px;
 `
 const Title = styled.Text`
+    width: 120%;
     color: ${props => props.theme.title};
     font-size:30px;
     font-family: Montserrat_900Black;
@@ -29,7 +30,8 @@ const TopSection = styled.View`
 const TopSectionCol1 = styled.View`
     flex:1;
     padding-left:34px;
-    justify-content:center;
+    justify-content: space-around;
+    padding-bottom: 40px;
 `
 const TopSectionCol2 = styled.View`
     width: 150px;
@@ -51,7 +53,7 @@ const PlantsSectionTitle = styled.Text`
     font-size:28px;
     color: ${props => props.theme.title};
     font-family: SuperaGothic;
-    margin-left: 20px;
+    margin-left: 30px;
 `
 
 const RandomPlantsSection = styled.View`
