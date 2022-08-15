@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Container = styled.ScrollView`
+const Container = styled.View`
     height: 100%;
     position: relative;
 `

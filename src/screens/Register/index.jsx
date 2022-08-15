@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import {useAuth} from '../../hooks/useAuth'
 import {appImages} from '../../global/images'
+import { useTheme } from '../../hooks/useTheme';
 
 import { 
     BackgroundImage,
@@ -27,6 +28,7 @@ import {
     PlantImage
 } from './styles'
 import { useState } from 'react'
+import { AlignHelper } from '../Login/styles'
 
 const schema = yup.object({
     email: yup.string().required("Email é obrigatório").email("Email inválido"),
@@ -40,6 +42,7 @@ export function Register({ navigation }) {
         resolver: yupResolver(schema)
     })
 
+    const {theme} = useTheme()
     const {signUp} = useAuth()
 
     const [bottomError, setBottomError] = useState('')
@@ -53,7 +56,7 @@ export function Register({ navigation }) {
     }
     return (
         <Container>
-            <BackgroundImage source={require('../../assets/background1.png')}>
+            <BackgroundImage source={theme === 'light' ? require('../../assets/background1.png') : require('../../assets/background-night.png')}>
                 <Image 
                     source={require('../../assets/logo_automate.png')}
                     style={{width:150, height:150}} 
@@ -68,7 +71,7 @@ export function Register({ navigation }) {
                             name="email"
                             control={control}
                             style={{ 
-                                marginTop: 10,
+                                marginBottom: 24,
                                 backgroundColor:'#9BC2DD',
                                 shadowColor: "#000",
                                 shadowOffset: {
@@ -90,7 +93,7 @@ export function Register({ navigation }) {
                             name="name"
                             control={control}
                             style={{ 
-                                marginTop: 10,
+                                marginBottom: 24,
                                 backgroundColor:'#9BC2DD',
                                 shadowColor: "#000",
                                 shadowOffset: {
@@ -111,7 +114,7 @@ export function Register({ navigation }) {
                             name="password"
                             control={control}
                             style={{ 
-                                marginTop: 10,
+                                marginBottom: 24,
                                 backgroundColor:'#9BC2DD',
                                 shadowColor: "#000",
                                 shadowOffset: {
@@ -133,7 +136,7 @@ export function Register({ navigation }) {
                             name="password-confirm"
                             control={control}
                             style={{ 
-                                marginTop: 10,
+                                marginBottom: 24,
                                 backgroundColor:'#9BC2DD',
                                 shadowColor: "#000",
                                 shadowOffset: {
@@ -164,10 +167,12 @@ export function Register({ navigation }) {
                         source={appImages['plant2']}
                     />
                     <BottomView>
-                        <BottomText>Já possui uma conta?</BottomText>
-                        <BottomLink onPress={() => navigation.replace('login')}>
-                            <BottomLinkText>Login</BottomLinkText>
-                        </BottomLink>
+                        <AlignHelper>
+                            <BottomText>Já possui uma conta?</BottomText>
+                            <BottomLink onPress={() => navigation.replace('login')}>
+                                <BottomLinkText>Login</BottomLinkText>
+                            </BottomLink>
+                        </AlignHelper>
                     </BottomView>
                 </Menu>
             </BackgroundImage>
