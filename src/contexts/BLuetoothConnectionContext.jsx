@@ -68,13 +68,15 @@ export function BluetoothConnectionContextProvider({children}){
     }, [isConnected])
 
     useEffect(()=> {
-        if(automateDevice !== undefined && Object.keys(automateDevice).length > 0){
+        if(isConnected){
             console.log(`Automate encontrado, configurando com id:${automateDevice.id}`)
-            setupDevice()
+            setupDevice().then(()=> {
+                console.log('Device configurado')
+            })
             loadDeviceData()
         }
 
-    }, [automateDevice])
+    }, [automateDevice, isConnected])
 
     useEffect(()=>{
         const i = setInterval(loadDeviceData, 8000)
