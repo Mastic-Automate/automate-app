@@ -7,8 +7,6 @@ import AppLoading from 'expo-app-loading';
 import { Image } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons'
 import { Text, View } from 'moti';
-import * as Bluetooth from '../../services/Bluetooth';
-import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 import {useBluetoothConnection} from '../../contexts/BLuetoothConnectionContext'
 

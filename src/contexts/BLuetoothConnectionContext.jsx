@@ -11,9 +11,11 @@ export function BluetoothConnectionContextProvider({children}){
     const [found, setFound] = useState(null);
     const [counter, setCounter] = useState(0);
     const [automateDevice, setAutomateDevice] = useState({});
+    const [isConnected, setIsConnected] = useState(false)
+    const [deviceData, setDeviceData] = useState({})
     const [data, setData] = useState('')
 
-    useEffect(()=>{
+    useEffect(()=> {
         if (!found) {
             console.log("Escaneando dispositivos...");
             RNBluetoothClassic.startDiscovery().then(devices => {
@@ -39,8 +41,27 @@ export function BluetoothConnectionContextProvider({children}){
                     RNBluetoothClassic.requestBluetoothEnabled().then(s => s?ifBonded("Automate").then(devices => {}):{}).catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO")) 
                 }
        })};
-       
     },[])
+
+    useEffect(()=> {
+        if(Object.keys(automateDevice).length > 0 && isConnected){
+            RNBluetoothClassic.onDeviceRead(automateDevice.id, ({data}) => {
+                
+            })
+            sendMessage(JSON.stringify({
+                "getReport": true,
+                "plantData": false,
+                "humidity": 0,
+            }))
+        }
+
+    }, [automateDevice])
+    
+    useEffect(()=>{
+        if(isConnected){
+            
+        }
+    }, [isConnected])
 
     async function requestAccessFineLocationPermission() {
         const granted = await PermissionsAndroid.request(
@@ -91,24 +112,28 @@ export function BluetoothConnectionContextProvider({children}){
     }
 
     const connect = async (device) => {
-        let deviceConnected = await device.isConnected()
-        if(!deviceConnected){
-            await device.connect()
+        if(Object.keys(device).length > 0){
+            let deviceConnected = await device.isConnected()
+            if(!deviceConnected){
+                await device.connect()
+                setIsConnected(true)
+            }
+
+            console.log('Dispositivo conectado')
         }
-     
-        console.log('Dispositivo conectado')
     }
     
     const disconnect = async (device) => {
         let d = await device.disconnect().catch(error => {});
         console.log(d? "Dispositivo Desconectado": 'O dispositivo já está desconectado');
+        setIsConnected(false)
         return d
     }
     
-    const sendMessage = async (device, message) => {
-        device.isConnected().then((isConnected) => {
+    const sendMessage = async (message) => {
+        !!automateDevice && automateDevice.isConnected().then((isConnected) => {
             if(isConnected){
-                device.write(message, 'utf-8').then(delivered => console.log(delivered? "Mensagem enviada":"Mensagem não enviada")).catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
+                automateDevice.write(message, 'utf-8').then(delivered => console.log(delivered? "Mensagem enviada":"Mensagem não enviada")).catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
             } else{
                 console.log('Ainda não pode escrever!');
                 return false
