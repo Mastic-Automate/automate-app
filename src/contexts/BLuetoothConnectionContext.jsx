@@ -77,11 +77,11 @@ export function BluetoothConnectionContextProvider({children}){
     }, [automateDevice])
 
     useEffect(()=>{
-        const i = setInterval(loadDeviceData, 3000)
+        const i = setInterval(loadDeviceData, 8000)
         return ()=> {
             clearInterval(i)
         }
-    }, [])
+    }, [isConnected])
 
     async function requestAccessFineLocationPermission() {
         const granted = await PermissionsAndroid.request(
@@ -137,8 +137,8 @@ export function BluetoothConnectionContextProvider({children}){
             if(!deviceConnected){
                 await device.connect()
                 setIsConnected(true)
-                console.log(`Connected: ${isConnected}`)
                 console.log('Conectou com toda certeza, e para provar...')
+                console.log(`Connected: ${isConnected}`)
             }
 
             console.log('Dispositivo conectado')
@@ -178,9 +178,13 @@ export function BluetoothConnectionContextProvider({children}){
             connect(automateDevice)
         }
     }, [automateDevice])
+
+    useEffect(()=>{
+        console.log(`Conectado: ${isConnected}`)
+    }, [isConnected])
     
     return (
-        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, devicesFound, deviceData, loadDeviceData}}>
+        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, devicesFound, deviceData, loadDeviceData, isConnected}}>
             {children}
         </BluetoothConnectionContext.Provider>
     )

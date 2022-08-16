@@ -208,7 +208,7 @@ const FoundAutomate = ({automate, deviceInfo}) => {
 }
 
 function BluetoothConnection(){
-    const {connect, disconnect, sendMessage, automateDevice, data, devicesFound, deviceData} = useBluetoothConnection()
+    const {connect, disconnect, sendMessage, automateDevice, data, devicesFound, deviceData, isConnected} = useBluetoothConnection()
     const automateFound = !!automateDevice
 
     let [fontsLoaded] = useFonts({
@@ -229,7 +229,7 @@ function BluetoothConnection(){
             {!automateFound? (
                 <ScanAutomate />
             ) : (
-                <FoundAutomate automate={automateDevice} deviceInfo={deviceData}/>
+                <FoundAutomate automate={automateDevice} deviceInfo={deviceData} connected={isConnected}/>
             )}
                 
         </Container>
