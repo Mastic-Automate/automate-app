@@ -2,7 +2,7 @@ import RNBluetoothClassic from 'react-native-bluetooth-classic'
 import { PermissionsAndroid } from 'react-native';
 
 import { createContext, useContext } from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const BluetoothConnectionContext = createContext({})
 
@@ -13,7 +13,6 @@ export function BluetoothConnectionContextProvider({children}){
     const [automateDevice, setAutomateDevice] = useState({});
     const [isConnected, setIsConnected] = useState(false)
     const [deviceData, setDeviceData] = useState({})
-    const [data, setData] = useState('')
 
     useEffect(()=> {
         if (!found) {
@@ -43,25 +42,46 @@ export function BluetoothConnectionContextProvider({children}){
        })};
     },[])
 
-    useEffect(()=> {
-        if(Object.keys(automateDevice).length > 0 && isConnected){
+    async function setupDevice(){
+        const isConnected = await automateDevice.isConnected()
+        if(isConnected){
             RNBluetoothClassic.onDeviceRead(automateDevice.id, ({data}) => {
-                
+                console.log("Dados recebidos")
+                console.log(data)
+                setDeviceData(data)
             })
+        }
+    }
+
+    const loadDeviceData = useCallback(()=> {
+        if(isConnected){
+            console.log('Requisitando dados...')
             sendMessage(JSON.stringify({
                 "getReport": true,
                 "plantData": false,
                 "humidity": 0,
             }))
+        } else {
+            console.log('Não pôde requistar pois ainda não houve conexão')
+            console.log(isConnected)
+        }
+    }, [isConnected])
+
+    useEffect(()=> {
+        if(automateDevice !== undefined && Object.keys(automateDevice).length > 0){
+            console.log(`Automate encontrado, configurando com id:${automateDevice.id}`)
+            setupDevice()
+            loadDeviceData()
         }
 
     }, [automateDevice])
-    
+
     useEffect(()=>{
-        if(isConnected){
-            
+        const i = setInterval(loadDeviceData, 3000)
+        return ()=> {
+            clearInterval(i)
         }
-    }, [isConnected])
+    }, [])
 
     async function requestAccessFineLocationPermission() {
         const granted = await PermissionsAndroid.request(
@@ -111,17 +131,25 @@ export function BluetoothConnectionContextProvider({children}){
         }
     }
 
-    const connect = async (device) => {
+    const connect = useCallback(async (device) => {
         if(Object.keys(device).length > 0){
             let deviceConnected = await device.isConnected()
             if(!deviceConnected){
                 await device.connect()
                 setIsConnected(true)
+                console.log(`Connected: ${isConnected}`)
+                console.log('Conectou com toda certeza, e para provar...')
             }
 
             console.log('Dispositivo conectado')
+            sendMessage(JSON.stringify({
+                "getReport": true,
+                "plantData": false,
+                "humidity": 0,
+            }))
+
         }
-    }
+    }, [isConnected])
     
     const disconnect = async (device) => {
         let d = await device.disconnect().catch(error => {});
@@ -131,14 +159,18 @@ export function BluetoothConnectionContextProvider({children}){
     }
     
     const sendMessage = async (message) => {
-        !!automateDevice && automateDevice.isConnected().then((isConnected) => {
+        if(!!automateDevice){
             if(isConnected){
-                automateDevice.write(message, 'utf-8').then(delivered => console.log(delivered? "Mensagem enviada":"Mensagem não enviada")).catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
+                automateDevice.write(message, 'utf-8')
+                    .then(delivered => console.log(delivered? "Mensagem enviada":"Mensagem não enviada"))
+                    .catch(err => console.log('Não foi Possível enviar a mensagem, certifique-se de ter Conectado o Automate'));
             } else{
                 console.log('Ainda não pode escrever!');
                 return false
             }
-        })
+        } else {
+            console.log('Não pôde enviar...')
+        }
     }
 
     useEffect(() => {
@@ -148,7 +180,7 @@ export function BluetoothConnectionContextProvider({children}){
     }, [automateDevice])
     
     return (
-        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, data, devicesFound}}>
+        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, devicesFound, deviceData, loadDeviceData}}>
             {children}
         </BluetoothConnectionContext.Provider>
     )

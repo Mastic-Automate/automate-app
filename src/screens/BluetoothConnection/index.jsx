@@ -179,7 +179,7 @@ const ScanAutomate = ({automateFound}) => {
     )
 }
 
-const FoundAutomate = (Automate, info) => {
+const FoundAutomate = ({automate, deviceInfo}) => {
 
     return (
         <>
@@ -191,7 +191,7 @@ const FoundAutomate = (Automate, info) => {
                 style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf:'center'}}
                 source={require('../../../assets/arduino.gif')} 
             />
-            <AutomateName>{Automate.automateFound.name}</AutomateName>
+            <AutomateName>{JSON.stringify(deviceInfo)}</AutomateName>
             <DescText >slaaaaaa</DescText>
             <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', }}>
                 <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
@@ -208,7 +208,7 @@ const FoundAutomate = (Automate, info) => {
 }
 
 function BluetoothConnection(){
-    const {connect, disconnect, sendMessage, automateDevice, data, devicesFound} = useBluetoothConnection()
+    const {connect, disconnect, sendMessage, automateDevice, data, devicesFound, deviceData} = useBluetoothConnection()
     const automateFound = !!automateDevice
 
     let [fontsLoaded] = useFonts({
@@ -229,7 +229,7 @@ function BluetoothConnection(){
             {!automateFound? (
                 <ScanAutomate />
             ) : (
-                <FoundAutomate automateFound={automateDevice} info={data}/>
+                <FoundAutomate automate={automateDevice} deviceInfo={deviceData}/>
             )}
                 
         </Container>
