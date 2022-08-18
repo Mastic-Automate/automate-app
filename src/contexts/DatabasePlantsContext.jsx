@@ -13,8 +13,28 @@ export function DatabasePlantsContextProvider({children}){
         })
     }, [])
 
+    useEffect(()=>{
+        requestPlants()
+    }, [])
+
+    const pickRandomPlants = useCallback((count)=>{
+        let result = []
+        while(result.length < count){
+            const selected = pickRandomPlant()
+            if(!result.includes(selected)) {
+                result.push(selected)
+            }
+        }
+        return result
+    }, [databasePlants])
+
+    const pickRandomPlant = useCallback(() => {
+        const index = Math.floor(Math.random() * databasePlants.length);
+        return databasePlants[index]
+    }, [databasePlants])
+
     return (
-        <DatabasePlantsContext.Provider value={{databasePlants, requestPlants}}>
+        <DatabasePlantsContext.Provider value={{databasePlants, requestPlants, pickRandomPlants}}>
             {children}
         </DatabasePlantsContext.Provider>
     )

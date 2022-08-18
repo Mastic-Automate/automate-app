@@ -21,10 +21,11 @@ import {
 } from './styles'
 
 import {appImages} from '../../global/images'
-import { pickRandomPlants } from '../../global/plants'
 import { useMemo } from 'react'
+import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 
 export function Home(){
+    const {pickRandomPlants} = useDatabasePlants()
     const randomPlants = useMemo(() => pickRandomPlants(3), [])
     return (
         <Container>
@@ -98,11 +99,11 @@ export function Home(){
                         return (
                             <InfoPlantCard 
                                 image={plant.image}
-                                description={plant.description}
+                                description={plant.plantAbout}
                                 style={{marginBottom:20}}
-                                key={plant.id}
-                                title={plant.name}
-                                id={plant.id}
+                                key={plant.idPlant}
+                                title={plant.plantName}
+                                id={plant.idPlant}
                             />
                         )
                     })}

@@ -7,6 +7,7 @@ import {StatusBar} from './src/components/StatusBar'
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 import { AuthContextProvider } from './src/contexts/AuthContext'
 import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
+import {DatabasePlantsContextProvider} from './src/contexts/DatabasePlantsContext'
 import {RootRoutes} from './src/routes/RootRoutes'
 
 import { 
@@ -61,12 +62,14 @@ export default function App() {
   return (
     <AuthContextProvider>
       <ThemeContextProvider>
-        <MicrocontrollersContextProvider>
-          <NavigationContainer>
-            <StatusBar />
-            <RootRoutes />
-          </NavigationContainer>
-        </MicrocontrollersContextProvider>
+        <DatabasePlantsContextProvider>
+          <MicrocontrollersContextProvider>
+            <NavigationContainer>
+              <StatusBar />
+              <RootRoutes />
+            </NavigationContainer>
+          </MicrocontrollersContextProvider>
+        </DatabasePlantsContextProvider>
       </ThemeContextProvider>
     </AuthContextProvider>
   );
