@@ -2,17 +2,18 @@ import styled from 'styled-components/native'
 
 const BarContainer = styled.View`
     height: 100%;
+    position: relative;
 `
 
 const TopSection = styled.View`
-    height: 160px;
-    width: 100%;
+    justify-content:center;
+    align-items:center;
+    margin: 10px;
 `
 
 const TopImage = styled.Image`
-    width: 100%;
-    height: 160px;
-    margin: 10px;
+    width: 150px;
+    height: 165px;
 `
 const MainSection = styled.View`
     flex:1;
@@ -57,6 +58,14 @@ const ItemText = styled.Text`
     margin-left: 12px;
     font-family: ${props => props.isFocused? 'Montserrat_700Bold' : 'Montserrat_500Medium'};
 `
+const CornerImage = styled.Image`
+    height: 300px;
+    width: 170px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    z-index:-1;
+`
 
 export {
     BarContainer,
@@ -67,5 +76,6 @@ export {
     BottomProfilePicture,
     BottomText,
     MainSection,
-    TopSection
+    TopSection,
+    CornerImage
 }
