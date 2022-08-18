@@ -23,16 +23,16 @@ const Subtitle = styled.Text`
     font-family: MusticaPro;
 `
 const Container = styled.TouchableOpacity`
-    margin:4px;
-    height: 200px;
-    width:130px;
+    margin: 3px;
+    height: 180px;
+    width: 130px;
     justify-content: flex-end;
 `
 const PlantPicture = styled.Image`
     width:130px;
-    height:130px;
+    height:140px;
     position:absolute;
-    top:10px;
+    top: -10px;
     right: -20px;
 `
 
