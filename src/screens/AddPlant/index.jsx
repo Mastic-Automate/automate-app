@@ -1,11 +1,9 @@
-import {Dimensions, Text, View} from 'react-native'
+import {Dimensions} from 'react-native'
 
 import { Button } from '../../components/Button'
 
-import {FormInput as Input} from '../../components/FormInput'
 
 import {useForm} from 'react-hook-form'
-import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 
 import Carousel from 'react-native-snap-carousel'
@@ -14,10 +12,6 @@ import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSecti
 import { CarouselCard } from './CarouselCard'
 import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
-
-const schema = yup.object({
-    name: yup.string().required("Nome é obrigatório")
-})
 
 const SLIDER_WIDTH = Dimensions.get('window').width
 const ITEM_WIDTH = SLIDER_WIDTH*0.8
@@ -31,12 +25,7 @@ function AddPlant(){
         return databasePlants[currentModelIndex]
     }, [currentModelIndex, databasePlants])
 
-    const {handleSubmit, control, formState:{errors}} = useForm({
-        resolver: yupResolver(schema)
-    })
-
     function handleAddPlant(data){
-        console.log(data)
         console.log(selectedPlant)
     }
     if(!selectedPlant){
@@ -89,7 +78,7 @@ function AddPlant(){
                     />
 
                     <BottomButtonsContainer>
-                        <Button text="Adicionar planta" style={{flex:1, margin:30}} onPress={handleSubmit(handleAddPlant)} />
+                        <Button text="Adicionar planta" style={{flex:1, margin:30}} onPress={handleAddPlant} />
                     </BottomButtonsContainer>
                 </DetailSection>
             </InputsContainer>
