@@ -7,11 +7,11 @@ const Container = styled.ScrollView`
 
 const Title = styled.Text`
     color: ${props => props.theme.title};
-    font-size: 30px;
+    font-size: 55px;
     width:100%;
     text-align:center;
     margin-top: 30px;
-    font-family:Poppins;
+    font-family:Montserrat_600SemiBold;
 `
 
 const InputsContainer = styled.View`
@@ -19,8 +19,9 @@ const InputsContainer = styled.View`
     flex:1;
 `
 const InputLabel = styled.Text`
-    color: ${props => props.theme.secondary1};
+    color: ${props => props.theme.title};
     font-size: 20px;
+    font-family: Poppins600;
 `
 const DetailSection = styled.View`
     height: 400px;
@@ -29,8 +30,7 @@ const DetailSection = styled.View`
     padding-right: 30px;
     padding-left: 30px;
     padding-top: 30px;
-    border-top-left-radius:60px;
-    margin-top: 50px;
+    border-top-left-radius:60px ;
 `
 const DetailSectionTitle = styled.Text`
     font-size:20px;
@@ -38,7 +38,9 @@ const DetailSectionTitle = styled.Text`
     width:100%;
     text-align:center;
     color: ${props => props.theme.title};
-    margin-bottom: 40px;
+`
+const DetailInfosSection = styled.View`
+    margin-top: 40px;
 `
 const DetailRowLabel = styled.Text`
     color: ${props => props.theme.title};
@@ -72,6 +74,11 @@ const DetailRow = ({label, value}) => {
 const BottomButtonsContainer = styled.View`
     flex-direction:row;
 `
+
+const PlantImage = styled.Image`
+    width: 300px;
+    height: 400px;
+`
 export { 
     Container, 
     Title, 
@@ -81,5 +88,7 @@ export {
     DetailRow,
     DetailRowContainer,
     DetailSection,
-    DetailSectionTitle
+    DetailSectionTitle,
+    PlantImage,
+    DetailInfosSection
 }

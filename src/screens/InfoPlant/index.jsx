@@ -20,17 +20,23 @@ import {
     BottomSectionTitle,
     RightSection,
 } from './styles'
-import { getPlantInfo } from '../../global/plants';
-import { useMemo } from 'react';
+import { getPlantImage, getPlantInfo } from '../../global/plants';
+import { useEffect, useMemo } from 'react';
+import { useState } from 'react';
+import { api } from '../../services/api';
 
 function InfoPlant({route}){
     const themeColors = useTheme()
-    const plantInfo = useMemo(() => getPlantInfo(route.params.id), [route.params.id])
+    const [plantInfo, setPlantInfo] = useState({})
+    useEffect( () => {
+        api.get(`/getPlant?id=${route.params.id}`)
+            .then(response => setPlantInfo(response.data[0]))
+    }, [route.params.id])
     return (
 
         <Container>
             <HeaderSection>
-                <Title style={{marginTop: 12}}>{plantInfo.name}</Title>
+                <Title style={{marginTop: 12}}>{plantInfo.plantName}</Title>
             </HeaderSection>
             <MidSection>
                 <MidSectionCol1>
@@ -40,7 +46,7 @@ function InfoPlant({route}){
                     </InfoSquare>
                     <InfoSquare>
                         <Ionicons name="water-outline" color={themeColors.background2} size={52} />
-                        <InfoSquareText>100%</InfoSquareText>
+                        <InfoSquareText>{plantInfo.plantSoilHumidity}</InfoSquareText>
                     </InfoSquare>
                     <InfoSquare>
                         <FontAwesome5 name="temperature-high" color={themeColors.background2} size={52} />
@@ -49,7 +55,7 @@ function InfoPlant({route}){
                 </MidSectionCol1>
                 <MidSectionCol2>
                     <PlantImage 
-                        source={plantInfo.image}
+                        source={getPlantImage(plantInfo.idPlant)}
                     />
                 </MidSectionCol2>
             </MidSection>
@@ -58,7 +64,7 @@ function InfoPlant({route}){
                     Sobre
                 </BottomSectionTitle>
                 <BottomText>
-                    {plantInfo.description}
+                    {plantInfo.plantAbout}
                 </BottomText>
             </BottomSection>
             <RightSection></RightSection>
