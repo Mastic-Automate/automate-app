@@ -13,38 +13,24 @@ import Carousel from 'react-native-snap-carousel'
 import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSectionTitle, InputLabel, InputsContainer, Title} from './styles'
 import { CarouselCard } from './CarouselCard'
 import { useMemo, useState } from 'react'
-import { appImages } from '../../global/images'
+import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 
 const schema = yup.object({
     name: yup.string().required("Nome é obrigatório")
 })
 
-const defaultModels = [
-    {
-        name:'tomate',
-        enviroment:'interno',
-        luminosity: 5,
-        sub:'Fácil de cuidar',
-        time: '2 a 4 semanas',
-        img: appImages['morango']
-    },
-    {
-        name:'alface',
-        enviroment:'externo',
-        luminosity: 5,
-        sub:'Fácil de cuidar',
-        time: '2 a 10 semanas',
-        img: appImages['pimenta_do_reino']
-    }
-]
 const SLIDER_WIDTH = Dimensions.get('window').width
 const ITEM_WIDTH = SLIDER_WIDTH*0.8
 
 function AddPlant(){
+    const {databasePlants} = useDatabasePlants()
+
     const [currentModelIndex, setCurrentModelIndex] = useState(0)
+
     const selectedPlant = useMemo(() => {
-        return defaultModels[currentModelIndex]
-    }, [currentModelIndex])
+        return databasePlants[currentModelIndex]
+    }, [currentModelIndex, databasePlants])
+
     const {handleSubmit, control, formState:{errors}} = useForm({
         resolver: yupResolver(schema)
     })
@@ -53,21 +39,28 @@ function AddPlant(){
         console.log(data)
         console.log(selectedPlant)
     }
-    
+    if(!selectedPlant){
+        return (
+            <Container>
+                <Title>Carregando...</Title>
+            </Container>
+        )
+    }
+
     return (
         <Container>
             <Title>Adicionar planta</Title>
             <InputsContainer>
                 <Carousel 
-                    data={defaultModels}
+                    data={databasePlants}
                     renderItem={({item, index}) => {
                         return (
                             <CarouselCard 
-                                name={item.name}
+                                name={item.plantName}
                                 active={currentModelIndex === index}
                                 img={item.img}
-                                key={index}
-                                sub={item.sub}
+                                key={item.idPlant}
+                                sub={item.plantAbout}
                             />
                         )
                     }}
@@ -83,16 +76,16 @@ function AddPlant(){
                 <DetailSection>
                     <DetailSectionTitle>Detalhes</DetailSectionTitle>
                     <DetailRow 
-                        label="Tempo"
-                        value={selectedPlant.time}
+                        label="Tempo de colheita"
+                        value={selectedPlant.plantTimeHarvest}
                     />
                     <DetailRow 
-                        label="Ambiente"
-                        value={selectedPlant.enviroment}
+                        label="Quantidade de água"
+                        value={selectedPlant.plantWaterQuantity}
                     />
                     <DetailRow 
-                        label="Iluminação"
-                        value={selectedPlant.luminosity}
+                        label="Temperatura ideal"
+                        value={selectedPlant.plantTemperature}
                     />
 
                     <BottomButtonsContainer>
