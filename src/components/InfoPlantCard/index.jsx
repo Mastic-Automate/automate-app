@@ -14,12 +14,14 @@ const Container = styled.View`
 
 const ImageContainer = styled.View`
     height: 130px;
-    width: 130px;
+    width: 115px;
     background-color: ${props => props.theme.cardImageContainer};
+    justify-content: center;
 `
 const Image = styled.Image`
-    width: 100%;
-    height: 100%;
+    width: 60%;
+    height: 60%;
+    align-self: center;
 `
 const ContentContainer = styled.View`
     flex:1;
@@ -28,14 +30,16 @@ const ContentContainer = styled.View`
     padding-left: 12px;
 `
 const Title = styled.Text`
-    font-size:28px;
-    font-family: Poppins700;
+    font-size:25px;
+    font-family: ProximaNovaSemiBold;
     color: ${props => props.theme.title};
+    margin-top: 4%;
 `
 const Description = styled.Text`
     font-size:12px;
     color: ${props => props.theme.text1};
     font-family: Poppins;
+    flex:1;
 `
 const ViewButton = styled.TouchableOpacity`
     border-radius: 16px;
@@ -50,8 +54,9 @@ const ViewButton = styled.TouchableOpacity`
 `
 const ViewButtonText = styled.Text`
     color: #ffffff;
-    font-size: 15px;
+    font-size: 14px;
     font-family: Poppins700;
+    align-self:center;
 `
 
 const LikeContainer = styled.TouchableOpacity`

@@ -1,8 +1,10 @@
-import { FlatList, View } from 'react-native'
+import { FlatList, View, Image } from 'react-native'
 import {Feather, FontAwesome5} from '@expo/vector-icons'
 import { Plant } from '../../components/Plant'
 import {InfoPlantCard} from '../../components/InfoPlantCard'
 import {Input} from '../../components/Input'
+
+const sol = require("../../assets/temperature.png");
 
 import {
     Container, 
@@ -33,17 +35,18 @@ export function Home(){
                 <TopSectionCol1>
                     <Title>
                         {`A Melhor rosa \n`} 
-                        {`está no seu jardim!`}
+                        {`está no seu Jardim!`}
                     </Title>
                     <TopMessageContainer>
                         <TopMessage>
                             Bom dia, 27°
                         </TopMessage>
-                        <Feather 
-                            name="sun"
-                            size={20}
-                            color="#FFCE31"
-                        />
+                       <Image 
+                       source={sol}
+                       width={0.1}
+                       height={0.1}
+                       style={{width:25,height:25, alignSelf:'center', margin:0, top:-2}}
+                       />
                     </TopMessageContainer>
                 </TopSectionCol1>
                 <TopSectionCol2>
@@ -66,14 +69,17 @@ export function Home(){
                         iconType={Feather}
                         iconName="search"
                         style={{
-                            flex:1
+                            width:'77%',
+                            backgroundColor: "#FFFFFF",
+                            
                         }}
                         placeholder="Pesquisar"
+                        placeholderColor="#FFFFFF"
                     />
                 </InputsRow>
 
                 <PlantsSectionTitle>
-                    Plantas recentes
+                    Plantas Recentes
                 </PlantsSectionTitle>
                 <FlatList
                     data={[
@@ -83,7 +89,7 @@ export function Home(){
                     ]}
                     horizontal
                     contentContainerStyle={{
-                        marginLeft: 10
+                        marginLeft: 12
                     }}
                     renderItem={({item}) => {
                         return (
