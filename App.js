@@ -32,7 +32,6 @@ import {
   Oswald_600SemiBold,
   Oswald_700Bold
 } from '@expo-google-fonts/oswald'
-import { AddPlant } from './src/screens/AddPlant';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
