@@ -20,7 +20,7 @@ import {
     BottomSectionTitle,
     RightSection,
 } from './styles'
-import { getPlantInfo } from '../../global/plants';
+import { getPlantImage, getPlantInfo } from '../../global/plants';
 import { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { api } from '../../services/api';
@@ -55,7 +55,7 @@ function InfoPlant({route}){
                 </MidSectionCol1>
                 <MidSectionCol2>
                     <PlantImage 
-                        source={plantInfo.image}
+                        source={getPlantImage(plantInfo.idPlant)}
                     />
                 </MidSectionCol2>
             </MidSection>
