@@ -22,25 +22,27 @@ import {
     PlantImage,
     DetailInfosSection
 } from './styles'
+import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
 const schema = yup.object({
     name: yup.string().required("Nome é obrigatório")
 })
 
 function SavePlant(){
+    const {addingPlant, savePlant} = usePlantsManagement()
     const {handleSubmit, control, formState:{errors}} = useForm({
         resolver: yupResolver(schema)
     })
 
     function handleSavePlant(data){
-        console.log(data)
+        savePlant(data.name)
     }
     
     return (
         <Container
             contentContainerStyle={{alignItems:'center'}}
         >
-            <Title>Suculenta</Title>
+            <Title>{addingPlant.plantName}</Title>
             <PlantImage 
                 source={appImages['suculenta']}
             />
@@ -57,15 +59,15 @@ function SavePlant(){
 
                         <DetailRow 
                             label="Tempo"
-                            value="2 semanas"
+                            value={addingPlant.plantTimeHarvest}
                         />
                         <DetailRow 
-                            label="Ambiente"
-                            value="Interno"
+                            label="Temperatura ideal"
+                            value={addingPlant.plantTemperature}
                         />
                         <DetailRow 
-                            label="Iluminação"
-                            value="5"
+                            label="Quantidade de água"
+                            value={addingPlant.plantWaterQuantity}
                         />
                     </DetailInfosSection>
 

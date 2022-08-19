@@ -23,10 +23,13 @@ import {
 import {appImages} from '../../global/images'
 import { useMemo } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { useMicrocontrollers } from '../../hooks/useMicrocontrollers' 
+import { getPlantImage } from '../../global/plants'
 
 export function Home(){
     const {pickRandomPlants} = useDatabasePlants()
     const randomPlants = useMemo(() => pickRandomPlants(3), [])
+    const {storedDevices} = useMicrocontrollers()
     return (
         <Container>
             <TopSection>
@@ -76,11 +79,12 @@ export function Home(){
                     Plantas recentes
                 </PlantsSectionTitle>
                 <FlatList
-                    data={[
-                        {variant:'yellow', title:'Amarelo'}, 
-                        {variant:'red', title:'Vermelho'}, 
-                        {variant:'blue', title:'Azul'}
-                    ]}
+                    data={storedDevices.map(device => {
+                        return {
+                            title: device.name,
+                            databaseId: device.databaseId
+                        }
+                    })}
                     horizontal
                     contentContainerStyle={{
                         marginLeft: 10
@@ -89,12 +93,13 @@ export function Home(){
                         return (
                             <Plant 
                                 {...item}
-                                image={appImages['plant1']}
+                                variant="yellow"
+                                image={getPlantImage(item.databaseId)}
                                 subtitle="Sub"
                             />
                         )
                     }}
-                    keyExtractor={(data)=> data.title}
+                    keyExtractor={(data)=> data.databaseId}
                     showsHorizontalScrollIndicator={false}
                 />
                 <RandomPlantsSection>
