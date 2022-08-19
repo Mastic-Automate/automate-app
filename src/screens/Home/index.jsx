@@ -31,12 +31,15 @@ export function Home(){
         <Container>
             <TopSection>
                 <TopSectionCol1>
-                    <Title>A melhor rosa está no seu jardim!</Title>
+                    <Title>
+                        {`A Melhor rosa \n`} 
+                        {`está no seu jardim!`}
+                    </Title>
                     <TopMessageContainer>
                         <TopMessage>
-                            Bom dia
+                            Bom dia, 27°
                         </TopMessage>
-                        <FontAwesome5 
+                        <Feather 
                             name="sun"
                             size={20}
                             color="#FFCE31"
@@ -53,7 +56,7 @@ export function Home(){
             <PlantsSection>
                 <InputsRow>
                     <FilterButton>
-                        <FontAwesome5 
+                        <Feather 
                             color="#ffffff"
                             size={30}
                             name="filter"
@@ -80,7 +83,7 @@ export function Home(){
                     ]}
                     horizontal
                     contentContainerStyle={{
-                        marginLeft: 20
+                        marginLeft: 10
                     }}
                     renderItem={({item}) => {
                         return (

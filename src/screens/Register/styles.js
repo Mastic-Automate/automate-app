@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Container = styled.ScrollView`
+const Container = styled.View`
     height: 100%;
     position: relative;
 `
@@ -51,7 +51,7 @@ const BottomText = styled.Text`
 `
 
 const BottomLink = styled.TouchableOpacity`
-    width: 50%;
+    text-align:center;
 `
 const BottomLinkText = styled.Text`
     text-align:center;
@@ -66,7 +66,9 @@ const InputsView = styled.View`
 `
 
 const BottomView = styled.View`
-    align-items:center;
+    flex-direction: column-reverse;
+    width: 100%;
+    flex: 1;
 `
 const ErrorText = styled.Text`
     color: ${props => props.theme.error};
@@ -83,6 +85,12 @@ const PlantImage = styled.Image`
     left:0;
 `
 
+const AlignHelper = styled.View`
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+`
+
 export {
     BottomLink, 
     BottomLinkText, 
@@ -96,5 +104,6 @@ export {
     Subtitle,
     HeadingSection,
     BackgroundImage,
-    PlantImage
+    PlantImage,
+    AlignHelper
 }

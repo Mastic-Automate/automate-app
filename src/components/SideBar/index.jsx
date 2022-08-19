@@ -10,7 +10,8 @@ import {
     TopSection,
     BarContainer,
     BottomText,
-    BottomProfilePicture
+    BottomProfilePicture,
+    CornerImage
 } from "./styles";
 import { appImages } from "../../global/images";
 import { useAuth } from '../../hooks/useAuth';
@@ -29,7 +30,7 @@ export const SideBar = (props) => {
         >
             <TopSection>
                 <TopImage 
-                    source={appImages['plant1']}
+                    source={appImages['plant3']}
                 />
             </TopSection>
             <MainSection>
@@ -62,6 +63,9 @@ export const SideBar = (props) => {
                 )}
                 <BottomProfilePicture source={appImages['profile_placeholder']} />
             </BottomSection>
+            <CornerImage 
+                source={appImages['plant2']}
+            />
         </BarContainer>
     );
 };
