@@ -28,10 +28,10 @@ import { api } from '../../services/api';
 function InfoPlant({route}){
     const themeColors = useTheme()
     const [plantInfo, setPlantInfo] = useState({})
-    useEffect(()=>{
+    useEffect( () => {
         api.get(`/getPlant?id=${route.params.id}`)
             .then(response => setPlantInfo(response.data[0]))
-    }, [])
+    }, [route.params.id])
     return (
 
         <Container>
