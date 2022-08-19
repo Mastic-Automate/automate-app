@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import {createContext, useContext, useState} from 'react'
+import { getPlantImage } from '../global/plants'
 import { api } from '../services/api'
 
 const DatabasePlantsContext = createContext({})
@@ -9,7 +10,12 @@ export function DatabasePlantsContextProvider({children}){
 
     const requestPlants = useCallback(() => {
         api.get('/getPlants').then(response => {
-            setDatabasePlants(response.data)
+            setDatabasePlants(response.data.map(plant => {
+                return {
+                    ...plant,
+                    image: getPlantImage(plant.idPlant)
+                }
+            }))
         })
     }, [])
 

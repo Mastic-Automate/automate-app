@@ -47,7 +47,7 @@ function AddPlant(){
                             <CarouselCard 
                                 name={item.plantName}
                                 active={currentModelIndex === index}
-                                img={item.img}
+                                img={item.image}
                                 key={item.idPlant}
                                 sub={item.plantAbout}
                             />

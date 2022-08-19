@@ -67,7 +67,7 @@ export default function App() {
           <MicrocontrollersContextProvider>
             <NavigationContainer>
               <StatusBar />
-              <AddPlant />
+              <RootRoutes />
             </NavigationContainer>
           </MicrocontrollersContextProvider>
         </DatabasePlantsContextProvider>
