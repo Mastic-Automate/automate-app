@@ -35,10 +35,9 @@ margin-left: 44px;
 
 const InputsRow = styled.View`
     flex-flow: row nowrap;
-
     position: absolute;
-margin-left:25px;
-margin-right:25px;
+    margin-left:25px;
+    margin-right:25px;
     top: -33px;
     z-index: 2;
 `;
@@ -58,6 +57,7 @@ const SomePlantsContainer = styled.ScrollView`
     padding-left: 12px;
     padding-right:50px;
     width: 95%;
+    margin-top: -50px;
 `
 
 const UserPlantsTitle = styled.Text`
@@ -66,8 +66,13 @@ const UserPlantsTitle = styled.Text`
     font-size: 30px;
     font-family: SuperaGothic;
     padding: 20px 20px;
+    margin-top:48px;
 `
 const UserPlantsContainer = styled.ScrollView`
+    overflow: hidden;
+    padding-left: 12px;
+    padding-right:50px;
+    width: 95%;
     
 `
 const AddButton = styled.TouchableOpacity`

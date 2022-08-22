@@ -47,19 +47,18 @@ export function Plants({ navigation }) {
                                     flex:1,
                                     borderRadius:10,
                                     fontFamily: "Montserrat_400Regular",
-                                    
                                 }}
                                 placeholder="Pesquisar"
                             />
                             <FilterButton>
                                 <FontAwesome5 
                                     color="#ffffff"
-                                    size={30}
+                                    size={26}
                                     name="filter"
                                 />
                             </FilterButton>
                         </InputsRow>
-                    <SomePlantsContainer horizontal>
+                    <SomePlantsContainer horizontal showsHorizontalScrollIndicator={false}>
                         {databasePlants.map(plant => (
                             <PlantCard 
                                 description={plant.plantAbout}
@@ -72,10 +71,10 @@ export function Plants({ navigation }) {
                         ))}
                         
                     </SomePlantsContainer>
-                    <UserPlantsTitle horizontal>
+                    <UserPlantsTitle horizontal >
                         Suas plantas
                     </UserPlantsTitle>
-                    <UserPlantsContainer horizontal>
+                    <UserPlantsContainer horizontal showsHorizontalScrollIndicator={false}>
                         <UserPlantCard 
                             image={appImages['plant_corner']}
                             name="Suculenta"
