@@ -59,6 +59,7 @@ export const themes = {
         secondary3:'#303030', 
         secondary4:'rgba(242, 242, 242, .1)', 
 
-        tabBackground:'#103551'
+        tabBackground:'#103551',
+        test1: '#CCCCCC'
     },
 }

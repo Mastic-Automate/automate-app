@@ -30,15 +30,16 @@ const Title = styled.Text`
     width: 100%;
     text-align:left;
     font-family: SuperaGothic;
-    padding: 6px 25px;
+margin-left: 44px;
 `
 
 const InputsRow = styled.View`
     flex-flow: row nowrap;
-    width: 100%;
+
     position: absolute;
-    padding: 10px 10px;
-    top: -40px;
+margin-left:25px;
+margin-right:25px;
+    top: -33px;
     z-index: 2;
 `;
 
@@ -48,11 +49,15 @@ const FilterButton = styled.TouchableOpacity`
     background-color: ${props => props.theme.green};
     align-items:center;
     justify-content:center;
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
 `;
 
 const SomePlantsContainer = styled.ScrollView`
+    overflow: hidden;
+    padding-left: 12px;
+    padding-right:50px;
+    width: 95%;
 `
 
 const UserPlantsTitle = styled.Text`
@@ -71,6 +76,8 @@ const AddButton = styled.TouchableOpacity`
     right: 20px;
 `;
 
+
+
 export {
     Container,
     Title,
@@ -83,4 +90,5 @@ export {
     UserPlantsTitle,
     InputsRow,
     FilterButton,
+
 }

@@ -44,7 +44,10 @@ export function Plants({ navigation }) {
                                 iconType={Feather}
                                 iconName="search"
                                 style={{
-                                    flex:1
+                                    flex:1,
+                                    borderRadius:10,
+                                    fontFamily: "Montserrat_400Regular",
+                                    
                                 }}
                                 placeholder="Pesquisar"
                             />
