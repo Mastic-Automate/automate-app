@@ -5,6 +5,8 @@ import { FormInput as Input } from '../../components/FormInput'
 
 import { useAuth } from '../../hooks/useAuth'
 
+import { appImages } from '../../global/images'
+
 import { 
     BottomLink, 
     BottomLinkText, 
@@ -17,13 +19,17 @@ import {
     Menu,
     Subtitle,
     HeadingSection,
-    BackgroundImage
+    BackgroundImage,
+    PlantImage,
+    AlignHelper
+
 } from './styles'
 
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect, useState } from 'react'
+import { useTheme } from '../../hooks/useTheme';
 import { Image } from 'react-native'
 
 const schema = yup.object({
@@ -32,6 +38,7 @@ const schema = yup.object({
 })
 
 export function Login({ navigation }) {
+    const {theme} = useTheme()
     const { signIn } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -47,17 +54,19 @@ export function Login({ navigation }) {
         })
     }
 
+    // name={theme === 'light' ? 'moon' : 'sun'}
     return (
         <Container>
-            <BackgroundImage source={require('../../assets/background1.png')}>
+            <BackgroundImage source={theme === 'light' ? require('../../assets/background1.png') : require('../../assets/background-night.png')}>
 
                 <Image 
                     source={require('../../assets/logo_automate.png')}
                     style={{width:150, height:150}}
                 />
+                
                 <Menu>
                     <HeadingSection>
-                        <Title>Login</Title>
+                        <Title>LOGIN</Title>
                         <Subtitle>Sua nova forma de plantar!</Subtitle>
                     </HeadingSection>
 
@@ -68,9 +77,21 @@ export function Login({ navigation }) {
                             error={errors.email}
                             keyboardType="email-address"
                             placeholder="Email"
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                backgroundColor:'#B7D9F0',
+                                marginBottom: 24,
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
+                                elevation: 30,
+                            }}
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#336283"
                         />
                         <Input
                             name="password"
@@ -78,18 +99,42 @@ export function Login({ navigation }) {
                             error={errors.password}
                             placeholder="Senha"
                             secureTextEntry
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
+                                elevation: 30,
+                            }}
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#336283"
                         />
 
-                        <Button text="Login" onPress={handleSubmit(handleSignin)} style={{ marginTop: 10 }} />
+                        <Button 
+                            text="Entrar" 
+                            onPress={handleSubmit(handleSignin)} 
+                            style={{ marginTop: 66,}} 
+                            variant="blue"
+                        />
                         <ErrorText>{bottomError}</ErrorText>
                     </InputsView>
+                    <PlantImage
+                        source={appImages['plant2']}
+                    />
                     <BottomView>
-                        <BottomLink onPress={() => navigation.replace('register')}>
-                            <BottomLinkText>Criar conta</BottomLinkText>
-                        </BottomLink>
+                        <AlignHelper>
+                            <BottomLink onPress={() => navigation.replace('register')}>
+                                <BottomLinkText>Criar conta</BottomLinkText>
+                            </BottomLink>
+                            <BottomLink onPress={() => navigation.replace('register')}>
+                                <BottomLinkText>Ih, esqueci a senha</BottomLinkText>
+                            </BottomLink>
+                        </AlignHelper>
                     </BottomView>
                 </Menu>
             </BackgroundImage>

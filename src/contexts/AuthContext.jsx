@@ -2,8 +2,7 @@ import { createContext, useEffect, useState } from 'react'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import {API_BASE_URL} from '@env'
-import axios from 'axios'
+import {api} from '../services/api'
 
 const AuthContext = createContext({})
 
@@ -13,7 +12,7 @@ function AuthContextProvider({ children }) {
     async function signIn(userEmail, userPassword) {
         const requestBody = { userEmail, userPassword }
         try {
-            const response = await axios.post(`${API_BASE_URL}/signin`, requestBody)
+            const response = await api.post('/signin', requestBody)
             if(response.data.sucess){
                 const responseUser = response.data.user
                 setUser(responseUser)
@@ -39,7 +38,7 @@ function AuthContextProvider({ children }) {
     }
     async function signUp(userEmail, userName, userPassword) {
         try {
-            const response = await axios.post(`${API_BASE_URL}/signup`, {
+            const response = await api.post('/signup', {
                 userEmail,
                 userName,
                 userPassword

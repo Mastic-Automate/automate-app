@@ -16,6 +16,7 @@ export const themes = {
         cardColor:'#EDEDED',
         cardImageContainer: '#ffffff',
         subtitle: '#585858',
+        themeButton: '#000532',
 
         background1: '#FFFFFF',
         background2:'#D7E1E8',
@@ -26,7 +27,7 @@ export const themes = {
         secondary3:'#F0F0F0', 
         secondary4:'#FAFAFA', 
 
-        tabBackground:'#ACD0E9'
+        tabBackground:'#4F8698'
     },
     dark: {
         primary: '#009D81',
@@ -45,6 +46,7 @@ export const themes = {
         cardColor:'#343434',
         cardImageContainer: '#636363',
         subtitle: '#C1C1C1',
+        themeButton: '#ECD665',
 
         background1: '#0D3440',
         background2:'#1A1F23',

@@ -9,6 +9,8 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import {useAuth} from '../../hooks/useAuth'
+import {appImages} from '../../global/images'
+import { useTheme } from '../../hooks/useTheme';
 
 import { 
     BackgroundImage,
@@ -22,7 +24,9 @@ import {
     InputsView,
     Menu,
     Subtitle,
-    Title
+    Title,
+    PlantImage,
+    AlignHelper
 } from './styles'
 import { useState } from 'react'
 
@@ -38,6 +42,7 @@ export function Register({ navigation }) {
         resolver: yupResolver(schema)
     })
 
+    const {theme} = useTheme()
     const {signUp} = useAuth()
 
     const [bottomError, setBottomError] = useState('')
@@ -51,69 +56,126 @@ export function Register({ navigation }) {
     }
     return (
         <Container>
-            <BackgroundImage source={require('../../assets/background1.png')}>
+            <BackgroundImage source={theme === 'light' ? require('../../assets/background1.png') : require('../../assets/background-night.png')}>
                 <Image 
                     source={require('../../assets/logo_automate.png')}
                     style={{width:150, height:150}} 
                 />
                 <Menu>
                     <HeadingSection>
-                        <Title>Cadastrar</Title>
+                        <Title>CADASTRE-SE</Title>
                         <Subtitle>Venha participar do melhor projeto de agricultura urbana!</Subtitle>
                     </HeadingSection>
                     <InputsView>
                         <Input
                             name="email"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginTop: 24,
+                                marginBottom: 24,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
+                                elevation: 30,
+                            }}
                             placeholder="Email"
                             error={errors.email}
                             keyboardType="email-address"
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="name"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginBottom: 24,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 20,
+                                elevation: 25,
+                            }}
                             placeholder="Nome"
                             error={errors.name}
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="password"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginBottom: 24,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 20,
+                                elevation: 25,
+                            }}
                             placeholder="Senha"
                             error={errors.password}
                             secureTextEntry
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Input
                             name="password-confirm"
                             control={control}
-                            style={{ marginTop: 10, backgroundColor:'#9BC2DD' }}
+                            style={{ 
+                                marginBottom: 24,
+                                backgroundColor:'#9BC2DD',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 20,
+                                elevation: 25,
+                            }}
                             placeholder="Confirmar senha"
                             error={errors['password-confirm']}
                             secureTextEntry
                             autoCorrect={false}
                             autoCapitalize="none"
+                            placeholderTextColor="#487B9D"
                         />
                         <Button
                             text="Cadastrar"
                             style={{ marginTop: 10 }}
                             onPress={handleSubmit(handleUserRegister)}
+                            variant="blue"
                         />
                         <ErrorText>{bottomError}</ErrorText>
 
                     </InputsView>
+                    <PlantImage 
+                        source={appImages['plant2']}
+                    />
                     <BottomView>
-                        <BottomText>Já possui uma conta?</BottomText>
-                        <BottomLink onPress={() => navigation.replace('login')}>
-                            <BottomLinkText>Login</BottomLinkText>
-                        </BottomLink>
+                        <AlignHelper>
+                            <BottomLink onPress={() => navigation.replace('login')}>
+                                <BottomLinkText>Login</BottomLinkText>
+                            </BottomLink>
+                            <BottomLink onPress={() => navigation.replace('login')}>
+                                <BottomLinkText>Ajuda</BottomLinkText>
+                            </BottomLink>
+                        </AlignHelper>
                     </BottomView>
                 </Menu>
             </BackgroundImage>

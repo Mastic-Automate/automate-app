@@ -15,27 +15,34 @@ const Menu = styled.View`
     border-top-left-radius:40px;
     border-top-right-radius:40px;
     width:100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 28px;
+
+    padding-top: 11.5%;
     padding-bottom:20px;
     height: 80%;
-    justify-content:space-between;
+    
 `
 
 const HeadingSection = styled.View`
-    width:100%;
+    margin-left: 5%;
+
 `
 
 const Title = styled.Text`
     font-size: 36px;
     font-family: ProximaNova;
     color: ${props => props.theme.title};
+    color: #003553;
+    margin-left: 19px;
+    margin-bottom: 1%;
 `
 const Subtitle = styled.Text`
-    color: ${props => props.theme.text1};
-    font-size: 24px;
+    color: #003553;
+    font-size: 26px;
     font-family: ProximaNova;
+    color: ${props => props.theme.text1};
+    margin-left: 19px;
+    font-weight: 600;
+    font-style: normal;
 `
 
 const BottomText = styled.Text`
@@ -46,28 +53,45 @@ const BottomText = styled.Text`
 `
 
 const BottomLink = styled.TouchableOpacity`
-    width: 50%;
     text-align:center;
 `
 const BottomLinkText = styled.Text`
     text-align:center;
     color: ${props => props.theme.title};
-    font-size: 20px;
+    font-size: 19px;
     font-family: Poppins700;
-    width: 100%;
 `
 
 const InputsView = styled.View`
+    width: 84%;
+    margin-left:8%;
+    margin-top: 40px;
+`
+
+const AlignHelper = styled.View`
+    justify-content: space-around;
+    flex-direction: row;
     width: 100%;
 `
 
 const BottomView = styled.View`
-    align-items:center;
+    flex-direction: column-reverse;
+    width: 100%;
+    flex: 1;
 `
 const ErrorText = styled.Text`
     color: ${props => props.theme.error};
     width: 100%;
     text-align:center;
+`
+
+const PlantImage = styled.Image`
+    width: 150px;
+    height: 250px;
+    position:absolute;
+    top: 50%;
+    z-index: -1;
+    left:0;
 `
 
 export {
@@ -82,5 +106,8 @@ export {
     Menu,
     Subtitle,
     HeadingSection,
-    BackgroundImage
+    BackgroundImage,
+    PlantImage,
+    AlignHelper
+
 }

@@ -21,21 +21,28 @@ import {
 } from './styles'
 
 import {appImages} from '../../global/images'
-import { pickRandomPlants } from '../../global/plants'
 import { useMemo } from 'react'
+import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { useMicrocontrollers } from '../../hooks/useMicrocontrollers' 
+import { getPlantImage } from '../../global/plants'
 
 export function Home(){
+    const {pickRandomPlants} = useDatabasePlants()
     const randomPlants = useMemo(() => pickRandomPlants(3), [])
+    const {storedDevices} = useMicrocontrollers()
     return (
         <Container>
             <TopSection>
                 <TopSectionCol1>
-                    <Title>A melhor rosa está no seu jardim!</Title>
+                    <Title>
+                        {`A Melhor rosa \n`} 
+                        {`está no seu jardim!`}
+                    </Title>
                     <TopMessageContainer>
                         <TopMessage>
-                            Bom dia
+                            Bom dia, 27°
                         </TopMessage>
-                        <FontAwesome5 
+                        <Feather 
                             name="sun"
                             size={20}
                             color="#FFCE31"
@@ -52,7 +59,7 @@ export function Home(){
             <PlantsSection>
                 <InputsRow>
                     <FilterButton>
-                        <FontAwesome5 
+                        <Feather 
                             color="#ffffff"
                             size={30}
                             name="filter"
@@ -72,25 +79,27 @@ export function Home(){
                     Plantas recentes
                 </PlantsSectionTitle>
                 <FlatList
-                    data={[
-                        {variant:'yellow', title:'Amarelo'}, 
-                        {variant:'red', title:'Vermelho'}, 
-                        {variant:'blue', title:'Azul'}
-                    ]}
+                    data={storedDevices.map(device => {
+                        return {
+                            title: device.name,
+                            databaseId: device.databaseId
+                        }
+                    })}
                     horizontal
                     contentContainerStyle={{
-                        marginLeft: 20
+                        marginLeft: 10
                     }}
                     renderItem={({item}) => {
                         return (
                             <Plant 
                                 {...item}
-                                image={appImages['plant1']}
+                                variant="yellow"
+                                image={getPlantImage(item.databaseId)}
                                 subtitle="Sub"
                             />
                         )
                     }}
-                    keyExtractor={(data)=> data.title}
+                    keyExtractor={(data)=> data.databaseId}
                     showsHorizontalScrollIndicator={false}
                 />
                 <RandomPlantsSection>
@@ -98,11 +107,11 @@ export function Home(){
                         return (
                             <InfoPlantCard 
                                 image={plant.image}
-                                description={plant.description}
+                                description={plant.plantAbout}
                                 style={{marginBottom:20}}
-                                key={plant.id}
-                                title={plant.name}
-                                id={plant.id}
+                                key={plant.idPlant}
+                                title={plant.plantName}
+                                id={plant.idPlant}
                             />
                         )
                     })}

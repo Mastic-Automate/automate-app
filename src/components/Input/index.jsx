@@ -15,6 +15,7 @@ const TextInput = styled.TextInput`
     color: ${props => props.theme.text1};
     font-size: 17px;
     margin-left: 10px;
+    font-family: Poppins700;
 `
 
 function Input({iconType:Icon, iconName, style, ...textInputProps}){

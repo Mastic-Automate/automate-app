@@ -8,9 +8,13 @@ import { ThemeContextProvider } from './src/contexts/ThemeContext';
 import { AuthContextProvider } from './src/contexts/AuthContext'
 import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
 import {BluetoothConnectionContextProvider} from './src/contexts/BLuetoothConnectionContext'
-import {RootRoutes} from './src/routes/RootRoutes'
+import {DatabasePlantsContextProvider} from './src/contexts/DatabasePlantsContext'
 
-import { Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import { 
+  Poppins_400Regular,
+  Poppins_700Bold,
+  Poppins_600SemiBold
+} from '@expo-google-fonts/poppins'
 import {
   Montserrat_900Black,
   Montserrat_700Bold,
@@ -20,11 +24,23 @@ import {
   Montserrat_800ExtraBold
 } from '@expo-google-fonts/montserrat'
 import { BluetoothConnection } from './src/screens/BluetoothConnection';
+import { Actor_400Regular } from '@expo-google-fonts/actor'
+import {
+  Oswald_200ExtraLight,
+  Oswald_300Light,
+  Oswald_400Regular,
+  Oswald_500Medium,
+  Oswald_600SemiBold,
+  Oswald_700Bold
+} from '@expo-google-fonts/oswald'
+import { PlantsManagementRoutes } from './src/routes/PlantsManagementRoutes';
+import {RootRoutes} from './src/routes/RootRoutes'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Poppins': Poppins_400Regular,
     'Poppins700': Poppins_700Bold,
+    'Poppins600':Poppins_600SemiBold,
     'ProximaNova': require('./assets/fonts/proximaNova/ProximaNovaBold.otf'),
     'SuperaGothic': require('./assets/fonts/SuperaGothic/SuperaGothic-ExtraBold.otf'),
     'SuperaGothic400': require('./assets/fonts/SuperaGothic/SuperaGothic-Regular.otf'),
@@ -34,7 +50,14 @@ export default function App() {
     Montserrat_900Black,
     Montserrat_400Regular,
     Montserrat_600SemiBold,
-    Montserrat_800ExtraBold
+    Montserrat_800ExtraBold,
+    'actor':Actor_400Regular,
+    'Oswald200': Oswald_200ExtraLight,
+    'Oswald300':Oswald_300Light,
+    'Oswald400':Oswald_400Regular,
+    'Oswald500':Oswald_500Medium,
+    'Oswald600':Oswald_600SemiBold,
+    'Oswald700':Oswald_700Bold
   })
   if(!fontsLoaded){
     return <AppLoading />
@@ -44,10 +67,12 @@ export default function App() {
       <ThemeContextProvider>
         <MicrocontrollersContextProvider>
           <BluetoothConnectionContextProvider>
-            <NavigationContainer>
-              <StatusBar />
-              <BluetoothConnection />
-            </NavigationContainer>
+            <DatabasePlantsContextProvider>
+              <NavigationContainer>
+                <StatusBar />
+                <RootRoutes />
+              </NavigationContainer>
+            </DatabasePlantsContextProvider>
           </BluetoothConnectionContextProvider>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>

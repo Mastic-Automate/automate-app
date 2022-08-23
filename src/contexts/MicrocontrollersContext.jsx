@@ -23,9 +23,9 @@ function MicrocontrollersContextProvider({children}){
         })
     }
 
-    async function saveNewDevice(address, id, name, customName){
+    async function saveNewDevice(databaseId, address, id, name){
         const savedDevices = await getSavedDevices()
-        const newDevice = {address, id, name, customName}
+        const newDevice = {address, id, name, databaseId}
         await AsyncStorage.setItem('@Microcontrollers', JSON.stringify([...savedDevices, newDevice]))
         loadDevices()
     }
@@ -34,6 +34,10 @@ function MicrocontrollersContextProvider({children}){
         AsyncStorage.setItem('@Microcontrollers', JSON.stringify(filteredDevices))
         loadDevices()
     }
+
+    useEffect(() => {
+        console.log(`Stored devices: ${JSON.stringify(storedDevices)}`)
+    }, [storedDevices])
 
     useEffect(()=>{
         loadDevices()

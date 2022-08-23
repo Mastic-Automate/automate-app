@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components/native'
 import { ScrollView } from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
@@ -9,6 +9,8 @@ import {MaterialIcons} from '@expo/vector-icons'
 import { Text, View } from 'moti';
 
 import {useBluetoothConnection} from '../../contexts/BLuetoothConnectionContext'
+import { Button } from '../../components/Button'
+import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
 
 const Container = styled.View`
@@ -179,7 +181,21 @@ const ScanAutomate = ({automateFound}) => {
     )
 }
 
-const FoundAutomate = ({automate, deviceInfo}) => {
+const FoundAutomate = ({automate, deviceInfo, navigation}) => {
+    const {automateDevice} = useBluetoothConnection()
+    const {setAddingPlant} = usePlantsManagement()
+
+    function handleAddPlant(){
+        if(Object.keys(automateDevice).length > 0){
+            setAddingPlant({
+                address:automateDevice.address,
+                id:automateDevice.id
+            })
+            navigation.navigate('add-plant')
+        } else{
+            console.log("Dispositivo ainda não foi encontrado, não pode salvar")
+        }
+    }
 
     return (
         <>
@@ -191,8 +207,11 @@ const FoundAutomate = ({automate, deviceInfo}) => {
                 style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf:'center'}}
                 source={require('../../../assets/arduino.gif')} 
             />
+            <Button 
+                text="Adicionar"
+                onPress={handleAddPlant}
+            />
             <AutomateName>{JSON.stringify(deviceInfo)}</AutomateName>
-            <DescText >slaaaaaa</DescText>
             <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', }}>
                 <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
                     <Barrinha />
@@ -207,8 +226,9 @@ const FoundAutomate = ({automate, deviceInfo}) => {
     )
 }
 
-function BluetoothConnection(){
+function BluetoothConnection({navigation}){
     const {connect, disconnect, sendMessage, automateDevice, data, devicesFound, deviceData, isConnected} = useBluetoothConnection()
+    const {setAddingPlant} = usePlantsManagement()
     const automateFound = !!automateDevice
 
     let [fontsLoaded] = useFonts({
@@ -229,7 +249,7 @@ function BluetoothConnection(){
             {!automateFound? (
                 <ScanAutomate />
             ) : (
-                <FoundAutomate automate={automateDevice} deviceInfo={deviceData} connected={isConnected}/>
+                <FoundAutomate automate={automateDevice} deviceInfo={deviceData} connected={isConnected} navigation={navigation}/>
             )}
                 
         </Container>

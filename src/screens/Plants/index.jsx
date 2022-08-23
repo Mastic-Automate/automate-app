@@ -23,8 +23,11 @@ import {UserPlantCard} from './UserPlantCard';
 import {plants} from '../../global/plants' ;
 import {appImages} from '../../global/images';
 
+import {useDatabasePlants} from '../../contexts/DatabasePlantsContext'
+
 export function Plants({ navigation }) {
     const { primary } = useTheme();
+    const {databasePlants} = useDatabasePlants()
 
     return (
         <Container>
@@ -54,13 +57,13 @@ export function Plants({ navigation }) {
                             </FilterButton>
                         </InputsRow>
                     <SomePlantsContainer horizontal>
-                        {plants.map(plant => (
+                        {databasePlants.map(plant => (
                             <PlantCard 
-                                description={plant.description}
-                                id={plant.id}
+                                description={plant.plantAbout}
+                                id={plant.idPlant}
                                 image={plant.image}
-                                name={plant.name}
-                                key={plant.id}
+                                name={plant.plantName}
+                                key={plant.idPlant}
                                 style={{marginHorizontal:5}}
                             />
                         ))}

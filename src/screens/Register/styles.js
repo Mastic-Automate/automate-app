@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Container = styled.ScrollView`
+const Container = styled.View`
     height: 100%;
     position: relative;
 `
@@ -18,7 +18,7 @@ const Menu = styled.SafeAreaView`
     width:100%;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 15px;
+    padding-top: 40px;
     padding-bottom: 20px;
     height: 82%;
     justify-content:space-between;
@@ -33,11 +33,13 @@ const Title = styled.Text`
     font-size: 36px;
     font-family: ProximaNova;
     color: ${props => props.theme.title};
+    margin-left: 10px;
 `
 const Subtitle = styled.Text`
     color: ${props => props.theme.text1};
     font-size: 16px;
     font-family: ProximaNova;
+    margin-left: 10px;
 `
 
 const BottomText = styled.Text`
@@ -49,7 +51,7 @@ const BottomText = styled.Text`
 `
 
 const BottomLink = styled.TouchableOpacity`
-    width: 50%;
+    text-align:center;
 `
 const BottomLinkText = styled.Text`
     text-align:center;
@@ -64,12 +66,29 @@ const InputsView = styled.View`
 `
 
 const BottomView = styled.View`
-    align-items:center;
+    flex-direction: column-reverse;
+    width: 100%;
+    flex: 1;
 `
 const ErrorText = styled.Text`
     color: ${props => props.theme.error};
     width: 100%;
     text-align:center;
+`
+
+const PlantImage = styled.Image`
+    width: 150px;
+    height: 250px;
+    position:absolute;
+    top: 50%;
+    z-index: -1;
+    left:0;
+`
+
+const AlignHelper = styled.View`
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
 `
 
 export {
@@ -84,5 +103,7 @@ export {
     Menu,
     Subtitle,
     HeadingSection,
-    BackgroundImage
+    BackgroundImage,
+    PlantImage,
+    AlignHelper
 }
