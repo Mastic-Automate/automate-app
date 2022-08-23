@@ -158,35 +158,12 @@ const StatusGif = styled.Image`
 
 export function ConnectPlant({navigation, route}){
     const {connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId} = useBluetoothConnection()
-    const {setAddingPlant} = usePlantsManagement()
     const automateFound = !!automateDevice
     const id = route.params.id
 
     useEffect(() => {
         connectUsingId(id)
     }, [id])
-
-    function handleAddPlant(){
-        if(Object.keys(automateDevice).length > 0){
-            setAddingPlant({
-                address:automateDevice.address,
-                id:automateDevice.id
-            })
-            navigation.navigate('add-plant')
-        } else{
-            console.log("Dispositivo ainda não foi encontrado, não pode salvar")
-        }
-    }
-
-    let [fontsLoaded] = useFonts({
-        'ProximaNovaBold': require('../../../assets/fonts/proximaNova/ProximaNovaBold.otf'),
-        'ProximaNovaExtraBold': require('../../../assets/fonts/proximaNova/ProximaNovaExtraBold.otf'),
-        'Montserrat': require('../../../assets/fonts/Montserrat/Montserrat-Regular.ttf'),
-      });
-    
-      if (!fontsLoaded) {
-        //console.log(fontsLoaded)
-      }
 
     return (
         <Container>

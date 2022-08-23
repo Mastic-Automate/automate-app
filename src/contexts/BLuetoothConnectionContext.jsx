@@ -185,6 +185,7 @@ export function BluetoothConnectionContextProvider({children}){
     }
 
     useEffect(() => {
+        console.log('Automate device atualizado')
         if(!!automateDevice){
             connect(automateDevice)
         }
