@@ -162,6 +162,7 @@ export function ConnectPlant({navigation, route}){
     const id = route.params.id
 
     useEffect(() => {
+        console.log(`Conectando: ${id}`)
         connectUsingId(id)
     }, [id])
 

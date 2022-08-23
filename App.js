@@ -66,14 +66,12 @@ export default function App() {
     <AuthContextProvider>
       <ThemeContextProvider>
         <MicrocontrollersContextProvider>
-          <BluetoothConnectionContextProvider>
             <DatabasePlantsContextProvider>
               <NavigationContainer>
                 <StatusBar />
                 <RootRoutes />
               </NavigationContainer>
             </DatabasePlantsContextProvider>
-          </BluetoothConnectionContextProvider>
         </MicrocontrollersContextProvider>
       </ThemeContextProvider>
     </AuthContextProvider>

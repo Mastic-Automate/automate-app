@@ -9,10 +9,21 @@ const BluetoothConnectionContext = createContext({})
 export function BluetoothConnectionContextProvider({children}){
     const [devicesFound, setDevicesFound] = useState([]);
     const [found, setFound] = useState(null);
-    const [counter, setCounter] = useState(0);
     const [automateDevice, setAutomateDevice] = useState({});
     const [isConnected, setIsConnected] = useState(false)
     const [deviceData, setDeviceData] = useState({})
+
+    useEffect(() => {
+        RNBluetoothClassic.startDiscovery().then(devices => {
+            setDevicesFound(devices)
+        }).catch(err => console.log('Já está em modo de descoberta'))
+    }, [])
+
+    useEffect(() => {
+        if(devicesFound.length > 0){
+            RNBluetoothClassic.cancelDiscovery()
+        }
+    }, [devicesFound])
 
     useEffect(()=> {
         if (!found) {
@@ -21,9 +32,8 @@ export function BluetoothConnectionContextProvider({children}){
                 setDevicesFound(devices);
                 console.log('Todos os devices Scaneados a seguir: ')
                 console.log(devices);
-                verifyDevices(devices);
         }).catch(err => console.log("Já está escaneando"));
-    }}, [found, counter])
+    }}, [found])
 
     useEffect(() => {
         let perm = requestAccessFineLocationPermission().then(perm => {
@@ -32,14 +42,15 @@ export function BluetoothConnectionContextProvider({children}){
 
         if (perm) {
             RNBluetoothClassic.isBluetoothEnabled().then(bluetoothEnable => {
-                if(bluetoothEnable) { 
+                if(!bluetoothEnable) { 
                     ifBonded('Automate').then(devices => {
 
                     });
                 } else {
                     RNBluetoothClassic.requestBluetoothEnabled().catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO"))
                 }
-       })};
+            })
+        };
     },[])
 
     async function setupDevice(){
@@ -109,7 +120,6 @@ export function BluetoothConnectionContextProvider({children}){
             if(A[0] === undefined){
                 console.log("Dispositivo ainda não pareado");   
                 setFound(false);
-                verifyDevices();
             } else {               
                 console.log("Dispositivo já pareado");
                 setAutomateDevice(A[0]);
@@ -117,22 +127,6 @@ export function BluetoothConnectionContextProvider({children}){
             }
             return r
         }).catch(err => {});
-    }
-    
-    const verifyDevices = async (d) =>  { 
-        if (d!==undefined) {
-            const automateDevicesFound = d.filter(device => device.name === "Automate")
-            if (!automateDevicesFound) {
-                console.log('Dispositivo não foi localizado, Pesquisando novamente');
-                setCounter(counter+1);
-                setFound(false);
-            } else {
-                RNBluetoothClassic.cancelDiscovery();
-                console.log("Scan Pausado, Dispositivo encontrado");
-                setAutomateDevice(automateDevicesFound[0])
-                setFound(true);
-            }
-        }
     }
 
     const connect = useCallback(async (device) => {
