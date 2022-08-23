@@ -90,7 +90,7 @@ export function Plants({ navigation }) {
                 
             </MainContent>
             
-            <AddButton onPress={() => navigation.navigate('bluetooth-connection', { target: 'add-plant', params: {} })}>
+            <AddButton onPress={() => navigation.navigate('plantsManagement', { target: 'bluetooth-connection', params: {} })}>
                 <MaterialIcons
                     name='add-circle'
                     size={70}
