@@ -26,7 +26,7 @@ import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 import { useMicrocontrollers } from '../../hooks/useMicrocontrollers' 
 import { getPlantImage } from '../../global/plants'
 
-export function Home(){
+export function Home({navigation}){
     const {pickRandomPlants} = useDatabasePlants()
     const randomPlants = useMemo(() => pickRandomPlants(3), [])
     const {storedDevices} = useMicrocontrollers()
@@ -82,7 +82,8 @@ export function Home(){
                     data={storedDevices.map(device => {
                         return {
                             title: device.name,
-                            databaseId: device.databaseId
+                            databaseId: device.databaseId,
+                            id: device.id
                         }
                     })}
                     horizontal
@@ -96,10 +97,11 @@ export function Home(){
                                 variant="yellow"
                                 image={getPlantImage(item.databaseId)}
                                 subtitle="Sub"
+                                onPress={()=> navigation.navigate('plantsManagement', {screen:'connect-plant', params:{id:item.id}})}
                             />
                         )
                     }}
-                    keyExtractor={(data)=> data.databaseId}
+                    keyExtractor={(data)=> data.id}
                     showsHorizontalScrollIndicator={false}
                 />
                 <RandomPlantsSection>

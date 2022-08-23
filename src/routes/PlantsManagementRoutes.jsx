@@ -3,6 +3,7 @@ import { EditPlant } from '../screens/EditPlant'
 import {BluetoothConnection} from '../screens/BluetoothConnection'
 import {AddPlant} from '../screens/AddPlant'
 import { SavePlant } from '../screens/SavePlant'
+import {ConnectPlant} from '../screens/ConnectPlant'
 import { PlantsManagementContextProvider } from '../contexts/PlantsManagementContext'
 
 const Nav = createNativeStackNavigator()
@@ -14,6 +15,7 @@ export function PlantsManagementRoutes(){
                 <Nav.Screen name="bluetooth-connection" component={BluetoothConnection} />
                 <Nav.Screen name="add-plant" component={AddPlant} />
                 <Nav.Screen name="save-plant" component={SavePlant} />
+                <Nav.Screen name="connect-plant" component={ConnectPlant} />
             </Nav.Navigator>
         </PlantsManagementContextProvider>
     )

@@ -36,8 +36,8 @@ export function BluetoothConnectionContextProvider({children}){
                     ifBonded('Automate').then(devices => {
 
                     });
-                } else { 
-                    RNBluetoothClassic.requestBluetoothEnabled().then(s => s?ifBonded("Automate").then(devices => {}):{}).catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO")) 
+                } else {
+                    RNBluetoothClassic.requestBluetoothEnabled().catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO"))
                 }
        })};
     },[])
@@ -79,9 +79,11 @@ export function BluetoothConnectionContextProvider({children}){
     }, [automateDevice, isConnected])
 
     useEffect(()=>{
-        const i = setInterval(loadDeviceData, 8000)
-        return ()=> {
-            clearInterval(i)
+        if(isConnected){
+            const i = setInterval(loadDeviceData, 8000)
+            return ()=> {
+                clearInterval(i)
+            }
         }
     }, [isConnected])
 
@@ -152,6 +154,13 @@ export function BluetoothConnectionContextProvider({children}){
 
         }
     }, [isConnected])
+
+    async function connectUsingId(id){
+        const targetDevice = devicesFound.filter(device => device.id === id)[0]
+        if(!!targetDevice){
+            setAutomateDevice(targetDevice)
+        }
+    }
     
     const disconnect = async (device) => {
         let d = await device.disconnect().catch(error => {});
@@ -186,7 +195,7 @@ export function BluetoothConnectionContextProvider({children}){
     }, [isConnected])
     
     return (
-        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, devicesFound, deviceData, loadDeviceData, isConnected}}>
+        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, devicesFound, deviceData, loadDeviceData, isConnected, connectUsingId}}>
             {children}
         </BluetoothConnectionContext.Provider>
     )
