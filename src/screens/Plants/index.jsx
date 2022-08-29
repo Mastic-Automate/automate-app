@@ -14,6 +14,7 @@ import {
     UserPlantsTitle,
     InputsRow,
     FilterButton,
+    SearchInput,
 } from './styles';
 
 import {Input} from '../../components/Input';
@@ -40,7 +41,7 @@ export function Plants({ navigation }) {
 
                 <PlantSection>
                     <InputsRow>
-                            <Input 
+                            <SearchInput 
                                 iconType={Feather}
                                 iconName="search"
                                 style={{
@@ -76,18 +77,16 @@ export function Plants({ navigation }) {
                     <UserPlantsTitle horizontal >
                         Suas Plantas
                     </UserPlantsTitle>
-                    <UserPlantsContainer horizontal showsHorizontalScrollIndicator={false}>
+                    <UserPlantsContainer horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{justifyContent: 'space-between'}} >
                         <UserPlantCard 
                             image={appImages['plant_corner']}
                             name="Suculenta"
-                            description="Sala"
-                            style={{marginLeft:10}}
+                            description="Sala"  
                         />
                         <UserPlantCard 
                             image={appImages['plant_corner']}
                             name="Suculenta1"
                             description="Telhado"
-                            style={{marginLeft:10}}
                         />
                     </UserPlantsContainer>
                 </PlantSection>

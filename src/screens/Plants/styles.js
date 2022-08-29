@@ -1,4 +1,4 @@
-import styled from 'styled-components/native'
+import styled, {useTheme} from 'styled-components/native'
 
 const Container = styled.View`
     background: ${props => props.theme.background};
@@ -58,6 +58,7 @@ const SomePlantsContainer = styled.ScrollView`
     padding-right:50px;
     width: 100%;
     margin-top: 10px;
+    margin-right: 500px;
 `
 
 const UserPlantsTitle = styled.Text`
@@ -66,13 +67,11 @@ const UserPlantsTitle = styled.Text`
     font-size: 30px;
     font-family: SuperaGothic;
     padding: 20px 20px;
-    margin-top:8px;
+    margin-top:0px;
 `
 const UserPlantsContainer = styled.ScrollView`
     overflow: hidden;
-    padding-left: 12px;
-    padding-right:50px;
-    width: 95%;
+    width: 100%;
     
 `
 const AddButton = styled.TouchableOpacity`
@@ -82,6 +81,38 @@ const AddButton = styled.TouchableOpacity`
 `;
 
 
+const InputContainer = styled.View`
+    
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+   
+`
+const TextInput = styled.TextInput`
+    font-family: ProximaNovaSemiBold;
+    color: #B6B6B6;
+    margin-left: 14px;
+    font-size: 18px;
+`
+
+function SearchInput({iconType:Icon, iconName, style, ...textInputProps}){
+    const theme = useTheme()
+
+    return (
+        <InputContainer style={style}>
+            {Icon &&(
+                <Icon name={iconName} size={24} color={theme.text1} style={{marginRight:10}} />
+            )}
+            <TextInput
+                {...textInputProps}
+                placeholderTextColor={theme.text1}
+            />
+            
+        </InputContainer>
+    )
+}
+
+export {SearchInput}
 
 export {
     Container,
@@ -95,5 +126,4 @@ export {
     UserPlantsTitle,
     InputsRow,
     FilterButton,
-
 }

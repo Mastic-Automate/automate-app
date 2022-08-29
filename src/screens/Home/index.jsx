@@ -89,7 +89,8 @@ export function Home(){
                     ]}
                     horizontal
                     contentContainerStyle={{
-                        marginLeft: 12
+                        marginLeft: 12,
+                        paddingRight: 24,
                     }}
                     renderItem={({item}) => {
                         return (

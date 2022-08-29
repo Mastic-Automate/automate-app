@@ -7,8 +7,6 @@ const Container = styled.TouchableOpacity`
     flex-flow: row nowrap;
     width: 300px;
     height: 120px;
-    margin-left:12px;
-    margin-right:12px;
 `
 const ImageContainer = styled.View`
     width: 100px;
@@ -46,6 +44,8 @@ export function UserPlantCard({name, description, image, id, style}) {
             shadowOpacity: 0.11,
             elevation: 5,
             marginBottom:15,
+            marginRight: 15,
+            marginleft: 15,
         }}>
             <ImageContainer>
                 <Image
