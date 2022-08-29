@@ -4,10 +4,10 @@ import styled from 'styled-components/native'
 const Container = styled.View`
     width:192px;
     height:293px;
-    background-color: ${props => props.theme.cardColor};
+    background-color: #FFFFFF;
     border-radius: 24px;
-    margin-left:12px;
-    margin-right:12px;
+    
+    margin-right:24px;
 `
 const ImageContainer = styled.View`
     width:171px;
@@ -27,7 +27,7 @@ const InfoContainer = styled.View`
     justify-content:space-between;
 `
 const PlantNameText = styled.Text`
-    color: ${props => props.theme.title};
+    color: #103551;
     font-size: 28px;
     font-family: ProximaNova;
     margin-left:15px;
@@ -68,7 +68,14 @@ const AlignHelper = styled.View`
 export function PlantCard({name, id, description, image, style}){
     const navigation = useNavigation()
     return (
-        <Container style={style}>
+        <Container style={{...style, 
+            shadowColor:"#4F5C66",
+            shadowOffset: {width:0, height: 12},
+            shadowOpacity: 0.29,
+            shadowRadius: 10.00,
+            elevation: 20,
+            marginBottom: 40,
+        }}>
             <ImageContainer>
                 <Image 
                     source={image}

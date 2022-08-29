@@ -56,8 +56,8 @@ const SomePlantsContainer = styled.ScrollView`
     overflow: hidden;
     padding-left: 12px;
     padding-right:50px;
-    width: 95%;
-    margin-top: -50px;
+    width: 100%;
+    margin-top: 10px;
 `
 
 const UserPlantsTitle = styled.Text`
@@ -66,7 +66,7 @@ const UserPlantsTitle = styled.Text`
     font-size: 30px;
     font-family: SuperaGothic;
     padding: 20px 20px;
-    margin-top:48px;
+    margin-top:8px;
 `
 const UserPlantsContainer = styled.ScrollView`
     overflow: hidden;

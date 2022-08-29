@@ -40,7 +40,13 @@ const PlantDescriptionText = styled.Text`
 
 export function UserPlantCard({name, description, image, id, style}) {
     return (
-        <Container style={style}>
+        <Container style={{...style, 
+            shadowColor:"#4F5C66",
+            shadowOffset: {width:100, height:100},
+            shadowOpacity: 0.11,
+            elevation: 5,
+            marginBottom:15,
+        }}>
             <ImageContainer>
                 <Image
                     source={image}

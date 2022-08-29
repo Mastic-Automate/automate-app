@@ -45,8 +45,10 @@ export function Plants({ navigation }) {
                                 iconName="search"
                                 style={{
                                     flex:1,
-                                    borderRadius:10,
+                                    borderRadius:5,
                                     fontFamily: "Montserrat_400Regular",
+                                    backgroundColor: "#FFF",
+                                    fontSize: 18,
                                 }}
                                 placeholder="Pesquisar"
                             />
@@ -72,7 +74,7 @@ export function Plants({ navigation }) {
                         
                     </SomePlantsContainer>
                     <UserPlantsTitle horizontal >
-                        Suas plantas
+                        Suas Plantas
                     </UserPlantsTitle>
                     <UserPlantsContainer horizontal showsHorizontalScrollIndicator={false}>
                         <UserPlantCard 
