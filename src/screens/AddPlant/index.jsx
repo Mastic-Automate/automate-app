@@ -14,7 +14,7 @@ import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
-const ITEM_WIDTH = SLIDER_WIDTH*0.8
+const ITEM_WIDTH = SLIDER_WIDTH*0.67
 
 function AddPlant(){
     const {databasePlants} = useDatabasePlants()
@@ -54,7 +54,7 @@ function AddPlant(){
                     }}
                     sliderWidth={SLIDER_WIDTH}
                     itemWidth={ITEM_WIDTH}
-                    useScrollView
+
                     slideStyle={{
                         alignItems:'center',
                         justifyContent:'center'

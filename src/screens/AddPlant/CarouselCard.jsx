@@ -16,7 +16,7 @@ const Frame = styled.View`
     justify-content: center;
     height: 320px;
     width: 240px;
-    border-color: #1DBF37;
+    border-color: ${props=> props.active?`#1DBF37`:`#ffffff`};
     border-radius:18px;
     border-width:3px;
 
@@ -43,9 +43,13 @@ margin-top:20%
 
 export function CarouselCard({name, sub, img, active}){
     return (
-        <Frame>
+        <Frame active={active}>
         <LinearGradient 
-        colors={['rgba(163, 183, 195, 0.36)', 'rgba(69, 116, 122, 0.86)']}
+        colors={active?
+            ['rgba(163, 183, 195, 0.36)', 'rgba(69, 116, 122, 0.86)']
+            :
+            ['rgba(49, 49, 49, 0.36)', 'rgba(49, 49, 49, 0.36)']
+        }
         style={{alignItems:'center', flexDirection:'row', borderRadius:10}}
         >
         <Container active={active}>
