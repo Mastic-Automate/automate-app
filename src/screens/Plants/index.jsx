@@ -1,5 +1,7 @@
 import { useTheme } from 'styled-components/native';
 
+import { useNavigation } from '@react-navigation/native'
+
 import { MaterialIcons, Feather, FontAwesome5 } from '@expo/vector-icons';
 
 import {
@@ -103,7 +105,10 @@ export function Plants({ navigation }) {
                 
             </MainContent>
             
-            <AddButton onPress={() => navigation.navigate('bluetooth-connection', { target: 'add-plant', params: {} })}>
+            <AddButton 
+            onPress={() => navigation.navigate('bluetooth-connection', { target: 'add-plant', params: {} })}
+            //onPress={()=> navigation.navigate('add-plant', {})}
+            >
                 <MaterialIcons
                     name='add-circle'
                     size={70}

@@ -1,28 +1,55 @@
 import styled from 'styled-components/native'
 
+import { LinearGradient } from 'expo-linear-gradient';
+
 const Container = styled.View`
     flex-flow: column nowrap;
     align-items:center;
-    height: 300px;
-    width: 230px;
-    background-color: ${props => props.active ? props.theme.purple : props.theme.cardColor };
-    border-radius:16px;
+    height: 306px;
+    width: 226px;
+    border-radius:10px;
+    
+`
+
+const Frame = styled.View`
+    align-items:center;
+    justify-content: center;
+    height: 320px;
+    width: 240px;
+    border-color: #1DBF37;
+    border-radius:18px;
+    border-width:3px;
+
 `
 const Name = styled.Text`
     font-size:28px;
-    color: ${props => props.active? 'white' : props.theme.title};
+    color: #000;
+    font-family: Montserrat_600SemiBold;
+    font-size: 24px;
+    margin-top: 13px;
 `
 const Subtitle = styled.Text`
-    font-size:16px;
-    color: ${props => props.active? 'white' : props.theme.subtitle};
+    font-size:15px;
+    color: #000;
+    font-family: Montserrat_400Regular;
+    margin-right: 10%;
+    margin-left:10%;
+    
 `
 const Image = styled.Image`
+margin-top:20%
     width:200px;
 `
 
 export function CarouselCard({name, sub, img, active}){
     return (
+        <Frame>
+        <LinearGradient 
+        colors={['rgba(163, 183, 195, 0.36)', 'rgba(69, 116, 122, 0.86)']}
+        style={{alignItems:'center', flexDirection:'row', borderRadius:10}}
+        >
         <Container active={active}>
+          
             <Name active={active}>
                 {name}
             </Name>
@@ -35,6 +62,9 @@ export function CarouselCard({name, sub, img, active}){
             <Image 
                 source={img}
             />
-        </Container>
+                
+            </Container>
+            </LinearGradient>   
+            </Frame>
     )
 }

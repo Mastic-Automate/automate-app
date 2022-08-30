@@ -10,6 +10,7 @@ import { useTheme } from 'styled-components'
 import {Ionicons} from '@expo/vector-icons'
 import { Plants } from '../screens/Plants'
 import { InfoPlant } from '../screens/InfoPlant'
+import { AddPlant } from '../screens/AddPlant'
 
 const Nav = createDrawerNavigator()
 
@@ -42,7 +43,7 @@ export function AuthRoutes({navigation}){
         <Nav.Navigator 
             drawerContent={SideBar} 
         >
-            <Nav.Screen name="home" component={Home} options={{
+            <Nav.Screen name="bluetooth-connection" component={AddPlant} options={{
         headerTitle:'Automate',
         headerTitleStyle: {
             fontFamily: "ProximaNovaSemiBold",
