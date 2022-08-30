@@ -66,13 +66,13 @@ const UserPlantsTitle = styled.Text`
     font-weight:bold;
     font-size: 30px;
     font-family: SuperaGothic;
-    padding: 20px 20px;
-    margin-top:0px;
+    margin-left: 34px
+    margin-bottom: 20px;
 `
 const UserPlantsContainer = styled.ScrollView`
-    overflow: hidden;
-    width: 100%;
-    
+    flex-direction: row;
+    margin-right: 10px;
+    margin-left: 23px;
 `
 const AddButton = styled.TouchableOpacity`
     position: absolute;
@@ -82,7 +82,6 @@ const AddButton = styled.TouchableOpacity`
 
 
 const InputContainer = styled.View`
-    
     flex-direction: row;
     align-items: flex-start;
     padding: 16px;
@@ -90,7 +89,6 @@ const InputContainer = styled.View`
 `
 const TextInput = styled.TextInput`
     font-family: ProximaNovaSemiBold;
-    color: #B6B6B6;
     margin-left: 14px;
     font-size: 18px;
 `
@@ -104,7 +102,7 @@ function SearchInput({iconType:Icon, iconName, style, ...textInputProps}){
                 <Icon name={iconName} size={24} color={theme.text1} style={{marginRight:10}} />
             )}
             <TextInput
-                {...textInputProps}
+               {...textInputProps}
                 placeholderTextColor={theme.text1}
             />
             

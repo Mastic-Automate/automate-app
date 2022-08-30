@@ -50,8 +50,18 @@ export function Plants({ navigation }) {
                                     fontFamily: "Montserrat_400Regular",
                                     backgroundColor: "#FFF",
                                     fontSize: 18,
+                                    shadowColor: "#3d3d3d",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 12,
+                                    },
+                                    shadowOpacity: 0.58,
+                                    shadowRadius: 16.00,
+
+                                    elevation: 15,
                                 }}
                                 placeholder="Pesquisar"
+                                textInputProps={{color: "#dadada"}}
                             />
                             <FilterButton>
                                 <FontAwesome5 
@@ -77,7 +87,7 @@ export function Plants({ navigation }) {
                     <UserPlantsTitle horizontal >
                         Suas Plantas
                     </UserPlantsTitle>
-                    <UserPlantsContainer horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{justifyContent: 'space-between'}} >
+                    <UserPlantsContainer horizontal showsHorizontalScrollIndicator={false}  >
                         <UserPlantCard 
                             image={appImages['plant_corner']}
                             name="Suculenta"
