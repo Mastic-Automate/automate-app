@@ -24,14 +24,18 @@ import { getPlantImage, getPlantInfo } from '../../global/plants';
 import { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { api } from '../../services/api';
+import { useDatabasePlant } from '../../hooks/useDatabasePlant';
+import AppLoading from 'expo-app-loading';
 
 function InfoPlant({route}){
     const themeColors = useTheme()
-    const [plantInfo, setPlantInfo] = useState({})
-    useEffect( () => {
-        api.get(`/getPlant?id=${route.params.id}`)
-            .then(response => setPlantInfo(response.data[0]))
-    }, [route.params.id])
+    const {data, isLoading} = useDatabasePlant(route.params.id)
+    const plantInfo = data
+
+    if(isLoading){
+        return <AppLoading />
+    }
+
     return (
 
         <Container>

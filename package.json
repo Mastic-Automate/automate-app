@@ -47,6 +47,7 @@
     "react-native-web": "0.17.1",
     "react-native-webview": "11.15.0",
     "react-native-youtube-iframe": "^2.2.2",
+    "react-query": "^3.39.2",
     "reanimated": "^0.0.1-alpha",
     "styled-components": "^5.3.3",
     "yup": "^0.32.11"
