@@ -23,7 +23,6 @@ import {
   Montserrat_600SemiBold,
   Montserrat_800ExtraBold
 } from '@expo-google-fonts/montserrat'
-import { BluetoothConnection } from './src/screens/BluetoothConnection';
 import { Actor_400Regular } from '@expo-google-fonts/actor'
 import {
   Oswald_200ExtraLight,
@@ -33,7 +32,6 @@ import {
   Oswald_600SemiBold,
   Oswald_700Bold
 } from '@expo-google-fonts/oswald'
-import { PlantsManagementRoutes } from './src/routes/PlantsManagementRoutes';
 import {RootRoutes} from './src/routes/RootRoutes'
 
 export default function App() {
@@ -65,14 +63,16 @@ export default function App() {
   return (
     <AuthContextProvider>
       <ThemeContextProvider>
-        <MicrocontrollersContextProvider>
-            <DatabasePlantsContextProvider>
-              <NavigationContainer>
-                <StatusBar />
-                <RootRoutes />
-              </NavigationContainer>
-            </DatabasePlantsContextProvider>
-        </MicrocontrollersContextProvider>
+        <BluetoothConnectionContextProvider>
+          <MicrocontrollersContextProvider>
+              <DatabasePlantsContextProvider>
+                <NavigationContainer>
+                  <StatusBar />
+                  <RootRoutes />
+                </NavigationContainer>
+              </DatabasePlantsContextProvider>
+          </MicrocontrollersContextProvider>
+        </BluetoothConnectionContextProvider>
       </ThemeContextProvider>
     </AuthContextProvider>
   );
