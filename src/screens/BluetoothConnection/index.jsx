@@ -182,7 +182,7 @@ const ScanAutomate = ({automateFound}) => {
 }
 
 const FoundAutomate = ({automate, deviceInfo, navigation}) => {
-    const {automateDevice} = useBluetoothConnection()
+    const {automateDevice, data} = useBluetoothConnection()
     const {setAddingPlant} = usePlantsManagement()
 
     function handleAddPlant(){
@@ -246,7 +246,7 @@ function BluetoothConnection({navigation}){
             <NavDiv>
                 <MaterialIcons style={{fontSize: 24, fontWeight: '900', marginLeft: 32}} name='arrow-back-ios' />
             </NavDiv>
-            {!automateFound? (
+            {devicesFound.length === 0 ? (
                 <ScanAutomate />
             ) : (
                 <FoundAutomate automate={automateDevice} deviceInfo={deviceData} connected={isConnected} navigation={navigation}/>
