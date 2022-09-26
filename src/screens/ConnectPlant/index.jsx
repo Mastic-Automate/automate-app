@@ -6,11 +6,10 @@ import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import { Image } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons'
-import { Text, View } from 'moti';
+import { Text } from 'moti';
 
 import {useBluetoothConnection} from '../../contexts/BLuetoothConnectionContext'
 import { Button } from '../../components/Button'
-import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
 
 const Container = styled.View`
@@ -158,17 +157,23 @@ const StatusGif = styled.Image`
 
 export function ConnectPlant({navigation, route}){
     const {connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId} = useBluetoothConnection()
-    const automateFound = !!automateDevice
+    const automateFound = !!automateDevice && Object.keys(automateDevice).length > 0
     const id = route.params.id
 
     useEffect(() => {
         console.log(`Conectando: ${id}`)
+
+        console.log('Device à seguir')
+        console.log(automateDevice)
         connectUsingId(id)
     }, [id])
 
+    if(!automateFound){
+        return <Text>Procurando...</Text>
+    }
+
     return (
         <Container>
-            <NewTitle >Selecione seu dispositivo</NewTitle>
             <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
             <LineDiv />
             <StatusGif
@@ -176,6 +181,10 @@ export function ConnectPlant({navigation, route}){
                 source={require('../../../assets/arduino.gif')} 
             />
             <AutomateName>{JSON.stringify(deviceData)}</AutomateName>
+            <Button
+                text="Desconectar"
+                onPress={()=> disconnect()}
+            />
             <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', }}>
                 <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
                     <Barrinha />

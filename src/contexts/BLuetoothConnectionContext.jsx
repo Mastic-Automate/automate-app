@@ -150,6 +150,7 @@ export function BluetoothConnectionContextProvider({children}){
 
     useEffect(() => {
         console.log('Automate device atualizado')
+        console.log(automateDevice)
         if(!!automateDevice){
             connect(automateDevice)
         }
@@ -163,7 +164,12 @@ export function BluetoothConnectionContextProvider({children}){
         console.log(devicesFound)
         //Essa parte abaixo faz o automate device ser definido ao encontrar os devices
         if(devicesFound.length > 0){
-            setAutomateDevice(devicesFound.find(device => device.name === 'Automate'))
+            const foundAutomate = devicesFound.find(device => device.name === 'Automate')
+            if(!!foundAutomate){
+                setAutomateDevice(foundAutomate)
+            } else {
+                console.log('Automate não encontrado dentre os dispositivos')
+            }
         }
     }, [devicesFound])
     

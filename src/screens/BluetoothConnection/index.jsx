@@ -186,7 +186,7 @@ const FoundAutomate = ({automate, deviceInfo, navigation}) => {
     const {setAddingPlant} = usePlantsManagement()
 
     function handleAddPlant(){
-        if(Object.keys(automateDevice).length > 0){
+        if(!!automateDevice && Object.keys(automateDevice).length > 0){
             setAddingPlant({
                 address:automateDevice.address,
                 id:automateDevice.id
