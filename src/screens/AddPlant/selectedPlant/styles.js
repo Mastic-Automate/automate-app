@@ -1,8 +1,8 @@
 import styled from 'styled-components/native'
 
 const Container = styled.ScrollView`
-    flex:1;
-    background-color: ${props => props.theme.background};
+
+    background-color: #00ffff;
 `
 
 const Title = styled.Text`
@@ -16,7 +16,7 @@ const Title = styled.Text`
 
 const InputsContainer = styled.View`
     width:100%;
-
+ 
 `
 const InputLabel = styled.Text`
     color: ${props => props.theme.secondary1};
@@ -72,6 +72,13 @@ const DetailRow = ({label, value}) => {
 const BottomButtonsContainer = styled.View`
     flex-direction:row;
 `
+const DivImage = styled.View`
+    flex:1;
+    width:100%;
+    height:100%;
+    background: #e93236;
+`
+
 export { 
     Container, 
     Title, 
@@ -81,5 +88,6 @@ export {
     DetailRow,
     DetailRowContainer,
     DetailSection,
-    DetailSectionTitle
+    DetailSectionTitle,
+    DivImage
 }

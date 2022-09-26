@@ -10,7 +10,7 @@ import { useTheme } from 'styled-components'
 import {Ionicons} from '@expo/vector-icons'
 import { Plants } from '../screens/Plants'
 import { InfoPlant } from '../screens/InfoPlant'
-import { AddPlant } from '../screens/AddPlant'
+import { AddPlant } from '../screens/AddPlant/selectedPlant'
 
 const Nav = createDrawerNavigator()
 
