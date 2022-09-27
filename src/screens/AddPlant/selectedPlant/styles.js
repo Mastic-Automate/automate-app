@@ -1,8 +1,8 @@
 import styled from 'styled-components/native'
+import { TextInput } from 'react-native'
 
-const Container = styled.ScrollView`
-
-    background-color: #00ffff;
+const Container = styled.View`
+    flex: 1;
 `
 
 const Title = styled.Text`
@@ -10,7 +10,7 @@ const Title = styled.Text`
     font-size: 30px;
     width:100%;
     text-align:center;
-    margin-top: 30px;
+    margin-top: 20px;
     font-family:Poppins;
 `
 
@@ -26,11 +26,11 @@ const DetailSection = styled.View`
     height: 400px;
     width: 100%;
     background-color: ${props => props.theme.background2};
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-top: 30px;
+    align-items: center;
+    flex-direction: column;
+
     border-top-left-radius:60px;
-    margin-top: 50px;
+
 `
 const DetailSectionTitle = styled.Text`
     font-size:20px;
@@ -38,7 +38,8 @@ const DetailSectionTitle = styled.Text`
     width:100%;
     text-align:center;
     color: ${props => props.theme.title};
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 `
 const DetailRowLabel = styled.Text`
     color: ${props => props.theme.title};
@@ -55,6 +56,7 @@ const DetailRowContainer = styled.View`
     justify-content:space-between;
     align-items:center;
     margin-bottom: 10px;
+    width: 91%;
 `
 const DetailRow = ({label, value}) => {
     return (
@@ -76,7 +78,23 @@ const DivImage = styled.View`
     flex:1;
     width:100%;
     height:100%;
-    background: #e93236;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+`
+
+const NameInput = styled.TextInput`
+    width: 361px;
+    height: 68px;
+    background-color: #D7DCE0;
+    border-radius: 37px;
+    margin-bottom: 20px;
+    border-width: 2px;
+    border-color: #164768;
+    color: #164768;
+    padding-left: 32px;
+    font-size: 20px;
+    font-family: Poppins600;
 `
 
 export { 
@@ -89,5 +107,6 @@ export {
     DetailRowContainer,
     DetailSection,
     DetailSectionTitle,
-    DivImage
+    DivImage,
+    NameInput
 }

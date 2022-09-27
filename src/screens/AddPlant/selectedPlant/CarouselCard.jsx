@@ -37,7 +37,7 @@ const Subtitle = styled.Text`
     
 `
 const Image = styled.Image`
-    margin-top:20%
+    margin-top:20%;
     width:200px;
 `
 
