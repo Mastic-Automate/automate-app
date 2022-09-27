@@ -44,14 +44,14 @@ export function AuthRoutes({navigation}){
             drawerContent={SideBar} 
         >
             <Nav.Screen name="bluetooth-connection" component={AddPlant} options={{
-        headerTitle:'Automate',
-        headerTitleStyle: {
-            fontFamily: "ProximaNovaSemiBold",
-            fontSize: 24,
-        },
-        headerTitleAlign:'center',
-        headerStyle:{backgroundColor:theme.background1},
-        headerTintColor:theme.text2,
+                headerTitle:'Automate',
+                headerTitleStyle: {
+                    fontFamily: "ProximaNovaSemiBold",
+                    fontSize: 24,
+                },
+                headerTitleAlign:'center',
+                headerStyle:{backgroundColor:theme.background1},
+                headerTintColor:theme.text2,
         headerRight: () => (
             <Ionicons 
                 name="settings-outline"

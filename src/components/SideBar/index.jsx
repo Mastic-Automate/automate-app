@@ -14,11 +14,11 @@ import {
     CornerImage
 } from "./styles";
 import { appImages } from "../../global/images";
-import { useAuth } from '../../hooks/useAuth';
+import { useUserInfo } from '../../hooks/useUserInfo';
 
 export const SideBar = (props) => {
     const theme = useTheme()
-    const {user} = useAuth()
+    const {data: user} = useUserInfo()
 
     return (
         <BarContainer 
