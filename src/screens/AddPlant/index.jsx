@@ -14,7 +14,7 @@ import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
-const ITEM_WIDTH = SLIDER_WIDTH*0.67
+const ITEM_WIDTH = SLIDER_WIDTH*0.63
 
 function AddPlant({navigation}){
     const {databasePlants} = useDatabasePlants()
@@ -39,7 +39,7 @@ function AddPlant({navigation}){
 
     return (
         <Container>
-            <InputsContainer>
+            
                 <Carousel 
                     data={databasePlants}
                     renderItem={({item, index}) => {
@@ -58,10 +58,11 @@ function AddPlant({navigation}){
 
                     slideStyle={{
                         alignItems:'center',
-                        justifyContent:'center'
+                        justifyContent:'center',
                     }}
                     onSnapToItem={setCurrentModelIndex}
                 />
+                <InputsContainer>
                 <DetailSection>
                     <DetailSectionTitle>Detalhes</DetailSectionTitle>
                     <DetailRow 

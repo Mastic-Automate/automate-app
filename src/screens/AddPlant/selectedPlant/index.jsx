@@ -6,10 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 
-import Carousel from 'react-native-snap-carousel'
 
 import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSectionTitle, InputLabel, InputsContainer, NameInput, Title, DivImage} from './styles'
-import { CarouselCard } from './CarouselCard'
 import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../../contexts/DatabasePlantsContext'
 import { Input } from '../../../components/Input'

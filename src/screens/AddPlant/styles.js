@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-const Container = styled.ScrollView`
+const Container = styled.View`
     flex:1;
     background-color: ${props => props.theme.background};
 `
@@ -23,14 +23,12 @@ const InputLabel = styled.Text`
     font-size: 20px;
 `
 const DetailSection = styled.View`
-    height: 400px;
-    width: 100%;
+    
     background-color: ${props => props.theme.background2};
     padding-right: 30px;
     padding-left: 30px;
-    padding-top: 30px;
+    padding-top: 20px;
     border-top-left-radius:60px;
-    margin-top: 50px;
 `
 const DetailSectionTitle = styled.Text`
     font-size:20px;
