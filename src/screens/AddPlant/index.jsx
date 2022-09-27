@@ -16,7 +16,7 @@ import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.67
 
-function AddPlant(){
+function AddPlant({navigation}){
     const {databasePlants} = useDatabasePlants()
 
     const [currentModelIndex, setCurrentModelIndex] = useState(0)
@@ -26,7 +26,8 @@ function AddPlant(){
     }, [currentModelIndex, databasePlants])
 
     function handleAddPlant(data){
-        console.log(selectedPlant)
+        console.log(selectedPlant.plantName);
+        navigation.navigate("namePlant", {id:selectedPlant.idPlant})
     }
     if(!selectedPlant){
         return (
@@ -77,7 +78,7 @@ function AddPlant(){
                     />
 
                     <BottomButtonsContainer>
-                        <Button text="Adicionar planta" style={
+                        <Button text="Selecionar Planta" style={
                             {
                                 flex:1, 
                                 margin:30, 
@@ -89,7 +90,7 @@ function AddPlant(){
                                 },
                                 shadowOpacity: 1,
                                 shadowRadius: 16.00,
-
+                                width: 323,
                                 elevation: 20,
                             }
                         } 

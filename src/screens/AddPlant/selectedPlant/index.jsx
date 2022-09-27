@@ -1,7 +1,7 @@
 import {Dimensions, Image} from 'react-native'
 
 import { Button } from '../../../components/Button'
-
+import { LinearGradient } from 'expo-linear-gradient'
 
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -13,15 +13,15 @@ import { CarouselCard } from './CarouselCard'
 import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../../contexts/DatabasePlantsContext'
 import { Input } from '../../../components/Input'
+import { useEffect } from 'react'
 
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.67
 
-function AddPlant({name, sub, img, active}){
-
-    img = require('../../../assets/suculenta.png');
+function NamePlant({route}){
     const {databasePlants} = useDatabasePlants()
+    const currentPlant = databasePlants.find(plant => plant.idPlant === route.params.id)
     const [currentModelIndex, setCurrentModelIndex] = useState(0)
 
     const selectedPlant = useMemo(() => {
@@ -31,6 +31,11 @@ function AddPlant({name, sub, img, active}){
     function handleAddPlant(data){
         console.log(selectedPlant)
     }
+
+    const img = currentPlant.image;
+    const name = currentPlant.plantName
+    console.log(currentPlant);
+
     if(!selectedPlant){
         return (
             <Container>
@@ -40,19 +45,28 @@ function AddPlant({name, sub, img, active}){
     }
 
     return (
-        <Container>
+        <Container>     
+            <LinearGradient 
+            colors={
+                ['rgba(163, 183, 195, 0.36)', 'rgba(69, 116, 122, 0.86)']
+            }
+            style={{alignItems:'center', borderRadius:10, flex:1}}
+            >
+            <Title>{name}</Title>
             
             <DivImage>
+                
             <Image 
             source={img} 
             style={{alignSelf: 'center',}}
             />
-            </DivImage>
 
+            </DivImage>
+            
             <InputsContainer>
                 <DetailSection>
                     <DetailSectionTitle>Nome da sua planta</DetailSectionTitle>
-                    <NameInput />
+                    <NameInput placeholder="Nome/Apelido"/>
                     <DetailRow 
                         label="Tempo de colheita"
                         value={selectedPlant.plantTimeHarvest}
@@ -87,9 +101,9 @@ function AddPlant({name, sub, img, active}){
                     </BottomButtonsContainer>
                 </DetailSection>
             </InputsContainer>
-
+            </LinearGradient>
         </Container>
     )
 }
 
-export {AddPlant}
+export {NamePlant}

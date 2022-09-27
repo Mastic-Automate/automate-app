@@ -1,17 +1,22 @@
 import styled from 'styled-components/native'
-import { TextInput } from 'react-native'
+import { TextInput, View } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient';
+
+
 
 const Container = styled.View`
-    flex: 1;
+    flex:1;
 `
+    
 
 const Title = styled.Text`
     color: ${props => props.theme.title};
-    font-size: 30px;
+    font-size: 55px;
     width:100%;
     text-align:center;
     margin-top: 20px;
-    font-family:Poppins;
+    font-family:Montserrat_600SemiBold;
+    color: #163345;
 `
 
 const InputsContainer = styled.View`
@@ -95,6 +100,8 @@ const NameInput = styled.TextInput`
     padding-left: 32px;
     font-size: 20px;
     font-family: Poppins600;
+    align-items: center;
+    flex-direction: row;
 `
 
 export { 

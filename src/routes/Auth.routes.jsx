@@ -10,7 +10,8 @@ import { useTheme } from 'styled-components'
 import {Ionicons} from '@expo/vector-icons'
 import { Plants } from '../screens/Plants'
 import { InfoPlant } from '../screens/InfoPlant'
-import { AddPlant } from '../screens/AddPlant/selectedPlant'
+import { AddPlant } from '../screens/AddPlant'
+import { NamePlant } from '../screens/AddPlant/selectedPlant'
 
 const Nav = createDrawerNavigator()
 
@@ -67,6 +68,7 @@ export function AuthRoutes({navigation}){
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{...defaultScreenOptions, headerTitle: 'Plantas'}} />
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />
             <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{...defaultScreenOptions, headerTitle:'Configurações'}} />
+            <Nav.Screen name="namePlant" component={NamePlant} options={{headerShown:false}} screenOptions={{...defaultScreenOptions, headerTitle:'Configurações'}} />
         </Nav.Navigator>
     )
 }
