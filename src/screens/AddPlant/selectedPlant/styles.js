@@ -14,7 +14,7 @@ const Title = styled.Text`
     font-size: 55px;
     width:100%;
     text-align:center;
-    margin-top: 20px;
+    margin-top: 50px;
     font-family:Montserrat_600SemiBold;
     color: #163345;
 `
@@ -84,8 +84,8 @@ const DivImage = styled.View`
     width:100%;
     height:100%;
     align-items: center;
-    justify-content: center;
-    flex-direction: row;
+    justify-content: space-between;
+
 `
 
 const NameInput = styled.TextInput`

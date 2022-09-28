@@ -69,7 +69,7 @@ export function AuthRoutes({navigation}){
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />
             <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{...defaultScreenOptions, headerTitle:'Configurações'}} />
             <Nav.Screen name="namePlant" component={NamePlant} options={{headerShown:false}} />
-            <Nav.Screen name="addPlant" component={AddPlant} options={{headerShown:false}} />
+            <Nav.Screen name="addPlant" component={AddPlant} options={{headerShown:false}}/>
         </Nav.Navigator>
     )
 }

@@ -12,12 +12,12 @@ import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../../contexts/DatabasePlantsContext'
 import { Input } from '../../../components/Input'
 import { useEffect } from 'react'
-
+import { Titlebar } from '../../../components/TitleBar'
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.67
 
-function NamePlant({route}){
+function NamePlant({navigation, route}){
     const {databasePlants} = useDatabasePlants()
     const currentPlant = databasePlants.find(plant => plant.idPlant === route.params.id)
     const [currentModelIndex, setCurrentModelIndex] = useState(0)
@@ -42,7 +42,8 @@ function NamePlant({route}){
         )
     }
 
-    return (
+    return (<>
+    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent"}}/>
         <Container>     
             <LinearGradient 
             colors={
@@ -50,13 +51,14 @@ function NamePlant({route}){
             }
             style={{alignItems:'center', borderRadius:10, flex:1}}
             >
+                <DivImage>
             <Title>{name}</Title>
             
-            <DivImage>
+            
                 
             <Image 
             source={img} 
-            style={{alignSelf: 'center',}}
+            style={{alignSelf: 'center', marginBottom: 10,}}
             />
 
             </DivImage>
@@ -101,6 +103,7 @@ function NamePlant({route}){
             </InputsContainer>
             </LinearGradient>
         </Container>
+        </>
     )
 }
 

@@ -1,7 +1,7 @@
 import {Dimensions} from 'react-native'
 
 import { Button } from '../../components/Button'
-
+import { Titlebar } from '../../components/TitleBar'
 
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -37,7 +37,8 @@ function AddPlant({navigation}){
         )
     }
 
-    return (
+    return (<>
+        <Titlebar navigation={navigation} title="Adicionar Planta"/>
         <Container>
             
                 <Carousel 
@@ -100,6 +101,7 @@ function AddPlant({navigation}){
                 </DetailSection>
             </InputsContainer>
         </Container>
+        </>
     )
 }
 

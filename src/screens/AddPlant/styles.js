@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 
+
 const Container = styled.View`
     flex:1;
     background-color: ${props => props.theme.background};
@@ -79,5 +80,5 @@ export {
     DetailRow,
     DetailRowContainer,
     DetailSection,
-    DetailSectionTitle
+    DetailSectionTitle,
 }
