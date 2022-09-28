@@ -3,7 +3,10 @@ import { api } from '../services/api';
 
 async function fetchUserInfo(){
     try{
-        const {data} = await api.get('/userInfo')
+        const {data, status} = await api.get('/userInfo')
+        if(status === 401){
+            return null
+        }
         return data
     } catch(err) {
         console.log(err)

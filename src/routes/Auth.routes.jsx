@@ -35,8 +35,8 @@ export function AuthRoutes({navigation}){
     }
 
     useEffect(() => {
-        if(user === null){
-            navigation.replace('initialRoutes')
+        if(!user){
+            navigation.replace('InitialRoutes')
         }
     }, [user])
     return (

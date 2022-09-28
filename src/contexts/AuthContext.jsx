@@ -1,16 +1,17 @@
 import { createContext, useEffect, useState } from 'react'
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import {api} from '../services/api'
+import { useUserInfo } from '../hooks/useUserInfo'
 
 const AuthContext = createContext({})
 
 function AuthContextProvider({ children }) {
+    const {data: user, refetch} = useUserInfo()
     async function signIn(userEmail, userPassword) {
         const requestBody = { userEmail, userPassword }
         try {
             const response = await api.post('/signin', requestBody)
+            await refetch()
 
             return {
                 sucess:false,
@@ -56,12 +57,12 @@ function AuthContextProvider({ children }) {
     }
 
     async function signOut(){
-        setUser(null)
-        AsyncStorage.removeItem('@UserAuth')
+        await api.get('/signOut')
+        await refetch()
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, signUp, signOut }}>
+        <AuthContext.Provider value={{ signIn, signUp, signOut, user: user }}>
             {children}
         </AuthContext.Provider>
     )
