@@ -5,11 +5,12 @@ import { Home } from '../screens/Home'
 
 import {useAuth} from '../hooks/useAuth'
 import { useEffect } from 'react'
+import { useUserInfo } from '../hooks/useUserInfo'
 
 const Stack = createNativeStackNavigator()
 
 export function InitialRoutes({navigation}){
-    const {user} = useAuth()
+    const {data:user} = useUserInfo()
 
     useEffect(() => {
         if(user !== null){

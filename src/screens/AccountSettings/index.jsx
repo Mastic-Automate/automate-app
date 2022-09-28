@@ -11,9 +11,11 @@ import {
     EmailText
 } from './styles'
 import { appImages } from '../../global/images'
+import { useUserInfo } from '../../hooks/useUserInfo'
 
 function AccountSettings() {
-    const {signOut, user} = useAuth()
+    const {signOut} = useAuth()
+    const {data:user} = useUserInfo()
 
     return (
         <Container>
