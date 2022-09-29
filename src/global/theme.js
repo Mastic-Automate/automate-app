@@ -27,7 +27,9 @@ export const themes = {
         secondary3:'#F0F0F0', 
         secondary4:'#FAFAFA', 
 
-        tabBackground:'#4F8698'
+        tabBackground:'#4F8698',
+
+        test1: '#363636'
     },
     dark: {
         primary: '#009D81',
@@ -57,6 +59,7 @@ export const themes = {
         secondary3:'#303030', 
         secondary4:'rgba(242, 242, 242, .1)', 
 
-        tabBackground:'#103551'
+        tabBackground:'#103551',
+        test1: '#CCCCCC'
     },
 }

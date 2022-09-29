@@ -27,10 +27,11 @@ import {
     SectionOptions,
 
 } from './styles'
+import { useUserInfo } from '../../hooks/useUserInfo';
 
 export function Config({navigation}){
     const {toggleTheme, theme} = useTheme()
-    const {user} = useAuth()
+    const {data:user} = useUserInfo()
 
     const isDarkTheme = !(theme==='light')
 

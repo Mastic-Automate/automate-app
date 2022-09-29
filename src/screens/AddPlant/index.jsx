@@ -10,8 +10,8 @@ import { useMemo, useState, useEffect } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
-const SLIDER_WIDTH = Dimensions.get('window').width
-const ITEM_WIDTH = SLIDER_WIDTH*0.8
+const SLIDER_WIDTH = (Dimensions.get('window').width)
+const ITEM_WIDTH = SLIDER_WIDTH*0.67
 
 function AddPlant({navigation}){
     const {databasePlants} = useDatabasePlants()
@@ -42,7 +42,6 @@ function AddPlant({navigation}){
 
     return (
         <Container>
-            <Title>Adicionar planta</Title>
             <InputsContainer>
                 <Carousel 
                     data={databasePlants}
@@ -59,7 +58,7 @@ function AddPlant({navigation}){
                     }}
                     sliderWidth={SLIDER_WIDTH}
                     itemWidth={ITEM_WIDTH}
-                    useScrollView
+
                     slideStyle={{
                         alignItems:'center',
                         justifyContent:'center'
@@ -82,7 +81,23 @@ function AddPlant({navigation}){
                     />
 
                     <BottomButtonsContainer>
-                        <Button text="Adicionar planta" style={{flex:1, margin:30}} onPress={handleAddPlant} />
+                        <Button text="Adicionar planta" style={
+                            {
+                                flex:1, 
+                                margin:30, 
+                                backgroundColor: "#0DD977",
+                                shadowColor: "#06EA7C",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 1,
+                                shadowRadius: 16.00,
+
+                                elevation: 20,
+                            }
+                        } 
+                            onPress={handleAddPlant} />
                     </BottomButtonsContainer>
                 </DetailSection>
             </InputsContainer>

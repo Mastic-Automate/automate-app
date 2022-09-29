@@ -7,6 +7,8 @@ import { useAuth } from '../../hooks/useAuth'
 
 import { appImages } from '../../global/images'
 
+import { Home } from '../Home'
+
 import { 
     BottomLink, 
     BottomLinkText, 

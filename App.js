@@ -34,12 +34,15 @@ import {
 } from '@expo-google-fonts/oswald'
 import {RootRoutes} from './src/routes/RootRoutes'
 
+import { ReactQueryProvider } from './src/services/reactQuery';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Poppins': Poppins_400Regular,
     'Poppins700': Poppins_700Bold,
     'Poppins600':Poppins_600SemiBold,
     'ProximaNova': require('./assets/fonts/proximaNova/ProximaNovaBold.otf'),
+    'ProximaNovaSemiBold': require('./assets/fonts/proximaNova/ProximaNovaSemibold.otf'),
     'SuperaGothic': require('./assets/fonts/SuperaGothic/SuperaGothic-ExtraBold.otf'),
     'SuperaGothic400': require('./assets/fonts/SuperaGothic/SuperaGothic-Regular.otf'),
     'MusticaPro':require('./assets/fonts/Mustica/MusticaPro-SemiBold.otf'),
@@ -61,19 +64,21 @@ export default function App() {
     return <AppLoading />
   }
   return (
-    <AuthContextProvider>
-      <ThemeContextProvider>
-        <BluetoothConnectionContextProvider>
-          <MicrocontrollersContextProvider>
+    <ReactQueryProvider>
+      <AuthContextProvider>
+        <ThemeContextProvider>
+          <BluetoothConnectionContextProvider>
+            <MicrocontrollersContextProvider>
               <DatabasePlantsContextProvider>
                 <NavigationContainer>
                   <StatusBar />
                   <RootRoutes />
                 </NavigationContainer>
               </DatabasePlantsContextProvider>
-          </MicrocontrollersContextProvider>
-        </BluetoothConnectionContextProvider>
-      </ThemeContextProvider>
-    </AuthContextProvider>
+            </MicrocontrollersContextProvider>
+          </BluetoothConnectionContextProvider>
+        </ThemeContextProvider>
+      </AuthContextProvider>
+    </ReactQueryProvider>
   );
 }

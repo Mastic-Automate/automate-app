@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 const Container = styled.TouchableOpacity`
-    background-color: ${props => props.theme.cardColor};
+    background-color: #FDFDFD;
     border-radius: 24px;
     padding: 10px;
     flex-flow: row nowrap;
@@ -38,7 +38,15 @@ const PlantDescriptionText = styled.Text`
 
 export function UserPlantCard({name, description, image, id, style}) {
     return (
-        <Container style={style}>
+        <Container style={{...style, 
+            shadowColor:"#4F5C66",
+            shadowOffset: {width:100, height:100},
+            shadowOpacity: 0.11,
+            elevation: 5,
+            marginBottom:15,
+            marginRight: 15,
+            marginleft: 15,
+        }}>
             <ImageContainer>
                 <Image
                     source={image}

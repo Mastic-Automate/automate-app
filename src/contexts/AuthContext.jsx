@@ -1,30 +1,17 @@
 import { createContext, useEffect, useState } from 'react'
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import {api} from '../services/api'
+import { useUserInfo } from '../hooks/useUserInfo'
 
 const AuthContext = createContext({})
 
 function AuthContextProvider({ children }) {
-    const [user, setUser] = useState(null)
-
+    const {data: user, refetch} = useUserInfo()
     async function signIn(userEmail, userPassword) {
         const requestBody = { userEmail, userPassword }
         try {
             const response = await api.post('/signin', requestBody)
-            if(response.data.sucess){
-                const responseUser = response.data.user
-                setUser(responseUser)
-                AsyncStorage.setItem('@UserAuth', JSON.stringify({
-                    email:userEmail,
-                    password:userPassword
-                }))
-                return {
-                    sucess:true,
-                    error: null
-                }
-            }
+            await refetch()
 
             return {
                 sucess:false,
@@ -70,24 +57,12 @@ function AuthContextProvider({ children }) {
     }
 
     async function signOut(){
-        setUser(null)
-        AsyncStorage.removeItem('@UserAuth')
+        await api.get('/signOut')
+        await refetch()
     }
-
-    async function signInOnSetup(){
-        const jsonAuthData = await AsyncStorage.getItem('@UserAuth')
-        if(!!jsonAuthData) {
-            const authData = JSON.parse(jsonAuthData)
-            signIn(authData.email, authData.password)
-        }
-    }
-
-    useEffect(() => {
-        signInOnSetup()
-    }, [])
 
     return (
-        <AuthContext.Provider value={{ user, signIn, signUp, signOut }}>
+        <AuthContext.Provider value={{ signIn, signUp, signOut, user: user }}>
             {children}
         </AuthContext.Provider>
     )

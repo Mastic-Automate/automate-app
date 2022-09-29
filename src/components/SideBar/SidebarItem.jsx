@@ -1,4 +1,5 @@
 import {ItemContainer, ItemText} from './styles'
+import hamburgerMenu from '@iconify/icons-cil/hamburger-menu';
 
 export function SidebarItem({text, iconName, iconType:Icon, onPress, focused}){
     return (
