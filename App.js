@@ -67,16 +67,12 @@ export default function App() {
     <ReactQueryProvider>
       <AuthContextProvider>
         <ThemeContextProvider>
-          <BluetoothConnectionContextProvider>
-            <MicrocontrollersContextProvider>
-              <DatabasePlantsContextProvider>
-                <NavigationContainer>
-                  <StatusBar />
-                  <RootRoutes />
-                </NavigationContainer>
-              </DatabasePlantsContextProvider>
-            </MicrocontrollersContextProvider>
-          </BluetoothConnectionContextProvider>
+          <MicrocontrollersContextProvider>
+            <NavigationContainer>
+              <StatusBar />
+              <RootRoutes />
+            </NavigationContainer>
+          </MicrocontrollersContextProvider>
         </ThemeContextProvider>
       </AuthContextProvider>
     </ReactQueryProvider>
