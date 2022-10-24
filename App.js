@@ -33,6 +33,8 @@ import {
   Oswald_700Bold
 } from '@expo-google-fonts/oswald'
 
+import { ReactQueryProvider } from './src/services/reactQuery';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Poppins': Poppins_400Regular,
@@ -63,14 +65,16 @@ export default function App() {
   return (
     <AuthContextProvider>
       <ThemeContextProvider>
-        <DatabasePlantsContextProvider>
-          <MicrocontrollersContextProvider>
-            <NavigationContainer>
-              <StatusBar />
-              <RootRoutes />
-            </NavigationContainer>
-          </MicrocontrollersContextProvider>
-        </DatabasePlantsContextProvider>
+        <ReactQueryProvider>
+          <DatabasePlantsContextProvider>
+            <MicrocontrollersContextProvider>
+              <NavigationContainer>
+                <StatusBar />
+                <RootRoutes />
+              </NavigationContainer>
+            </MicrocontrollersContextProvider>
+          </DatabasePlantsContextProvider>
+        </ReactQueryProvider>
       </ThemeContextProvider>
     </AuthContextProvider>
   );
