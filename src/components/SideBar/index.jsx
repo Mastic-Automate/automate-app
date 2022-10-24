@@ -52,6 +52,15 @@ export const SideBar = (props) => {
                     iconType={Entypo}
                     focused={props.state.index === 1}
                 />
+                <SidebarItem
+                    onPress={() => {
+                        props.navigation.navigate("addPlant");
+                    }}
+                    text="Adicionar Planta"
+                    iconName="tree"
+                    iconType={Entypo}
+                    focused={props.state.index === 2}
+                />
             </MainSection>
             <BottomSection onPress={() => {
                 props.navigation.navigate('config', {screen:'account'})

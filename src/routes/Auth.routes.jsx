@@ -11,6 +11,7 @@ import {Ionicons} from '@expo/vector-icons'
 import { Plants } from '../screens/Plants'
 import { InfoPlant } from '../screens/InfoPlant'
 import { AddPlant } from '../screens/AddPlant'
+import { NamePlant } from '../screens/AddPlant/selectedPlant'
 
 const Nav = createDrawerNavigator()
 
@@ -52,21 +53,34 @@ export function AuthRoutes({navigation}){
                 headerTitleAlign:'center',
                 headerStyle:{backgroundColor:theme.background1},
                 headerTintColor:theme.text2,
-        headerRight: () => (
-            <Ionicons 
-                name="settings-outline"
-                color={theme.text2}
-                size={35}
-                onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
-                style={{margin:10, marginRight:20}}
+            }}
             />
-        )
-    }
-} />
+            <Nav.Screen name="home" component={Home} options={{
+                headerTitle:'Automate',
+                headerTitleStyle: {
+                    fontFamily: "ProximaNovaSemiBold",
+                    fontSize: 24,
+                    headerTitleAlign:'center',
+                    headerStyle:{backgroundColor:theme.background1},
+                    headerTintColor:theme.text2,
+                    headerRight: () => (
+                        <Ionicons 
+                            name="settings-outline"
+                            color={theme.text2}
+                            size={35}
+                            onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
+                            style={{margin:10, marginRight:20}}
+                        />
+                    )
+                }
+            }}       
+            />
             <Nav.Screen name="plants" component={Plants} options={{...defaultScreenOptions, headerShown:false}} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{...defaultScreenOptions, headerTitle: 'Plantas'}} />
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />
             <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{...defaultScreenOptions, headerTitle:'Configurações'}} />
+            <Nav.Screen name="namePlant" component={NamePlant} options={{headerShown:false}} />
+            <Nav.Screen name="addPlant" component={AddPlant} options={{headerShown:false}}/>
         </Nav.Navigator>
     )
 }
