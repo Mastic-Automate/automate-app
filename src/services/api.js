@@ -1,5 +1,4 @@
-import axios from 'axios'
-//import {API_BASE_URL} from '@env'
+import axios from 'axios';
 
 const api = axios.create({
     baseURL: 'https://automate-api-deploy.vercel.app'

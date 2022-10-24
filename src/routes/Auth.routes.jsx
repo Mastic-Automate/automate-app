@@ -36,34 +36,45 @@ export function AuthRoutes({navigation}){
     }
 
     useEffect(() => {
-        if(user === null){
-            navigation.replace('initialRoutes')
+        if(!user){
+            navigation.replace('InitialRoutes')
         }
     }, [user])
     return (
         <Nav.Navigator 
             drawerContent={SideBar} 
         >
-            <Nav.Screen name="home" component={Home} options={{
-        headerTitle:'Automate',
-        headerTitleStyle: {
-            fontFamily: "ProximaNovaSemiBold",
-            fontSize: 24,
-        },
-        headerTitleAlign:'center',
-        headerStyle:{backgroundColor:theme.background1},
-        headerTintColor:theme.text2,
-        headerRight: () => (
-            <Ionicons 
-                name="settings-outline"
-                color={theme.text2}
-                size={35}
-                onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
-                style={{margin:10, marginRight:20}}
+            <Nav.Screen name="bluetooth-connection" component={AddPlant} options={{
+                headerTitle:'Automate',
+                headerTitleStyle: {
+                    fontFamily: "ProximaNovaSemiBold",
+                    fontSize: 24,
+                },
+                headerTitleAlign:'center',
+                headerStyle:{backgroundColor:theme.background1},
+                headerTintColor:theme.text2,
+            }}
             />
-        )
-    }
-} />
+            <Nav.Screen name="home" component={Home} options={{
+                headerTitle:'Automate',
+                headerTitleStyle: {
+                    fontFamily: "ProximaNovaSemiBold",
+                    fontSize: 24,
+                    headerTitleAlign:'center',
+                    headerStyle:{backgroundColor:theme.background1},
+                    headerTintColor:theme.text2,
+                    headerRight: () => (
+                        <Ionicons 
+                            name="settings-outline"
+                            color={theme.text2}
+                            size={35}
+                            onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
+                            style={{margin:10, marginRight:20}}
+                        />
+                    )
+                }
+            }}       
+            />
             <Nav.Screen name="plants" component={Plants} options={{...defaultScreenOptions, headerShown:false}} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{...defaultScreenOptions, headerTitle: 'Plantas'}} />
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />
