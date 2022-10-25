@@ -6,7 +6,7 @@ const Container = styled.View`
     flex-flow: column nowrap;
     align-items:center;
     height: 306px;
-    width: 226px;
+    width: 216px;
     border-radius:10px;
     
 `
@@ -15,7 +15,7 @@ const Frame = styled.View`
     align-items:center;
     justify-content: center;
     height: 320px;
-    width: 240px;
+    width: 230px;
     border-color: ${props=> props.active?`#1DBF37`:`#ffffff`};
     border-radius:18px;
     border-width:3px;
@@ -37,7 +37,7 @@ const Subtitle = styled.Text`
     
 `
 const Image = styled.Image`
-margin-top:20%
+    margin-top:20%;
     width:200px;
 `
 
