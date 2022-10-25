@@ -36,8 +36,8 @@ export function AuthRoutes({navigation}){
     }
 
     useEffect(() => {
-        if(!user){
-            navigation.replace('InitialRoutes')
+        if(user === null){
+            navigation.replace('initialRoutes')
         }
     }, [user])
     return (
@@ -73,8 +73,9 @@ export function AuthRoutes({navigation}){
                         />
                     )
                 }
-            }}       
-            />
+            }} 
+            />    
+
             <Nav.Screen name="plants" component={Plants} options={{...defaultScreenOptions, headerShown:false}} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{...defaultScreenOptions, headerTitle: 'Plantas'}} />
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />

@@ -3,9 +3,8 @@ import { Login } from '../screens/Login'
 import { Register } from '../screens/Register'
 import { Home } from '../screens/Home'
 
+import {useAuth} from '../hooks/useAuth'
 import { useEffect } from 'react'
-import { useUserInfo } from '../hooks/useUserInfo'
-import { useAuth } from '../hooks/useAuth'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,7 +12,7 @@ export function InitialRoutes({navigation}){
     const {user} = useAuth()
 
     useEffect(() => {
-        if(!!user){
+        if(user !== null){
             navigation.replace('authRoutes')
         }
     }, [user])

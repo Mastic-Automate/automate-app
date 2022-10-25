@@ -63,9 +63,9 @@ export default function App() {
     return <AppLoading />
   }
   return (
-    <ReactQueryProvider>
-      <AuthContextProvider>
-        <ThemeContextProvider>
+    <AuthContextProvider>
+      <ThemeContextProvider>
+        <ReactQueryProvider>
           <DatabasePlantsContextProvider>
             <MicrocontrollersContextProvider>
               <NavigationContainer>
@@ -74,8 +74,8 @@ export default function App() {
               </NavigationContainer>
             </MicrocontrollersContextProvider>
           </DatabasePlantsContextProvider>
-        </ThemeContextProvider>
-      </AuthContextProvider>
-    </ReactQueryProvider>
+        </ReactQueryProvider>
+      </ThemeContextProvider>
+    </AuthContextProvider>
   );
 }
