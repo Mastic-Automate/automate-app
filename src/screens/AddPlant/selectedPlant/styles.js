@@ -28,7 +28,6 @@ const InputLabel = styled.Text`
     font-size: 20px;
 `
 const DetailSection = styled.View`
-    height: 400px;
     width: 100%;
     background-color: ${props => props.theme.background2};
     align-items: center;
