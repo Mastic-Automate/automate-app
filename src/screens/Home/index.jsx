@@ -29,8 +29,9 @@ import { useMicrocontrollers } from '../../hooks/useMicrocontrollers'
 import { getPlantImage } from '../../global/plants'
 
 export function Home({navigation}){
-    const {pickRandomPlants} = useDatabasePlants()
-    const randomPlants = useMemo(() => pickRandomPlants(3), [])
+    const {pickRandomPlants, databasePlants} = useDatabasePlants()
+    const randomPlants = useMemo(() => pickRandomPlants(3), [databasePlants])
+
     const {storedDevices} = useMicrocontrollers()
     return (
         <Container>
@@ -113,16 +114,18 @@ export function Home({navigation}){
                 />
                 <RandomPlantsSection>
                     {randomPlants.map(plant => {
-                        return (
-                            <InfoPlantCard 
-                                image={plant.image}
-                                description={plant.plantAbout}
-                                style={{marginBottom:20}}
-                                key={plant.idPlant}
-                                title={plant.plantName}
-                                id={plant.idPlant}
-                            />
-                        )
+                        if(!!plant){
+                            return (
+                                <InfoPlantCard 
+                                    image={plant.image}
+                                    description={plant.plantAbout}
+                                    style={{marginBottom:20}}
+                                    key={plant.idPlant}
+                                    title={plant.plantName}
+                                    id={plant.idPlant}
+                                />
+                            )
+                        }
                     })}
                 </RandomPlantsSection>
             </PlantsSection>

@@ -33,11 +33,11 @@ export function DatabasePlantsContextProvider({children}){
         }
         return result
     }
-
-    const pickRandomPlant = () => {
+    
+    const pickRandomPlant = useCallback(() => {
         const selected = _.sample(databasePlants)
         return selected
-    }
+    }, [databasePlants])
 
     return (
         <DatabasePlantsContext.Provider value={{databasePlants, pickRandomPlants, isLoading, isSuccess}}>
