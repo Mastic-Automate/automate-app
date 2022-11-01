@@ -26,22 +26,6 @@ const enteringAnimation = new Keyframe({
     },
   }).delay(1000).duration(750)
 
-  const exitingAnimation = new Keyframe({
-    0: {
-        transform: [{ scale: 1}],
-        opacity: 1,
-    },
-    45: {
-        transform: [{ scale: 0.7}],
-        opacity: 0.5,
-        easing: Easing.linear,
-    },
-    100: {
-        transform: [{ scale: 0.5}],
-        opacity: 0,
-    },
-  }).delay(1000).duration(750)
-
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.67
 
@@ -74,10 +58,11 @@ function NamePlant({navigation, route}){
 
     const [showView, setShowView] = useState(false)
     useFocusEffect(() => {
+        console.log('entrei')
+        setShowView(true)
         return () => {
             console.log('saí')
-            setShowView(true)
-            
+            setShowView(false)
         }     
     })
 
@@ -88,7 +73,6 @@ function NamePlant({navigation, route}){
             {showView && (
                 <Animated.View 
                     entering={enteringAnimation}
-                    exiting={exitingAnimation}
                     style={{
                             width: '100%',
                             height: '100%',
