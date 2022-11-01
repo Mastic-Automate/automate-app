@@ -7,6 +7,7 @@ import AppLoading from 'expo-app-loading';
 import { Image } from 'react-native';
 import {MaterialIcons} from '@expo/vector-icons'
 import { Text } from 'moti';
+import {useFocusEffect} from '@react-navigation/native'
 
 import {useBluetoothConnection} from '../../contexts/BLuetoothConnectionContext'
 import { Button } from '../../components/Button'
@@ -160,17 +161,41 @@ export function ConnectPlant({navigation, route}){
     const automateFound = !!automateDevice && Object.keys(automateDevice).length > 0
     const id = route.params.id
 
+    const searchingForDevices = !(devicesFound.length > 0)
+
     useEffect(() => {
-        console.log(`Conectando: ${id}`)
+        if(searchingForDevices){
+            console.log('Procurando pelos dispositivos')
+        } else {
+            console.log(`Conectando: ${id}`)
+    
+            console.log('Device à seguir')
+            console.log(automateDevice)
+            connectUsingId(id).then(() => {
+                console.log('Função de conexão rodou')
+            })
+        }
 
-        console.log('Device à seguir')
-        console.log(automateDevice)
-        connectUsingId(id)
-    }, [id])
+    }, [id, searchingForDevices])
+    
+    useFocusEffect(() => {
+        return () => {
+            console.log('Tela fechou-se, disconectando...')
+            disconnect()
+        }
+    })
 
-    if(!automateFound){
-        return <Text>Procurando...</Text>
+    if(searchingForDevices){
+        return <Text>Ainda procurando dispositivos...</Text>
     }
+
+    if(!isConnected){
+        return <Text>Conectando...</Text>
+    }
+
+    useEffect(()=> {
+        console.log(deviceData)
+    }, [deviceData])
 
     return (
         <Container>
@@ -181,6 +206,8 @@ export function ConnectPlant({navigation, route}){
                 source={require('../../../assets/arduino.gif')} 
             />
             <AutomateName>{JSON.stringify(deviceData)}</AutomateName>
+            <Text>Média da umidade: {deviceData.humidityAverage}</Text>
+            <Text>Média da umidade: {deviceData.wateredTimes}</Text>
             <Button
                 text="Desconectar"
                 onPress={()=> disconnect()}

@@ -3,15 +3,60 @@ import { PermissionsAndroid } from 'react-native';
 
 import { createContext, useContext } from "react";
 import { useState, useEffect, useCallback } from 'react';
+import {useMicrocontrollers} from '../hooks/useMicrocontrollers' 
 
 const BluetoothConnectionContext = createContext({})
 
 export function BluetoothConnectionContextProvider({children}){
     const [devicesFound, setDevicesFound] = useState([]);
-    const [found, setFound] = useState(false);
+    const [searchingForDevices, setSearchingForDevices] = useState(true);
+    const [bondedDevices, setBondedDevices] = useState([])
     const [automateDevice, setAutomateDevice] = useState({});
     const [isConnected, setIsConnected] = useState(false)
     const [deviceData, setDeviceData] = useState({})
+
+    const {storedDevices} = useMicrocontrollers()
+
+    useEffect(() => {
+        RNBluetoothClassic.getConnectedDevices().then(devices => {
+            console.log(devices)
+            if(devices.length > 0) {
+                console.log('Já está conectado')
+                setIsConnected(true)
+            } else {
+                console.log('Não está conectado')
+            }
+        })
+    }, [])
+
+    function getDeviceById(id){
+        return devicesFound.find(device => device.id === id)
+    }
+
+    useEffect(() => {
+        storedDevices.map((device) => {
+            const deviceObj = getDeviceById(device.id)
+            console.log('deviceObj')
+            console.log(deviceObj)
+        })
+    }, [storedDevices])
+
+    useEffect(() => {
+        RNBluetoothClassic.getBondedDevices().then(devices => {
+            setBondedDevices(devices)
+        })
+    }, [])
+
+    useEffect(() => {
+        if(bondedDevices.length > 0){
+            bondedDevices.map(device => {
+                device.isConnected().then(is => {
+                    console.log(`Device(id: ${device.id}) is connected: ${is}`)
+                })
+            })
+        }
+        
+    }, [bondedDevices])
 
     useEffect(() => {
         requestAccessFineLocationPermission().then(perm => {
@@ -30,8 +75,24 @@ export function BluetoothConnectionContextProvider({children}){
                })
            };
         });
+        return ()=> {
+            console.log('Cancelada a busca')
+            RNBluetoothClassic.cancelDiscovery()
+        }
 
     },[])
+
+    async function changeAutomateDevice(newDevice){
+        await disconnect(automateDevice)
+        setAutomateDevice(newDevice)
+    }
+
+    useEffect(()=> {
+        RNBluetoothClassic.getConnectedDevices().then(devices => {
+            console.log('Devices conectados a seguir')
+            console.log(devices)
+        })
+    }, [])
 
     async function setupDevice(){
         const isConnected = await automateDevice.isConnected()
@@ -41,11 +102,6 @@ export function BluetoothConnectionContextProvider({children}){
                 console.log(data)
                 setDeviceData(data)
             })
-        }
-
-        return ()=> {
-            console.log('Cancelada a busca')
-            RNBluetoothClassic.cancelDiscovery()
         }
     }
 
@@ -123,6 +179,8 @@ export function BluetoothConnectionContextProvider({children}){
         const targetDevice = devicesFound.filter(device => device.id === id)[0]
         if(!!targetDevice){
             setAutomateDevice(targetDevice)
+        } else {
+            console.log('Tentando conectar a dispositivo não encontrado')
         }
     }
     
@@ -166,7 +224,7 @@ export function BluetoothConnectionContextProvider({children}){
         if(devicesFound.length > 0){
             const foundAutomate = devicesFound.find(device => device.name === 'Automate')
             if(!!foundAutomate){
-                setAutomateDevice(foundAutomate)
+                changeAutomateDevice(foundAutomate)
             } else {
                 console.log('Automate não encontrado dentre os dispositivos')
             }
@@ -174,7 +232,19 @@ export function BluetoothConnectionContextProvider({children}){
     }, [devicesFound])
     
     return (
-        <BluetoothConnectionContext.Provider value={{sendMessage, disconnect, connect, devicesFound, automateDevice, devicesFound, deviceData, loadDeviceData, isConnected, connectUsingId}}>
+        <BluetoothConnectionContext.Provider value={{
+            sendMessage, 
+            disconnect, 
+            connect, 
+            devicesFound, 
+            automateDevice, 
+            devicesFound, 
+            deviceData, 
+            loadDeviceData, 
+            isConnected, 
+            connectUsingId,
+            searchingForDevices
+        }}>
             {children}
         </BluetoothConnectionContext.Provider>
     )
