@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import styled from 'styled-components/native'
+import { appImages } from '../../global/images'
 import { Like } from './Like'
 
 const Container = styled.View`

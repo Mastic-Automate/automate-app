@@ -1,15 +1,15 @@
+import _ from 'lodash'
+
 import { 
     useCallback, 
-    useEffect,
     createContext,
     useContext,
-    useState
+    useEffect,
 } from 'react'
 
 import { useDatabasePlants } from '../hooks/useDatabasePlants' 
 
 import { getPlantImage } from '../global/plants'
-import { api } from '../services/api'
 
 const DatabasePlantsContext = createContext({})
 
@@ -23,21 +23,21 @@ export function DatabasePlantsContextProvider({children}){
         }
     }) || []
 
-    const pickRandomPlants = useCallback((count)=> {
+    const pickRandomPlants = (count)=> {
         let result = []
-        while(result.length < count){
+        for(let c = 0; c< count; c++){
             const selected = pickRandomPlant()
             if(!result.includes(selected)) {
                 result.push(selected)
             }
         }
         return result
-    }, [databasePlants])
+    }
 
-    const pickRandomPlant = useCallback(() => {
-        const index = Math.floor(Math.random() * databasePlants.length);
-        return databasePlants[index]
-    }, [databasePlants])
+    const pickRandomPlant = () => {
+        const selected = _.sample(databasePlants)
+        return selected
+    }
 
     return (
         <DatabasePlantsContext.Provider value={{databasePlants, pickRandomPlants, isLoading, isSuccess}}>
