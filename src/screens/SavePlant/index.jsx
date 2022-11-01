@@ -29,7 +29,7 @@ const schema = yup.object({
     name: yup.string().required("Nome é obrigatório")
 })
 
-function SavePlant(){
+function SavePlant({navigation}){
     const {addingPlant, savePlant} = usePlantsManagement()
     const {handleSubmit, control, formState:{errors}} = useForm({
         resolver: yupResolver(schema)
@@ -37,6 +37,7 @@ function SavePlant(){
 
     function handleSavePlant(data){
         savePlant(data.name)
+        navigation.navigate('home')
     }
     
     return (
