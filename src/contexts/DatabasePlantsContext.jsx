@@ -4,7 +4,6 @@ import {
     useCallback, 
     createContext,
     useContext,
-    useEffect,
 } from 'react'
 
 import { useDatabasePlants } from '../hooks/useDatabasePlants' 
