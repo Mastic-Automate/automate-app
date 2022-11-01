@@ -13,6 +13,7 @@ import { useDatabasePlants } from '../../../contexts/DatabasePlantsContext'
 import { Input } from '../../../components/Input'
 import { useEffect } from 'react'
 import { Titlebar } from '../../../components/TitleBar'
+import { StatusBar } from 'expo-status-bar'
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.67
@@ -43,7 +44,8 @@ function NamePlant({navigation, route}){
     }
 
     return (<>
-    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent"}}/>
+<StatusBar animated={true} translucent={true}/>
+    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent", marginTop: 35}}/>
         <Container>     
             <LinearGradient 
             colors={

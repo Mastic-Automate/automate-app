@@ -14,7 +14,7 @@ const Title = styled.Text`
     font-size: 55px;
     width:100%;
     text-align:center;
-    margin-top: 50px;
+    margin-top: 95px;
     font-family:Montserrat_600SemiBold;
     color: #163345;
 `

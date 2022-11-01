@@ -12,6 +12,7 @@ import { Plants } from '../screens/Plants'
 import { InfoPlant } from '../screens/InfoPlant'
 import { AddPlant } from '../screens/AddPlant'
 import { NamePlant } from '../screens/AddPlant/selectedPlant'
+import { BluetoothConnection } from '../screens/BluetoothConnection'
 
 const Nav = createDrawerNavigator()
 
@@ -44,18 +45,8 @@ export function AuthRoutes({navigation}){
         <Nav.Navigator 
             drawerContent={SideBar} 
         >
-            <Nav.Screen name="bluetooth-connection" component={AddPlant} options={{
-                headerTitle:'Automate',
-                headerTitleStyle: {
-                    fontFamily: "ProximaNovaSemiBold",
-                    fontSize: 24,
-                },
-                headerTitleAlign:'center',
-                headerStyle:{backgroundColor:theme.background1},
-                headerTintColor:theme.text2,
-            }}
-            />
-            <Nav.Screen name="home" component={Home} options={{
+
+<Nav.Screen name="home" component={Home} options={{
                 headerTitle:'Automate',
                 headerTitleStyle: {
                     fontFamily: "ProximaNovaSemiBold",
@@ -75,6 +66,18 @@ export function AuthRoutes({navigation}){
                 }
             }}       
             />
+            <Nav.Screen name="bluetooth-connection" component={BluetoothConnection} options={{
+                headerTitle:'Automate',
+                headerTitleStyle: {
+                    fontFamily: "ProximaNovaSemiBold",
+                    fontSize: 24,
+                },
+                headerTitleAlign:'center',
+                headerStyle:{backgroundColor:theme.background1},
+                headerTintColor:theme.text2,
+            }}
+            />
+            
             <Nav.Screen name="plants" component={Plants} options={{...defaultScreenOptions, headerShown:false}} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{...defaultScreenOptions, headerTitle: 'Plantas'}} />
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />
