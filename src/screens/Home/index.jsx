@@ -25,11 +25,35 @@ import {
 import {appImages} from '../../global/images'
 import { useMemo } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { Titlebar } from '../../components/TitleBar'
+import {Ionicons} from '@expo/vector-icons'
+import { useTheme } from 'styled-components'
+import { StatusBar } from 'expo-status-bar'
 
-export function Home(){
+export function Home({navigation}){
     const {pickRandomPlants} = useDatabasePlants()
     const randomPlants = useMemo(() => pickRandomPlants(3), [])
-    return (
+    const theme = useTheme()
+
+    const openDrawer = () => navigation.openDrawer();
+    const configIcon = <Ionicons 
+    name="settings-outline"
+    color={theme.text2}
+    size={35}
+    onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
+    style={{margin:10, marginRight:20}}
+    />
+
+    return (<>
+        <StatusBar animated={false} translucent={false} hideTransitionAnimation={true}  />
+        <Titlebar 
+        navigation={navigation} 
+        title="Automate" 
+        rightIcon={configIcon}  
+        exe={openDrawer} 
+        iconName="menu-outline"
+        style={{ zIndex: 999,}}
+        />
         <Container>
             <TopSection>
                 <TopSectionCol1>
@@ -104,7 +128,7 @@ export function Home(){
                     keyExtractor={(data)=> data.title}
                     showsHorizontalScrollIndicator={false}
                 />
-                <RandomPlantsSection>
+                 <RandomPlantsSection>
                     {randomPlants.map(plant => {
                         return (
                             <InfoPlantCard 
@@ -120,5 +144,6 @@ export function Home(){
                 </RandomPlantsSection>
             </PlantsSection>
         </Container>
+        </>
     )
 }

@@ -45,15 +45,9 @@ export function AuthRoutes({navigation}){
         <Nav.Navigator 
             drawerContent={SideBar} 
         >
-            <Nav.Screen name="addPlant" component={AddPlant} options={{headerShown:false}}/>
+            
 <Nav.Screen name="home" component={Home} options={{
-                headerTitle:'Automate',
-                headerTitleStyle: {
-                    fontFamily: "ProximaNovaSemiBold",
-                    fontSize: 24,
-                    headerTitleAlign:'center',
-                    headerStyle:{backgroundColor:theme.background1},
-                    headerTintColor:theme.text2,
+            headerShown:false,
                     headerRight: () => (
                         <Ionicons 
                             name="settings-outline"
@@ -64,7 +58,7 @@ export function AuthRoutes({navigation}){
                         />
                     )
                 }
-            }}       
+            }      
             />
             <Nav.Screen name="bluetooth-connection" component={BluetoothConnection} options={{
                 headerTitle:'Automate',
@@ -83,7 +77,7 @@ export function AuthRoutes({navigation}){
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />
             <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{...defaultScreenOptions, headerTitle:'Configurações'}} />
             <Nav.Screen name="namePlant" component={NamePlant} options={{headerShown:false}} />
-            
+            <Nav.Screen name="addPlant" component={AddPlant} options={{headerShown:false}}/>
         </Nav.Navigator>
     )
 }
