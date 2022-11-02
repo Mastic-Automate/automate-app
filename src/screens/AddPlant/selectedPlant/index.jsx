@@ -24,7 +24,7 @@ const enteringAnimation = new Keyframe({
     100: {
         transform: [{ scale: 1}]
     },
-  }).delay(1000).duration(750)
+  }).delay(300).duration(500)
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.67
@@ -67,8 +67,8 @@ function NamePlant({navigation, route}){
     })
 
     return (<>
-<StatusBar animated={true} translucent={true}/>
-    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent", marginTop: 35, zIndex: 999,}}/>
+    <StatusBar animated={true} translucent={true} />
+    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent", zIndex: 999, marginTop: 30}}/>
         <Container>
             {showView && (
                 <Animated.View 

@@ -12,6 +12,7 @@ import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSecti
 import { CarouselCard } from './CarouselCard'
 import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { StatusBar } from 'expo-status-bar'
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.63
@@ -38,8 +39,9 @@ function AddPlant({navigation}){
     }
 
     return (<>
-        <Titlebar navigation={navigation} title="Adicionar Planta"/>
-        <Container>
+     <StatusBar animated={true} translucent={true} />
+        <Titlebar navigation={navigation} style={{position:"absolute", backgroundColor: "transparent", zIndex: 999, marginTop: 30}} title="Adicionar Planta"/>
+        <Container >
             
                 <Carousel 
                     data={databasePlants}
