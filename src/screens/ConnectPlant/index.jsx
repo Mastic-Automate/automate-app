@@ -184,18 +184,19 @@ export function ConnectPlant({navigation, route}){
             disconnect()
         }
     })
+    
+    useEffect(()=> {
+        console.log(deviceData)
+    }, [deviceData])
 
     if(searchingForDevices){
         return <Text>Ainda procurando dispositivos...</Text>
     }
-
+    
     if(!isConnected){
         return <Text>Conectando...</Text>
     }
 
-    useEffect(()=> {
-        console.log(deviceData)
-    }, [deviceData])
 
     return (
         <Container>
