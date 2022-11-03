@@ -179,6 +179,7 @@ export function ConnectPlant({navigation, route}){
     }, [id, searchingForDevices])
     
     useFocusEffect(() => {
+        console.log('Focus effect triggered')
         return () => {
             console.log('Tela fechou-se, disconectando...')
             disconnect()

@@ -184,7 +184,7 @@ export function BluetoothConnectionContextProvider({children}){
     }
     
     const disconnect = async (device) => {
-        let d = await device.disconnect().catch(error => {});
+        let d = await automateDevice.disconnect().catch(error => {});
         console.log(d? "Dispositivo Desconectado": 'O dispositivo já está desconectado');
         setIsConnected(false)
         return d
