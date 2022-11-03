@@ -1,5 +1,6 @@
 import { FlatList, View, Image } from 'react-native'
-import {Feather, FontAwesome5} from '@expo/vector-icons'
+import { useState } from 'react'
+import { Feather} from '@expo/vector-icons'
 import { Plant } from '../../components/Plant'
 import {InfoPlantCard} from '../../components/InfoPlantCard'
 import {Input} from '../../components/Input'
@@ -36,23 +37,32 @@ export function Home({navigation}){
     const theme = useTheme()
 
     const openDrawer = () => navigation.openDrawer();
-    const configIcon = <Ionicons 
-    name="settings-outline"
-    color={theme.text2}
-    size={35}
-    onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
-    style={{margin:10, marginRight:20}}
+    const configIcon = 
+    <Ionicons 
+        name="settings-outline"
+        color={theme.text2}
+        size={35}
+        onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
+        style={{margin:10, marginRight:20}}
     />
 
+
     return (<>
-        <StatusBar animated={false} translucent={false} hideTransitionAnimation={true}  />
+        <StatusBar 
+            animated={true} 
+            hideTransitionAnimation={true}  
+            translucent={false}
+        />
+
         <Titlebar 
-        navigation={navigation} 
-        title="Automate" 
-        rightIcon={configIcon}  
-        exe={openDrawer} 
-        iconName="menu-outline"
-        style={{ zIndex: 999,}}
+            navigation={navigation} 
+            title="Automate" 
+            rightIcon={configIcon}  
+            exe={openDrawer} 
+            iconName="menu-outline"
+            style={{
+                
+            }}
         />
         <Container>
             <TopSection>
