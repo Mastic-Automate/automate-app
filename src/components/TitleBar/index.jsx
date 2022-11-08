@@ -1,21 +1,22 @@
-import styled from "styled-components/native"
+import styled, { useTheme } from "styled-components/native"
 import {Ionicons} from '@expo/vector-icons'
 
 const TitlebarContainer = styled.View`
     width: 100%;
     height: 8%;
-    background-color: ${props => props.theme.background};
+    background-color: red;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
+
 `
 const TitlebarText = styled.Text`
     font-size: 24px;
     height: 40%;
     font-family: ProximaNovaSemiBold;
     align-self: center;
-    
+    color: ${props => props.theme.title};
 `
 
 
@@ -24,14 +25,16 @@ export const Titlebar = ({navigation, title = "", style, iconName = "chevron-bac
 
 const defBack = () => navigation.goBack();
 
-   const TitlebarIcon = ({navigation, opacity, screen, name = "chevron-back", exe = defBack}) => (
+    const { colors } = useTheme();
+
+    const TitlebarIcon = ({navigation, opacity, screen, name = "chevron-back", exe = defBack}) => (
     <Ionicons 
-                name={name}
-                color="#000"
-                size={27}
-                onPress={exe}
-                style={{margin:10, marginLeft:25, opacity: opacity}}
-            />)
+        name={name}
+        color={title}
+        size={27}
+        onPress={exe}
+        style={{margin:10, marginLeft:25, opacity: opacity, zIndex: 1001}}
+    />)
 
 
     return (

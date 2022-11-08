@@ -13,6 +13,7 @@ import { CarouselCard } from './CarouselCard'
 import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 import { StatusBar } from 'expo-status-bar'
+import { useTheme } from '@react-navigation/native';
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.63
@@ -30,6 +31,10 @@ function AddPlant({navigation}){
         console.log(selectedPlant.plantName);
         navigation.navigate("namePlant", {id:selectedPlant.idPlant})
     }
+
+    const { background1 } = useTheme();
+
+
     if(!selectedPlant){
         return (
             <Container>
@@ -39,8 +44,16 @@ function AddPlant({navigation}){
     }
 
     return (<>
-     <StatusBar animated={true} translucent={true} />
-        <Titlebar navigation={navigation} style={{position:"absolute", backgroundColor: "transparent", zIndex: 999, marginTop: 30}} title="Adicionar Planta"/>
+     <StatusBar animated={true} translucent={false} style={{backgroundColor: background1}}/>
+        <Titlebar navigation={navigation} 
+        style={{
+            position:"absolute", 
+            backgroundColor: "transparent", 
+            zIndex: 999, marginTop: 30
+            }} 
+                
+                title="Adicionar Planta"
+                />
         <Container >
             
                 <Carousel 
