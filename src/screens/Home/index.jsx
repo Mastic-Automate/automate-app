@@ -30,6 +30,7 @@ import { Titlebar } from '../../components/TitleBar'
 import {Ionicons} from '@expo/vector-icons'
 import { useTheme } from 'styled-components'
 import { StatusBar } from 'expo-status-bar'
+import { reduce } from 'async'
 
 export function Home({navigation}){
     const {pickRandomPlants} = useDatabasePlants()
@@ -46,12 +47,12 @@ export function Home({navigation}){
         style={{margin:10, marginRight:20}}
     />
 
-
     return (<>
         <StatusBar 
+            backgroundColor={theme.background}
             animated={true} 
             hideTransitionAnimation={true}  
-            translucent={false}
+            translucent={true}
         />
 
         <Titlebar 
