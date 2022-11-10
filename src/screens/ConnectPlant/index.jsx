@@ -179,7 +179,8 @@ export function ConnectPlant({navigation, route}){
     }, [id, searchingForDevices])
     
     useFocusEffect(useCallback(() => {
-        console.log('Focus effect triggered');
+        console.log(`Tela de conexão aberta, usando o id ${id}`);
+        connectUsingId(id)
         return () => {
             console.log('Tela fechou-se, disconectando...')
             disconnect()
