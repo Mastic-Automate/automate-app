@@ -4,7 +4,7 @@ import {Ionicons} from '@expo/vector-icons'
 const TitlebarContainer = styled.View`
     width: 100%;
     height: 8%;
-    margin-top: 15px;
+    margin-top: 20px;
     flex-direction: row;
     background-color: ${props => props.theme.background};
     justify-content: space-between;

@@ -58,10 +58,8 @@ function NamePlant({navigation, route}){
 
     const [showView, setShowView] = useState(false)
     useFocusEffect(() => {
-        console.log('entrei')
         setShowView(true)
         return () => {
-            console.log('saí')
             setShowView(false)
         }     
     })
