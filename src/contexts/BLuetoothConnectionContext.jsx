@@ -58,28 +58,32 @@ export function BluetoothConnectionContextProvider({children}){
         
     }, [bondedDevices])
 
-    useEffect(() => {
-        requestAccessFineLocationPermission().then(perm => {
-           console.log(perm? 'Permitido o Uso da localização': "Não permitido o Uso da localização")
-           if (perm) {
-               RNBluetoothClassic.isBluetoothEnabled().then(bluetoothEnable => {
-                    if(bluetoothEnable) { 
-                        console.log('Escaneando')
-                        RNBluetoothClassic.startDiscovery().then(devices => {
-                            console.log('Escaneou')
-                            setDevicesFound(devices)
-                        }).catch(err => console.log('Já está em modo de descoberta'))
-                    } else {
-                       RNBluetoothClassic.requestBluetoothEnabled().catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO"))
-                    }
-               })
-           };
-        });
-        return ()=> {
-            console.log('Cancelada a busca')
-            RNBluetoothClassic.cancelDiscovery()
-        }
+    async function startSearchForDevices(){
+        const perm = await requestAccessFineLocationPermission()
+        console.log(perm? 'Permitido o Uso da localização': "Não permitido o Uso da localização")
+        if (perm) {
+            const bluetoothEnable = await RNBluetoothClassic.isBluetoothEnabled()
+            if(bluetoothEnable) { 
+                console.log('Escaneando')
+                RNBluetoothClassic.startDiscovery().then(devices => {
+                    console.log('Escaneou')
+                    setDevicesFound(devices)
+                }).catch(err => console.log('Já está em modo de descoberta'))
+            } else {
+                await RNBluetoothClassic.requestBluetoothEnabled().catch(err=>  console.log("LIGA O BLUETOOTH SE NÃO NÃO ROLA IRMÃO"))
+            }
+            
+        };
+        
+    }
+    async function endSearchForDevices() {
+        console.log('Cancelada a busca')
+        await RNBluetoothClassic.cancelDiscovery()
+    }
 
+    useEffect(() => {
+        startSearchForDevices()
+        return endSearchForDevices
     },[])
 
     async function changeAutomateDevice(newDevice){
@@ -175,12 +179,15 @@ export function BluetoothConnectionContextProvider({children}){
     }, [isConnected])
 
     async function connectUsingId(id){
+        console.log('Iniciada conexão')
         const targetDevice = devicesFound.filter(device => device.id === id)[0]
+        console.log(targetDevice)
         if(!!targetDevice){
             setAutomateDevice(targetDevice)
         } else {
             console.log(`Tentando conectar a dispositivo não encontrado(${id})`)
         }
+        return targetDevice
     }
     
     const disconnect = async (device) => {
@@ -229,7 +236,8 @@ export function BluetoothConnectionContextProvider({children}){
             loadDeviceData, 
             isConnected, 
             connectUsingId,
-            searchingForDevices
+            searchingForDevices,
+            startSearchForDevices
         }}>
             {children}
         </BluetoothConnectionContext.Provider>

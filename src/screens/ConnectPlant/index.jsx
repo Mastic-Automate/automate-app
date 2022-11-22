@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components/native'
 import { ScrollView } from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
@@ -157,13 +157,16 @@ const StatusGif = styled.Image`
 `
 
 export function ConnectPlant({navigation, route}){
-    const {connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId} = useBluetoothConnection()
+    const {connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId, startSearchForDevices} = useBluetoothConnection()
     const automateFound = !!automateDevice && Object.keys(automateDevice).length > 0
     const id = route.params.id
 
-    const searchingForDevices = !(devicesFound.length > 0)
+    const searchingForDevices = useMemo(() => !(devicesFound.length > 0), [devicesFound])
 
     useFocusEffect(useCallback(() => {
+        startSearchForDevices().then(() => {
+            console.log('Re-busca finalizada')
+        })
         if(searchingForDevices){
             console.log('Procurando pelos dispositivos')
         } else {
@@ -171,8 +174,8 @@ export function ConnectPlant({navigation, route}){
     
             console.log('Device à seguir')
             console.log(automateDevice)
-            connectUsingId(id).then(() => {
-                console.log('Função de conexão rodou')
+            connectUsingId(id).then((device) => {
+                console.log('Função de conexão executou')
             })
         }
 
@@ -196,6 +199,7 @@ export function ConnectPlant({navigation, route}){
     }
     
     if(!isConnected){
+        connectUsingId(id)
         return <Text>Conectando com o dispositivo de id {id}...</Text>
     }
 
