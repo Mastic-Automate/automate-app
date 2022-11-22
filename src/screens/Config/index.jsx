@@ -1,65 +1,84 @@
-import {Image} from 'react-native'
-
-import {Feather, FontAwesome5} from '@expo/vector-icons'
-
-import { useTheme } from '../../hooks/useTheme';
-import { useAuth } from '../../hooks/useAuth';
-import {appImages} from '../../global/images';
-
-import {Input} from '../../components/Input';
-
+import { Feather, Ionicons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
+import { Image } from 'react-native';
+import { Input } from '../../components/Input';
+import { Titlebar } from '../../components/TitleBar';
+import { appImages } from '../../global/images';
+import { useUserInfo } from '../../hooks/useUserInfo';
 import {
-    Container, 
-    HeadingSection, 
-    MainSection, 
-    SectionTitle, 
-    MessageContainer, 
-    MessageContainerText,
-    MessageContainerCol1,
-    MessageContainerCol2,
     AccountImage,
     AccountSection,
     AccountSectionInfoCol1,
     AccountUserEmail,
-    AccountUserName,
-    InputsRow,
-    ThemeButton,
-    SectionOptions,
+    AccountUserName, Container,
+    HeadingSection, InputsRow, MainSection, MessageContainer, MessageContainerCol1,
+    MessageContainerCol2, MessageContainerText, SectionOptions, SectionTitle, ThemeButton
+} from './styles';
 
-} from './styles'
-import { useUserInfo } from '../../hooks/useUserInfo';
+import { useTheme as useThemeContext } from '../../hooks/useTheme'
+import { useTheme } from 'styled-components';
 
-export function Config({navigation}){
-    const {toggleTheme, theme} = useTheme()
-    const {data:user} = useUserInfo()
 
-    const isDarkTheme = !(theme==='light')
+export function Config({ navigation }) {
+    const theme = useTheme()
+    const { toggleTheme, isTheme } = useThemeContext()
+    const { data: user } = useUserInfo()
+
+    const isDarkTheme = !(isTheme === 'light')
+
+    const openDrawer = () => navigation.openDrawer();
+    const configIcon =
+        <Ionicons
+            name="settings-outline"
+            color={theme.text2}
+            size={35}
+            onPress={() => navigation.replace('authRoutes', { screen: 'config' })}
+            style={{ margin: 10, marginRight: 20 }}
+        />
 
     const themeButton = () => {
         return (
-            <ThemeButton 
+            <ThemeButton
                 onPress={() => {
                     toggleTheme()
                 }}
             >
-                <Feather 
+                <Feather
                     color="#ffffff"
                     size={30}
-                    name={theme === 'light' ? 'moon' : 'sun'}
+                    name={isTheme === 'light' ? 'moon' : 'sun'}
                 />
             </ThemeButton>
         )
     }
 
-    return(
+
+    return (
         <Container>
+
+            {/*<Titlebar navigation={navigation}
+                title="Config"
+                style={{
+                    backgroundColor: theme.background1,
+                }}
+
+            />*/}
+            <Titlebar
+                navigation={navigation}
+                title="Automate"
+                style={{
+                    backgroundColor: theme.background1,
+
+                }}
+            />
+
             <HeadingSection>
                 <AccountSection
                     onPress={() => {
                         navigation.navigate('account')
                     }}
                 >
-                    <AccountImage 
+                    <AccountImage
                         source={appImages['profile_placeholder']}
                     />
                     <AccountSectionInfoCol1>
@@ -78,9 +97,9 @@ export function Config({navigation}){
                         </MessageContainerText>
                     </MessageContainerCol1>
                     <MessageContainerCol2>
-                        <Image 
+                        <Image
                             source={require('../../assets/rose.png')}
-                            style={{width:100, height:100}}
+                            style={{ width: 100, height: 100 }}
                         />
                     </MessageContainerCol2>
                 </MessageContainer>
@@ -88,15 +107,15 @@ export function Config({navigation}){
             <MainSection>
                 <InputsRow>
                     {themeButton()}
-                        <Input 
-                            iconType={Feather}
-                            iconName="search"
-                            style={{
-                                flex:1
-                            }}
-                            placeholder="Pesquisar"
-                        />
-                    </InputsRow>
+                    <Input
+                        iconType={Feather}
+                        iconName="search"
+                        style={{
+                            flex: 1
+                        }}
+                        placeholder="Pesquisar"
+                    />
+                </InputsRow>
                 <SectionTitle>
                     Geral
                 </SectionTitle>
@@ -113,5 +132,7 @@ export function Config({navigation}){
             </MainSection>
 
         </Container>
-    ) 
+
+
+    )
 }

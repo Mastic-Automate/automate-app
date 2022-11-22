@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 const Container = styled.ScrollView`
     background-color:${props => props.theme.background};
     flex:1;
-    height: 100%;
 `
 
 const HeadingSection = styled.View`
@@ -131,4 +130,4 @@ export {
     InputsRow,
     ThemeButton,
     SectionOptions,
-}
+};
