@@ -156,30 +156,12 @@ const StatusGif = styled.Image`
     border-radius:40px;
 `
 
-export function ConnectPlant({navigation, route}){
+export function ConnectPlant({ route}){
     const {connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId, startSearchForDevices} = useBluetoothConnection()
     const automateFound = !!automateDevice && Object.keys(automateDevice).length > 0
     const id = route.params.id
 
     const searchingForDevices = useMemo(() => !(devicesFound.length > 0), [devicesFound])
-
-    useFocusEffect(useCallback(() => {
-        startSearchForDevices().then(() => {
-            console.log('Re-busca finalizada')
-        })
-        if(searchingForDevices){
-            console.log('Procurando pelos dispositivos')
-        } else {
-            console.log(`Conectando: ${id}`)
-    
-            console.log('Device à seguir')
-            console.log(automateDevice)
-            connectUsingId(id).then((device) => {
-                console.log('Função de conexão executou')
-            })
-        }
-
-    }, [id, searchingForDevices]))
     
     useFocusEffect(useCallback(() => {
         console.log(`Tela de conexão aberta, usando o id ${id}`);
@@ -188,17 +170,18 @@ export function ConnectPlant({navigation, route}){
             console.log('Tela fechou-se, disconectando...')
             disconnect()
         }
-    }, [automateDevice]))
+    }, [automateDevice, id]))
     
     useEffect(()=> {
         console.log(deviceData)
     }, [deviceData])
-
+    
+    
     if(searchingForDevices){
         return <Text>Ainda procurando dispositivos...</Text>
     }
-    
     if(!isConnected){
+        console.log('Iniciando a conexão pois não está conectado')
         connectUsingId(id)
         return <Text>Conectando com o dispositivo de id {id}...</Text>
     }

@@ -186,7 +186,7 @@ const ScanAutomate = ({automateFound}) => {
 }
 
 const FoundAutomate = ({automate, deviceInfo, navigation}) => {
-    const {automateDevice, data, devicesFound, connectUsingId} = useBluetoothConnection()
+    const {automateDevice, data, devicesFound, connectUsingId, isConnected} = useBluetoothConnection()
     const {setAddingPlant} = usePlantsManagement()
     const [currentDeviceIndex, setCurrentDeviceIndex] = useState(0)
 
@@ -204,7 +204,7 @@ const FoundAutomate = ({automate, deviceInfo, navigation}) => {
                 address:automateDevice.address,
                 id:automateDevice.id
             })
-            navigation.navigate('add-plant')
+            navigation.replace('add-plant')
         } else{
             console.log("Dispositivo ainda não foi encontrado, não pode salvar")
         }
@@ -223,7 +223,7 @@ const FoundAutomate = ({automate, deviceInfo, navigation}) => {
                 address:automateDevice.address,
                 id:automateDevice.id
             })
-            navigation.navigate('add-plant')
+            navigation.replace('add-plant')
         } else{
             console.log("Dispositivo ainda não foi encontrado, não pode salvar")
         }
@@ -270,15 +270,6 @@ const FoundAutomate = ({automate, deviceInfo, navigation}) => {
                     text="Adicionar"
                     onPress={handleConnect}
                 />
-
-                {/* <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
-                    <Barrinha />
-                    <ContentMenuFooter>
-                        <BatteryIcon name='battery-std' color="#42db49" />
-                        <DropIcon name='opacity' color="#006eff" />
-                        <SunIcon name='brightness-7' color="#e9db19" />
-                    </ContentMenuFooter>
-                </ContainerMenuFooter> */}
             </ScrollView>
         </>
     )

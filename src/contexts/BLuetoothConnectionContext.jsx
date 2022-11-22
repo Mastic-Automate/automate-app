@@ -124,7 +124,7 @@ export function BluetoothConnectionContextProvider({children}){
     }, [isConnected])
 
     useEffect(()=> {
-        if(isConnected){
+        if(isConnected && !!automateDevice && Object.keys(automateDevice).length > 0){
             console.log(`Automate encontrado, configurando com id:${automateDevice.id}`)
             setupDevice().then(()=> {
                 console.log('Device configurado')
@@ -190,8 +190,10 @@ export function BluetoothConnectionContextProvider({children}){
         return targetDevice
     }
     
-    const disconnect = async (device) => {
-        let d = await automateDevice.disconnect().catch(error => {});
+    const disconnect = async () => {
+        let d = await automateDevice.disconnect()
+        console.log('Definindo automate device como null...')
+        setAutomateDevice(null)
         console.log(d? "Dispositivo Desconectado": 'O dispositivo já está desconectado');
         setIsConnected(false)
         return d
@@ -213,7 +215,7 @@ export function BluetoothConnectionContextProvider({children}){
     }
 
     useEffect(() => {
-        console.log('Automate device atualizado')
+        console.log('Automate device')
         console.log(automateDevice)
         if(!!automateDevice){
             connect(automateDevice)
@@ -223,6 +225,7 @@ export function BluetoothConnectionContextProvider({children}){
     useEffect(()=>{
         console.log(`Conectado: ${isConnected}`)
     }, [isConnected])
+
     
     return (
         <BluetoothConnectionContext.Provider value={{
