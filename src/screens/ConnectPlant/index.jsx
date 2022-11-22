@@ -163,7 +163,7 @@ export function ConnectPlant({navigation, route}){
 
     const searchingForDevices = !(devicesFound.length > 0)
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         if(searchingForDevices){
             console.log('Procurando pelos dispositivos')
         } else {
@@ -176,7 +176,7 @@ export function ConnectPlant({navigation, route}){
             })
         }
 
-    }, [id, searchingForDevices])
+    }, [id, searchingForDevices]))
     
     useFocusEffect(useCallback(() => {
         console.log(`Tela de conexão aberta, usando o id ${id}`);
@@ -196,7 +196,7 @@ export function ConnectPlant({navigation, route}){
     }
     
     if(!isConnected){
-        return <Text>Conectando...</Text>
+        return <Text>Conectando com o dispositivo de id {id}...</Text>
     }
 
 
