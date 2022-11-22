@@ -7,6 +7,7 @@ import {FormInput, FormInput as Input} from '../../components/FormInput'
 import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
+import {useFocusEffect} from '@react-navigation/native'
 
 import {appImages} from '../../global/images'
 
@@ -24,6 +25,8 @@ import {
 } from './styles'
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 import { getPlantImage } from '../../global/plants'
+import { useCallback } from 'react'
+import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext'
 
 const schema = yup.object({
     name: yup.string().required("Nome é obrigatório")
@@ -31,6 +34,7 @@ const schema = yup.object({
 
 function SavePlant({navigation}){
     const {addingPlant, savePlant} = usePlantsManagement()
+    const {disconnect} = useBluetoothConnection()
     const {handleSubmit, control, formState:{errors}} = useForm({
         resolver: yupResolver(schema)
     })
@@ -39,6 +43,13 @@ function SavePlant({navigation}){
         savePlant(data.name)
         navigation.navigate('home')
     }
+
+    useFocusEffect(useCallback(() => {
+        console.log('Tela aberta')
+        return () => {
+            disconnect()
+        }
+    }, [addingPlant]))
     
     return (
         <Container

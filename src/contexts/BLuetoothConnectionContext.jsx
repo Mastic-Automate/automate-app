@@ -179,7 +179,7 @@ export function BluetoothConnectionContextProvider({children}){
         if(!!targetDevice){
             setAutomateDevice(targetDevice)
         } else {
-            console.log('Tentando conectar a dispositivo não encontrado')
+            console.log(`Tentando conectar a dispositivo não encontrado(${id})`)
         }
     }
     

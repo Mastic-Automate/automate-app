@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components/native'
-import { ScrollView } from 'react-native'
+import Carousel from 'react-native-snap-carousel';
+import {CarouselCard} from './CarouselCard';
+import { ScrollView, Dimensions } from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading';
@@ -11,7 +12,10 @@ import { Text, View } from 'moti';
 import {useBluetoothConnection} from '../../contexts/BLuetoothConnectionContext'
 import { Button } from '../../components/Button'
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
+import { useEffect, useState, useMemo } from 'react';
 
+const SLIDER_WIDTH = (Dimensions.get('window').width)
+const ITEM_WIDTH = SLIDER_WIDTH*0.67
 
 const Container = styled.View`
     flex:1;
@@ -182,8 +186,17 @@ const ScanAutomate = ({automateFound}) => {
 }
 
 const FoundAutomate = ({automate, deviceInfo, navigation}) => {
-    const {automateDevice, data} = useBluetoothConnection()
+    const {automateDevice, data, devicesFound, connectUsingId} = useBluetoothConnection()
     const {setAddingPlant} = usePlantsManagement()
+    const [currentDeviceIndex, setCurrentDeviceIndex] = useState(0)
+
+    const currentDevice = useMemo(() => {
+        return devicesFound[currentDeviceIndex]
+    }, [currentDeviceIndex, devicesFound])
+
+    useEffect(() => {
+        console.log(currentDevice.name)
+    }, [currentDevice])
 
     function handleAddPlant(){
         if(!!automateDevice && Object.keys(automateDevice).length > 0){
@@ -197,10 +210,29 @@ const FoundAutomate = ({automate, deviceInfo, navigation}) => {
         }
     }
 
+    async function handleConnect(){
+        await connectUsingId(currentDevice.id)
+    }
+
+    useEffect(() => {
+        devicesFound.map(device => console.log(device.name))
+    }, [devicesFound])
+    useEffect(() => {
+        if(!!automateDevice && Object.keys(automateDevice).length > 0){
+            setAddingPlant({
+                address:automateDevice.address,
+                id:automateDevice.id
+            })
+            navigation.navigate('add-plant')
+        } else{
+            console.log("Dispositivo ainda não foi encontrado, não pode salvar")
+        }
+    }, [automateDevice])
+
     return (
         <>
         
-            <NewTitle >Selecione seu dispositivo</NewTitle>
+            {/* <NewTitle >Selecione seu dispositivo</NewTitle>
             <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
             <LineDiv />
             <StatusGif
@@ -211,16 +243,42 @@ const FoundAutomate = ({automate, deviceInfo, navigation}) => {
                 text="Adicionar"
                 onPress={handleAddPlant}
             />
-            <AutomateName>{JSON.stringify(deviceInfo)}</AutomateName>
+            <AutomateName>{JSON.stringify(deviceInfo)}</AutomateName> */}
             <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', }}>
-                <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
+                <Carousel
+                    data={devicesFound}
+                    renderItem={({item, index}) => {
+                        return (
+                            <CarouselCard 
+                                name={item.name}
+                                active={currentDeviceIndex === index}
+                                key={item.id}
+                                id={item.id}
+                            />
+                        )
+                    }}
+                    sliderWidth={SLIDER_WIDTH}
+                    itemWidth={ITEM_WIDTH}
+
+                    slideStyle={{
+                        alignItems:'center',
+                        justifyContent:'center'
+                    }}
+                    onSnapToItem={setCurrentDeviceIndex}
+                />
+                <Button 
+                    text="Adicionar"
+                    onPress={handleConnect}
+                />
+
+                {/* <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
                     <Barrinha />
                     <ContentMenuFooter>
                         <BatteryIcon name='battery-std' color="#42db49" />
                         <DropIcon name='opacity' color="#006eff" />
                         <SunIcon name='brightness-7' color="#e9db19" />
                     </ContentMenuFooter>
-                </ContainerMenuFooter>
+                </ContainerMenuFooter> */}
             </ScrollView>
         </>
     )
