@@ -202,7 +202,7 @@ const FoundAutomate = ({ automate, deviceInfo, navigation }) => {
                 address: automateDevice.address,
                 id: automateDevice.id
             })
-            navigation.replace('add-plant')
+            navigation.navigate('add-plant')
         } else {
             console.log("Dispositivo ainda não foi encontrado, não pode salvar")
         }
@@ -221,7 +221,7 @@ const FoundAutomate = ({ automate, deviceInfo, navigation }) => {
                 address: automateDevice.address,
                 id: automateDevice.id
             })
-            navigation.replace('add-plant')
+            navigation.navigate('add-plant')
         } else {
             console.log("Dispositivo ainda não foi encontrado, não pode salvar")
         }
