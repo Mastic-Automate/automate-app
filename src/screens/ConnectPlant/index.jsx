@@ -1,16 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components/native'
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'
+import { useFocusEffect } from '@react-navigation/native'
+import { Text } from 'moti'
+import { useCallback, useEffect, useMemo } from 'react'
 import { ScrollView } from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
-import { useFonts } from 'expo-font'
-import AppLoading from 'expo-app-loading';
-import { Image } from 'react-native';
-import {MaterialIcons} from '@expo/vector-icons'
-import { Text } from 'moti';
-import {useFocusEffect} from '@react-navigation/native'
+import styled from 'styled-components/native'
 
-import {useBluetoothConnection} from '../../contexts/BLuetoothConnectionContext'
 import { Button } from '../../components/Button'
+import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext'
 
 
 const Container = styled.View`
@@ -156,13 +152,13 @@ const StatusGif = styled.Image`
     border-radius:40px;
 `
 
-export function ConnectPlant({ route}){
-    const {connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId, startSearchForDevices} = useBluetoothConnection()
+export function ConnectPlant({ route }) {
+    const { connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId, startSearchForDevices } = useBluetoothConnection()
     const automateFound = !!automateDevice && Object.keys(automateDevice).length > 0
     const id = route.params.id
 
     const searchingForDevices = useMemo(() => !(devicesFound.length > 0), [devicesFound])
-    
+
     useFocusEffect(useCallback(() => {
         console.log(`Tela de conexão aberta, usando o id ${id}`);
         connectUsingId(id)
@@ -171,18 +167,23 @@ export function ConnectPlant({ route}){
             disconnect()
         }
     }, [automateDevice, id]))
-    
-    useEffect(()=> {
+
+    useEffect(() => {
         console.log(deviceData)
     }, [deviceData])
-    
-    
-    if(searchingForDevices){
+
+    useEffect(() => {
+        if (!searchingForDevices) {
+            connectUsingId(id)
+        }
+    }, [searchingForDevices])
+
+
+    if (searchingForDevices) {
         return <Text>Ainda procurando dispositivos...</Text>
     }
-    if(!isConnected){
+    if (!isConnected) {
         console.log('Iniciando a conexão pois não está conectado')
-        connectUsingId(id)
         return <Text>Conectando com o dispositivo de id {id}...</Text>
     }
 
@@ -192,18 +193,18 @@ export function ConnectPlant({ route}){
             <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
             <LineDiv />
             <StatusGif
-                style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf:'center'}}
-                source={require('../../../assets/arduino.gif')} 
+                style={{ width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf: 'center' }}
+                source={require('../../../assets/arduino.gif')}
             />
             <AutomateName>{JSON.stringify(deviceData)}</AutomateName>
             <Text>Média da umidade: {deviceData.humidityAverage}</Text>
             <Text>Média da umidade: {deviceData.wateredTimes}</Text>
             <Button
                 text="Desconectar"
-                onPress={()=> disconnect()}
+                onPress={() => disconnect()}
             />
-            <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', }}>
-                <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
+            <ScrollView style={{ height: '100%', flex: 1, marginTop: '5%', width: '100%', }}>
+                <ContainerMenuFooter style={{ marginTop: "5%", minHeight: '200%', flex: 1, width: '100%' }}>
                     <Barrinha />
                     <ContentMenuFooter>
                         <BatteryIcon name='battery-std' color="#42db49" />
@@ -211,7 +212,7 @@ export function ConnectPlant({ route}){
                         <SunIcon name='brightness-7' color="#e9db19" />
                     </ContentMenuFooter>
                 </ContainerMenuFooter>
-            </ScrollView>  
+            </ScrollView>
         </Container>
     )
 }
