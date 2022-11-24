@@ -1,7 +1,6 @@
 import {Dimensions} from 'react-native'
 
 import { Button } from '../../components/Button'
-import { Titlebar } from '../../components/TitleBar'
 
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -10,14 +9,16 @@ import Carousel from 'react-native-snap-carousel'
 
 import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSectionTitle, InputLabel, InputsContainer, Title} from './styles'
 import { CarouselCard } from './CarouselCard'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.63
 
 function AddPlant({navigation}){
     const {databasePlants} = useDatabasePlants()
+    const {addingPlant, setAddingPlant} = usePlantsManagement()
 
     const [currentModelIndex, setCurrentModelIndex] = useState(0)
 
@@ -25,9 +26,14 @@ function AddPlant({navigation}){
         return databasePlants[currentModelIndex]
     }, [currentModelIndex, databasePlants])
 
-    function handleAddPlant(data){
-        console.log(selectedPlant.plantName);
-        navigation.navigate("namePlant", {id:selectedPlant.idPlant})
+    useEffect(()=>{
+        console.log('Selected plant')
+        console.log(selectedPlant)
+        setAddingPlant({...addingPlant, ...selectedPlant})
+    }, [selectedPlant])
+
+    function handleAddPlant(){
+        navigation.navigate('save-plant')
     }
     if(!selectedPlant){
         return (
@@ -38,7 +44,6 @@ function AddPlant({navigation}){
     }
 
     return (<>
-        <Titlebar navigation={navigation} title="Adicionar Planta"/>
         <Container>
             
                 <Carousel 
@@ -94,9 +99,9 @@ function AddPlant({navigation}){
                                 shadowRadius: 16.00,
                                 width: 323,
                                 elevation: 20,
-                            }
-                        } 
-                            onPress={handleAddPlant} />
+                            }} 
+                            onPress={handleAddPlant} 
+                        />
                     </BottomButtonsContainer>
                 </DetailSection>
             </InputsContainer>

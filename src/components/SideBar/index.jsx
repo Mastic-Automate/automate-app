@@ -54,7 +54,7 @@ export const SideBar = (props) => {
                 />
                 <SidebarItem
                     onPress={() => {
-                        props.navigation.navigate("addPlant");
+                        props.navigation.navigate("plantsManagement", {screen: 'bluetooth-connection'});
                     }}
                     text="Adicionar Planta"
                     iconName="tree"

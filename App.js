@@ -7,8 +7,8 @@ import {StatusBar} from './src/components/StatusBar'
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 import { AuthContextProvider } from './src/contexts/AuthContext'
 import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
+import {BluetoothConnectionContextProvider} from './src/contexts/BLuetoothConnectionContext'
 import {DatabasePlantsContextProvider} from './src/contexts/DatabasePlantsContext'
-import {RootRoutes} from './src/routes/RootRoutes'
 
 import { 
   Poppins_400Regular,
@@ -32,6 +32,7 @@ import {
   Oswald_600SemiBold,
   Oswald_700Bold
 } from '@expo-google-fonts/oswald'
+import {RootRoutes} from './src/routes/RootRoutes'
 
 import { ReactQueryProvider } from './src/services/reactQuery';
 
@@ -63,19 +64,19 @@ export default function App() {
     return <AppLoading />
   }
   return (
-    <AuthContextProvider>
-      <ThemeContextProvider>
-        <ReactQueryProvider>
-          <DatabasePlantsContextProvider>
-            <MicrocontrollersContextProvider>
-              <NavigationContainer>
-                <StatusBar />
-                <RootRoutes />
-              </NavigationContainer>
-            </MicrocontrollersContextProvider>
-          </DatabasePlantsContextProvider>
-        </ReactQueryProvider>
-      </ThemeContextProvider>
-    </AuthContextProvider>
+    <ReactQueryProvider>
+      <AuthContextProvider>
+        <ThemeContextProvider>
+            <DatabasePlantsContextProvider>
+              <MicrocontrollersContextProvider>
+                <NavigationContainer>
+                  <StatusBar />
+                  <RootRoutes />
+                </NavigationContainer>
+              </MicrocontrollersContextProvider>
+            </DatabasePlantsContextProvider>
+        </ThemeContextProvider>
+      </AuthContextProvider>
+    </ReactQueryProvider>
   );
 }

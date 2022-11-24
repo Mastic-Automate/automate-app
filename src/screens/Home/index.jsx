@@ -1,77 +1,76 @@
-import { FlatList, View, Image } from 'react-native'
-import {Feather, FontAwesome5} from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
+import { FlatList, Image } from 'react-native'
+import { InfoPlantCard } from '../../components/InfoPlantCard'
+import { Input } from '../../components/Input'
 import { Plant } from '../../components/Plant'
-import {InfoPlantCard} from '../../components/InfoPlantCard'
-import {Input} from '../../components/Input'
 
 const sol = require("../../assets/temperature.png");
 
 import {
-    Container, 
-    PlantsSection, 
-    PlantsSectionTitle, 
-    Title, 
-    TopSection,
-    TopMessageContainer,
-    TopPlantImage,
-    TopSectionCol1,
-    TopSectionCol2,
-    RandomPlantsSection,
-    TopMessage,
-    InputsRow,
-    FilterButton
+    Container, FilterButton, InputsRow, PlantsSection,
+    PlantsSectionTitle, RandomPlantsSection, Title, TopMessage, TopMessageContainer,
+    TopPlantImage, TopSection, TopSectionCol1,
+    TopSectionCol2
 } from './styles'
 
-import {appImages} from '../../global/images'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { appImages } from '../../global/images'
+import { getPlantImage } from '../../global/plants'
+import { useMicrocontrollers } from '../../hooks/useMicrocontrollers'
 
-export function Home(){
-    const {pickRandomPlants} = useDatabasePlants()
-    const randomPlants = useMemo(() => pickRandomPlants(3), [])
+export function Home({ navigation }) {
+    const { pickRandomPlants, databasePlants } = useDatabasePlants()
+    const randomPlants = useMemo(() => pickRandomPlants(3), [databasePlants])
+
+    useEffect(() => {
+        console.log(databasePlants)
+    }, [databasePlants])
+
+    const { storedDevices } = useMicrocontrollers()
     return (
         <Container>
             <TopSection>
                 <TopSectionCol1>
                     <Title>
-                        {`A Melhor rosa \n`} 
+                        {`A Melhor rosa \n`}
                         {`está no seu Jardim!`}
                     </Title>
                     <TopMessageContainer>
                         <TopMessage>
                             Bom dia, 27°
                         </TopMessage>
-                       <Image 
-                       source={sol}
-                       width={0.1}
-                       height={0.1}
-                       style={{width:25,height:25, alignSelf:'center', margin:0, top:-2}}
-                       />
+                        <Image
+                            source={sol}
+                            width={0.1}
+                            height={0.1}
+                            style={{ width: 25, height: 25, alignSelf: 'center', margin: 0, top: -2 }}
+                        />
                     </TopMessageContainer>
                 </TopSectionCol1>
                 <TopSectionCol2>
-                    <TopPlantImage 
+                    <TopPlantImage
                         source={appImages['plant1']}
                     />
                 </TopSectionCol2>
             </TopSection>
-            
+
             <PlantsSection>
                 <InputsRow>
                     <FilterButton>
-                        <Feather 
+                        <Feather
                             color="#ffffff"
                             size={30}
                             name="filter"
                         />
                     </FilterButton>
-                    <Input 
+                    <Input
                         iconType={Feather}
                         iconName="search"
                         style={{
-                            width:'77%',
+                            width: '77%',
                             backgroundColor: "#FFFFFF",
-                            
+
                         }}
                         placeholder="Pesquisar"
                         placeholderColor="#FFFFFF"
@@ -82,40 +81,46 @@ export function Home(){
                     Plantas Recentes
                 </PlantsSectionTitle>
                 <FlatList
-                    data={[
-                        {variant:'yellow', title:'Amarelo'}, 
-                        {variant:'red', title:'Vermelho'}, 
-                        {variant:'blue', title:'Azul'}
-                    ]}
+                    data={storedDevices.map(device => {
+                        return {
+                            title: device.name,
+                            databaseId: device.databaseId,
+                            id: device.id
+                        }
+                    })}
                     horizontal
                     contentContainerStyle={{
                         marginLeft: 12,
                         paddingRight: 24,
                     }}
-                    renderItem={({item}) => {
+                    renderItem={({ item }) => {
                         return (
-                            <Plant 
+                            <Plant
                                 {...item}
-                                image={appImages['plant1']}
+                                variant="yellow"
+                                image={getPlantImage(item.databaseId)}
                                 subtitle="Sub"
+                                onPress={() => navigation.navigate('plantsManagement', { screen:'connect-plant', params: {id: item.id} })}
                             />
                         )
                     }}
-                    keyExtractor={(data)=> data.title}
+                    keyExtractor={(data) => data.id}
                     showsHorizontalScrollIndicator={false}
                 />
                 <RandomPlantsSection>
                     {randomPlants.map(plant => {
-                        return (
-                            <InfoPlantCard 
-                                image={plant.image}
-                                description={plant.plantAbout}
-                                style={{marginBottom:20}}
-                                key={plant.idPlant}
-                                title={plant.plantName}
-                                id={plant.idPlant}
-                            />
-                        )
+                        if (!!plant) {
+                            return (
+                                <InfoPlantCard
+                                    image={plant.image}
+                                    description={plant.plantAbout}
+                                    style={{ marginBottom: 20 }}
+                                    key={plant.idPlant}
+                                    title={plant.plantName}
+                                    id={plant.idPlant}
+                                />
+                            )
+                        }
                     })}
                 </RandomPlantsSection>
             </PlantsSection>

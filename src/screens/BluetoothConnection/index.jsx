@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react'
-import styled from 'styled-components/native'
-import { ScrollView } from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
-import { useFonts } from 'expo-font'
-import AppLoading from 'expo-app-loading';
-import { Image } from 'react-native';
-import {MaterialIcons} from '@expo/vector-icons'
-import { Text, View } from 'moti';
-import * as Bluetooth from '../../services/Bluetooth';
-import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
+import { Text } from 'moti';
+import { Dimensions, ScrollView } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
+import styled from 'styled-components/native';
+import { CarouselCard } from './CarouselCard';
 
+import { useEffect, useMemo, useState } from 'react';
+import { Button } from '../../components/Button';
+import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext';
+import { usePlantsManagement } from '../../contexts/PlantsManagementContext';
+
+
+const SLIDER_WIDTH = (Dimensions.get('window').width)
+const ITEM_WIDTH = SLIDER_WIDTH * 0.67
 
 const Container = styled.View`
     flex:1;
@@ -154,162 +158,150 @@ const StatusGif = styled.Image`
     border-radius:40px;
 `
 
-const ScanAutomate = ({automateFound}) => {
-    return  (
+const ScanAutomate = ({ automateFound }) => {
+    return (
         <>
             <NewTitle >Procurando dispositivo</NewTitle>
             <NewSubtitle>Seu dispositivo Automate deve aparecer aqui, em breve.</NewSubtitle>
             <LineDiv />
-            
+
             <StatusGif
-                style={{width: 428, height: 330, marginTop: 36, borderRadius:40, alignSelf:'center'}}
-                source={require('../../../assets/conexão.gif')} 
+                style={{ width: 428, height: 330, marginTop: 36, borderRadius: 40, alignSelf: 'center' }}
+                source={require('../../../assets/conexão.gif')}
             />
-            
-            <ContainerMenuFooter style={{justifySelf:'flex-end'}}>
+
+            <ContainerMenuFooter style={{ justifySelf: 'flex-end' }}>
                 <Barrinha />
-                <ContentMenuFooter style={{flex:1}}>
+                <ContentMenuFooter style={{ flex: 1 }}>
                     <BatteryIcon name='battery-std' color={'#4e4e4e'} />
                     <DropIcon name='opacity' color={'#4e4e4e'} />
                     <SunIcon name='brightness-7' color={'#4e4e4e'} />
                 </ContentMenuFooter>
             </ContainerMenuFooter>
 
-       </>
+        </>
     )
 }
 
-const FoundAutomate = (Automate, info) => {
+const FoundAutomate = ({ automate, deviceInfo, navigation }) => {
+    const { automateDevice, data, devicesFound, connectUsingId, isConnected } = useBluetoothConnection()
+    const { setAddingPlant } = usePlantsManagement()
+    const [currentDeviceIndex, setCurrentDeviceIndex] = useState(0)
+
+    const currentDevice = useMemo(() => {
+        return devicesFound[currentDeviceIndex]
+    }, [currentDeviceIndex, devicesFound])
+
+    useEffect(() => {
+        console.log(currentDevice.name)
+    }, [currentDevice])
+
+    function handleAddPlant() {
+        if (!!automateDevice && Object.keys(automateDevice).length > 0) {
+            setAddingPlant({
+                address: automateDevice.address,
+                id: automateDevice.id
+            })
+            navigation.navigate('add-plant')
+        } else {
+            console.log("Dispositivo ainda não foi encontrado, não pode salvar")
+        }
+    }
+
+    async function handleConnect() {
+        await connectUsingId(currentDevice.id)
+    }
+
+    useEffect(() => {
+        devicesFound.map(device => console.log(device.name))
+    }, [devicesFound])
+    useEffect(() => {
+        if (!!automateDevice && Object.keys(automateDevice).length > 0) {
+            setAddingPlant({
+                address: automateDevice.address,
+                id: automateDevice.id
+            })
+            navigation.navigate('add-plant')
+        } else {
+            console.log("Dispositivo ainda não foi encontrado, não pode salvar")
+        }
+    }, [automateDevice])
 
     return (
         <>
-        
-            <NewTitle >Selecione seu dispositivo</NewTitle>
+
+            {/* <NewTitle >Selecione seu dispositivo</NewTitle>
             <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
             <LineDiv />
             <StatusGif
                 style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf:'center'}}
                 source={require('../../../assets/arduino.gif')} 
             />
-            <AutomateName>{Automate.automateFound.name}</AutomateName>
-            <DescText >slaaaaaa</DescText>
-            <ScrollView style={{height: '100%', flex: 1, marginTop: '5%',width:'100%', }}>
-                <ContainerMenuFooter style={{marginTop: "5%", minHeight:'200%', flex:1, width:'100%'}}>
-                    <Barrinha />
-                    <ContentMenuFooter>
-                        <BatteryIcon name='battery-std' color="#42db49" />
-                        <DropIcon name='opacity' color="#006eff" />
-                        <SunIcon name='brightness-7' color="#e9db19" />
-                    </ContentMenuFooter>
-                </ContainerMenuFooter>
+            <Button 
+                text="Adicionar"
+                onPress={handleAddPlant}
+            />
+            <AutomateName>{JSON.stringify(deviceInfo)}</AutomateName> */}
+            <ScrollView style={{ height: '100%', flex: 1, marginTop: '5%', width: '100%', }}>
+                <Carousel
+                    data={devicesFound}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <CarouselCard
+                                name={item.name}
+                                active={currentDeviceIndex === index}
+                                key={item.id}
+                                id={item.id}
+                            />
+                        )
+                    }}
+                    sliderWidth={SLIDER_WIDTH}
+                    itemWidth={ITEM_WIDTH}
+
+                    slideStyle={{
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                    onSnapToItem={setCurrentDeviceIndex}
+                />
+                <Button
+                    text="Adicionar"
+                    onPress={handleConnect}
+                />
             </ScrollView>
         </>
     )
 }
 
-function BluetoothConnection(){
-   
-    const [automateFound, setAutomateFound] = useState(false);
-    const [Automate, setAutomate] = useState({});
-    const [text, setText] = useState(null);
-    const [data, setData] =useState('');
-    const [bottomError, setBottomError] = useState('');
-    const [connected, setConnected] = useState(false);
-
-
-
-    useEffect(()=> {
-         if(automateFound) {
-       let z = isConnectedDevice().then(b => b?console.log("Já conectado"): HandleConnect(Automate));
-       console.log("Valor z");
-       console.log(z);
-    }
-    return () => {
-        
-        //funções para desmonte de componente
-       
-    }
-}, [automateFound])
-
- const isConnectedDevice= async () => {
-  let b = await Automate.isConnected();
-  return b;
- }
-
-    const removeSubscriptions = () => {
-       // subscription.remove();
-       // conne.remove();
-    }
-   
-    const HandleScan = async () => {
-        Bluetooth.Scanear().then(r => {
-            if (r !== undefined) {
-                setAutomate(r);
-                setAutomateFound(true);              
-                //console.log(r); 
-            }
-            
-        });
-     }
-     
-     const HandleConnect = async (d) => {
-  
-       await Bluetooth.Connect(d).then(array => {
-            const device = array[0];
-            console.log("\n \nAprovação: ");
-            console.log(array[1]);
-             if (array[1] || undefined){
-                console.log("Entrou no Read");
-                setConnected(true);
-            RNBluetoothClassic.onDeviceRead(device.id, ({ data }) => {console.log(device.available());device.clear();HandleDataRead(data)});
-            setConnected(true);
-             }
-             
-            });
-         
-     }
-        HandleScan();
-
-     const HandleDisconnect = async () => {
-        Bluetooth.Disconnect(Automate).then(device => setAutomate(device));
-         setConnected(false)
-     }
- 
-     const HandleMessage = async () => {
-        let r = await Bluetooth.SendMessage(Automate, text).then(response => {return response});
-        
-     }
- 
-     const HandleDataRead = async (info) => {
-        console.log(data)
-        setData(info)
-         
-     }
-
-    //Função para ver os dois estados em mudança
-    setTimeout(function (){
-       //setAutomateFound(!automateFound);
-    },5000)
+function BluetoothConnection({ navigation }) {
+    const { connect, disconnect, sendMessage, automateDevice, data, devicesFound, deviceData, isConnected } = useBluetoothConnection()
+    const { setAddingPlant } = usePlantsManagement()
+    const automateFound = !!automateDevice
 
     let [fontsLoaded] = useFonts({
         'ProximaNovaBold': require('../../../assets/fonts/proximaNova/ProximaNovaBold.otf'),
         'ProximaNovaExtraBold': require('../../../assets/fonts/proximaNova/ProximaNovaExtraBold.otf'),
         'Montserrat': require('../../../assets/fonts/Montserrat/Montserrat-Regular.ttf'),
-      });
-    
-      if (!fontsLoaded) {
+    });
+
+    if (!fontsLoaded) {
         //console.log(fontsLoaded)
-      }
+    }
 
     return (
         <Container>
             <NavDiv>
-            <MaterialIcons style={{fontSize: 24, fontWeight: '900', marginLeft: 32}} name='arrow-back-ios' />
+                <MaterialIcons style={{ fontSize: 24, fontWeight: '900', marginLeft: 32 }} name='arrow-back-ios' />
             </NavDiv>
-                {!automateFound? <ScanAutomate />:<FoundAutomate automateFound={Automate} info={data}/>}
-                
+            {devicesFound.length === 0 ? (
+                <ScanAutomate />
+            ) : (
+                <FoundAutomate automate={automateDevice} deviceInfo={deviceData} connected={isConnected} navigation={navigation} />
+            )}
+
         </Container>
     )
 }
 
-export {BluetoothConnection}
+export { BluetoothConnection };
+
