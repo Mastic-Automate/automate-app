@@ -14,11 +14,11 @@ import {
     CornerImage
 } from "./styles";
 import { appImages } from "../../global/images";
-import { useUserInfo } from '../../hooks/useUserInfo';
+import { useAuth } from '../../hooks/useAuth';
 
 export const SideBar = (props) => {
     const theme = useTheme()
-    const {data: user} = useUserInfo()
+    const {user} = useAuth()
 
     return (
         <BarContainer 
@@ -51,6 +51,15 @@ export const SideBar = (props) => {
                     iconName="list"
                     iconType={Entypo}
                     focused={props.state.index === 1}
+                />
+                <SidebarItem
+                    onPress={() => {
+                        props.navigation.navigate("addPlant");
+                    }}
+                    text="Adicionar Planta"
+                    iconName="tree"
+                    iconType={Entypo}
+                    focused={props.state.index === 2}
                 />
             </MainSection>
             <BottomSection onPress={() => {

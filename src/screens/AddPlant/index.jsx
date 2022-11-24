@@ -2,6 +2,11 @@ import {Dimensions} from 'react-native'
 
 import { Button } from '../../components/Button'
 
+import { Titlebar } from '../../components/TitleBar'
+
+import {useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+
 import Carousel from 'react-native-snap-carousel'
 
 import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSectionTitle, InputLabel, InputsContainer, Title} from './styles'
@@ -11,7 +16,7 @@ import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
-const ITEM_WIDTH = SLIDER_WIDTH*0.67
+const ITEM_WIDTH = SLIDER_WIDTH*0.63
 
 function AddPlant({navigation}){
     const {databasePlants} = useDatabasePlants()
@@ -40,9 +45,10 @@ function AddPlant({navigation}){
         )
     }
 
-    return (
+    return (<>
+        <Titlebar navigation={navigation} title="Adicionar Planta"/>
         <Container>
-            <InputsContainer>
+            
                 <Carousel 
                     data={databasePlants}
                     renderItem={({item, index}) => {
@@ -61,10 +67,11 @@ function AddPlant({navigation}){
 
                     slideStyle={{
                         alignItems:'center',
-                        justifyContent:'center'
+                        justifyContent:'center',
                     }}
                     onSnapToItem={setCurrentModelIndex}
                 />
+                <InputsContainer>
                 <DetailSection>
                     <DetailSectionTitle>Detalhes</DetailSectionTitle>
                     <DetailRow 
@@ -81,9 +88,8 @@ function AddPlant({navigation}){
                     />
 
                     <BottomButtonsContainer>
-                        <Button 
-                            text="Adicionar planta" 
-                            style={{
+                        <Button text="Selecionar Planta" style={
+                            {
                                 flex:1, 
                                 margin:30, 
                                 backgroundColor: "#0DD977",
@@ -94,7 +100,7 @@ function AddPlant({navigation}){
                                 },
                                 shadowOpacity: 1,
                                 shadowRadius: 16.00,
-
+                                width: 323,
                                 elevation: 20,
                             }} 
                             onPress={handleAddPlant} 
@@ -103,6 +109,7 @@ function AddPlant({navigation}){
                 </DetailSection>
             </InputsContainer>
         </Container>
+        </>
     )
 }
 

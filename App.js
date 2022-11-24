@@ -64,17 +64,19 @@ export default function App() {
     return <AppLoading />
   }
   return (
-    <ReactQueryProvider>
-      <AuthContextProvider>
-        <ThemeContextProvider>
-          <MicrocontrollersContextProvider>
-            <NavigationContainer>
-              <StatusBar />
-              <RootRoutes />
-            </NavigationContainer>
-          </MicrocontrollersContextProvider>
-        </ThemeContextProvider>
-      </AuthContextProvider>
-    </ReactQueryProvider>
+    <AuthContextProvider>
+      <ThemeContextProvider>
+        <ReactQueryProvider>
+          <DatabasePlantsContextProvider>
+            <MicrocontrollersContextProvider>
+              <NavigationContainer>
+                <StatusBar />
+                <RootRoutes />
+              </NavigationContainer>
+            </MicrocontrollersContextProvider>
+          </DatabasePlantsContextProvider>
+        </ReactQueryProvider>
+      </ThemeContextProvider>
+    </AuthContextProvider>
   );
 }

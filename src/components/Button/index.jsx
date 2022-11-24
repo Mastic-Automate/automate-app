@@ -22,7 +22,7 @@ const Container = styled.TouchableOpacity`
     flex-flow: row nowrap;
     align-items:center;
     height: 60px;
-    width: 277px;
+    width: 100%;
     align-self: center;
 `
 
@@ -31,6 +31,7 @@ const Text = styled.Text`
     font-family: ProximaNova;
     font-size: 24px;
     flex:1;
+    width:100%;
     text-align: center;
 `
 

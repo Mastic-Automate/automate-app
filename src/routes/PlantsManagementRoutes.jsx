@@ -2,10 +2,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import { EditPlant } from '../screens/EditPlant'
 import {BluetoothConnection} from '../screens/BluetoothConnection'
 import {AddPlant} from '../screens/AddPlant'
+
 import { SavePlant } from '../screens/SavePlant'
 import {ConnectPlant} from '../screens/ConnectPlant'
 import { PlantsManagementContextProvider } from '../contexts/PlantsManagementContext'
 import { BluetoothConnectionContextProvider } from '../contexts/BLuetoothConnectionContext'
+
+import {NamePlant} from '../screens/AddPlant/selectedPlant'
 
 const Nav = createNativeStackNavigator()
 // São todas as rotas que estão relacionadas com as configurações de planta e conexão bluetooth
