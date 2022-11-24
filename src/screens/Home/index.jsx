@@ -13,7 +13,7 @@ import {
     TopSectionCol2
 } from './styles'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
 import { appImages } from '../../global/images'
 import { getPlantImage } from '../../global/plants'
@@ -22,6 +22,10 @@ import { useMicrocontrollers } from '../../hooks/useMicrocontrollers'
 export function Home({ navigation }) {
     const { pickRandomPlants, databasePlants } = useDatabasePlants()
     const randomPlants = useMemo(() => pickRandomPlants(3), [databasePlants])
+
+    useEffect(() => {
+        console.log(databasePlants)
+    }, [databasePlants])
 
     const { storedDevices } = useMicrocontrollers()
     return (
