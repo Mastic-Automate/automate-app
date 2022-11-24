@@ -96,7 +96,7 @@ export function Home({ navigation }) {
                                 variant="yellow"
                                 image={getPlantImage(item.databaseId)}
                                 subtitle="Sub"
-                                onPress={() => navigation.navigate('connect-plant', { id: item.id })}
+                                onPress={() => navigation.navigate('plantsManagement', { screen:'connect-plant', params: {id: item.id} })}
                             />
                         )
                     }}

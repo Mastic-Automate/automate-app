@@ -81,8 +81,9 @@ function AddPlant({navigation}){
                     />
 
                     <BottomButtonsContainer>
-                        <Button text="Adicionar planta" style={
-                            {
+                        <Button 
+                            text="Adicionar planta" 
+                            style={{
                                 flex:1, 
                                 margin:30, 
                                 backgroundColor: "#0DD977",
@@ -95,9 +96,9 @@ function AddPlant({navigation}){
                                 shadowRadius: 16.00,
 
                                 elevation: 20,
-                            }
-                        } 
-                            onPress={handleAddPlant} />
+                            }} 
+                            onPress={handleAddPlant} 
+                        />
                     </BottomButtonsContainer>
                 </DetailSection>
             </InputsContainer>

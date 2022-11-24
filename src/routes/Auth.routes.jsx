@@ -16,6 +16,7 @@ import { InfoPlant } from '../screens/InfoPlant'
 import { Plants } from '../screens/Plants'
 import { SavePlant } from '../screens/SavePlant'
 import { ConfigScreensRoutes } from './ConfigScreensRoutes'
+import { PlantsManagementRoutes } from './PlantsManagementRoutes'
 
 const Nav = createDrawerNavigator()
 
@@ -46,24 +47,13 @@ export function AuthRoutes({ navigation }) {
     }, [user])
     return (
         <DatabasePlantsContextProvider>
-            <BluetoothConnectionContextProvider>
-                <PlantsManagementContextProvider>
-                    <Nav.Navigator drawerContent={SideBar} >
-                        <Nav.Screen
-                            name="home"
-                            component={Home}
-                        />
-                        <Nav.Screen name="plants" component={Plants} options={{ ...defaultScreenOptions, headerShown: false }} />
-                        <Nav.Screen name="bluetooth-connection" component={BluetoothConnection} />
-                        <Nav.Screen name="add-plant" component={AddPlant} />
-                        <Nav.Screen name="save-plant" component={SavePlant} />
-                        <Nav.Screen name="connect-plant" component={ConnectPlant} />
-                        <Nav.Screen name="plantInfo" component={InfoPlant} options={{ headerShown: false }} />
-                        <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{ ...defaultScreenOptions, headerTitle: 'Configurações' }} />
-                    </Nav.Navigator>
-                </PlantsManagementContextProvider>
-            </BluetoothConnectionContextProvider>
-
+            <Nav.Navigator drawerContent={SideBar} >
+                <Nav.Screen name="home" component={Home} />
+                <Nav.Screen name="plants" component={Plants} options={{ ...defaultScreenOptions, headerShown: false }} />
+                <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} />
+                <Nav.Screen name="plantInfo" component={InfoPlant} options={{ headerShown: false }} />
+                <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{ ...defaultScreenOptions, headerTitle: 'Configurações' }} />
+            </Nav.Navigator>
         </DatabasePlantsContextProvider>
     )
 }

@@ -183,7 +183,6 @@ export function ConnectPlant({ route }) {
         return <Text>Ainda procurando dispositivos...</Text>
     }
     if (!isConnected) {
-        console.log('Iniciando a conexão pois não está conectado')
         return <Text>Conectando com o dispositivo de id {id}...</Text>
     }
 
