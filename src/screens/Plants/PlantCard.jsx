@@ -65,19 +65,20 @@ const AlignHelper = styled.View`
     flex-direction: column;
 `
 
-export function PlantCard({name, id, description, image, style}){
+export function PlantCard({ name, id, description, image, style }) {
     const navigation = useNavigation()
     return (
-        <Container style={{...style, 
-            shadowColor:"#4F5C66",
-            shadowOffset: {width:0, height: 12},
+        <Container style={{
+            ...style,
+            shadowColor: "#4F5C66",
+            shadowOffset: { width: 0, height: 12 },
             shadowOpacity: 0.29,
             shadowRadius: 10.00,
             elevation: 20,
             marginBottom: 40,
         }}>
             <ImageContainer>
-                <Image 
+                <Image
                     source={image}
                 />
             </ImageContainer>
@@ -91,11 +92,11 @@ export function PlantCard({name, id, description, image, style}){
                     {description}
                 </PlantDescriptionText>
                 <AlignHelper>
-                <PlantViewButton onPress={()=> navigation.navigate('plantInfo', {id: id})}>
-                    <PlantViewButtonText>
-                        Detalhes
-                    </PlantViewButtonText>
-                </PlantViewButton>
+                    <PlantViewButton onPress={() => navigation.navigate('plantInfo', { id: id })}>
+                        <PlantViewButtonText>
+                            Detalhes
+                        </PlantViewButtonText>
+                    </PlantViewButton>
                 </AlignHelper>
             </InfoContainer>
         </Container>

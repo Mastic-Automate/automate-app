@@ -1,7 +1,7 @@
-import { useNavigation } from '@react-navigation/native'
-import styled from 'styled-components/native'
-import { appImages } from '../../global/images'
-import { Like } from './Like'
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import styled from 'styled-components/native';
+import { Like } from './Like';
 
 const Container = styled.View`
     width:100%;
@@ -66,12 +66,24 @@ const LikeContainer = styled.TouchableOpacity`
     right:12px;
 `
 
-export function InfoPlantCard({title, description, image, style, id, liked=false, onLikePressed}){
+export function InfoPlantCard({ title, description, image, style, id, liked = false, onLikePressed }) {
     const navigation = useNavigation()
+
+    const [isLiked, setIsLiked] = useState(liked)
+
+    async function handleToggleLiked() {
+        setIsLiked(!isLiked)
+    }
+
+    async function handleLikePressed() {
+        await handleToggleLiked()
+        onLikePressed()
+    }
+
     return (
         <Container style={style}>
             <ImageContainer>
-                <Image 
+                <Image
                     source={image}
                 />
             </ImageContainer>
@@ -84,13 +96,15 @@ export function InfoPlantCard({title, description, image, style, id, liked=false
                 >
                     {description}
                 </Description>
-                <ViewButton onPress={()=> navigation.navigate('plantInfo', {id:id})}>
+                <ViewButton onPress={() => navigation.navigate('plantInfo', { id: id })}>
                     <ViewButtonText>
                         Ver planta
                     </ViewButtonText>
                 </ViewButton>
-                <LikeContainer onPress={onLikePressed}>
-                    <Like liked={liked} />
+                <LikeContainer onPress={handleLikePressed}>
+                    <Like
+                        liked={isLiked}
+                    />
                 </LikeContainer>
             </ContentContainer>
         </Container>
