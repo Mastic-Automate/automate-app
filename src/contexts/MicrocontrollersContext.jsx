@@ -34,17 +34,14 @@ function MicrocontrollersContextProvider({ children }) {
     }
     async function removeDevice(address) {
         const filteredDevices = storedDevices.filter(device => device.address !== address)
-        AsyncStorage.setItem('@Microcontrollers', JSON.stringify(filteredDevices))
+
+        await AsyncStorage.setItem('@Microcontrollers', JSON.stringify(filteredDevices))
+
         loadDevices()
     }
 
     useEffect(() => {
-        console.log(`Stored devices: ${JSON.stringify(storedDevices)}`)
-    }, [storedDevices])
-
-    useEffect(() => {
         loadDevices()
-        // AsyncStorage.clear()
     }, [])
 
     return (

@@ -7,6 +7,7 @@ import styled from 'styled-components/native'
 
 import { Button } from '../../components/Button'
 import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext'
+import { useMicrocontrollers } from '../../hooks/useMicrocontrollers'
 
 
 const Container = styled.View`
@@ -152,17 +153,18 @@ const StatusGif = styled.Image`
     border-radius:40px;
 `
 
-export function ConnectPlant({ route }) {
+export function ConnectPlant({ route, navigation }) {
+    const { removeDevice } = useMicrocontrollers()
     const [deviceName, setDeviceName] = useState('')
-    const { 
-        connect, 
-        disconnect, 
-        sendMessage, 
-        automateDevice, 
-        devicesFound, 
-        deviceData, 
-        isConnected, 
-        connectUsingId, 
+    const {
+        connect,
+        disconnect,
+        sendMessage,
+        automateDevice,
+        devicesFound,
+        deviceData,
+        isConnected,
+        connectUsingId,
         startSearchForDevices,
         getDeviceById
     } = useBluetoothConnection()
@@ -183,17 +185,22 @@ export function ConnectPlant({ route }) {
     useEffect(() => {
         console.log('Device data')
         console.log(deviceData)
-        
+
     }, [deviceData])
 
     useEffect(() => {
         if (!searchingForDevices) {
             connectUsingId(id)
 
-            const {name} = getDeviceById(id)
+            const { name } = getDeviceById(id)
             setDeviceName(name)
         }
     }, [searchingForDevices])
+
+    const handleRemoveDevice = useCallback(async () => {
+        await removeDevice(id)
+        navigation.goBack()
+    }, [id, navigation])
 
 
     if (searchingForDevices) {
@@ -220,8 +227,8 @@ export function ConnectPlant({ route }) {
                 </>
             )}
             <Button
-                text="Desconectar"
-                onPress={() => disconnect()}
+                text="Deletar"
+                onPress={handleRemoveDevice}
             />
             <ScrollView style={{ height: '100%', flex: 1, marginTop: '5%', width: '100%', }}>
                 <ContainerMenuFooter style={{ marginTop: "5%", minHeight: '200%', flex: 1, width: '100%' }}>
