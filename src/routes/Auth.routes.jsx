@@ -5,31 +5,9 @@ import { useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { SideBar } from '../components/SideBar'
 import { useAuth } from '../hooks/useAuth'
-import { AddPlant } from '../screens/AddPlant'
-import { NamePlant } from '../screens/AddPlant/selectedPlant'
-import { BluetoothConnection } from '../screens/BluetoothConnection'
 import { Home } from '../screens/Home'
 import { InfoPlant } from '../screens/InfoPlant'
 import { Plants } from '../screens/Plants'
-// =======
-import { createDrawerNavigator } from '@react-navigation/drawer'
-
-import { Ionicons } from '@expo/vector-icons'
-import { useEffect } from 'react'
-import { useTheme } from 'styled-components'
-import { SideBar } from '../components/SideBar'
-import { BluetoothConnectionContextProvider } from '../contexts/BLuetoothConnectionContext'
-import { DatabasePlantsContextProvider } from '../contexts/DatabasePlantsContext'
-import { PlantsManagementContextProvider } from '../contexts/PlantsManagementContext'
-import { useAuth } from '../hooks/useAuth'
-import { AddPlant } from '../screens/AddPlant'
-
-import { BluetoothConnection } from '../screens/BluetoothConnection'
-import { ConnectPlant } from '../screens/ConnectPlant'
-import { Home } from '../screens/Home'
-import { InfoPlant } from '../screens/InfoPlant'
-import { Plants } from '../screens/Plants'
-import { SavePlant } from '../screens/SavePlant'
 
 import { ConfigScreensRoutes } from './ConfigScreensRoutes'
 import { PlantsManagementRoutes } from './PlantsManagementRoutes'
@@ -67,31 +45,30 @@ export function AuthRoutes({ navigation }) {
             drawerContent={SideBar}
         >
             <Nav.Screen name="home" component={Home} options={{
-                headerTitle:'Automate',
+                headerTitle: 'Automate',
                 headerTitleStyle: {
                     fontFamily: "ProximaNovaSemiBold",
                     fontSize: 24,
-                    headerTitleAlign:'center',
-                    headerStyle:{backgroundColor:theme.background1},
-                    headerTintColor:theme.text2,
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: theme.background1 },
+                    headerTintColor: theme.text2,
                     headerRight: () => (
-                        <Ionicons 
+                        <Ionicons
                             name="settings-outline"
                             color={theme.text2}
                             size={35}
-                            onPress={()=> navigation.replace('authRoutes', {screen: 'config'})}
-                            style={{margin:10, marginRight:20}}
+                            onPress={() => navigation.replace('authRoutes', { screen: 'config' })}
+                            style={{ margin: 10, marginRight: 20 }}
                         />
                     )
                 }
-            }} 
-            />    
+            }}
+            />
 
-            <Nav.Screen name="plants" component={Plants} options={{...defaultScreenOptions, headerShown:false}} />
-            <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{...defaultScreenOptions, headerTitle: 'Plantas'}} />
-            <Nav.Screen name="plantInfo" component={InfoPlant} options={{headerShown:false}} />
-            <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{...defaultScreenOptions, headerTitle:'Configurações'}} />
-            <Nav.Screen name="addPlant" component={AddPlant} options={{headerShown:false}}/>
+            <Nav.Screen name="plants" component={Plants} options={{ ...defaultScreenOptions, headerShown: false }} />
+            <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{ ...defaultScreenOptions, headerTitle: 'Plantas' }} />
+            <Nav.Screen name="plantInfo" component={InfoPlant} options={{ headerShown: false }} />
+            <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{ ...defaultScreenOptions, headerTitle: 'Configurações' }} />
         </Nav.Navigator>
     )
 }
