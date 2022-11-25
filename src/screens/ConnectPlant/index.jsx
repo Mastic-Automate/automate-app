@@ -1,7 +1,7 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text } from 'moti'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ScrollView } from 'react-native'
 import styled from 'styled-components/native'
 
@@ -153,7 +153,19 @@ const StatusGif = styled.Image`
 `
 
 export function ConnectPlant({ route }) {
-    const { connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId, startSearchForDevices } = useBluetoothConnection()
+    const [deviceName, setDeviceName] = useState('')
+    const { 
+        connect, 
+        disconnect, 
+        sendMessage, 
+        automateDevice, 
+        devicesFound, 
+        deviceData, 
+        isConnected, 
+        connectUsingId, 
+        startSearchForDevices,
+        getDeviceById
+    } = useBluetoothConnection()
     const automateFound = !!automateDevice && Object.keys(automateDevice).length > 0
     const id = route.params.id
 
@@ -169,12 +181,17 @@ export function ConnectPlant({ route }) {
     }, [automateDevice, id]))
 
     useEffect(() => {
+        console.log('Device data')
         console.log(deviceData)
+        
     }, [deviceData])
 
     useEffect(() => {
         if (!searchingForDevices) {
             connectUsingId(id)
+
+            const {name} = getDeviceById(id)
+            setDeviceName(name)
         }
     }, [searchingForDevices])
 
@@ -195,9 +212,13 @@ export function ConnectPlant({ route }) {
                 style={{ width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf: 'center' }}
                 source={require('../../../assets/arduino.gif')}
             />
-            <AutomateName>{JSON.stringify(deviceData)}</AutomateName>
-            <Text>Média da umidade: {deviceData.humidityAverage}</Text>
-            <Text>Média da umidade: {deviceData.wateredTimes}</Text>
+            <AutomateName>{deviceName}</AutomateName>
+            {!!deviceData && (
+                <>
+                    <Text>Média da umidade: {deviceData.humidityAverage}</Text>
+                    <Text>QUantidade de vezes que regou: {deviceData.wateredTimes}</Text>
+                </>
+            )}
             <Button
                 text="Desconectar"
                 onPress={() => disconnect()}
