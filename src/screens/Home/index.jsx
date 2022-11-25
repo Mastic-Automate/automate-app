@@ -49,7 +49,7 @@ export function Home({ navigation }) {
             exe={openDrawer}
             iconName="menu-outline"
             style={{
-                backgroundColor: theme.background1
+                backgroundColor: theme.background1,
             }}
         />
         <Container>

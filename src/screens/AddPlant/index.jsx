@@ -8,7 +8,16 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import Carousel from 'react-native-snap-carousel'
 
-import { BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSectionTitle, InputLabel, InputsContainer, Title } from './styles'
+import { 
+    BottomButtonsContainer,
+    Container,
+    CarouselWrapper,
+    DetailRow,
+    DetailSection,
+    DetailSectionTitle,
+    InputLabel,
+    InputsContainer,
+    Title } from './styles'
 import { CarouselCard } from './CarouselCard'
 import { useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
@@ -49,35 +58,38 @@ function AddPlant({ navigation }) {
             style={{
                 position: "absolute",
                 backgroundColor: "transparent",
-                zIndex: 999, marginTop: 30
+                zIndex: 999, marginTop: 20
             }}
 
             title="Adicionar Planta"
         />
         <Container >
 
-            <Carousel
-                data={databasePlants}
-                renderItem={({ item, index }) => {
-                    return (
-                        <CarouselCard
-                            name={item.plantName}
-                            active={currentModelIndex === index}
-                            img={item.image}
-                            key={item.idPlant}
-                            sub={item.plantAbout}
-                        />
-                    )
-                }}
-                sliderWidth={SLIDER_WIDTH}
-                itemWidth={ITEM_WIDTH}
+            <CarouselWrapper>
+                <Carousel
+                    data={databasePlants}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <CarouselCard
+                                name={item.plantName}
+                                active={currentModelIndex === index}
+                                img={item.image}
+                                key={item.idPlant}
+                                sub={item.plantAbout}
+                            />
+                        )
+                    }}
+                    sliderWidth={SLIDER_WIDTH}
+                    itemWidth={ITEM_WIDTH}
 
-                slideStyle={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-                onSnapToItem={setCurrentModelIndex}
-            />
+                    slideStyle={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                    onSnapToItem={setCurrentModelIndex}
+                />
+            </CarouselWrapper>
+            
             <InputsContainer>
                 <DetailSection>
                     <DetailSectionTitle>Detalhes</DetailSectionTitle>

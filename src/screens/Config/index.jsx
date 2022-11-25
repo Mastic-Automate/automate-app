@@ -1,4 +1,5 @@
 import { Feather, Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Image } from 'react-native';
 import { Input } from '../../components/Input';
@@ -54,55 +55,62 @@ export function Config({ navigation }) {
 
 
     return (
-        <Container>
-
-            {/*<Titlebar navigation={navigation}
-                title="Config"
-                style={{
-                    backgroundColor: theme.background1,
-                }}
-
-            />*/}
-            <Titlebar
-                navigation={navigation}
-                title="Automate"
-                style={{
-                    backgroundColor: theme.background1,
-
-                }}
+        <>
+            <StatusBar
+                backgroundColor={theme.background}
+                animated={true}
+                hideTransitionAnimation={true}
+                translucent={true}
             />
 
-            <HeadingSection>
-                <AccountSection
-                    onPress={() => {
-                        navigation.navigate('account')
+            <Titlebar
+                    navigation={navigation}
+                    title="Automate"
+                    style={{
+                        position: 'absolute',
+                        marginTop: 20,
+                        zIndex: 999999999,
                     }}
-                >
-                    <AccountImage
-                        source={appImages['profile_placeholder']}
-                    />
-                    <AccountSectionInfoCol1>
-                        {!!user && (
-                            <>
-                                <AccountUserName>{user.userName}</AccountUserName>
-                                <AccountUserEmail>{user.userEmail}</AccountUserEmail>
-                            </>
-                        )}
-                    </AccountSectionInfoCol1>
-                </AccountSection>
-                <MessageContainer>
-                    <MessageContainerCol1>
-                        <MessageContainerText>
-                            Lembre-se de encher seu recipiente de água.
-                        </MessageContainerText>
-                    </MessageContainerCol1>
-                    <MessageContainerCol2>
-                        <Image
-                            source={require('../../assets/rose.png')}
-                            style={{ width: 100, height: 100 }}
+                />
+            
+            
+            <Container> 
+            <HeadingSection>
+                
+                
+                <View>
+                    <AccountSection
+                        onPress={() => {
+                            navigation.navigate('account')
+                        }}
+                    >
+                        <AccountImage
+                            source={appImages['profile_placeholder']}
                         />
-                    </MessageContainerCol2>
-                </MessageContainer>
+                        <AccountSectionInfoCol1>
+                            {!!user && (
+                                <>
+                                    <AccountUserName>{user.userName}</AccountUserName>
+                                    <AccountUserEmail>{user.userEmail}</AccountUserEmail>
+                                </>
+                            )}
+                        </AccountSectionInfoCol1>
+                    </AccountSection>
+                    <MessageContainer>
+                        <MessageContainerCol1>
+                            <MessageContainerText>
+                                Lembre-se de encher seu recipiente de água.
+                            </MessageContainerText>
+                        </MessageContainerCol1>
+                        <MessageContainerCol2>
+                            <Image
+                                source={require('../../assets/rose.png')}
+                                style={{ width: 100, height: 100 }}
+                            />
+                        </MessageContainerCol2>
+                    </MessageContainer>
+                </View>
+                
             </HeadingSection>
             <MainSection>
                 <InputsRow>
@@ -133,6 +141,9 @@ export function Config({ navigation }) {
 
         </Container>
 
+        </>
+        
+    
 
     )
 }
