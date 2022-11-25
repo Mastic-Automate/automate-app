@@ -1,12 +1,13 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text } from 'moti'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ScrollView } from 'react-native'
 import styled from 'styled-components/native'
 
 import { Button } from '../../components/Button'
 import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext'
+import { useMicrocontrollers } from '../../hooks/useMicrocontrollers'
 
 
 const Container = styled.View`
@@ -152,8 +153,21 @@ const StatusGif = styled.Image`
     border-radius:40px;
 `
 
-export function ConnectPlant({ route }) {
-    const { connect, disconnect, sendMessage, automateDevice, devicesFound, deviceData, isConnected, connectUsingId, startSearchForDevices } = useBluetoothConnection()
+export function ConnectPlant({ route, navigation }) {
+    const { removeDevice } = useMicrocontrollers()
+    const [deviceName, setDeviceName] = useState('')
+    const {
+        connect,
+        disconnect,
+        sendMessage,
+        automateDevice,
+        devicesFound,
+        deviceData,
+        isConnected,
+        connectUsingId,
+        startSearchForDevices,
+        getDeviceById
+    } = useBluetoothConnection()
     const automateFound = !!automateDevice && Object.keys(automateDevice).length > 0
     const id = route.params.id
 
@@ -169,14 +183,24 @@ export function ConnectPlant({ route }) {
     }, [automateDevice, id]))
 
     useEffect(() => {
+        console.log('Device data')
         console.log(deviceData)
+
     }, [deviceData])
 
     useEffect(() => {
         if (!searchingForDevices) {
             connectUsingId(id)
+
+            const { name } = getDeviceById(id)
+            setDeviceName(name)
         }
     }, [searchingForDevices])
+
+    const handleRemoveDevice = useCallback(async () => {
+        await removeDevice(id)
+        navigation.goBack()
+    }, [id, navigation])
 
 
     if (searchingForDevices) {
@@ -195,12 +219,16 @@ export function ConnectPlant({ route }) {
                 style={{ width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf: 'center' }}
                 source={require('../../../assets/arduino.gif')}
             />
-            <AutomateName>{JSON.stringify(deviceData)}</AutomateName>
-            <Text>Média da umidade: {deviceData.humidityAverage}</Text>
-            <Text>Média da umidade: {deviceData.wateredTimes}</Text>
+            <AutomateName>{deviceName}</AutomateName>
+            {!!deviceData && (
+                <>
+                    <Text>Média da umidade: {deviceData.humidityAverage}</Text>
+                    <Text>QUantidade de vezes que regou: {deviceData.wateredTimes}</Text>
+                </>
+            )}
             <Button
-                text="Desconectar"
-                onPress={() => disconnect()}
+                text="Deletar"
+                onPress={handleRemoveDevice}
             />
             <ScrollView style={{ height: '100%', flex: 1, marginTop: '5%', width: '100%', }}>
                 <ContainerMenuFooter style={{ marginTop: "5%", minHeight: '200%', flex: 1, width: '100%' }}>

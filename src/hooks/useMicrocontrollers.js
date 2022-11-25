@@ -1,9 +1,9 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 
-import {MicrocontrollersContext} from '../contexts/MicrocontrollersContext'
+import { MicrocontrollersContext } from '../contexts/MicrocontrollersContext'
 
-function useMicrocontrollers(){
-    const {storedDevices, saveNewDevice, removeDevice} = useContext(MicrocontrollersContext)
+function useMicrocontrollers() {
+    const { storedDevices, saveNewDevice, removeDevice } = useContext(MicrocontrollersContext)
     return {
         storedDevices,
         saveNewDevice,
@@ -11,4 +11,4 @@ function useMicrocontrollers(){
     }
 }
 
-export {useMicrocontrollers}
+export { useMicrocontrollers }

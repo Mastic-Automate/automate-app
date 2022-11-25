@@ -102,8 +102,8 @@ export function BluetoothConnectionContextProvider({ children }) {
         if (isConnected) {
             RNBluetoothClassic.onDeviceRead(automateDevice.id, ({ data }) => {
                 console.log("Dados recebidos")
-                console.log(data)
-                setDeviceData(data)
+                console.log(JSON.parse(data))
+                setDeviceData(JSON.parse(data))
             })
         }
     }
@@ -239,7 +239,8 @@ export function BluetoothConnectionContextProvider({ children }) {
             isConnected,
             connectUsingId,
             searchingForDevices,
-            startSearchForDevices
+            startSearchForDevices,
+            getDeviceById
         }}>
             {children}
         </BluetoothConnectionContext.Provider>
