@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button } from '../../components/Button';
 import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext';
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext';
+import { useMicrocontrollers } from '../../hooks/useMicrocontrollers';
 
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
@@ -185,6 +186,7 @@ const ScanAutomate = ({ automateFound }) => {
 
 const FoundAutomate = ({ automate, deviceInfo, navigation }) => {
     const { automateDevice, data, devicesFound, connectUsingId, isConnected } = useBluetoothConnection()
+    const { storedDevices } = useMicrocontrollers()
     const { setAddingPlant } = usePlantsManagement()
     const [currentDeviceIndex, setCurrentDeviceIndex] = useState(0)
 
@@ -227,6 +229,13 @@ const FoundAutomate = ({ automate, deviceInfo, navigation }) => {
         }
     }, [automateDevice])
 
+    const filteredDevices = useMemo(() => {
+        const alreadyInUseIds = storedDevices.map(device => device.id)
+        return devicesFound.filter(device => {
+            return !(alreadyInUseIds.includes(device.id))
+        })
+    }, [devicesFound, storedDevices])
+
     return (
         <>
 
@@ -244,7 +253,7 @@ const FoundAutomate = ({ automate, deviceInfo, navigation }) => {
             <AutomateName>{JSON.stringify(deviceInfo)}</AutomateName> */}
             <ScrollView style={{ height: '100%', flex: 1, marginTop: '5%', width: '100%', }}>
                 <Carousel
-                    data={devicesFound}
+                    data={filteredDevices}
                     renderItem={({ item, index }) => {
                         return (
                             <CarouselCard
