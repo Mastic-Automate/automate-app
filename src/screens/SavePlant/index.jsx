@@ -7,6 +7,7 @@ import {FormInput, FormInput as Input} from '../../components/FormInput'
 import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
+import {useFocusEffect} from '@react-navigation/native'
 
 import {appImages} from '../../global/images'
 
@@ -22,27 +23,41 @@ import {
     PlantImage,
     DetailInfosSection
 } from './styles'
+import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
+import { getPlantImage } from '../../global/plants'
+import { useCallback } from 'react'
+import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext'
 
 const schema = yup.object({
     name: yup.string().required("Nome é obrigatório")
 })
 
-function SavePlant(){
+function SavePlant({navigation}){
+    const {addingPlant, savePlant} = usePlantsManagement()
+    const {disconnect} = useBluetoothConnection()
     const {handleSubmit, control, formState:{errors}} = useForm({
         resolver: yupResolver(schema)
     })
 
     function handleSavePlant(data){
-        console.log(data)
+        savePlant(data.name)
+        navigation.navigate('home')
     }
+
+    useFocusEffect(useCallback(() => {
+        console.log('Tela aberta')
+        return () => {
+            disconnect()
+        }
+    }, [addingPlant]))
     
     return (
         <Container
             contentContainerStyle={{alignItems:'center'}}
         >
-            <Title>Suculenta</Title>
+            <Title>{addingPlant.plantName}</Title>
             <PlantImage 
-                source={appImages['suculenta']}
+                source={getPlantImage(addingPlant.idPlant)}
             />
             <InputsContainer>
                 <DetailSection style={{marginTop:10}}>
@@ -57,15 +72,15 @@ function SavePlant(){
 
                         <DetailRow 
                             label="Tempo"
-                            value="2 semanas"
+                            value={addingPlant.plantTimeHarvest}
                         />
                         <DetailRow 
-                            label="Ambiente"
-                            value="Interno"
+                            label="Temperatura ideal"
+                            value={addingPlant.plantTemperature}
                         />
                         <DetailRow 
-                            label="Iluminação"
-                            value="5"
+                            label="Quantidade de água"
+                            value={addingPlant.plantWaterQuantity}
                         />
                     </DetailInfosSection>
 

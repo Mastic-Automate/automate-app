@@ -14,11 +14,11 @@ import {
     CornerImage
 } from "./styles";
 import { appImages } from "../../global/images";
-import { useUserInfo } from '../../hooks/useUserInfo';
+import { useAuth } from '../../hooks/useAuth';
 
 export const SideBar = (props) => {
     const theme = useTheme()
-    const {data: user} = useUserInfo()
+    const {user} = useAuth()
 
     return (
         <BarContainer 
@@ -54,7 +54,7 @@ export const SideBar = (props) => {
                 />
                 <SidebarItem
                     onPress={() => {
-                        props.navigation.navigate("addPlant");
+                        props.navigation.navigate("plantsManagement", {screen: 'bluetooth-connection'});
                     }}
                     text="Adicionar Planta"
                     iconName="tree"

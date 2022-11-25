@@ -19,11 +19,9 @@ import {
 import { useTheme as useThemeContext } from '../../hooks/useTheme'
 import { useTheme } from 'styled-components';
 
-
-export function Config({ navigation }) {
-    const theme = useTheme()
-    const { toggleTheme, isTheme } = useThemeContext()
-    const { data: user } = useUserInfo()
+export function Config({navigation}){
+    const {toggleTheme, theme} = useTheme()
+    const {user} = useAuth()
 
     const isDarkTheme = !(isTheme === 'light')
 

@@ -1,113 +1,99 @@
 import { useTheme } from 'styled-components/native';
 
-import { useNavigation } from '@react-navigation/native'
 
-import { MaterialIcons, Feather, FontAwesome5 } from '@expo/vector-icons';
+import { Feather, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 import {
-    Container, 
-    Title,
-    AddButton,
-    MainContent,
-    TopSection,
-    PlantSection,
-    SomePlantsContainer,
-    UserPlantsContainer,
-    UserPlantsTitle,
-    InputsRow,
-    FilterButton,
-    SearchInput,
+    AddButton, Container, FilterButton, InputsRow, MainContent, PlantSection, SearchInput, SomePlantsContainer, Title, TopSection, UserPlantsContainer,
+    UserPlantsTitle
 } from './styles';
 
-import {Input} from '../../components/Input';
 import { PlantCard } from './PlantCard';
-import {UserPlantCard} from './UserPlantCard';
+import { UserPlantCard } from './UserPlantCard';
 
-import {plants} from '../../global/plants' ;
-import {appImages} from '../../global/images';
+import { appImages } from '../../global/images';
 
-import {useDatabasePlants} from '../../contexts/DatabasePlantsContext'
+import { useDatabasePlants } from '../../contexts/DatabasePlantsContext';
 
 export function Plants({ navigation }) {
     const { primary } = useTheme();
-    const {databasePlants} = useDatabasePlants()
+    const { databasePlants } = useDatabasePlants()
 
     return (
         <Container>
             <MainContent>
                 <TopSection>
                     <Title>Todas as plantas</Title>
-                    
+
                 </TopSection>
-                
+
 
                 <PlantSection>
                     <InputsRow>
-                            <SearchInput 
-                                iconType={Feather}
-                                iconName="search"
-                                style={{
-                                    flex:1,
-                                    borderRadius:5,
-                                    fontFamily: "Montserrat_400Regular",
-                                    backgroundColor: "#FFF",
-                                    fontSize: 18,
-                                    shadowColor: "#3d3d3d",
-                                    shadowOffset: {
-                                        width: 0,
-                                        height: 12,
-                                    },
-                                    shadowOpacity: 0.58,
-                                    shadowRadius: 16.00,
+                        <SearchInput
+                            iconType={Feather}
+                            iconName="search"
+                            style={{
+                                flex: 1,
+                                borderRadius: 5,
+                                fontFamily: "Montserrat_400Regular",
+                                backgroundColor: "#FFF",
+                                fontSize: 18,
+                                shadowColor: "#3d3d3d",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 12,
+                                },
+                                shadowOpacity: 0.58,
+                                shadowRadius: 16.00,
 
-                                    elevation: 15,
-                                }}
-                                placeholder="Pesquisar"
-                                textInputProps={{color: "#dadada"}}
+                                elevation: 15,
+                            }}
+                            placeholder="Pesquisar"
+                            textInputProps={{ color: "#dadada" }}
+                        />
+                        <FilterButton>
+                            <FontAwesome5
+                                color="#ffffff"
+                                size={26}
+                                name="filter"
                             />
-                            <FilterButton>
-                                <FontAwesome5 
-                                    color="#ffffff"
-                                    size={26}
-                                    name="filter"
-                                />
-                            </FilterButton>
-                        </InputsRow>
+                        </FilterButton>
+                    </InputsRow>
                     <SomePlantsContainer horizontal showsHorizontalScrollIndicator={false}>
                         {databasePlants.map(plant => (
-                            <PlantCard 
+                            <PlantCard
                                 description={plant.plantAbout}
                                 id={plant.idPlant}
                                 image={plant.image}
                                 name={plant.plantName}
                                 key={plant.idPlant}
-                                style={{marginHorizontal:5}}
+                                style={{ marginHorizontal: 5 }}
                             />
                         ))}
-                        
+
                     </SomePlantsContainer>
                     <UserPlantsTitle horizontal >
                         Suas Plantas
                     </UserPlantsTitle>
                     <UserPlantsContainer horizontal showsHorizontalScrollIndicator={false}  >
-                        <UserPlantCard 
+                        <UserPlantCard
                             image={appImages['plant_corner']}
                             name="Suculenta"
-                            description="Sala"  
+                            description="Sala"
                         />
-                        <UserPlantCard 
+                        <UserPlantCard
                             image={appImages['plant_corner']}
                             name="Suculenta1"
                             description="Telhado"
                         />
                     </UserPlantsContainer>
                 </PlantSection>
-                
+
             </MainContent>
-            
-            <AddButton 
-            onPress={() => navigation.navigate('bluetooth-connection', { target: 'add-plant', params: {} })}
-            //onPress={()=> navigation.navigate('add-plant', {})}
+
+            <AddButton
+                onPress={() => navigation.navigate('plantsManagement', {screen:'bluetooth-connection'})}
             >
                 <MaterialIcons
                     name='add-circle'
