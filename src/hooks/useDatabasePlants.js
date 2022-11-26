@@ -1,8 +1,8 @@
-import { api } from "../services/api";
 import { useQuery } from "react-query";
+import { api } from "../services/api";
 
-async function fetchDatabasePlants(){
-    const {data} = await api.get('/getPlants')
+async function fetchDatabasePlants() {
+    const { data } = await api.get('/getPlants')
     return data
 }
 

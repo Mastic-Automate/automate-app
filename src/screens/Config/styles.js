@@ -3,15 +3,17 @@ import styled from 'styled-components/native';
 const Container = styled.ScrollView`
     background-color:${props => props.theme.background};
     flex:1;
-    height: 100%;
 `
 
 const HeadingSection = styled.View`
     width:100%;
-    height:300px;
+    height:400px;
     background-color: ${props => props.theme.background1};
-    padding: 8px;
+    justify-content: center;
+    padding: 20px 0;
+    position:relative;
 `
+
 const Title = styled.Text`
     color: ${props => props.theme.title};
     font-size: 24px;
@@ -131,4 +133,4 @@ export {
     InputsRow,
     ThemeButton,
     SectionOptions,
-}
+};

@@ -1,18 +1,30 @@
-import {Dimensions, Image} from 'react-native'
+import {View, Dimensions, Image} from 'react-native'
 
 import { Button } from '../../../components/Button'
 import { LinearGradient } from 'expo-linear-gradient'
-
-import {useForm} from 'react-hook-form'
-import {yupResolver} from '@hookform/resolvers/yup'
+import {useFocusEffect} from '@react-navigation/native'
 
 
 import {BottomButtonsContainer, Container, DetailRow, DetailSection, DetailSectionTitle, InputLabel, InputsContainer, NameInput, Title, DivImage} from './styles'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useDatabasePlants } from '../../../contexts/DatabasePlantsContext'
-import { Input } from '../../../components/Input'
-import { useEffect } from 'react'
 import { Titlebar } from '../../../components/TitleBar'
+import { StatusBar } from 'expo-status-bar'
+
+import Animated, { Keyframe, Easing, onChange } from 'react-native-reanimated';
+
+const enteringAnimation = new Keyframe({
+    0: {
+        transform: [{ scale: 0.5}]
+    },
+    45: {
+        transform: [{ scale: 0.7}],
+        easing: Easing.linear,
+    },
+    100: {
+        transform: [{ scale: 1}]
+    },
+  }).delay(300).duration(500)
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH*0.67
@@ -25,6 +37,8 @@ function NamePlant({navigation, route}){
     const selectedPlant = useMemo(() => {
         return databasePlants[currentModelIndex]
     }, [currentModelIndex, databasePlants])
+
+    
 
     function handleAddPlant(data){
         console.log(selectedPlant)
@@ -42,68 +56,96 @@ function NamePlant({navigation, route}){
         )
     }
 
+    const [showView, setShowView] = useState(false)
+    useFocusEffect(() => {
+        setShowView(true)
+        return () => {
+            setShowView(false)
+        }     
+    })
+
     return (<>
-    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent"}}/>
-        <Container>     
-            <LinearGradient 
-            colors={
-                ['rgba(163, 183, 195, 0.36)', 'rgba(69, 116, 122, 0.86)']
-            }
-            style={{alignItems:'center', borderRadius:10, flex:1}}
-            >
-                <DivImage>
-            <Title>{name}</Title>
-            
-            
+    <StatusBar animated={true} translucent={true} />
+    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent", zIndex: 999, marginTop: 30}}/>
+        <Container>
+            {showView && (
+                <Animated.View 
+                    entering={enteringAnimation}
+                    style={{
+                            width: '100%',
+                            height: '100%',
+                            position: 'absolute',
+                            borderRadius: 18,
+                            overflow: 'hidden',
+                            zIndex: 0,
+                        }}
+                >
+                    <LinearGradient 
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                        }}
+                        colors={
+                            ['rgba(163, 183, 195, 0.36)', 'rgba(69, 116, 122, 0.86)']
+                        }
+                    />
+                </Animated.View>
+            )}  
+
+            <DivImage>
+                <Title>{name}</Title>
                 
-            <Image 
-            source={img} 
-            style={{alignSelf: 'center', marginBottom: 10,}}
-            />
+                
+                    
+                <Image 
+                source={img} 
+                style={{alignSelf: 'center', marginBottom: 10,}}
+                />
 
             </DivImage>
             
             <InputsContainer>
-                <DetailSection>
-                    <DetailSectionTitle>Nome da sua planta</DetailSectionTitle>
-                    <NameInput placeholder="Nome/Apelido"/>
-                    <DetailRow 
-                        label="Tempo de colheita"
-                        value={selectedPlant.plantTimeHarvest}
-                    />
-                    <DetailRow 
-                        label="Quantidade de água"
-                        value={selectedPlant.plantWaterQuantity}
-                    />
-                    <DetailRow 
-                        label="Temperatura ideal"
-                        value={selectedPlant.plantTemperature}
-                    />
+                <Animated.View>
+                    <DetailSection>
+                        <DetailSectionTitle>Nome da sua planta</DetailSectionTitle>
+                        <NameInput placeholder="Nome/Apelido"/>
+                        <DetailRow 
+                            label="Tempo de colheita"
+                            value={selectedPlant.plantTimeHarvest}
+                        />
+                        <DetailRow 
+                            label="Quantidade de água"
+                            value={selectedPlant.plantWaterQuantity}
+                        />
+                        <DetailRow 
+                            label="Temperatura ideal"
+                            value={selectedPlant.plantTemperature}
+                        />
 
-                    <BottomButtonsContainer>
-                        <Button text="Adicionar planta" style={
-                            {
-                                flex:1, 
-                                margin:30, 
-                                backgroundColor: "#0DD977",
-                                shadowColor: "#06EA7C",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 12,
-                                },
-                                shadowOpacity: 1,
-                                shadowRadius: 16.00,
+                        <BottomButtonsContainer>
+                            <Button text="Adicionar planta" style={
+                                {
+                                    flex:1, 
+                                    margin:30, 
+                                    backgroundColor: "#0DD977",
+                                    shadowColor: "#06EA7C",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 12,
+                                    },
+                                    shadowOpacity: 1,
+                                    shadowRadius: 16.00,
 
-                                elevation: 20,
-                            }
-                        } 
-                            onPress={handleAddPlant} />
-                    </BottomButtonsContainer>
-                </DetailSection>
+                                    elevation: 20,
+                                }
+                            } 
+                                onPress={handleAddPlant} />
+                        </BottomButtonsContainer>
+                    </DetailSection>
+                </Animated.View>
             </InputsContainer>
-            </LinearGradient>
-        </Container>
-        </>
+    </Container>
+    </>
     )
 }
 

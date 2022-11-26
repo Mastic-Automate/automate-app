@@ -1,101 +1,127 @@
-import {Image} from 'react-native'
-
-import {Feather, FontAwesome5} from '@expo/vector-icons'
-
-import { useTheme } from '../../hooks/useTheme';
-import { useAuth } from '../../hooks/useAuth';
-import {appImages} from '../../global/images';
-
-import {Input} from '../../components/Input';
-
+import { Feather, Ionicons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { Image } from 'react-native';
+import { Input } from '../../components/Input';
+import { Titlebar } from '../../components/TitleBar';
+import { appImages } from '../../global/images';
+import { useUserInfo } from '../../hooks/useUserInfo';
 import {
-    Container, 
-    HeadingSection, 
-    MainSection, 
-    SectionTitle, 
-    MessageContainer, 
-    MessageContainerText,
-    MessageContainerCol1,
-    MessageContainerCol2,
     AccountImage,
     AccountSection,
     AccountSectionInfoCol1,
     AccountUserEmail,
-    AccountUserName,
-    InputsRow,
-    ThemeButton,
-    SectionOptions,
+    AccountUserName, Container,
+    HeadingSection, InputsRow, MainSection, MessageContainer, MessageContainerCol1,
+    MessageContainerCol2, MessageContainerText, SectionOptions, SectionTitle, ThemeButton
+} from './styles';
 
-} from './styles'
+import { useTheme as useThemeContext } from '../../hooks/useTheme'
+import { useTheme } from 'styled-components';
 
 export function Config({navigation}){
     const {toggleTheme, theme} = useTheme()
     const {user} = useAuth()
 
-    const isDarkTheme = !(theme==='light')
+    const isDarkTheme = !(isTheme === 'light')
+
+    const openDrawer = () => navigation.openDrawer();
+    const configIcon =
+        <Ionicons
+            name="settings-outline"
+            color={theme.text2}
+            size={35}
+            onPress={() => navigation.replace('authRoutes', { screen: 'config' })}
+            style={{ margin: 10, marginRight: 20 }}
+        />
 
     const themeButton = () => {
         return (
-            <ThemeButton 
+            <ThemeButton
                 onPress={() => {
                     toggleTheme()
                 }}
             >
-                <Feather 
+                <Feather
                     color="#ffffff"
                     size={30}
-                    name={theme === 'light' ? 'moon' : 'sun'}
+                    name={isTheme === 'light' ? 'moon' : 'sun'}
                 />
             </ThemeButton>
         )
     }
 
-    return(
-        <Container>
-            <HeadingSection>
-                <AccountSection
-                    onPress={() => {
-                        navigation.navigate('account')
+
+    return (
+        <>
+            <StatusBar
+                backgroundColor={theme.background}
+                animated={true}
+                hideTransitionAnimation={true}
+                translucent={true}
+            />
+
+            <Titlebar
+                    navigation={navigation}
+                    title="Automate"
+                    style={{
+                        position: 'absolute',
+                        marginTop: 20,
+                        zIndex: 999999999,
                     }}
-                >
-                    <AccountImage 
-                        source={appImages['profile_placeholder']}
-                    />
-                    <AccountSectionInfoCol1>
-                        {!!user && (
-                            <>
-                                <AccountUserName>{user.userName}</AccountUserName>
-                                <AccountUserEmail>{user.userEmail}</AccountUserEmail>
-                            </>
-                        )}
-                    </AccountSectionInfoCol1>
-                </AccountSection>
-                <MessageContainer>
-                    <MessageContainerCol1>
-                        <MessageContainerText>
-                            Lembre-se de encher seu recipiente de água.
-                        </MessageContainerText>
-                    </MessageContainerCol1>
-                    <MessageContainerCol2>
-                        <Image 
-                            source={require('../../assets/rose.png')}
-                            style={{width:100, height:100}}
+                />
+            
+            
+            <Container> 
+            <HeadingSection>
+                
+                
+                <View>
+                    <AccountSection
+                        onPress={() => {
+                            navigation.navigate('account')
+                        }}
+                    >
+                        <AccountImage
+                            source={appImages['profile_placeholder']}
                         />
-                    </MessageContainerCol2>
-                </MessageContainer>
+                        <AccountSectionInfoCol1>
+                            {!!user && (
+                                <>
+                                    <AccountUserName>{user.userName}</AccountUserName>
+                                    <AccountUserEmail>{user.userEmail}</AccountUserEmail>
+                                </>
+                            )}
+                        </AccountSectionInfoCol1>
+                    </AccountSection>
+                    <MessageContainer>
+                        <MessageContainerCol1>
+                            <MessageContainerText>
+                                Lembre-se de encher seu recipiente de água.
+                            </MessageContainerText>
+                        </MessageContainerCol1>
+                        <MessageContainerCol2>
+                            <Image
+                                source={require('../../assets/rose.png')}
+                                style={{ width: 100, height: 100 }}
+                            />
+                        </MessageContainerCol2>
+                    </MessageContainer>
+                </View>
+                
             </HeadingSection>
             <MainSection>
                 <InputsRow>
                     {themeButton()}
-                        <Input 
-                            iconType={Feather}
-                            iconName="search"
-                            style={{
-                                flex:1
-                            }}
-                            placeholder="Pesquisar"
-                        />
-                    </InputsRow>
+                    <Input
+                        iconType={Feather}
+                        iconName="search"
+                        style={{
+                            flex: 1
+                        }}
+                        placeholder="Pesquisar"
+                    />
+                </InputsRow>
                 <SectionTitle>
                     Geral
                 </SectionTitle>
@@ -112,5 +138,10 @@ export function Config({navigation}){
             </MainSection>
 
         </Container>
-    ) 
+
+        </>
+        
+    
+
+    )
 }
