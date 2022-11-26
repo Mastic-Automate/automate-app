@@ -19,25 +19,24 @@ const TitlebarText = styled.Text`
 
 
 
+const TitlebarIcon = ({ navigation, opacity, screen, name = "chevron-back", exe = defBack, colors }) => (
+    <Ionicons
+        name={name}
+        color={colors}
+        size={27}
+        onPress={exe}
+        style={{ margin: 10, marginLeft: 25, opacity: opacity}}
+    />
+)
 export const Titlebar = ({ navigation, title = "", style, iconName = "chevron-back", exe, rightIcon = null }) => {
 
     const defBack = () => { navigation.goBack() };
 
     const { colors } = useTheme();
 
-    const TitlebarIcon = ({ navigation, opacity, screen, name = "chevron-back", exe = defBack }) => (
-        <Ionicons
-            name={name}
-            color={colors}
-            size={27}
-            onPress={exe}
-            style={{ margin: 10, marginLeft: 25, opacity: opacity}}
-        />)
-
-
     return (
-        <TitlebarContainer style={style}>
-            <TitlebarIcon navigation={navigation} name={iconName} exe={exe} opacity={1}/>
+        <TitlebarContainer style={style} >
+            <TitlebarIcon navigation={navigation} name={iconName} exe={exe} opacity={1} colors={colors} />
             <TitlebarText>{title}</TitlebarText>
             {rightIcon ? rightIcon : <TitlebarIcon opacity={0} />}
         </TitlebarContainer>

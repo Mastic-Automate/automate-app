@@ -12,6 +12,7 @@ import { Plants } from '../screens/Plants'
 import { ConfigScreensRoutes } from './ConfigScreensRoutes'
 import { PlantsManagementRoutes } from './PlantsManagementRoutes'
 
+import { Text, View } from 'react-native'
 
 const Nav = createDrawerNavigator()
 
@@ -36,10 +37,11 @@ export function AuthRoutes({ navigation }) {
     }
 
     useEffect(() => {
-        if (!user) {
+        if (user === null) {
             navigation.replace('InitialRoutes')
         }
     }, [user])
+    
     return (
         <Nav.Navigator
             drawerContent={SideBar}

@@ -17,6 +17,7 @@ import { getPlantImage } from '../../global/plants'
 import { useMicrocontrollers } from '../../hooks/useMicrocontrollers'
 
 import { InfoPlantCard } from './../../components/InfoPlantCard'
+import { useEffect } from 'react'
 
 const sol = require("../../assets/temperature.png");
 
@@ -37,7 +38,6 @@ export function Home({ navigation }) {
     const openDrawer = () => navigation.openDrawer();
 
     const { storedDevices } = useMicrocontrollers()
-
 
     return (
         <>

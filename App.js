@@ -7,7 +7,6 @@ import {StatusBar} from './src/components/StatusBar'
 import { ThemeContextProvider } from './src/contexts/ThemeContext';
 import { AuthContextProvider } from './src/contexts/AuthContext'
 import {MicrocontrollersContextProvider} from './src/contexts/MicrocontrollersContext'
-import {BluetoothConnectionContextProvider} from './src/contexts/BLuetoothConnectionContext'
 import {DatabasePlantsContextProvider} from './src/contexts/DatabasePlantsContext'
 
 import { 
