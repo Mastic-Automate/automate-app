@@ -5,7 +5,15 @@ import { View } from 'react-native';
 const Container = styled.View`
     flex: 1;
     background-color: #5EDAF5;
-    flex-direction: column-reverse;
+
+`
+
+const BackgroundImageContainer = styled.View`
+    z-index: 3;
+    height: 37%;
+`
+const BackgroundImage = styled.View`
+
 `
 
 const ContentContainer = styled.View`
@@ -14,6 +22,7 @@ const ContentContainer = styled.View`
     height: 63%;
     border-top-right-radius: 40px;
     border-top-left-radius: 40px;
+    z-index: 100;
     `
 
 const Title = styled.Text`
@@ -35,12 +44,15 @@ font-weight: 400;
 font-size: 16px;
 line-height: 25px;
 font-family: 'Poppins';
-/* CardColor/[night] */
-
 color: #343434;
 width:300px;
-
     `
+
+
+
+
+
+
 
 const PropsTitle = styled.Text`
     width: 329px;
@@ -55,9 +67,10 @@ const PropsTitle = styled.Text`
     color: #292929;
     `
 
+
 const PropsCardContainer = styled.View`
     height: 211px;
-    margin-left: 19px;
+    margin-left: 10px;
     margin-top: 5%;
     background: ${props => props.color};
     border-radius: 18px;
@@ -85,7 +98,7 @@ const PropsLabel = styled.Text`
 `
 const PropsValue = styled.Text`
     margin-left: 16px;
-font-family: 'MusticaPro';
+font-family: 'SuperaGothicBold';
 font-style: normal;
 font-weight: 600;
 font-size: 34px;
@@ -108,4 +121,4 @@ const PropsCard = ({ style, color, icon, label, value }) => {
         </PropsCardContainer>
     )
 }
-export { Container, ContentContainer, Title, Description, PropsTitle, PropsCard }
+export { Container, ContentContainer, Title, Description, PropsTitle, PropsCard, BackgroundImageContainer, BackgroundImage }

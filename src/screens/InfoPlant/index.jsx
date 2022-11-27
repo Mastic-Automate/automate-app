@@ -1,40 +1,61 @@
-import { FlatList } from 'react-native';
+import { FlatList, Image, Text } from 'react-native';
 import { useTheme } from 'styled-components';
-import { Container, ContentContainer, Description, PropsCard, PropsTitle, Title } from './styles';
+import { BackgroundImage, BackgroundImageContainer, Container, ContentContainer, Description, PropsCard, PropsTitle, Title } from './styles';
 import { Feather } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { useDatabasePlants } from '../../hooks/useDatabasePlants';
+import { getPlantImage } from './../../global/plants';
 
 function InfoPlant({ route }) {
     const themeColors = useTheme()
-    //const {data, isLoading} = useDatabasePlant(route.params.id)
-    // const plantInfo = data
+    const { data, isLoading } = useDatabasePlants(route.params.id)
+    const plantInfo = data
     const TempIcon = <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
+    const HomeIcon = <Ionicons name="home-outline" size={30} style={{ alignSelf: "center", }} color="#FCFCFC" />
+    const UmidityIcon = <MaterialCommunityIcons name="water-outline" size={40} style={{ alignSelf: "center", }} color="#FCFCFC" />
 
     const cardData = [{
+        key: 0,
         color: "#55C1AE",
         icon: TempIcon,
-        label: "",
-        value: "",
+        label: "Temperatura",
+        value: "18-25 cº",
     }, {
-        color: "#55C1AE",
-        icon: TempIcon,
-        label: "",
-        value: "",
+        key: 1,
+        color: "#C15555",
+        icon: HomeIcon,
+        label: "Local",
+        value: "Jardim",
     },
     {
-        color: "#55C1AE",
-        icon: TempIcon,
-        label: "",
-        value: "",
+        key: 2,
+        color: "#5581C1",
+        icon: UmidityIcon,
+        label: "Umidade",
+        value: plantInfo.plantSoilHumidity,
     }]
 
+    if (!!isLoading) {
+        return <Text>Carregando</Text>
+    }
 
-    return (
+    return (<>
 
         <Container>
+            <BackgroundImageContainer>
+                <BackgroundImage>
+                    <Image
+                        source={getPlantImage(plantInfo.idPlant)}
+                        style={{ width: 350, height: 350 }}
+                    />
+                </BackgroundImage>
+            </BackgroundImageContainer>
             <ContentContainer>
-                <Title>Blueberry</Title>
+                <Title>{plantInfo.plantName}</Title>
                 <Description>
-                    is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                    {plantInfo.plantAbout}
                 </Description>
 
                 <PropsTitle>
@@ -52,13 +73,13 @@ function InfoPlant({ route }) {
                         />
                     )}
                     horizontal={true}
+                    style={{ marginLeft: 10 }}
                 />
 
-                {/* <PropsCard /> */}
             </ContentContainer>
         </Container>
 
-    )
+    </>)
 }
 
 export { InfoPlant };

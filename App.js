@@ -46,6 +46,7 @@ export default function App() {
     'ProximaNovaSemiBold': require('./assets/fonts/proximaNova/ProximaNovaSemibold.otf'),
     'SuperaGothic': require('./assets/fonts/SuperaGothic/SuperaGothic-ExtraBold.otf'),
     'SuperaGothic400': require('./assets/fonts/SuperaGothic/SuperaGothic-Regular.otf'),
+    'SuperaGothicBold': require('./assets/fonts/SuperaGothic/SuperaGothic-Bold.otf'),
     'MusticaPro': require('./assets/fonts/Mustica/MusticaPro-SemiBold.otf'),
     Montserrat_500Medium,
     Montserrat_700Bold,
