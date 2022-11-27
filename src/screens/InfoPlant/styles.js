@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { Feather } from '@expo/vector-icons';
+import { View } from 'react-native';
 
 const Container = styled.View`
     flex: 1;
@@ -57,27 +58,53 @@ const PropsTitle = styled.Text`
 const PropsCardContainer = styled.View`
     height: 211px;
     margin-left: 19px;
-    background: #55C1AE;
+    margin-top: 5%;
+    background: ${props => props.color};
     border-radius: 18px;
     width: 168px;
 `
 const CardIconContainer = styled.View`
 height: 45px;
-left: 16px;
-top: 16px;
+margin-left: 16px;
+margin-top: 16px;
 width: 45px;
 background: rgba(252, 252, 252, 0.59);
 border-radius: 10px;
 justify-content: center;
 `
+const PropsLabel = styled.Text`
+    height: 24px;
+    width: 129px;
+    margin-left: 16px;
+    font-family: 'ProximaNovaSemiBold';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #F5F5F5;
+`
+const PropsValue = styled.Text`
+    margin-left: 16px;
+font-family: 'MusticaPro';
+font-style: normal;
+font-weight: 600;
+font-size: 34px;
+line-height: 44px;
+color: #FFFFFF;
 
-const PropsCard = ({ style }) => {
+`
+
+const PropsCard = ({ style, color, icon, label, value }) => {
 
     return (
-        <PropsCardContainer>
+        <PropsCardContainer color={color}>
             <CardIconContainer>
-                <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
+                {icon}
             </CardIconContainer>
+            <View style={{ flexDirection: 'column-reverse', flex: 1, marginBottom: 28, }}>
+                <PropsValue>{value}</PropsValue>
+                <PropsLabel>{label}</PropsLabel>
+            </View>
         </PropsCardContainer>
     )
 }
