@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { Feather } from '@expo/vector-icons';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 const Container = styled.View`
     flex: 1;
@@ -36,10 +36,15 @@ const Title = styled.Text`
     color: #292929;
     `
 
+const DescriptionContainer = styled.ScrollView`
+margin-left: 10%;
+margin-right: 10%;
+margin-top: 5%;
+max-height: 21%;
+`
+
 const Description = styled.Text`
 font-style: normal;
-margin-left: 10%;
-margin-top:25px;
 font-weight: 400;
 font-size: 16px;
 line-height: 25px;
@@ -121,4 +126,4 @@ const PropsCard = ({ style, color, icon, label, value }) => {
         </PropsCardContainer>
     )
 }
-export { Container, ContentContainer, Title, Description, PropsTitle, PropsCard, BackgroundImageContainer, BackgroundImage }
+export { Container, ContentContainer, Title, DescriptionContainer, Description, PropsTitle, PropsCard, BackgroundImageContainer, BackgroundImage }
