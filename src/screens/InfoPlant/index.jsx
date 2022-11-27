@@ -1,81 +1,38 @@
-import { Text } from 'react-native'
-import styled from 'styled-components/native'
-
-import { Feather, Ionicons, FontAwesome5 } from '@expo/vector-icons';
-
+import { FlatList } from 'react-native';
 import { useTheme } from 'styled-components';
+import { Container, ContentContainer, Description, PropsCard, PropsTitle, Title } from './styles';
 
-import {
-    BottomSection,
-    BottomText,
-    Container,
-    HeaderSection,
-    InfoSquare,
-    InfoSquareText,
-    MidSection,
-    MidSectionCol1,
-    MidSectionCol2,
-    PlantImage,
-    Title,
-    BottomSectionTitle,
-    RightSection,
-} from './styles'
-import { getPlantImage, getPlantInfo } from '../../global/plants';
-import { useEffect, useMemo } from 'react';
-import { useState } from 'react';
-import { api } from '../../services/api';
-import { useDatabasePlant } from '../../hooks/useDatabasePlant';
-import AppLoading from 'expo-app-loading';
 
-function InfoPlant({route}){
+function InfoPlant({ route }) {
     const themeColors = useTheme()
-    const {data, isLoading} = useDatabasePlant(route.params.id)
-    const plantInfo = data
+    //const {data, isLoading} = useDatabasePlant(route.params.id)
+    // const plantInfo = data
 
-    if(isLoading){
-        return <AppLoading />
-    }
 
     return (
 
         <Container>
-            <HeaderSection>
-                <Title style={{marginTop: 12}}>{plantInfo.plantName}</Title>
-            </HeaderSection>
-            <MidSection>
-                <MidSectionCol1>
-                    <InfoSquare>
-                        <Feather name="sun" color={themeColors.background2} size={52} />
-                        <InfoSquareText>100%</InfoSquareText>
-                    </InfoSquare>
-                    <InfoSquare>
-                        <Ionicons name="water-outline" color={themeColors.background2} size={52} />
-                        <InfoSquareText>{plantInfo.plantSoilHumidity}</InfoSquareText>
-                    </InfoSquare>
-                    <InfoSquare>
-                        <FontAwesome5 name="temperature-high" color={themeColors.background2} size={52} />
-                        <InfoSquareText>100%</InfoSquareText>
-                    </InfoSquare>
-                </MidSectionCol1>
-                <MidSectionCol2>
-                    <PlantImage 
-                        source={getPlantImage(plantInfo.idPlant)}
-                    />
-                </MidSectionCol2>
-            </MidSection>
-            <BottomSection>
-                <BottomSectionTitle>
-                    Sobre
-                </BottomSectionTitle>
-                <BottomText>
-                    {plantInfo.plantAbout}
-                </BottomText>
-            </BottomSection>
-            <RightSection></RightSection>
+            <ContentContainer>
+                <Title>Blueberry</Title>
+                <Description>
+                    is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                </Description>
+
+                <PropsTitle>
+                    Propriedades
+                </PropsTitle>
+
+                {/* <FlatList 
+                data={}
+                renderItem
+                /> */}
+
+                <PropsCard />
+            </ContentContainer>
         </Container>
-        
-        
+
     )
 }
 
-export {InfoPlant}
+export { InfoPlant };
+

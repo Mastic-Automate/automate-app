@@ -1,100 +1,84 @@
 import styled from 'styled-components/native'
+import { Feather } from '@expo/vector-icons';
 
-const Container = styled.ScrollView`
+const Container = styled.View`
     flex: 1;
-    /* background-color:${props => props.theme.background1}; */
+    background-color: #5EDAF5;
+    flex-direction: column-reverse;
 `
+
+const ContentContainer = styled.View`
+    background-color: white;
+    width: 100%;
+    height: 63%;
+    border-top-right-radius: 40px;
+    border-top-left-radius: 40px;
+    `
 
 const Title = styled.Text`
-    font-size: 48px;
-    color: ${props => props.theme.title};
-    font-family: SuperaGothic;
-    z-index: 2;
+    font-family: 'Supera Gothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 55px;
+    margin-left: 10%;
+    margin-top: 25px;
+    color: #292929;
+    `
+
+const Description = styled.Text`
+font-style: normal;
+margin-left: 10%;
+margin-top:25px;
+font-weight: 400;
+font-size: 16px;
+line-height: 25px;
+font-family: 'Poppins';
+/* CardColor/[night] */
+
+color: #343434;
+width:300px;
+
+    `
+
+const PropsTitle = styled.Text`
+    width: 329px;
+    height: 41px;
+    margin-left: 10%;
+    margin-top: 25px;
+    font-family: 'Poppins500';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 48px;
+    color: #292929;
+    `
+
+const PropsCardContainer = styled.View`
+    height: 211px;
+    margin-left: 19px;
+    background: #55C1AE;
+    border-radius: 18px;
+    width: 168px;
+`
+const CardIconContainer = styled.View`
+height: 45px;
+left: 16px;
+top: 16px;
+width: 45px;
+background: rgba(252, 252, 252, 0.59);
+border-radius: 10px;
+justify-content: center;
 `
 
-const HeaderSection = styled.View`
-    width: 100%;
-    padding-left: 20px;
-    flex-direction: row;
-    align-items:center;
-`
-const MidSection = styled.View`
-    flex:1;
-    flex-direction:row;
-    margin-top: 5px;
-`
-const MidSectionCol1 = styled.View`
-    padding-left: 25px;
-    justify-content: center;
-`
-const InfoSquare = styled.View`
-    border: 4px solid ${props => props.theme.background2};
-    background: ${props => props.theme.cardColor};
-    width: 125px;
-    height: 125px;
-    border-radius: 20px;
-    align-items:center;
-    justify-content: space-around;
-    margin-bottom: 10px;
-`
-const InfoSquareText = styled.Text`
-    color: ${props => props.theme.text1};
-`
+const PropsCard = ({ style }) => {
 
-const MidSectionCol2 = styled.View`
-    flex:1;
-    height: 100%;
-    align-items:flex-end;
-    z-index: 2;
-`
-const PlantImage = styled.Image`
-    width: 300px;
-    height: 300px;
-    right: -100px;
-`
-
-const BottomSection = styled.View`
-    width: 100%;
-    min-height: 200px;
-    padding: 30px 0;
-`
-const BottomSectionTitle = styled.Text`
-    font-size: 24px;
-    font-family: Montserrat_800ExtraBold;
-    color: ${props => props.theme.title};
-    padding-left: 20px;
-    margin-top: 20px
-`
-const BottomText = styled.Text`
-    color: ${props => props.theme.text2};
-    font-size: 20px;
-    font-family: Montserrat_400Regular;
-    margin-top: 10px;
-    padding: 0 20px;
-    z-index: 2;
-`
-
-const RightSection = styled.View`
-    position: absolute;
-    right: 0;
-    flex: 1;
-    height: 100%;
-    background: ${props => props.theme.background2};
-    width: 30%;
-`;
-
-export {
-    BottomSection,
-    BottomText,
-    Container,
-    HeaderSection,
-    InfoSquare,
-    InfoSquareText,
-    MidSection,
-    MidSectionCol1,
-    Title,
-    MidSectionCol2,
-    PlantImage,
-    BottomSectionTitle,
-    RightSection
+    return (
+        <PropsCardContainer>
+            <CardIconContainer>
+                <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
+            </CardIconContainer>
+        </PropsCardContainer>
+    )
 }
+export { Container, ContentContainer, Title, Description, PropsTitle, PropsCard }

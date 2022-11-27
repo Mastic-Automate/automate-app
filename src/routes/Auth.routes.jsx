@@ -12,7 +12,6 @@ import { Plants } from '../screens/Plants'
 import { ConfigScreensRoutes } from './ConfigScreensRoutes'
 import { PlantsManagementRoutes } from './PlantsManagementRoutes'
 
-import { Text, View } from 'react-native'
 
 const Nav = createDrawerNavigator()
 
@@ -22,8 +21,6 @@ export function AuthRoutes({ navigation }) {
 
     const defaultScreenOptions = {
         headerTitle: 'Automate',
-        headerTitleAlign: 'center',
-        headerStyle: { backgroundColor: theme.background1 },
         headerTintColor: theme.text2,
         headerRight: () => (
             <Ionicons
@@ -41,18 +38,17 @@ export function AuthRoutes({ navigation }) {
             navigation.replace('InitialRoutes')
         }
     }, [user])
-    
+
     return (
         <Nav.Navigator
             drawerContent={SideBar}
         >
+            <Nav.Screen name="plantInfo" component={InfoPlant} options={{ headerShown: false }} />
             <Nav.Screen name="home" component={Home} options={{
                 headerTitle: 'Automate',
                 headerTitleStyle: {
                     fontFamily: "ProximaNovaSemiBold",
                     fontSize: 24,
-                    headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: theme.background1 },
                     headerTintColor: theme.text2,
                     headerRight: () => (
                         <Ionicons
@@ -69,7 +65,7 @@ export function AuthRoutes({ navigation }) {
 
             <Nav.Screen name="plants" component={Plants} options={{ ...defaultScreenOptions, headerShown: false }} />
             <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{ ...defaultScreenOptions, headerTitle: 'Plantas' }} />
-            <Nav.Screen name="plantInfo" component={InfoPlant} options={{ headerShown: false }} />
+
             <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{ ...defaultScreenOptions, headerTitle: 'Configurações' }} />
         </Nav.Navigator>
     )
