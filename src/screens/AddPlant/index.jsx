@@ -44,7 +44,7 @@ function AddPlant({ navigation }) {
         navigation.navigate('save-plant')
     }
 
-    const { background1 } = useTheme();
+    const theme = useTheme();
 
 
     if (!selectedPlant) {
@@ -57,12 +57,10 @@ function AddPlant({ navigation }) {
 
     return (
         <>
-            <StatusBar animated={true} translucent={false} style={{ backgroundColor: background1 }} />
+            <StatusBar animated={true} translucent={false} style={{ backgroundColor: background2 }} />
             <Titlebar navigation={navigation}
                 style={{
-                    position: "absolute",
-                    backgroundColor: "transparent",
-                    zIndex: 999, marginTop: 20
+                    backgroundColor: theme.background2,
                 }}
 
                 title="Adicionar Planta"

@@ -4,10 +4,10 @@ import styled, { useTheme } from "styled-components/native"
 const TitlebarContainer = styled.View`
     width: 100%;
     height: 60px;
+    margin-top: 20px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
 `
 const TitlebarText = styled.Text`
     font-size: 24px;
@@ -17,9 +17,7 @@ const TitlebarText = styled.Text`
     color: ${props => props.theme.title};
 `
 
-
-
-const TitlebarIcon = ({ navigation, opacity, screen, name = "chevron-back", exe = defBack, colors }) => (
+const TitlebarIcon = ({ navigation, opacity, screen, name = "chevron-back", exe, colors }) => (
     <Ionicons
         name={name}
         color={colors}
@@ -30,15 +28,13 @@ const TitlebarIcon = ({ navigation, opacity, screen, name = "chevron-back", exe 
 )
 export const Titlebar = ({ navigation, title = "", style, iconName = "chevron-back", exe, rightIcon = null }) => {
 
-    const defBack = () => { navigation.goBack() };
-
-    const { colors } = useTheme();
+    const theme = useTheme();
 
     return (
         <TitlebarContainer style={style} >
-            <TitlebarIcon navigation={navigation} name={iconName} exe={exe} opacity={1} colors={colors} />
+            <TitlebarIcon navigation={navigation} name={iconName} exe={exe} opacity={1} colors={theme.text2} />
             <TitlebarText>{title}</TitlebarText>
-            {rightIcon ? rightIcon : <TitlebarIcon opacity={0} />}
+            {rightIcon ? rightIcon : <TitlebarIcon opacity={0} colors={theme.text2}/>}
         </TitlebarContainer>
     )
 }

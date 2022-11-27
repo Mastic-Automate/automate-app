@@ -65,8 +65,18 @@ function NamePlant({navigation, route}){
     })
 
     return (<>
-    <StatusBar animated={true} translucent={true} />
-    <Titlebar title="" navigation={navigation} style={{position:"absolute", backgroundColor: "transparent", zIndex: 999, marginTop: 30}}/>
+        <StatusBar 
+            animated={true} 
+            translucent={true} 
+            backgroundColor={theme.background}
+        />
+        <Titlebar 
+            title="" 
+            navigation={navigation} 
+            style={{
+                backgroundColor: theme.background, 
+            }}
+        />
         <Container>
             {showView && (
                 <Animated.View 
