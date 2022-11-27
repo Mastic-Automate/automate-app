@@ -54,7 +54,20 @@ width:300px;
     `
 
 
+const FavIconContainer = styled.View`
+position: absolute;
+width: 60px;
+height: 60px;
+align-self: flex-end;
 
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    z-index: 100;
+    right: 50px;
+    top: -30px;
+    background-color: #009D81;
+`
 
 
 
@@ -126,4 +139,4 @@ const PropsCard = ({ style, color, icon, label, value }) => {
         </PropsCardContainer>
     )
 }
-export { Container, ContentContainer, Title, DescriptionContainer, Description, PropsTitle, PropsCard, BackgroundImageContainer, BackgroundImage }
+export { Container, ContentContainer, FavIconContainer, Title, DescriptionContainer, Description, PropsTitle, PropsCard, BackgroundImageContainer, BackgroundImage }

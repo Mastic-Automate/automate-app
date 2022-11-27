@@ -1,16 +1,18 @@
 import { FlatList, Image, Text } from 'react-native';
 import { useTheme } from 'styled-components';
-import { BackgroundImage, BackgroundImageContainer, Container, ContentContainer, Description, DescriptionContainer, PropsCard, PropsTitle, Title } from './styles';
+import { BackgroundImage, BackgroundImageContainer, Container, ContentContainer, Description, DescriptionContainer, FavIconContainer, PropsCard, PropsTitle, Title } from './styles';
 import { Feather } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useDatabasePlants } from '../../hooks/useDatabasePlants';
 import { getPlantImage } from './../../global/plants';
+import { useState } from 'react';
 
 function InfoPlant({ route }) {
     const themeColors = useTheme()
     const { data, isLoading } = useDatabasePlants(route.params.id)
+    const [heart, setHeart] = useState("heart-outline");
     const plantInfo = data[route.params.id]
     const TempIcon = <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
     const HomeIcon = <Ionicons name="home-outline" size={30} style={{ alignSelf: "center", }} color="#FCFCFC" />
@@ -40,6 +42,8 @@ function InfoPlant({ route }) {
         return <Text>Carregando</Text>
     }
 
+
+
     return (<>
 
         <Container>
@@ -52,6 +56,9 @@ function InfoPlant({ route }) {
                 </BackgroundImage>
             </BackgroundImageContainer>
             <ContentContainer>
+                <FavIconContainer onPress={() => { heart == "heart-outline" ? setHeart("heart-sharp") : setHeart("heart-outline") }} >
+                    <Ionicons name={heart} size={40} style={{ zIndex: 100 }} onPress={() => { heart == "heart-outline" ? setHeart("heart-sharp") : setHeart("heart-outline") }} color="white" />
+                </FavIconContainer>
                 <Title>{plantInfo.plantName}</Title>
                 <DescriptionContainer>
                     <Description>
