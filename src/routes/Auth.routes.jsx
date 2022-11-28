@@ -63,7 +63,7 @@ export function AuthRoutes({ navigation }) {
             />
 
             <Nav.Screen name="plants" component={Plants} options={{ ...defaultScreenOptions, headerShown: false }} />
-            <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{ ...defaultScreenOptions, headerTitle: 'Plantas' }} />
+            <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{ ...defaultScreenOptions, headerShown: false }} />
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{ headerShown: false }} />
             <Nav.Screen name="config" component={ConfigScreensRoutes} options={{ ...defaultScreenOptions, headerShown: false }} />
         </Nav.Navigator>

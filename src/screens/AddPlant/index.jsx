@@ -6,7 +6,7 @@ import { Button } from '../../components/Button'
 import Carousel from 'react-native-snap-carousel'
 
 import { useEffect, useMemo, useState } from 'react'
-import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { useDatabasePlantsContext } from '../../contexts/DatabasePlantsContext'
 import { CarouselCard } from './CarouselCard'
 import {
     BottomButtonsContainer, CarouselWrapper, Container, DetailRow,
@@ -17,6 +17,7 @@ import {
 
 import { useTheme } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
+import { Titlebar } from '../../components/TitleBar'
 
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
@@ -25,7 +26,7 @@ const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH * 0.63
 
 function AddPlant({ navigation }) {
-    const { databasePlants } = useDatabasePlants()
+    const { databasePlants } = useDatabasePlantsContext()
     const { addingPlant, setAddingPlant } = usePlantsManagement()
 
     const [currentModelIndex, setCurrentModelIndex] = useState(0)
@@ -57,10 +58,10 @@ function AddPlant({ navigation }) {
 
     return (
         <>
-            <StatusBar animated={true} translucent={false} style={{ backgroundColor: background2 }} />
+            <StatusBar animated={true} translucent={false} style={{ backgroundColor: theme.background }} />
             <Titlebar navigation={navigation}
                 style={{
-                    backgroundColor: theme.background2,
+                    backgroundColor: theme.background,
                 }}
 
                 title="Adicionar Planta"

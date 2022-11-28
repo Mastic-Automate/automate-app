@@ -1,9 +1,11 @@
+import { StatusBar } from 'expo-status-bar';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import { Text } from 'moti';
 import { Dimensions, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components/native';
+import { useTheme } from 'styled-components/native';
 import { CarouselCard } from './CarouselCard';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -11,6 +13,8 @@ import { Button } from '../../components/Button';
 import { useBluetoothConnection } from '../../contexts/BLuetoothConnectionContext';
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext';
 import { useMicrocontrollers } from '../../hooks/useMicrocontrollers';
+
+import { Titlebar } from '../../components/TitleBar';
 
 
 const SLIDER_WIDTH = (Dimensions.get('window').width)
@@ -98,7 +102,7 @@ const LineDiv = styled.View`
 const Barrinha = styled.View`
 
     width: 25%;
-    height: 10px;
+    height: 5px;
     background-color: #8FA9BB;
     align-self: center;
     border-radius: 16px;
@@ -108,7 +112,7 @@ const Barrinha = styled.View`
 
 const ContainerMenuFooter = styled.View`
     width: 100%;
-    height: 136px;
+    height: 80px;
     background-color: #D7E1E8;
 
     border-top-left-radius: 54px;
@@ -118,9 +122,8 @@ const ContainerMenuFooter = styled.View`
 `
 
 const ContentMenuFooter = styled.View`
-    width: 90%;
-    height: 25%;
-
+    width: 100%;
+    height: 100%;
 
     align-content: center;
     align-items: center;
@@ -132,18 +135,18 @@ const ContentMenuFooter = styled.View`
 `
 
 const BatteryIcon = styled(MaterialIcons)`
-    font-size: 75px;
+    font-size: 42px;
     transform: rotate(90deg);
    
 `
 
 const DropIcon = styled(MaterialIcons)`
-    font-size: 75px;
+    font-size: 42px;
 
 `
 
 const SunIcon = styled(MaterialIcons)`
-    font-size: 75px;
+    font-size: 42px;
 
 `
 
@@ -156,7 +159,10 @@ const DescText = styled(Text)`
 `
 
 const StatusGif = styled.Image`
-    border-radius:40px;
+    width: 428px;
+    height: 330px;
+    marginTop: 15px; 
+    align-self: center;
 `
 
 const ScanAutomate = ({ automateFound }) => {
@@ -167,7 +173,6 @@ const ScanAutomate = ({ automateFound }) => {
             <LineDiv />
 
             <StatusGif
-                style={{ width: 428, height: 330, marginTop: 36, borderRadius: 40, alignSelf: 'center' }}
                 source={require('../../../assets/conexão.gif')}
             />
 
@@ -238,19 +243,6 @@ const FoundAutomate = ({ automate, deviceInfo, navigation }) => {
 
     return (
         <>
-
-            {/* <NewTitle >Selecione seu dispositivo</NewTitle>
-            <NewSubtitle>Aí está ele! Veja estatísticas como bateria e nível de sol.</NewSubtitle>
-            <LineDiv />
-            <StatusGif
-                style={{width: 342, height: 256, borderRadius: 40, marginTop: '7%', alignSelf:'center'}}
-                source={require('../../../assets/arduino.gif')} 
-            />
-            <Button 
-                text="Adicionar"
-                onPress={handleAddPlant}
-            />
-            <AutomateName>{JSON.stringify(deviceInfo)}</AutomateName> */}
             <ScrollView style={{ height: '100%', flex: 1, marginTop: '5%', width: '100%', }}>
                 <Carousel
                     data={filteredDevices}
@@ -287,6 +279,8 @@ function BluetoothConnection({ navigation }) {
     const { setAddingPlant } = usePlantsManagement()
     const automateFound = !!automateDevice
 
+    const theme = useTheme();
+
     let [fontsLoaded] = useFonts({
         'ProximaNovaBold': require('../../../assets/fonts/proximaNova/ProximaNovaBold.otf'),
         'ProximaNovaExtraBold': require('../../../assets/fonts/proximaNova/ProximaNovaExtraBold.otf'),
@@ -299,9 +293,19 @@ function BluetoothConnection({ navigation }) {
 
     return (
         <Container>
-            <NavDiv>
-                <MaterialIcons style={{ fontSize: 24, fontWeight: '900', marginLeft: 32 }} name='arrow-back-ios' />
-            </NavDiv>
+            <StatusBar
+                backgroundColor={theme.background}
+                animated={true}
+                hideTransitionAnimation={true}
+                translucent={true}
+            />
+            <Titlebar
+                navigation={navigation}
+                exe={() => navigation.goBack()}
+                style={{
+                    backgroundColor: theme.background
+                }}
+            />
             {devicesFound.length === 0 ? (
                 <ScanAutomate />
             ) : (

@@ -13,7 +13,7 @@ const MainContent = styled.ScrollView`
 const TopSection = styled.View`
     background: ${props => props.theme.background1};
     justify-content: flex-end;
-    height: 200px;
+    height: 180px;
     padding: 50px 0;
 `;
 
