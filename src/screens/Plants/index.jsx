@@ -13,11 +13,11 @@ import { UserPlantCard } from './UserPlantCard';
 
 import { appImages } from '../../global/images';
 
-import { useDatabasePlants } from '../../contexts/DatabasePlantsContext';
+import { useDatabasePlantsContext } from '../../contexts/DatabasePlantsContext';
 
 export function Plants({ navigation }) {
     const { primary } = useTheme();
-    const { databasePlants } = useDatabasePlants()
+    const { databasePlants } = useDatabasePlantsContext()
 
     return (
         <Container>
@@ -93,7 +93,7 @@ export function Plants({ navigation }) {
             </MainContent>
 
             <AddButton
-                onPress={() => navigation.navigate('plantsManagement', {screen:'bluetooth-connection'})}
+                onPress={() => navigation.navigate('plantsManagement', { screen: 'bluetooth-connection' })}
             >
                 <MaterialIcons
                     name='add-circle'
