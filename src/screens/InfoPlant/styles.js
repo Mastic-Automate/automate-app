@@ -31,14 +31,14 @@ const Title = styled.Text`
     font-weight: 700;
     font-size: 34px;
     line-height: 55px;
-    margin-left: 10%;
-    margin-top: 25px;
+    margin-left: 8%;
+    margin-top: 5%;
     color: #292929;
     `
 
 const DescriptionContainer = styled.ScrollView`
-margin-left: 10%;
-margin-right: 10%;
+margin-left: 8%;
+margin-right: 7%;
 margin-top: 5%;
 max-height: 21%;
 `
@@ -50,22 +50,22 @@ font-size: 16px;
 line-height: 25px;
 font-family: 'Poppins';
 color: #343434;
-width:300px;
+
     `
 
 
-const FavIconContainer = styled.View`
+const FavIconContainer = styled.TouchableOpacity`
 position: absolute;
-width: 60px;
-height: 60px;
+width: 15%;
+height: 11%;
 align-self: flex-end;
 
     align-items: center;
     justify-content: center;
     border-radius: 14px;
     z-index: 100;
-    right: 50px;
-    top: -30px;
+    right: 13%;
+    top: -5%;
     background-color: #009D81;
 `
 
@@ -73,10 +73,9 @@ align-self: flex-end;
 
 
 const PropsTitle = styled.Text`
-    width: 329px;
-    height: 41px;
+    height: 7%;
     margin-left: 10%;
-    margin-top: 25px;
+    margin-top: 5%;
     font-family: 'Poppins500';
     font-style: normal;
     font-weight: 500;
@@ -88,8 +87,9 @@ const PropsTitle = styled.Text`
 
 const PropsCardContainer = styled.View`
     height: 211px;
+    margin-right: 10px;
     margin-left: 10px;
-    margin-top: 5%;
+    margin-top: 7%;
     background: ${props => props.color};
     border-radius: 18px;
     width: 168px;
