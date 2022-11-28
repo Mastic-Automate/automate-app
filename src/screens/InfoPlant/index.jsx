@@ -6,17 +6,20 @@ import { Octicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useDatabasePlants } from '../../hooks/useDatabasePlants';
+import {useDatabasePlant} from '../../hooks/useDatabasePlant'
 import { getPlantImage } from './../../global/plants';
 import { useState } from 'react';
 
+const TempIcon = <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
+const HomeIcon = <Ionicons name="home-outline" size={30} style={{ alignSelf: "center", }} color="#FCFCFC" />
+const UmidityIcon = <MaterialCommunityIcons name="water-outline" size={40} style={{ alignSelf: "center", }} color="#FCFCFC" />
+
 function InfoPlant({ route }) {
-    const themeColors = useTheme()
-    const { data, isLoading } = useDatabasePlants(route.params.id)
+    const {data, isLoading} = useDatabasePlant(route.params.id)
+    const plantInfo = data
     const [heart, setHeart] = useState("heart-outline");
     const plantInfo = data[route.params.id]
-    const TempIcon = <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
-    const HomeIcon = <Ionicons name="home-outline" size={30} style={{ alignSelf: "center", }} color="#FCFCFC" />
-    const UmidityIcon = <MaterialCommunityIcons name="water-outline" size={40} style={{ alignSelf: "center", }} color="#FCFCFC" />
+
     const cardData = [{
         key: 0,
         color: "#55C1AE",
@@ -42,10 +45,7 @@ function InfoPlant({ route }) {
         return <Text>Carregando</Text>
     }
 
-
-
-    return (<>
-
+    return (
         <Container>
             <BackgroundImageContainer>
                 <BackgroundImage>
@@ -85,8 +85,7 @@ function InfoPlant({ route }) {
 
             </ContentContainer>
         </Container>
-
-    </>)
+    )
 }
 
 export { InfoPlant };
