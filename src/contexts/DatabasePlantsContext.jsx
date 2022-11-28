@@ -7,6 +7,7 @@ import {
 import { useDatabasePlants } from '../hooks/useDatabasePlants';
 
 import { getPlantImage } from '../global/plants';
+import { useEffect } from 'react';
 
 const DatabasePlantsContext = createContext({})
 
