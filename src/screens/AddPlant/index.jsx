@@ -15,7 +15,7 @@ import {
     Title
 } from './styles'
 
-import { useTheme } from '@react-navigation/native'
+import { useTheme } from 'styled-components/native'
 import { StatusBar } from 'expo-status-bar'
 import { Titlebar } from '../../components/TitleBar'
 
@@ -26,6 +26,8 @@ const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH * 0.63
 
 function AddPlant({ navigation }) {
+    const theme = useTheme();
+
     const { databasePlants } = useDatabasePlantsContext()
     const { addingPlant, setAddingPlant } = usePlantsManagement()
 
@@ -45,8 +47,6 @@ function AddPlant({ navigation }) {
         navigation.navigate('save-plant')
     }
 
-    const theme = useTheme();
-
 
     if (!selectedPlant) {
         return (
@@ -58,15 +58,22 @@ function AddPlant({ navigation }) {
 
     return (
         <>
-            <StatusBar animated={true} translucent={false} style={{ backgroundColor: theme.background }} />
-            <Titlebar navigation={navigation}
+            <StatusBar
+                backgroundColor={theme.background}
+                animated={true}
+                hideTransitionAnimation={true}
+                translucent={true}
+            />
+            <Titlebar 
+                navigation={navigation}
                 style={{
                     backgroundColor: theme.background,
                 }}
+                exe={() => navigation.goBack()}
 
                 title="Adicionar Planta"
             />
-            <Container >
+            <Container>
 
                 <CarouselWrapper>
                     <Carousel

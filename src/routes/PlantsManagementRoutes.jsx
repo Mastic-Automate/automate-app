@@ -15,7 +15,7 @@ export function PlantsManagementRoutes(){
         <BluetoothConnectionContextProvider>
             <PlantsManagementContextProvider>
                 <Nav.Navigator screenOptions={{headerShown:false}}>
-                    <Nav.Screen name="bluetooth-connection" component={AddPlant}/>
+                    <Nav.Screen name="bluetooth-connection" component={BluetoothConnection}/>
                     <Nav.Screen name="add-plant" component={AddPlant} />
                     <Nav.Screen name="save-plant" component={SavePlant} />
                     <Nav.Screen name="connect-plant" component={ConnectPlant}/>
