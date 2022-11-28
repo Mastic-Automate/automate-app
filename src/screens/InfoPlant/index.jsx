@@ -5,10 +5,9 @@ import { Feather } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { useDatabasePlants } from '../../hooks/useDatabasePlants';
 import {useDatabasePlant} from '../../hooks/useDatabasePlant'
 import { getPlantImage } from './../../global/plants';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 const TempIcon = <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
 const HomeIcon = <Ionicons name="home-outline" size={30} style={{ alignSelf: "center", }} color="#FCFCFC" />
@@ -18,28 +17,35 @@ function InfoPlant({ route }) {
     const {data, isLoading} = useDatabasePlant(route.params.id)
     const plantInfo = data
     const [heart, setHeart] = useState("heart-outline");
-    const plantInfo = data[route.params.id]
 
-    const cardData = [{
-        key: 0,
-        color: "#55C1AE",
-        icon: TempIcon,
-        label: "Temperatura",
-        value: `${plantInfo.plantTemperature} cº`,
-    }, {
-        key: 1,
-        color: "#C15555",
-        icon: HomeIcon,
-        label: "Local",
-        value: "Jardim",
-    },
-    {
-        key: 2,
-        color: "#5581C1",
-        icon: UmidityIcon,
-        label: "Umidade",
-        value: `${plantInfo.plantWaterQuantity}mL/h`,
-    }]
+    const cardData = useMemo(() => {
+        if(!!plantInfo){
+            return [
+                {
+                    key: 1,
+                    color: "#C15555",
+                    icon: HomeIcon,
+                    label: "Local",
+                    value: "Jardim",
+                },
+                {
+                    key: 0,
+                    color: "#55C1AE",
+                    icon: TempIcon,
+                    label: "Temperatura",
+                    value: `${plantInfo.plantTemperature} cº`,
+                }, 
+                {
+                    key: 2,
+                    color: "#5581C1",
+                    icon: UmidityIcon,
+                    label: "Umidade",
+                    value: `${plantInfo.plantWaterQuantity}mL/h`,
+                }
+            ]
+        }
+        return []
+    }, [plantInfo])
 
     if (!!isLoading) {
         return <Text>Carregando</Text>
@@ -84,6 +90,7 @@ function InfoPlant({ route }) {
                 />
 
             </ContentContainer>
+            <Text>AAA</Text>
         </Container>
     )
 }
