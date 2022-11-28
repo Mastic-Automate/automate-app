@@ -7,10 +7,10 @@ const Container = styled.ScrollView`
 
 const HeadingSection = styled.View`
     width:100%;
-    height:400px;
+    height: 250px;
     background-color: ${props => props.theme.background1};
     justify-content: center;
-    padding: 20px 0;
+    padding: 0 10px;
     position:relative;
 `
 

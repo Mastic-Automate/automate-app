@@ -18,22 +18,14 @@ import {
 
 import { useTheme as useThemeContext } from '../../hooks/useTheme'
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../hooks/useAuth';
 
 export function Config({navigation}){
-    const {toggleTheme, theme} = useTheme()
+    const {toggleTheme, isTheme} = useThemeContext()
     const {user} = useAuth()
+    const theme = useTheme();
 
     const isDarkTheme = !(isTheme === 'light')
-
-    const openDrawer = () => navigation.openDrawer();
-    const configIcon =
-        <Ionicons
-            name="settings-outline"
-            color={theme.text2}
-            size={35}
-            onPress={() => navigation.replace('authRoutes', { screen: 'config' })}
-            style={{ margin: 10, marginRight: 20 }}
-        />
 
     const themeButton = () => {
         return (
@@ -55,21 +47,20 @@ export function Config({navigation}){
     return (
         <>
             <StatusBar
-                backgroundColor={theme.background}
+                backgroundColor={theme.background1}
                 animated={true}
                 hideTransitionAnimation={true}
                 translucent={true}
             />
 
             <Titlebar
-                    navigation={navigation}
-                    title="Automate"
-                    style={{
-                        position: 'absolute',
-                        marginTop: 20,
-                        zIndex: 999999999,
-                    }}
-                />
+                navigation={navigation}
+                title="Automate"
+                exe={() => navigation.goBack()}
+                style={{
+                    backgroundColor: theme.background1,
+                }}
+            />
             
             
             <Container> 

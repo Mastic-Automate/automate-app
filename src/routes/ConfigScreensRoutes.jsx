@@ -10,7 +10,7 @@ import {useTheme} from 'styled-components/native'
 function ConfigScreensRoutes(){
     const {primary} = useTheme()
     return (
-        <stack.Navigator screenOptions={{headerShown:true, headerTransparent:true, headerTitle:'', headerTintColor:primary}}>
+        <stack.Navigator screenOptions={{headerShown:false, headerTransparent:true, headerTitle:'', headerTintColor:primary}}>
             <stack.Screen name="config-home" component={Config} />
             <stack.Screen name="account" component={AccountSettings} />
         </stack.Navigator>

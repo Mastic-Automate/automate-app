@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar'
 import { Feather, Ionicons } from '@expo/vector-icons'
 import { FlatList, Image } from 'react-native'
 import { useTheme } from 'styled-components'
@@ -17,7 +18,7 @@ import { getPlantImage } from '../../global/plants'
 import { useMicrocontrollers } from '../../hooks/useMicrocontrollers'
 
 import { InfoPlantCard } from './../../components/InfoPlantCard'
-import { useEffect } from 'react'
+import { Titlebar } from '../../components/TitleBar'
 
 const sol = require("../../assets/temperature.png");
 
@@ -41,6 +42,23 @@ export function Home({ navigation }) {
 
     return (
         <>
+            <StatusBar
+                backgroundColor={theme.background1}
+                animated={true}
+                hideTransitionAnimation={true}
+                translucent={true}
+            />
+            <Titlebar
+                navigation={navigation}
+                title="Automate"
+                rightIcon={ConfigIcon}
+                exe={openDrawer}
+                iconName="menu-outline"
+                style={{
+
+                    backgroundColor: theme.background1
+                }}
+            />
             <Container>
                 <TopSection>
                     <TopSectionCol1>

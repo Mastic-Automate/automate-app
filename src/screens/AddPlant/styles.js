@@ -1,16 +1,15 @@
 import styled from 'styled-components/native'
 
 
-const Container = styled.View`
+const Container = styled.ScrollView`
     flex:1;
     background-color: ${props => props.theme.background};
-    justify-content: space-between;
 `
 
 const CarouselWrapper = styled.View`
     height: 100%;
     max-height: 400px;
-    margin-top: 40px;
+    margin-top: 10px;
 
     align-items: center;
     justify-content: center;
@@ -76,6 +75,7 @@ const DetailRow = ({label, value}) => {
 
 const BottomButtonsContainer = styled.View`
     flex-direction:row;
+    margin-bottom: 50px;
 `
 export { 
     Container, 

@@ -6,7 +6,7 @@ import { Button } from '../../components/Button'
 import Carousel from 'react-native-snap-carousel'
 
 import { useEffect, useMemo, useState } from 'react'
-import { useDatabasePlants } from '../../contexts/DatabasePlantsContext'
+import { useDatabasePlantsContext } from '../../contexts/DatabasePlantsContext'
 import { CarouselCard } from './CarouselCard'
 import {
     BottomButtonsContainer, CarouselWrapper, Container, DetailRow,
@@ -15,8 +15,9 @@ import {
     Title
 } from './styles'
 
-import { useTheme } from '@react-navigation/native'
+import { useTheme } from 'styled-components/native'
 import { StatusBar } from 'expo-status-bar'
+import { Titlebar } from '../../components/TitleBar'
 
 import { usePlantsManagement } from '../../contexts/PlantsManagementContext'
 
@@ -25,7 +26,9 @@ const SLIDER_WIDTH = (Dimensions.get('window').width)
 const ITEM_WIDTH = SLIDER_WIDTH * 0.63
 
 function AddPlant({ navigation }) {
-    const { databasePlants } = useDatabasePlants()
+    const theme = useTheme();
+
+    const { databasePlants } = useDatabasePlantsContext()
     const { addingPlant, setAddingPlant } = usePlantsManagement()
 
     const [currentModelIndex, setCurrentModelIndex] = useState(0)
@@ -44,8 +47,6 @@ function AddPlant({ navigation }) {
         navigation.navigate('save-plant')
     }
 
-    const { background1 } = useTheme();
-
 
     if (!selectedPlant) {
         return (
@@ -57,17 +58,22 @@ function AddPlant({ navigation }) {
 
     return (
         <>
-            <StatusBar animated={true} translucent={false} style={{ backgroundColor: background1 }} />
-            <Titlebar navigation={navigation}
+            <StatusBar
+                backgroundColor={theme.background}
+                animated={true}
+                hideTransitionAnimation={true}
+                translucent={true}
+            />
+            <Titlebar 
+                navigation={navigation}
                 style={{
-                    position: "absolute",
-                    backgroundColor: "transparent",
-                    zIndex: 999, marginTop: 20
+                    backgroundColor: theme.background,
                 }}
+                exe={() => navigation.goBack()}
 
                 title="Adicionar Planta"
             />
-            <Container >
+            <Container>
 
                 <CarouselWrapper>
                     <Carousel

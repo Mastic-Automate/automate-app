@@ -44,6 +44,7 @@ export function AuthRoutes({ navigation }) {
         >
 
             <Nav.Screen name="home" component={Home} options={{
+                headerShown: false,
                 headerTitle: 'Automate',
                 headerTitleStyle: {
                     fontFamily: "ProximaNovaSemiBold",
@@ -52,7 +53,7 @@ export function AuthRoutes({ navigation }) {
                         <Ionicons
                             name="settings-outline"
                             color={theme.text2}
-                            size={35}
+                            size={32}
                             onPress={() => navigation.replace('authRoutes', { screen: 'config' })}
                             style={{ margin: 10, marginRight: 20 }}
                         />
@@ -62,9 +63,9 @@ export function AuthRoutes({ navigation }) {
             />
 
             <Nav.Screen name="plants" component={Plants} options={{ ...defaultScreenOptions, headerShown: false }} />
-            <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{ ...defaultScreenOptions, headerTitle: 'Plantas' }} />
+            <Nav.Screen name="plantsManagement" component={PlantsManagementRoutes} options={{ ...defaultScreenOptions, headerShown: false }} />
             <Nav.Screen name="plantInfo" component={InfoPlant} options={{ headerShown: false }} />
-            <Nav.Screen name="config" component={ConfigScreensRoutes} screenOptions={{ ...defaultScreenOptions, headerTitle: 'Configurações' }} />
+            <Nav.Screen name="config" component={ConfigScreensRoutes} options={{ ...defaultScreenOptions, headerShown: false }} />
         </Nav.Navigator>
     )
 }
