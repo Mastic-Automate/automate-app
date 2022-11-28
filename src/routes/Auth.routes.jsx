@@ -12,7 +12,6 @@ import { Plants } from '../screens/Plants'
 import { ConfigScreensRoutes } from './ConfigScreensRoutes'
 import { PlantsManagementRoutes } from './PlantsManagementRoutes'
 
-import { Text, View } from 'react-native'
 
 const Nav = createDrawerNavigator()
 
@@ -22,9 +21,6 @@ export function AuthRoutes({ navigation }) {
 
     const defaultScreenOptions = {
         headerTitle: 'Automate',
-        headerTitleAlign: 'center',
-        headerStyle: { backgroundColor: theme.background1 },
-        headerTintColor: theme.text2,
         headerRight: () => (
             <Ionicons
                 name="settings-outline"
@@ -41,19 +37,17 @@ export function AuthRoutes({ navigation }) {
             navigation.replace('InitialRoutes')
         }
     }, [user])
-    
+
     return (
         <Nav.Navigator
             drawerContent={SideBar}
         >
+
             <Nav.Screen name="home" component={Home} options={{
                 headerTitle: 'Automate',
                 headerTitleStyle: {
                     fontFamily: "ProximaNovaSemiBold",
                     fontSize: 24,
-                    headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: theme.background1 },
-                    headerTintColor: theme.text2,
                     headerRight: () => (
                         <Ionicons
                             name="settings-outline"

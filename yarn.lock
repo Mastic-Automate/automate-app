@@ -1015,7 +1015,7 @@
 
 "@babel/runtime@^7.12.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.7.2":
   version "7.19.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.19.0.tgz"
   integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
   dependencies:
     regenerator-runtime "^0.13.4"
@@ -1375,15 +1375,29 @@
   dependencies:
     "@iconify/types" "*"
 
-"@iconify/react@^3.2.2":
-  version "3.2.2"
-  resolved "https://registry.npmjs.org/@iconify/react/-/react-3.2.2.tgz"
-  integrity sha512-z3+Jno3VcJzgNHsN5mEvYMsgCkOZkydqdIwOxjXh45+i2Vs9RGH68Y52vt39izwFSfuYUXhaW+1u7m7+IhCn/g==
+"@iconify/icons-mi@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.npmjs.org/@iconify/icons-mi/-/icons-mi-1.2.3.tgz"
+  integrity sha512-xWCjoW6LVj1HOrcO6J3i/rdtEzDA65z7v45wLJlITcRPrb+5XnMsBz4jcFHatA0boUaGfNN+tGYhvh93nMJCFA==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify/react@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/@iconify/react/-/react-4.0.0.tgz"
+  integrity sha512-YE+z5PCegYyuJtLR6KBbJNlssmuVgRyFyRxcgxSPVkN3Gsm7npSzrUh+gWlBxrNb5g4Q6Nnb1gczPBNcwtUpng==
+  dependencies:
+    "@iconify/types" "^2.0.0"
 
 "@iconify/types@*":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@iconify/types/-/types-1.1.0.tgz"
   integrity sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==
+
+"@iconify/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/@iconify/types/-/types-2.0.0.tgz"
+  integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
 
 "@jest/create-cache-key-function@^26.5.0":
   version "26.6.2"
@@ -2178,7 +2192,7 @@ braces@^3.0.2:
 
 broadcast-channel@^3.4.1:
   version "3.7.0"
-  resolved "https://registry.yarnpkg.com/broadcast-channel/-/broadcast-channel-3.7.0.tgz#2dfa5c7b4289547ac3f6705f9c00af8723889937"
+  resolved "https://registry.npmjs.org/broadcast-channel/-/broadcast-channel-3.7.0.tgz"
   integrity sha512-cIAKJXAxGJceNZGTZSBzMxzyOn72cVgPnKx4dc6LRjQgbaJUQqhy5rzL3zbMxkMWsGKkv2hSFkPRMEXfoMZ2Mg==
   dependencies:
     "@babel/runtime" "^7.7.2"
@@ -2737,7 +2751,7 @@ destroy@1.2.0:
 
 detect-node@^2.0.4, detect-node@^2.1.0:
   version "2.1.0"
-  resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.1.0.tgz#c9c70775a49c3d03bc2c06d9a73be550f978f8b1"
+  resolved "https://registry.npmjs.org/detect-node/-/detect-node-2.1.0.tgz"
   integrity sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==
 
 dotenv@^10.0.0:
@@ -3830,7 +3844,7 @@ joi@^17.2.1:
 
 js-sha3@0.8.0:
   version "0.8.0"
-  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.8.0.tgz#b9b7a5da73afad7dedd0f8c463954cbde6818840"
+  resolved "https://registry.npmjs.org/js-sha3/-/js-sha3-0.8.0.tgz"
   integrity sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
@@ -4128,7 +4142,7 @@ map-visit@^1.0.0:
 
 match-sorter@^6.0.2:
   version "6.3.1"
-  resolved "https://registry.yarnpkg.com/match-sorter/-/match-sorter-6.3.1.tgz#98cc37fda756093424ddf3cbc62bfe9c75b92bda"
+  resolved "https://registry.npmjs.org/match-sorter/-/match-sorter-6.3.1.tgz"
   integrity sha512-mxybbo3pPNuA+ZuCUhm5bwNkXrJTbsk5VWbR5wiwz/GC6LIiegBGn2w3O08UG/jdbYLinw51fSQ5xNU1U3MgBw==
   dependencies:
     "@babel/runtime" "^7.12.5"
@@ -4449,7 +4463,7 @@ micromatch@^4.0.2, micromatch@^4.0.4:
 
 microseconds@0.2.0:
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/microseconds/-/microseconds-0.2.0.tgz#233b25f50c62a65d861f978a4a4f8ec18797dc39"
+  resolved "https://registry.npmjs.org/microseconds/-/microseconds-0.2.0.tgz"
   integrity sha512-n7DHHMjR1avBbSpsTBj6fmMGh2AGrifVV4e+WYc3Q9lO+xnSZ3NyhcBND3vzzatt05LFhoKFRxrIyklmLlUtyA==
 
 mime-db@1.52.0, "mime-db@>= 1.43.0 < 2":
@@ -4545,7 +4559,7 @@ mz@^2.7.0:
 
 nano-time@1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/nano-time/-/nano-time-1.0.0.tgz#b0554f69ad89e22d0907f7a12b0993a5d96137ef"
+  resolved "https://registry.npmjs.org/nano-time/-/nano-time-1.0.0.tgz"
   integrity sha512-flnngywOoQ0lLQOTRNexn2gGSNuM9bKj9RZAWSzhQ+UJYaAFG9bac4DW9VHjUAzrOaIcajHybCTHe/bkvozQqA==
   dependencies:
     big-integer "^1.6.16"
@@ -4718,7 +4732,7 @@ object.pick@^1.3.0:
 
 oblivious-set@1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/oblivious-set/-/oblivious-set-1.0.0.tgz#c8316f2c2fb6ff7b11b6158db3234c49f733c566"
+  resolved "https://registry.npmjs.org/oblivious-set/-/oblivious-set-1.0.0.tgz"
   integrity sha512-z+pI07qxo4c2CulUHCDf9lcqDlMSo72N/4rLUpRXf6fu+q8vjt8y0xS+Tlf8NTJDdTXHbdeO1n3MlbctwEoXZw==
 
 on-finished@2.4.1:
@@ -5204,7 +5218,7 @@ react-native-youtube-iframe@^2.2.2:
 
 react-native@0.64.3:
   version "0.64.3"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.64.3.tgz#40db6385963b4b17325f9cc86dd19132394b03fc"
+  resolved "https://registry.npmjs.org/react-native/-/react-native-0.64.3.tgz"
   integrity sha512-2OEU74U0Ek1/WeBzPbg6XDsCfjF/9fhrNX/5TFgEiBKd5mNc9LOZ/OlMmkb7iues/ZZ/oc51SbEfLRQdcW0fVw==
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
@@ -5242,7 +5256,7 @@ react-native@0.64.3:
 
 react-query@^3.39.2:
   version "3.39.2"
-  resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.39.2.tgz#9224140f0296f01e9664b78ed6e4f69a0cc9216f"
+  resolved "https://registry.npmjs.org/react-query/-/react-query-3.39.2.tgz"
   integrity sha512-F6hYDKyNgDQfQOuR1Rsp3VRzJnWHx6aRnnIZHMNGGgbL3SBgpZTDg8MQwmxOgpCAoqZJA+JSNCydF1xGJqKOCA==
   dependencies:
     "@babel/runtime" "^7.5.5"
@@ -5355,7 +5369,7 @@ regjsparser@^0.8.2:
 
 remove-accents@0.4.2:
   version "0.4.2"
-  resolved "https://registry.yarnpkg.com/remove-accents/-/remove-accents-0.4.2.tgz#0a43d3aaae1e80db919e07ae254b285d9e1c7bb5"
+  resolved "https://registry.npmjs.org/remove-accents/-/remove-accents-0.4.2.tgz"
   integrity sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==
 
 remove-trailing-separator@^1.0.1:
@@ -5442,7 +5456,7 @@ reusify@^1.0.4:
 
 rimraf@3.0.2:
   version "3.0.2"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
+  resolved "https://registry.npmjs.org/rimraf/-/rimraf-3.0.2.tgz"
   integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
   dependencies:
     glob "^7.1.3"
@@ -6131,7 +6145,7 @@ universalify@^2.0.0:
 
 unload@2.2.0:
   version "2.2.0"
-  resolved "https://registry.yarnpkg.com/unload/-/unload-2.2.0.tgz#ccc88fdcad345faa06a92039ec0f80b488880ef7"
+  resolved "https://registry.npmjs.org/unload/-/unload-2.2.0.tgz"
   integrity sha512-B60uB5TNBLtN6/LsgAf3udH9saB5p7gqJwcFfbOEZ8BcBHnGwCf6G/TGiEqkRAxX7zAFIUtzdrXQSdL3Q/wqNA==
   dependencies:
     "@babel/runtime" "^7.6.2"

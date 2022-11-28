@@ -1,81 +1,99 @@
-import { Text } from 'react-native'
-import styled from 'styled-components/native'
-
-import { Feather, Ionicons, FontAwesome5 } from '@expo/vector-icons';
-
+import { FlatList, Image, Text } from 'react-native';
 import { useTheme } from 'styled-components';
+import { BackgroundImage, BackgroundImageContainer, Container, ContentContainer, Description, DescriptionContainer, FavIconContainer, PropsCard, PropsTitle, Title } from './styles';
+import { Feather } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import {useDatabasePlant} from '../../hooks/useDatabasePlant'
+import { getPlantImage } from './../../global/plants';
+import { useState, useMemo } from 'react';
 
-import {
-    BottomSection,
-    BottomText,
-    Container,
-    HeaderSection,
-    InfoSquare,
-    InfoSquareText,
-    MidSection,
-    MidSectionCol1,
-    MidSectionCol2,
-    PlantImage,
-    Title,
-    BottomSectionTitle,
-    RightSection,
-} from './styles'
-import { getPlantImage, getPlantInfo } from '../../global/plants';
-import { useEffect, useMemo } from 'react';
-import { useState } from 'react';
-import { api } from '../../services/api';
-import { useDatabasePlant } from '../../hooks/useDatabasePlant';
-import AppLoading from 'expo-app-loading';
+const TempIcon = <Feather name="thermometer" size={32} style={{ alignSelf: "center", }} color="#FCFCFC" />
+const HomeIcon = <Ionicons name="home-outline" size={30} style={{ alignSelf: "center", }} color="#FCFCFC" />
+const UmidityIcon = <MaterialCommunityIcons name="water-outline" size={40} style={{ alignSelf: "center", }} color="#FCFCFC" />
 
-function InfoPlant({route}){
-    const themeColors = useTheme()
+function InfoPlant({ route }) {
     const {data, isLoading} = useDatabasePlant(route.params.id)
     const plantInfo = data
+    const [heart, setHeart] = useState("heart-outline");
 
-    if(isLoading){
-        return <AppLoading />
+    const cardData = useMemo(() => {
+        if(!!plantInfo){
+            return [
+                {
+                    key: 1,
+                    color: "#C15555",
+                    icon: HomeIcon,
+                    label: "Local",
+                    value: "Jardim",
+                },
+                {
+                    key: 0,
+                    color: "#55C1AE",
+                    icon: TempIcon,
+                    label: "Temperatura",
+                    value: `${plantInfo.plantTemperature} cº`,
+                }, 
+                {
+                    key: 2,
+                    color: "#5581C1",
+                    icon: UmidityIcon,
+                    label: "Umidade",
+                    value: `${plantInfo.plantWaterQuantity}mL/h`,
+                }
+            ]
+        }
+        return []
+    }, [plantInfo])
+
+    if (!!isLoading) {
+        return <Text>Carregando</Text>
     }
 
     return (
-
         <Container>
-            <HeaderSection>
-                <Title style={{marginTop: 12}}>{plantInfo.plantName}</Title>
-            </HeaderSection>
-            <MidSection>
-                <MidSectionCol1>
-                    <InfoSquare>
-                        <Feather name="sun" color={themeColors.background2} size={52} />
-                        <InfoSquareText>100%</InfoSquareText>
-                    </InfoSquare>
-                    <InfoSquare>
-                        <Ionicons name="water-outline" color={themeColors.background2} size={52} />
-                        <InfoSquareText>{plantInfo.plantSoilHumidity}</InfoSquareText>
-                    </InfoSquare>
-                    <InfoSquare>
-                        <FontAwesome5 name="temperature-high" color={themeColors.background2} size={52} />
-                        <InfoSquareText>100%</InfoSquareText>
-                    </InfoSquare>
-                </MidSectionCol1>
-                <MidSectionCol2>
-                    <PlantImage 
+            <BackgroundImageContainer>
+                <BackgroundImage>
+                    <Image
                         source={getPlantImage(plantInfo.idPlant)}
+                        style={{ width: 350, height: 350 }}
                     />
-                </MidSectionCol2>
-            </MidSection>
-            <BottomSection>
-                <BottomSectionTitle>
-                    Sobre
-                </BottomSectionTitle>
-                <BottomText>
-                    {plantInfo.plantAbout}
-                </BottomText>
-            </BottomSection>
-            <RightSection></RightSection>
+                </BackgroundImage>
+            </BackgroundImageContainer>
+            <ContentContainer>
+                <FavIconContainer onPress={() => { heart == "heart-outline" ? setHeart("heart-sharp") : setHeart("heart-outline") }} >
+                    <Ionicons name={heart} size={40} style={{ zIndex: 100 }} onPress={() => { heart == "heart-outline" ? setHeart("heart-sharp") : setHeart("heart-outline") }} color="white" />
+                </FavIconContainer>
+                <Title>{plantInfo.plantName}</Title>
+                <DescriptionContainer>
+                    <Description>
+                        {plantInfo.plantAbout}
+                    </Description>
+                </DescriptionContainer>
+                <PropsTitle>
+                    Propriedades
+                </PropsTitle>
+
+                <FlatList
+                    data={cardData}
+                    renderItem={({ item }) => (
+                        <PropsCard
+                            color={item.color}
+                            icon={item.icon}
+                            label={item.label}
+                            value={item.value}
+                        />
+                    )}
+                    horizontal={true}
+                    style={{ marginLeft: 10 }}
+                />
+
+            </ContentContainer>
+            <Text>AAA</Text>
         </Container>
-        
-        
     )
 }
 
-export {InfoPlant}
+export { InfoPlant };
+

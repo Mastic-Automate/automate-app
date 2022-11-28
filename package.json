@@ -16,6 +16,7 @@
     "@expo-google-fonts/oswald": "^0.2.2",
     "@expo-google-fonts/poppins": "^0.2.2",
     "@hookform/resolvers": "^2.8.8",
+    "@iconify/icons-mi": "^1.2.3",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/drawer": "^6.4.3",
@@ -56,7 +57,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@iconify/icons-cil": "^1.2.3",
-    "@iconify/react": "^3.2.2",
+    "@iconify/react": "^4.0.0",
     "@types/styled-components": "^5.1.24",
     "react-native-web-webview": "^1.0.2"
   },
